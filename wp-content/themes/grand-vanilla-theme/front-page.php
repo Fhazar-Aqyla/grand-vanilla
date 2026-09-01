@@ -8,6 +8,9 @@
 get_header();
 
 $img_dir = get_template_directory_uri() . '/assets/images/';
+$contact = grand_vanilla_get_contact_info();
+$hero_title = get_theme_mod( 'gv_hero_title', 'Premium Indonesian vanilla, sourced for the global market.' );
+$hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.' );
 ?>
 
 <!-- 1. Hero Section -->
@@ -16,10 +19,10 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
     <div class="gv-container" style="position: relative; z-index: 2;">
         <div style="max-width: 48rem;">
             <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; color: #FFFFFF; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.02em;">
-                Premium Indonesian vanilla, sourced for the global market.
+                <?php echo esc_html( $hero_title ); ?>
             </h1>
             <p style="font-size: 1.125rem; color: var(--color-nw-200); line-height: 1.7; margin-bottom: 2.5rem; max-width: 38rem;">
-                We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.
+                <?php echo esc_html( $hero_subtitle ); ?>
             </p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem;">
                 <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" class="gv-btn gv-btn-primary">
@@ -44,40 +47,36 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 <!-- 2. About Us Teaser Section -->
 <section class="gv-section">
     <div class="gv-container">
-        <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 3.5rem; align-items: center;" class="gv-about-grid">
-            
-            <div style="display: grid; grid-template-columns: 1fr; gap: 3rem;" class="gv-about-split">
-                <!-- Left: Image -->
-                <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
-                    <img src="<?php echo esc_url( $img_dir . 'About Us Image.png' ); ?>" alt="Grand Vanilla Indonesian Vanilla Beans" style="width: 100%; height: auto; object-fit: cover;">
-                </div>
-
-                <!-- Right: Content -->
-                <div>
-                    <span class="gv-section-tag">About Us</span>
-                    <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.25rem;">Grand Vanilla Indonesia</h2>
-                    
-                    <p style="color: var(--color-nw-500); line-height: 1.7; margin-bottom: 1.25rem; font-size: 0.9375rem;">
-                        Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
-                    </p>
-                    <p style="color: var(--color-nw-500); line-height: 1.7; margin-bottom: 2rem; font-size: 0.9375rem;">
-                        Operating from Java and sourcing across Indonesian growing hubs, we specialize in high-vanillin Planifolia and aromatic Tahitensis beans, carefully graded for luxury pastry, extract houses, and industrial flavor manufacturing.
-                    </p>
-
-                    <!-- 4 Value Pills -->
-                    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 2rem;">
-                        <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Premium Product Quality</div>
-                        <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Consistent Global Supply</div>
-                        <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Reliable Business Service</div>
-                        <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Flexible Custom Solutions</div>
-                    </div>
-
-                    <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
-                        Learn More &rarr;
-                    </a>
-                </div>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center;" class="gv-about-split">
+            <!-- Left: Image -->
+            <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
+                <img src="<?php echo esc_url( $img_dir . 'About Us Image.png' ); ?>" alt="Grand Vanilla Indonesian Vanilla Beans" style="width: 100%; height: auto; object-fit: cover;">
             </div>
 
+            <!-- Right: Content -->
+            <div>
+                <span class="gv-section-tag">About Us</span>
+                <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.25rem;">Grand Vanilla Indonesia</h2>
+                
+                <p style="color: var(--color-nw-500); line-height: 1.7; margin-bottom: 1.25rem; font-size: 0.9375rem;">
+                    Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
+                </p>
+                <p style="color: var(--color-nw-500); line-height: 1.7; margin-bottom: 2rem; font-size: 0.9375rem;">
+                    Operating from Java and sourcing across Indonesian growing hubs, we specialize in high-vanillin Planifolia and aromatic Tahitensis beans, carefully graded for luxury pastry, extract houses, and industrial flavor manufacturing.
+                </p>
+
+                <!-- 4 Value Pills -->
+                <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 2rem;">
+                    <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Premium Product Quality</div>
+                    <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Consistent Global Supply</div>
+                    <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Reliable Business Service</div>
+                    <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Flexible Custom Solutions</div>
+                </div>
+
+                <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    Learn More &rarr;
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -118,7 +117,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                         </p>
                     </div>
                     <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                        <a href="<?php echo esc_url( home_url( '/products/indonesian-planifolia-gourmet-vanilla-beans-grade-a/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
                             Detail &rarr;
                         </a>
                     </div>
@@ -139,7 +138,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                         </p>
                     </div>
                     <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                        <a href="<?php echo esc_url( home_url( '/products/indonesian-tahitensis-vanilla-beans-floral-gourmet/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
                             Detail &rarr;
                         </a>
                     </div>
@@ -160,7 +159,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                         </p>
                     </div>
                     <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                        <a href="<?php echo esc_url( home_url( '/products/indonesian-extraction-grade-vanilla-beans-grade-b/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
                             Detail &rarr;
                         </a>
                     </div>
@@ -388,7 +387,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 
         <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
             
-            <!-- Article 1: What Makes Indonesian Vanilla Exceptional? -->
+            <!-- Article 1 -->
             <div class="gv-card" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; align-items: center;" class="gv-blog-card-split">
                 <div style="position: relative; border-radius: var(--radius-12); overflow: hidden; height: 220px;">
                     <img src="<?php echo esc_url( $img_dir . 'Buat Blog Example 1.png' ); ?>" alt="What Makes Indonesian Vanilla Exceptional" style="width: 100%; height: 100%; object-fit: cover;">
@@ -400,13 +399,13 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                     <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1.25rem;">
                         Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient for global food industries.
                     </p>
-                    <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    <a href="<?php echo esc_url( home_url( '/articles/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
                         Continue Reading &rarr;
                     </a>
                 </div>
             </div>
 
-            <!-- Article 2: From Vanilla Bean to Global Ingredient -->
+            <!-- Article 2 -->
             <div class="gv-card" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; align-items: center;" class="gv-blog-card-split">
                 <div style="position: relative; border-radius: var(--radius-12); overflow: hidden; height: 220px;">
                     <img src="<?php echo esc_url( $img_dir . 'Buat blog example 2.png' ); ?>" alt="From Vanilla Bean to Global Ingredient" style="width: 100%; height: 100%; object-fit: cover;">
@@ -418,7 +417,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                     <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1.25rem;">
                         Explore how quality vanilla is sourced, processed, and prepared to meet the needs of international B2B buyers.
                     </p>
-                    <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    <a href="<?php echo esc_url( home_url( '/articles/from-vanilla-bean-to-global-ingredient/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
                         Continue Reading &rarr;
                     </a>
                 </div>
@@ -441,7 +440,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 }
 </style>
 
-<!-- 9. CTA Banner (Ready to Get Your Vanilla Supply Started?) -->
+<!-- 9. CTA Banner -->
 <section class="gv-cta-banner">
     <div class="gv-container">
         <h2>Ready To Get Your Vanilla<br>Supply Started?</h2>

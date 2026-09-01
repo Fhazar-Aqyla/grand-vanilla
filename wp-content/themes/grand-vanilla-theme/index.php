@@ -8,6 +8,7 @@
 get_header();
 
 $img_dir = get_template_directory_uri() . '/assets/images/';
+$contact = grand_vanilla_get_contact_info();
 ?>
 
 <!-- 1. Hero Section -->
@@ -32,22 +33,23 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
             </div>
 
             <!-- Filter Tabs -->
-            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                <button type="button" class="gv-pill gv-pill-khaki" style="cursor: pointer;">All Blogs</button>
-                <button type="button" class="gv-pill" style="cursor: pointer;">Vanilla Guide</button>
-                <button type="button" class="gv-pill" style="cursor: pointer;">Vanilla Insight</button>
-                <button type="button" class="gv-pill" style="cursor: pointer;">Global Market</button>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;" id="gv-blog-tabs">
+                <button type="button" class="gv-pill gv-pill-khaki gv-blog-filter-btn" data-filter="all" style="cursor: pointer;">All Blogs</button>
+                <button type="button" class="gv-pill gv-blog-filter-btn" data-filter="guide" style="cursor: pointer;">Vanilla Guide</button>
+                <button type="button" class="gv-pill gv-blog-filter-btn" data-filter="insight" style="cursor: pointer;">Vanilla Insight</button>
+                <button type="button" class="gv-pill gv-blog-filter-btn" data-filter="market" style="cursor: pointer;">Global Market</button>
             </div>
         </div>
 
         <!-- Blog Articles List -->
-        <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 4rem;">
+        <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 4rem;" id="gv-blog-list">
             
             <?php
             $articles_list = array(
                 array(
                     'badge' => '12/12',
                     'cat'   => 'Vanilla Guide',
+                    'filter'=> 'guide',
                     'title' => 'What Makes Indonesian Vanilla Exceptional?',
                     'desc'  => 'Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient for global food industries.',
                     'img'   => 'Buat Blog Example 1.png',
@@ -56,6 +58,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                 array(
                     'badge' => '11/12',
                     'cat'   => 'Vanilla Insight',
+                    'filter'=> 'insight',
                     'title' => 'From Vanilla Bean to Global Ingredient',
                     'desc'  => 'Explore how quality vanilla is sourced, processed, and prepared to meet the needs of international B2B buyers.',
                     'img'   => 'Buat blog example 2.png',
@@ -64,6 +67,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                 array(
                     'badge' => '10/12',
                     'cat'   => 'Vanilla Guide',
+                    'filter'=> 'guide',
                     'title' => 'The Science of Traditional Sun Curing in Indonesian Agroforestry',
                     'desc'  => 'How temperature-controlled wooden sweat boxes and natural sun drying optimize natural vanillin hydrolyzation without chemical accelerators.',
                     'img'   => 'Buat Blog Example 1.png',
@@ -72,6 +76,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                 array(
                     'badge' => '09/12',
                     'cat'   => 'Global Market',
+                    'filter'=> 'market',
                     'title' => 'FOB vs. CIF Shipping: Sourcing Vanilla Beans Directly from Indonesia',
                     'desc'  => 'A complete logistical guide for spice importers navigating phytosanitary quarantine clearance, airway bills, and vacuum packaging standards.',
                     'img'   => 'Buat blog example 2.png',
@@ -81,7 +86,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 
             foreach ( $articles_list as $art ) :
                 ?>
-                <div class="gv-card" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; align-items: center;" class="gv-blog-card-split">
+                <div class="gv-card gv-blog-card-item" data-cat="<?php echo esc_attr( $art['filter'] ); ?>" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; align-items: center;" class="gv-blog-card-split">
                     <div style="position: relative; border-radius: var(--radius-12); overflow: hidden; height: 220px; background: var(--color-warm-sand-alt);">
                         <img src="<?php echo esc_url( $img_dir . $art['img'] ); ?>" alt="<?php echo esc_attr( $art['title'] ); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                         <span style="position: absolute; top: 1rem; left: 1rem; font-size: 2.25rem; font-weight: 800; font-family: var(--font-heading); color: rgba(255,255,255,0.9); text-shadow: 0 2px 8px rgba(0,0,0,0.6);"><?php echo esc_html( $art['badge'] ); ?></span>
@@ -105,6 +110,26 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 
         </div>
 
+        <script>
+        document.querySelectorAll('#gv-blog-tabs .gv-blog-filter-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#gv-blog-tabs .gv-blog-filter-btn').forEach(function(b) {
+                    b.classList.remove('gv-pill-khaki');
+                });
+                btn.classList.add('gv-pill-khaki');
+
+                var filter = btn.getAttribute('data-filter');
+                document.querySelectorAll('#gv-blog-list .gv-blog-card-item').forEach(function(card) {
+                    if (filter === 'all' || card.getAttribute('data-cat') === filter) {
+                        card.style.display = 'grid';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        </script>
+
     </div>
 </section>
 
@@ -113,7 +138,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
     <div class="gv-container">
         <h2>Looking For A Reliable<br>Indonesian Vanilla Supplier?</h2>
         <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="gv-btn gv-btn-primary">
+            <a href="<?php echo esc_url( $contact['whatsapp_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="gv-btn gv-btn-primary">
                 Request a Quote
             </a>
         </div>

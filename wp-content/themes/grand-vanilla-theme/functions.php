@@ -65,7 +65,7 @@ function grand_vanilla_scripts() {
         'grand-vanilla-style',
         get_stylesheet_uri(),
         array( 'grand-vanilla-google-fonts' ),
-        wp_get_theme()->get( 'Version' )
+        '1.1.0'
     );
 }
 add_action( 'wp_enqueue_scripts', 'grand_vanilla_scripts' );
@@ -135,13 +135,13 @@ function grand_vanilla_register_product_cpt() {
 add_action( 'init', 'grand_vanilla_register_product_cpt' );
 
 /**
- * 4. Register Custom Post Type: Harvest & Curing Gallery
+ * 4. Register Custom Post Type: Harvest & Curing Gallery (Slug: curing-gallery to avoid collision with /gallery/ page)
  */
 function grand_vanilla_register_gallery_cpt() {
     $labels = array(
         'name'               => _x( 'Curing Gallery', 'Post type general name', 'grand-vanilla' ),
         'singular_name'      => _x( 'Gallery Item', 'Post type singular name', 'grand-vanilla' ),
-        'menu_name'          => _x( 'Gallery', 'Admin Menu text', 'grand-vanilla' ),
+        'menu_name'          => _x( 'Gallery CPT', 'Admin Menu text', 'grand-vanilla' ),
         'add_new'            => __( 'Add New Photo', 'grand-vanilla' ),
         'add_new_item'       => __( 'Add New Gallery Photo', 'grand-vanilla' ),
         'all_items'          => __( 'All Gallery Items', 'grand-vanilla' ),
@@ -154,9 +154,9 @@ function grand_vanilla_register_gallery_cpt() {
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-        'rewrite'            => array( 'slug' => 'gallery' ),
+        'rewrite'            => array( 'slug' => 'curing-gallery' ),
         'capability_type'    => 'post',
-        'has_archive'        => true,
+        'has_archive'        => false,
         'hierarchical'       => false,
         'menu_position'      => 6,
         'menu_icon'          => 'dashicons-format-gallery',
@@ -195,23 +195,38 @@ function grand_vanilla_product_specs_callback( $post ) {
     <table class="form-table">
         <tr>
             <th><label for="gv_grade"><?php esc_html_e( 'Grade / Classification', 'grand-vanilla' ); ?></label></th>
-            <td><input type="text" id="gv_grade" name="gv_grade" value="<?php echo esc_attr( $grade ); ?>" placeholder="e.g. Gourmet Grade A / Extraction Grade" class="regular-text"></td>
+            <td>
+                <input type="text" id="gv_grade" name="gv_grade" value="<?php echo esc_attr( $grade ); ?>" placeholder="e.g. Gourmet Grade A / Extraction Grade" class="regular-text">
+                <p class="description"><?php esc_html_e( 'Standard commercial classification of the pods.', 'grand-vanilla' ); ?></p>
+            </td>
         </tr>
         <tr>
             <th><label for="gv_vanillin"><?php esc_html_e( 'Vanillin Content (%)', 'grand-vanilla' ); ?></label></th>
-            <td><input type="text" id="gv_vanillin" name="gv_vanillin" value="<?php echo esc_attr( $vanillin ); ?>" placeholder="e.g. 1.8% - 2.4%" class="regular-text"></td>
+            <td>
+                <input type="text" id="gv_vanillin" name="gv_vanillin" value="<?php echo esc_attr( $vanillin ); ?>" placeholder="e.g. 2.0% - 2.4%" class="regular-text">
+                <p class="description"><?php esc_html_e( 'Laboratory certified vanillin concentration percentage.', 'grand-vanilla' ); ?></p>
+            </td>
         </tr>
         <tr>
             <th><label for="gv_moisture"><?php esc_html_e( 'Moisture Content (%)', 'grand-vanilla' ); ?></label></th>
-            <td><input type="text" id="gv_moisture" name="gv_moisture" value="<?php echo esc_attr( $moisture ); ?>" placeholder="e.g. 28% - 33%" class="regular-text"></td>
+            <td>
+                <input type="text" id="gv_moisture" name="gv_moisture" value="<?php echo esc_attr( $moisture ); ?>" placeholder="e.g. 30% - 35%" class="regular-text">
+                <p class="description"><?php esc_html_e( 'Moisture percentage level (e.g. 30%-35% for Gourmet, 20%-25% for Extraction).', 'grand-vanilla' ); ?></p>
+            </td>
         </tr>
         <tr>
             <th><label for="gv_length"><?php esc_html_e( 'Pod Length (cm)', 'grand-vanilla' ); ?></label></th>
-            <td><input type="text" id="gv_length" name="gv_length" value="<?php echo esc_attr( $length ); ?>" placeholder="e.g. 16 - 20 cm" class="regular-text"></td>
+            <td>
+                <input type="text" id="gv_length" name="gv_length" value="<?php echo esc_attr( $length ); ?>" placeholder="e.g. 16 - 20 cm" class="regular-text">
+                <p class="description"><?php esc_html_e( 'Average bean length in centimeters.', 'grand-vanilla' ); ?></p>
+            </td>
         </tr>
         <tr>
             <th><label for="gv_origin"><?php esc_html_e( 'Origin / Growing Region', 'grand-vanilla' ); ?></label></th>
-            <td><input type="text" id="gv_origin" name="gv_origin" value="<?php echo esc_attr( $origin ); ?>" placeholder="e.g. Bali, Java, Papua (Indonesia)" class="regular-text"></td>
+            <td>
+                <input type="text" id="gv_origin" name="gv_origin" value="<?php echo esc_attr( $origin ); ?>" placeholder="e.g. Jember, East Java / Bali & Papua" class="regular-text">
+                <p class="description"><?php esc_html_e( 'Harvest terroir and cooperative growing location.', 'grand-vanilla' ); ?></p>
+            </td>
         </tr>
     </table>
     <?php
@@ -238,13 +253,88 @@ function grand_vanilla_save_product_specs( $post_id ) {
 add_action( 'save_post_vanilla_product', 'grand_vanilla_save_product_specs' );
 
 /**
- * 6. Helper: Get Company Contact
+ * 6. WordPress Customizer Settings (Appearance -> Customize)
+ */
+function grand_vanilla_customize_register( $wp_customize ) {
+    // Section: Grand Vanilla Settings
+    $wp_customize->add_section( 'grand_vanilla_options', array(
+        'title'       => __( 'Grand Vanilla Settings', 'grand-vanilla' ),
+        'priority'    => 30,
+        'description' => __( 'Customize Hero Text and Contact Info for Grand Vanilla ID', 'grand-vanilla' ),
+    ) );
+
+    // Hero Title
+    $wp_customize->add_setting( 'gv_hero_title', array(
+        'default'           => 'Premium Indonesian vanilla, sourced for the global market.',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'gv_hero_title', array(
+        'label'    => __( 'Hero Title (Headline)', 'grand-vanilla' ),
+        'section'  => 'grand_vanilla_options',
+        'type'     => 'text',
+    ) );
+
+    // Hero Subtitle
+    $wp_customize->add_setting( 'gv_hero_subtitle', array(
+        'default'           => 'We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ) );
+    $wp_customize->add_control( 'gv_hero_subtitle', array(
+        'label'    => __( 'Hero Subtitle', 'grand-vanilla' ),
+        'section'  => 'grand_vanilla_options',
+        'type'     => 'textarea',
+    ) );
+
+    // WhatsApp Number
+    $wp_customize->add_setting( 'gv_whatsapp', array(
+        'default'           => '+62 812-2697-4731',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'gv_whatsapp', array(
+        'label'    => __( 'Primary WhatsApp Number', 'grand-vanilla' ),
+        'section'  => 'grand_vanilla_options',
+        'type'     => 'text',
+    ) );
+
+    // Email Address
+    $wp_customize->add_setting( 'gv_email', array(
+        'default'           => 'grandvanilla@gmail.com',
+        'sanitize_callback' => 'sanitize_email',
+    ) );
+    $wp_customize->add_control( 'gv_email', array(
+        'label'    => __( 'Primary Export Email', 'grand-vanilla' ),
+        'section'  => 'grand_vanilla_options',
+        'type'     => 'email',
+    ) );
+
+    // Location Address
+    $wp_customize->add_setting( 'gv_address', array(
+        'default'           => 'Sumbersari 2 Street, Jember, East Java, Indonesia',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'gv_address', array(
+        'label'    => __( 'Office / Warehouse Location', 'grand-vanilla' ),
+        'section'  => 'grand_vanilla_options',
+        'type'     => 'text',
+    ) );
+}
+add_action( 'customize_register', 'grand_vanilla_customize_register' );
+
+/**
+ * 7. Helper: Get Company Contact Info
  */
 function grand_vanilla_get_contact_info() {
+    $whatsapp = get_theme_mod( 'gv_whatsapp', '+62 812-2697-4731' );
+    $clean_wa = preg_replace( '/[^0-9]/', '', $whatsapp );
+    if ( substr( $clean_wa, 0, 1 ) === '0' ) {
+        $clean_wa = '62' . substr( $clean_wa, 1 );
+    }
+
     return array(
-        'whatsapp'     => '081226974731',
-        'whatsapp_url' => 'https://wa.me/6281226974731?text=Hello%20Grand%20Vanilla%2C%20I%20would%20like%20to%20inquire%20about%20your%20Indonesian%20vanilla%20beans%20export.',
-        'email'        => 'export@grandvanilla.id',
+        'whatsapp'     => $whatsapp,
+        'whatsapp_url' => 'https://wa.me/' . $clean_wa . '?text=' . rawurlencode('Hello Grand Vanilla Indonesia, I would like to inquire about sourcing your Indonesian vanilla beans for export.'),
+        'email'        => get_theme_mod( 'gv_email', 'grandvanilla@gmail.com' ),
+        'address'      => get_theme_mod( 'gv_address', 'Sumbersari 2 Street, Jember, East Java, Indonesia' ),
         'export_hubs'  => 'Jakarta (CGK) & Bali (DPS), Indonesia',
     );
 }

@@ -8,6 +8,7 @@
 get_header();
 
 $img_dir = get_template_directory_uri() . '/assets/images/';
+$contact = grand_vanilla_get_contact_info();
 ?>
 
 <!-- 1. Hero Section -->
@@ -68,40 +69,40 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
             </div>
         </div>
 
-        <!-- 3. Explore More Gallery (Tabs & 12 Grid) -->
+        <!-- 3. Explore More Gallery (Interactive Tabs & 12 Grid) -->
         <div>
             <div style="display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 2.5rem; gap: 1rem;">
                 <h2 style="font-size: 2rem; font-weight: 800;">Explore More Gallery</h2>
                 
                 <!-- Category Filter Tabs -->
-                <div style="display: flex; gap: 0.75rem;">
-                    <button type="button" class="gv-pill gv-pill-khaki" style="cursor: pointer;">All Gallery</button>
-                    <button type="button" class="gv-pill" style="cursor: pointer;">Vanilla</button>
-                    <button type="button" class="gv-pill" style="cursor: pointer;">Company</button>
+                <div style="display: flex; gap: 0.75rem;" id="gv-gallery-tabs">
+                    <button type="button" class="gv-pill gv-pill-khaki gv-filter-btn" data-filter="all" style="cursor: pointer;">All Gallery</button>
+                    <button type="button" class="gv-pill gv-filter-btn" data-filter="vanilla" style="cursor: pointer;">Vanilla</button>
+                    <button type="button" class="gv-pill gv-filter-btn" data-filter="company" style="cursor: pointer;">Company</button>
                 </div>
             </div>
 
             <!-- 12 Gallery Items Grid -->
-            <div class="gv-grid-4" style="gap: 1.5rem; margin-bottom: 3.5rem;">
+            <div class="gv-grid-4" id="gv-gallery-grid" style="gap: 1.5rem; margin-bottom: 3.5rem;">
                 <?php
                 $gallery_samples = array(
-                    array( 'img' => 'Gallery Example Carroussel 1.png', 'title' => 'Sun Drying Decks', 'desc' => 'Patient sun drying under equatorial sunshine in East Java.' ),
-                    array( 'img' => 'Gallery Example Carroussel 2.png', 'title' => 'Wooden Sweat Boxes', 'desc' => 'Nightly sweat box conditioning to maximize natural vanillin.' ),
-                    array( 'img' => 'Gallery Example Carroussel 3.png', 'title' => 'Orchid Hand Pollination', 'desc' => 'Delicate hand pollination during morning floral bloom.' ),
-                    array( 'img' => 'Gallery Example Carroussel 4.png', 'title' => 'Pod Length Sorting', 'desc' => 'Precision manual sorting by length and moisture.' ),
-                    array( 'img' => 'Gallery Example Carroussel 5.png', 'title' => 'Wax Paper Bundling', 'desc' => 'Aroma-sealed wax wrapping for export safety.' ),
-                    array( 'img' => 'Our Story.png', 'title' => 'Agroforestry Canopy', 'desc' => 'Shade-grown vanilla vines climbing live Gamal trees.' ),
-                    array( 'img' => 'Sourcing.png', 'title' => 'Fresh Pod Harvest', 'desc' => 'Harvesting only when pods develop yellow blossom tips.' ),
-                    array( 'img' => 'Processing.png', 'title' => 'Inspection Facility', 'desc' => 'Laboratory moisture testing and quality inspection.' ),
-                    array( 'img' => 'Warehouse.png', 'title' => 'Clean Room Storage', 'desc' => 'Climate-controlled warehouse and logistics staging.' ),
-                    array( 'img' => 'Bulk  Wholesale Vanilla 1.png', 'title' => 'Export Shipping Staging', 'desc' => 'FOB / CIF export packaging for global buyers.' ),
-                    array( 'img' => 'Planifolia Carroussel 1.png', 'title' => 'Planifolia Grade A Pods', 'desc' => 'Supple, glossy caviar-rich Gourmet vanilla beans.' ),
-                    array( 'img' => 'Tahitensis Carroussel 1.png', 'title' => 'Tahitensis Floral Pods', 'desc' => 'Aromatic floral pods for boutique confectionery.' ),
+                    array( 'img' => 'Gallery Example Carroussel 1.png', 'title' => 'Sun Drying Decks', 'desc' => 'Patient sun drying under equatorial sunshine in East Java.', 'cat' => 'vanilla' ),
+                    array( 'img' => 'Gallery Example Carroussel 2.png', 'title' => 'Wooden Sweat Boxes', 'desc' => 'Nightly sweat box conditioning to maximize natural vanillin.', 'cat' => 'vanilla' ),
+                    array( 'img' => 'Gallery Example Carroussel 3.png', 'title' => 'Orchid Hand Pollination', 'desc' => 'Delicate hand pollination during morning floral bloom.', 'cat' => 'vanilla' ),
+                    array( 'img' => 'Gallery Example Carroussel 4.png', 'title' => 'Pod Length Sorting', 'desc' => 'Precision manual sorting by length and moisture.', 'cat' => 'vanilla' ),
+                    array( 'img' => 'Gallery Example Carroussel 5.png', 'title' => 'Wax Paper Bundling', 'desc' => 'Aroma-sealed wax wrapping for export safety.', 'cat' => 'vanilla' ),
+                    array( 'img' => 'Our Story.png', 'title' => 'Agroforestry Canopy', 'desc' => 'Shade-grown vanilla vines climbing live Gamal trees.', 'cat' => 'company' ),
+                    array( 'img' => 'Sourcing.png', 'title' => 'Fresh Pod Harvest', 'desc' => 'Harvesting only when pods develop yellow blossom tips.', 'cat' => 'vanilla' ),
+                    array( 'img' => 'Processing.png', 'title' => 'Inspection Facility', 'desc' => 'Laboratory moisture testing and quality inspection.', 'cat' => 'company' ),
+                    array( 'img' => 'Warehouse.png', 'title' => 'Clean Room Storage', 'desc' => 'Climate-controlled warehouse and logistics staging.', 'cat' => 'company' ),
+                    array( 'img' => 'Bulk  Wholesale Vanilla 1.png', 'title' => 'Export Shipping Staging', 'desc' => 'FOB / CIF export packaging for global buyers.', 'cat' => 'company' ),
+                    array( 'img' => 'Planifolia Carroussel 1.png', 'title' => 'Planifolia Grade A Pods', 'desc' => 'Supple, glossy caviar-rich Gourmet vanilla beans.', 'cat' => 'vanilla' ),
+                    array( 'img' => 'Tahitensis Carroussel 1.png', 'title' => 'Tahitensis Floral Pods', 'desc' => 'Aromatic floral pods for boutique confectionery.', 'cat' => 'vanilla' ),
                 );
 
                 foreach ( $gallery_samples as $item ) :
                     ?>
-                    <div class="gv-card">
+                    <div class="gv-card gv-gallery-item" data-cat="<?php echo esc_attr( $item['cat'] ); ?>">
                         <div style="height: 180px; overflow: hidden; background: var(--color-warm-sand-alt);">
                             <img src="<?php echo esc_url( $img_dir . $item['img'] ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
@@ -116,6 +117,26 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                 ?>
             </div>
 
+            <script>
+            document.querySelectorAll('#gv-gallery-tabs .gv-filter-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#gv-gallery-tabs .gv-filter-btn').forEach(function(b) {
+                        b.classList.remove('gv-pill-khaki');
+                    });
+                    btn.classList.add('gv-pill-khaki');
+
+                    var filter = btn.getAttribute('data-filter');
+                    document.querySelectorAll('#gv-gallery-grid .gv-gallery-item').forEach(function(card) {
+                        if (filter === 'all' || card.getAttribute('data-cat') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            </script>
+
         </div>
 
     </div>
@@ -126,7 +147,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
     <div class="gv-container">
         <h2>Looking For A Reliable<br>Indonesian Vanilla Supplier?</h2>
         <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="gv-btn gv-btn-primary">
+            <a href="<?php echo esc_url( $contact['whatsapp_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="gv-btn gv-btn-primary">
                 Request a Quote
             </a>
         </div>
