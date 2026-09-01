@@ -1,48 +1,126 @@
 <?php
 /**
- * The template for displaying all single posts
+ * The template for displaying all single blog posts
  *
  * @package GrandVanilla
  */
 
 get_header();
+
+$img_dir = get_template_directory_uri() . '/assets/images/';
 ?>
 
-<div class="gv-section-sm" style="background: linear-gradient(180deg, #f7efe4 0%, var(--color-cream) 100%); border-bottom: 1px solid var(--color-stone-200);">
-    <div class="gv-container" style="max-width: 800px;">
-        <div style="font-size: 0.8125rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem;">
-            Published on <?php echo get_the_date(); ?> &bull; By <?php the_author(); ?>
+<div class="gv-section-sm" style="border-bottom: 1px solid var(--color-nb-100); padding-bottom: 1.5rem;">
+    <div class="gv-container" style="max-width: 860px;">
+        <!-- Breadcrumbs -->
+        <div style="font-size: 0.8125rem; color: var(--color-nw-500); font-family: var(--font-heading); margin-bottom: 2rem;">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: var(--color-nw-500);">Home</a> // 
+            <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" style="color: var(--color-nw-500);">Blog</a> // 
+            <span style="color: var(--color-pitch-black); font-weight: 700;"><?php the_title(); ?></span>
         </div>
-        <h1 style="font-size: 2.25rem; font-weight: 800; line-height: 1.25; margin-bottom: 1rem;"><?php the_title(); ?></h1>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <span style="font-size: 0.8125rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase; font-family: var(--font-heading); display: block; margin-bottom: 0.75rem;">
+                Vanilla Guide
+            </span>
+            <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem;">
+                <?php the_title(); ?>
+            </h1>
+            <p style="color: var(--color-nw-500); font-size: 1.0625rem; max-width: 42rem; margin: 0 auto 1.5rem; line-height: 1.6;">
+                Discover the unique aroma, rich flavor profile, and meticulous cultivation processes that position Indonesian vanilla as a premium choice for global B2B culinary professionals.
+            </p>
+            <div style="font-size: 0.8125rem; color: var(--color-nw-400); font-family: var(--font-heading);">
+                📅 <?php echo get_the_date(); ?> &bull; ⏱️ 6 min read
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="gv-section">
-    <div class="gv-container" style="max-width: 800px;">
-        <article class="gv-card gv-content">
-            <?php if ( has_post_thumbnail() ) : ?>
-                <div style="margin: -2.5rem -2.5rem 2rem -2.5rem; overflow: hidden; border-radius: var(--radius-md) var(--radius-md) 0 0;">
-                    <?php the_post_thumbnail( 'large', array( 'style' => 'width: 100%; height: auto;' ) ); ?>
-                </div>
-            <?php endif; ?>
+    <div class="gv-container" style="max-width: 860px;">
+        
+        <!-- Hero Featured Image -->
+        <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md); margin-bottom: 3.5rem; max-height: 480px;">
+            <img src="<?php echo esc_url( $img_dir . 'Detail Blog.png' ); ?>" alt="<?php the_title(); ?>" style="width: 100%; height: auto; object-fit: cover;">
+        </div>
 
-            <?php
-            while ( have_posts() ) : the_post();
-                the_content();
-            endwhile;
-            ?>
+        <!-- Article Content -->
+        <article style="font-size: 1.0625rem; line-height: 1.8; color: var(--color-pitch-black); margin-bottom: 4rem;">
+            <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 1.25rem;">A Vanilla Shaped by Its Origin</h2>
+            
+            <p style="color: var(--color-nw-500); margin-bottom: 1.5rem;">
+                In the competitive landscape of industrial food manufacturing and premium culinary distribution, the origin and quality of ingredients are paramount. Indonesian vanilla has emerged as a cornerstone for F&B businesses seeking robust, versatile, and high-quality flavor profiles.
+            </p>
+            <p style="color: var(--color-nw-500); margin-bottom: 2rem;">
+                The journey of every pod begins in the nutrient-rich volcanic soils and tropical climate of the archipelago. This unique environment imparts distinct characteristics that set it apart from vanilla grown anywhere else in the world, making it highly sought after by flavor houses and extract manufacturers.
+            </p>
 
-            <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-stone-200); display: flex; justify-content: space-between; align-items: center;">
-                <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" style="font-weight: 700; color: var(--color-primary);">
-                    &larr; Back to Articles
-                </a>
-                <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="gv-btn gv-btn-primary gv-btn-sm">
-                    Inquire Products
-                </a>
+            <!-- Pull Quote Box -->
+            <blockquote style="background: var(--color-warm-sand); border-left: 4px solid var(--color-dark-khaki); padding: 1.75rem 2rem; border-radius: 0 var(--radius-12) var(--radius-12) 0; margin: 2.5rem 0; font-style: italic; font-size: 1.125rem; line-height: 1.7; color: var(--color-pitch-black);">
+                "Indonesian vanilla isn't just an ingredient; it's a structural component of flavor. Its deep, complex profile provides a foundation that lighter vanillas simply cannot achieve in high-heat or complex formulations."
+            </blockquote>
+
+            <!-- Key Takeaways Box -->
+            <div style="background: var(--color-parchment); border: 1px solid var(--color-nb-200); border-radius: var(--radius-16); padding: 2rem; margin-top: 3rem;">
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem; color: var(--color-dark-khaki);">Key Takeaways</h3>
+                
+                <ul style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9375rem; color: var(--color-pitch-black);">
+                    <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <span style="color: var(--color-dark-khaki); font-weight: 800;">✓</span>
+                        <span>Indonesian vanilla offers a unique woody, smoky flavor profile ideal for industrial F&B applications.</span>
+                    </li>
+                    <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <span style="color: var(--color-dark-khaki); font-weight: 800;">✓</span>
+                        <span>Rigorous hand-pollination and traditional curing ensure consistently high vanillin content.</span>
+                    </li>
+                    <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <span style="color: var(--color-dark-khaki); font-weight: 800;">✓</span>
+                        <span>Direct B2B sourcing guarantees traceability and premium quality control.</span>
+                    </li>
+                </ul>
             </div>
         </article>
+
+        <!-- Explore More Insights -->
+        <div style="border-top: 1px solid var(--color-nb-200); padding-top: 3.5rem;">
+            <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 2.5rem;">Explore More Insights</h2>
+
+            <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
+                <div class="gv-card" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; align-items: center;" class="gv-blog-card-split">
+                    <div style="position: relative; border-radius: var(--radius-12); overflow: hidden; height: 180px;">
+                        <img src="<?php echo esc_url( $img_dir . 'Buat Blog Example 1.png' ); ?>" alt="More Insights" style="width: 100%; height: 100%; object-fit: cover;">
+                        <span style="position: absolute; top: 1rem; left: 1rem; font-size: 2rem; font-weight: 800; font-family: var(--font-heading); color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.6);">11/12</span>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase;">Vanilla Guide</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0.35rem 0 0.5rem;">What Makes Indonesian Vanilla Exceptional?</h3>
+                        <p style="color: var(--color-nw-500); font-size: 0.875rem; margin-bottom: 1rem;">Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient.</p>
+                        <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">Continue Reading &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="gv-btn gv-btn-primary">
+                    View All Blogs &rarr;
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
+
+<!-- CTA Banner -->
+<section class="gv-cta-banner">
+    <div class="gv-container">
+        <h2>Looking For A Reliable<br>Indonesian Vanilla Supplier?</h2>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="gv-btn gv-btn-primary">
+                Request a Quote
+            </a>
+        </div>
+    </div>
+</section>
 
 <?php
 get_footer();

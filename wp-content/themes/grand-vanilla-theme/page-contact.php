@@ -7,111 +7,99 @@
 
 get_header();
 
-$contact = grand_vanilla_get_contact_info();
-$prefilled_product = isset( $_GET['product'] ) ? sanitize_text_field( $_GET['product'] ) : '';
+$img_dir = get_template_directory_uri() . '/assets/images/';
 ?>
 
-<div class="gv-section-sm" style="background: linear-gradient(180deg, #f7efe4 0%, var(--color-cream) 100%); border-bottom: 1px solid var(--color-stone-200); text-align: center;">
+<!-- 1. Hero Section -->
+<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $img_dir . 'Contact Us  Hero Section.png' ); ?>');">
     <div class="gv-container">
-        <span class="gv-badge gv-badge-primary" style="margin-bottom: 0.75rem;">Wholesale & B2B Inquiry</span>
-        <h1 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem;">Contact Grand Vanilla ID</h1>
-        <p style="color: var(--color-stone-600); max-width: 38rem; margin: 0 auto; font-size: 0.9375rem;">
-            Request FOB / CIF freight quotes, laboratory Certificates of Analysis (COA), or order evaluation samples directly from our export specialists.
-        </p>
+        <h1 class="gv-hero-tag">#getInTouch</h1>
+        <p class="gv-hero-subtag">Discuss your vanilla requirements with us.</p>
     </div>
-</div>
+</section>
 
-<div class="gv-section">
+<!-- 2. Contact Split Section -->
+<section class="gv-section">
     <div class="gv-container">
         
-        <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 3rem;">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 3.5rem;" class="gv-contact-grid">
             
-            <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;" class="gv-contact-split">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 3.5rem;" class="gv-contact-split">
                 
-                <!-- Contact Direct Cards -->
-                <div class="gv-card" style="background-color: var(--color-dark); color: #ffffff;">
-                    <span class="gv-badge gv-badge-accent" style="margin-bottom: 1rem;">Direct Channels</span>
-                    <h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 1rem;">
-                        Connect Directly With Our Export Team
+                <!-- Left: Info -->
+                <div>
+                    <span class="gv-section-tag">Contact Us</span>
+                    <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.25rem; line-height: 1.2;">
+                        We Are Always Ready To<br>Help You And Your<br>Questions
                     </h2>
-                    <p style="color: #a8a29e; font-size: 0.875rem; margin-bottom: 2rem; line-height: 1.6;">
-                        For urgent price quotations, bulk contract negotiations, or rapid sample requests, feel free to contact us via WhatsApp or Email.
+                    <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 2.5rem; max-width: 32rem;">
+                        Have a question or need more information about our products and services? Get in touch with our team and we'll be happy to assist with your inquiry.
                     </p>
 
-                    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 1.5rem; background: rgba(255,255,255,0.1); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">📱</div>
-                            <div>
-                                <span style="font-size: 0.75rem; color: #a8a29e; display: block; text-transform: uppercase;">WhatsApp Direct</span>
-                                <a href="<?php echo esc_url( $contact['whatsapp_url'] ); ?>" target="_blank" rel="noopener noreferrer" style="color: #22c55e; font-weight: 700; font-size: 1rem;">
-                                    +62 812-2697-4731
-                                </a>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                        <div>
+                            <strong style="font-size: 0.8125rem; color: var(--color-nw-500); display: block; text-transform: uppercase; font-family: var(--font-heading); margin-bottom: 0.35rem;">Phone Number</strong>
+                            <div style="font-size: 0.9375rem; font-weight: 700; color: var(--color-pitch-black);">+62 812-2697-4731</div>
+                            <div style="font-size: 0.8125rem; color: var(--color-nw-500);">+123 456 789 12</div>
+                        </div>
+
+                        <div>
+                            <strong style="font-size: 0.8125rem; color: var(--color-nw-500); display: block; text-transform: uppercase; font-family: var(--font-heading); margin-bottom: 0.35rem;">Our Location</strong>
+                            <div style="font-size: 0.875rem; color: var(--color-pitch-black); line-height: 1.4;">
+                                Sumbersari 2 Street, Jember<br>East Java, Indonesia
                             </div>
                         </div>
 
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 1.5rem; background: rgba(255,255,255,0.1); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">📧</div>
-                            <div>
-                                <span style="font-size: 0.75rem; color: #a8a29e; display: block; text-transform: uppercase;">Official Export Email</span>
-                                <a href="mailto:<?php echo esc_attr( $contact['email'] ); ?>" style="color: #ffffff; font-weight: 600; font-size: 1rem;">
-                                    <?php echo esc_html( $contact['email'] ); ?>
-                                </a>
+                        <div>
+                            <strong style="font-size: 0.8125rem; color: var(--color-nw-500); display: block; text-transform: uppercase; font-family: var(--font-heading); margin-bottom: 0.35rem;">Email</strong>
+                            <div style="font-size: 0.9375rem; font-weight: 700; color: var(--color-dark-khaki);">
+                                <a href="mailto:grandvanilla@gmail.com">grandvanilla@gmail.com</a>
                             </div>
                         </div>
 
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 1.5rem; background: rgba(255,255,255,0.1); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">📍</div>
-                            <div>
-                                <span style="font-size: 0.75rem; color: #a8a29e; display: block; text-transform: uppercase;">Export Hubs</span>
-                                <span style="color: #e7e5e4; font-size: 0.875rem;">Soekarno-Hatta (CGK), Jakarta & I Gusti Ngurah Rai (DPS), Bali</span>
+                        <div>
+                            <strong style="font-size: 0.8125rem; color: var(--color-nw-500); display: block; text-transform: uppercase; font-family: var(--font-heading); margin-bottom: 0.35rem;">Social Network</strong>
+                            <div style="display: flex; gap: 0.75rem; font-size: 1.125rem; margin-top: 0.25rem;">
+                                <a href="https://wa.me/6281226974731" target="_blank" rel="noopener noreferrer" style="color: var(--color-dark-khaki);">💬</a>
+                                <a href="mailto:grandvanilla@gmail.com" style="color: var(--color-dark-khaki);">📧</a>
+                                <a href="#" style="color: var(--color-dark-khaki);">🌐</a>
                             </div>
                         </div>
-                    </div>
-
-                    <div style="padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <a href="<?php echo esc_url( $contact['whatsapp_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="gv-btn gv-btn-primary" style="width: 100%;">
-                            Chat on WhatsApp Now &rarr;
-                        </a>
                     </div>
                 </div>
 
-                <!-- Inquiry Form -->
-                <div class="gv-card">
-                    <span class="gv-badge gv-badge-primary" style="margin-bottom: 0.75rem;">Quotation Request Form</span>
-                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Send a B2B Inquiry</h2>
-                    <p style="color: var(--color-stone-600); font-size: 0.875rem; margin-bottom: 1.5rem;">
-                        Fill out the details below and our international sales manager will respond within 24 business hours.
-                    </p>
+                <!-- Right: Get in Touch Form Card -->
+                <div class="gv-card" style="padding: 2.5rem; background: var(--color-white);">
+                    <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem;">Get in Touch</h3>
 
-                    <form action="<?php echo esc_url( $contact['whatsapp_url'] ); ?>" method="GET" target="_blank" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                    <form action="https://wa.me/6281226974731" method="GET" target="_blank" style="display: flex; flex-direction: column; gap: 1.25rem;">
                         <div>
-                            <label style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--color-stone-700); margin-bottom: 0.35rem;">Your Full Name / Company Name</label>
-                            <input type="text" name="name" required placeholder="e.g. John Doe / Global Flavors Ltd." style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-stone-300); border-radius: var(--radius-sm); font-size: 0.875rem;">
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                            <div>
-                                <label style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--color-stone-700); margin-bottom: 0.35rem;">Email Address</label>
-                                <input type="email" name="email" required placeholder="john@company.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-stone-300); border-radius: var(--radius-sm); font-size: 0.875rem;">
-                            </div>
-                            <div>
-                                <label style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--color-stone-700); margin-bottom: 0.35rem;">Destination Country / Port</label>
-                                <input type="text" name="port" required placeholder="e.g. Rotterdam, Hamburg, Los Angeles" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-stone-300); border-radius: var(--radius-sm); font-size: 0.875rem;">
-                            </div>
+                            <label style="display: block; font-size: 0.8125rem; font-weight: 600; color: var(--color-nw-500); margin-bottom: 0.35rem;">Full Name</label>
+                            <input type="text" name="name" required placeholder="John Doe / Global Importers Ltd." style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-nb-200); border-radius: var(--radius-8); font-size: 0.875rem; background: var(--color-parchment);">
                         </div>
 
                         <div>
-                            <label style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--color-stone-700); margin-bottom: 0.35rem;">Product of Interest</label>
-                            <input type="text" name="product" value="<?php echo esc_attr( $prefilled_product ); ?>" placeholder="e.g. Planifolia Gourmet Grade A (25 kg)" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-stone-300); border-radius: var(--radius-sm); font-size: 0.875rem;">
+                            <label style="display: block; font-size: 0.8125rem; font-weight: 600; color: var(--color-nw-500); margin-bottom: 0.35rem;">Contact Email</label>
+                            <input type="email" name="email" required placeholder="john@company.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-nb-200); border-radius: var(--radius-8); font-size: 0.875rem; background: var(--color-parchment);">
                         </div>
 
                         <div>
-                            <label style="display: block; font-size: 0.8125rem; font-weight: 700; color: var(--color-stone-700); margin-bottom: 0.35rem;">Estimated Quantity & Specifications Requirement</label>
-                            <textarea name="message" rows="4" placeholder="Mention target volume (e.g. 50 kg - 1 MT), delivery term (FOB / CIF), and any custom packaging requirements..." style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-stone-300); border-radius: var(--radius-sm); font-size: 0.875rem; font-family: inherit;"></textarea>
+                            <label style="display: block; font-size: 0.8125rem; font-weight: 600; color: var(--color-nw-500); margin-bottom: 0.35rem;">Subject</label>
+                            <select name="subject" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-nb-200); border-radius: var(--radius-8); font-size: 0.875rem; background: var(--color-parchment);">
+                                <option value="Wholesale Vanilla Beans Inquiry">Wholesale Vanilla Beans Inquiry</option>
+                                <option value="Vanilla Powder / Extract Quote">Vanilla Powder / Extract Quote</option>
+                                <option value="Custom OEM Packaging Request">Custom OEM Packaging Request</option>
+                                <option value="Physical Sample Request">Physical Sample Request</option>
+                            </select>
                         </div>
 
-                        <button type="submit" class="gv-btn gv-btn-primary" style="width: 100%; font-size: 0.9375rem;">
-                            Submit Export Inquiry &rarr;
+                        <div>
+                            <label style="display: block; font-size: 0.8125rem; font-weight: 600; color: var(--color-nw-500); margin-bottom: 0.35rem;">Message</label>
+                            <textarea name="text" rows="4" placeholder="Tell us your target volume, destination port (FOB/CIF), and specifications..." style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--color-nb-200); border-radius: var(--radius-8); font-size: 0.875rem; font-family: inherit; background: var(--color-parchment);"></textarea>
+                        </div>
+
+                        <button type="submit" class="gv-btn gv-btn-primary" style="width: 100%; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            SEND MESSAGE
                         </button>
                     </form>
                 </div>
@@ -119,8 +107,27 @@ $prefilled_product = isset( $_GET['product'] ) ? sanitize_text_field( $_GET['pro
             </div>
 
         </div>
+
     </div>
-</div>
+</section>
+
+<style>
+@media (min-width: 900px) {
+    .gv-contact-split { grid-template-columns: 1fr 1fr !important; }
+}
+</style>
+
+<!-- 3. CTA Banner -->
+<section class="gv-cta-banner">
+    <div class="gv-container">
+        <h2>Looking For A Reliable<br>Indonesian Vanilla Supplier?</h2>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+            <a href="https://wa.me/6281226974731" target="_blank" rel="noopener noreferrer" class="gv-btn gv-btn-primary">
+                Request a Quote
+            </a>
+        </div>
+    </div>
+</section>
 
 <?php
 get_footer();

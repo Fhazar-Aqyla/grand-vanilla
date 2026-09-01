@@ -3,56 +3,80 @@ Theme Name: Grand Vanilla ID
 Theme URI: https://grandvanilla.id
 Author: Jasa Digital Nirwana
 Author URI: https://jasadigitalnirwana.com
-Description: Premium Custom WordPress Theme for Grand Vanilla Indonesia — Indonesian Vanilla Beans B2B Supplier & Exporter.
-Version: 1.0.0
+Description: High-Fidelity Custom WordPress Theme for Grand Vanilla Indonesia — Indonesian Vanilla Beans B2B Supplier & Exporter.
+Version: 1.1.0
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.0
 Text Domain: grand-vanilla
-Tags: custom-theme, company-profile, b2b, exporter, clean, responsive, vanilla
+Tags: custom-theme, b2b, vanilla-exporter, corporate, clean, responsive
 */
 
 /* -------------------------------------------------------------
- * 1. CSS Variables & Design Tokens
+ * 1. Design System Tokens & Custom Properties
  * ----------------------------------------------------------- */
 :root {
-    --font-heading: 'Jost', sans-serif;
-    --font-body: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    
-    /* Vanilla Palette */
-    --color-primary: #8b5a2b;          /* Vanilla Warm Brown */
-    --color-primary-dark: #653e1b;     /* Deep Cured Brown */
-    --color-primary-light: #d4a373;    /* Golden Vanilla Pod */
-    --color-cream: #fdfbf7;            /* Organic Cream Background */
-    --color-cream-card: #f8f4ec;       /* Soft Sand / Card Tint */
-    --color-accent: #2e6040;           /* Agroforestry Orchid Green */
-    --color-accent-light: #e8f3ec;     /* Soft Green Tint */
-    
-    /* Neutral Shades */
-    --color-dark: #1b1917;             /* Obsidian / Dark Charcoal */
-    --color-stone-800: #292524;
-    --color-stone-700: #44403c;
-    --color-stone-600: #57534e;
-    --color-stone-500: #78716c;
-    --color-stone-300: #d6d3d1;
-    --color-stone-200: #e7e5e4;
-    --color-stone-100: #f5f5f4;
-    --color-white: #ffffff;
+    /* Color Palette */
+    --color-dark-khaki: #363E19;
+    --color-dark-khaki-hover: #2a3113;
+    --color-pitch-black: #0A0804;
+    --color-parchment: #FBF7F4;
+    --color-warm-sand: #F3ECE6;
+    --color-warm-sand-alt: #EBE4DD;
+    --color-white: #FFFFFF;
 
-    /* Transitions & Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
+    /* Neutral Black Scale */
+    --color-nb-100: #E7E6E6;
+    --color-nb-200: #DADAD9;
+    --color-nb-300: #B3B2B1;
+    --color-nb-400: #0A0804;
+
+    /* Neutral White Scale */
+    --color-nw-base: #FBF7F4;
+    --color-nw-200: #C9C6C3;
+    --color-nw-300: #BCB9B7;
+    --color-nw-400: #979492;
+    --color-nw-500: #716F6E;
+
+    /* General Status */
+    --color-success: #16A34A;
+    --color-info: #2563EB;
+    --color-danger: #DC2626;
+
+    /* Typography */
+    --font-heading: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* Corner Radius Scale */
+    --radius-4: 4px;
+    --radius-8: 8px;
+    --radius-12: 12px;
+    --radius-16: 16px;
+    --radius-24: 24px;
     --radius-full: 9999px;
+
+    /* Spacing Scale */
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-24: 24px;
+    --space-32: 32px;
+    --space-40: 40px;
+    --space-48: 48px;
+    --space-64: 64px;
+    --space-72: 72px;
+    --space-80: 80px;
+
+    /* Shadows & Transitions */
+    --shadow-sm: 0 1px 3px rgba(10, 8, 4, 0.05);
+    --shadow-md: 0 4px 12px rgba(10, 8, 4, 0.08);
+    --shadow-lg: 0 12px 24px -4px rgba(10, 8, 4, 0.12);
     --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* -------------------------------------------------------------
- * 2. Reset & Global Styles
+ * 2. CSS Reset & Typography
  * ----------------------------------------------------------- */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -67,8 +91,8 @@ html {
 
 body {
     font-family: var(--font-body);
-    background-color: var(--color-cream);
-    color: var(--color-stone-800);
+    background-color: var(--color-parchment);
+    color: var(--color-pitch-black);
     line-height: 1.6;
     display: flex;
     flex-direction: column;
@@ -78,7 +102,7 @@ body {
 
 h1, h2, h3, h4, h5, h6, .font-heading {
     font-family: var(--font-heading);
-    color: var(--color-stone-800);
+    color: var(--color-pitch-black);
     line-height: 1.25;
     font-weight: 700;
 }
@@ -100,14 +124,14 @@ ul {
 }
 
 /* -------------------------------------------------------------
- * 3. Container & Layout Utilities
+ * 3. Layout & Container Utilities
  * ----------------------------------------------------------- */
 .gv-container {
-    max-width: 1280px;
+    max-width: 1240px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: var(--space-24);
+    padding-right: var(--space-24);
 }
 
 .gv-main {
@@ -115,34 +139,44 @@ ul {
 }
 
 .gv-section {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: var(--space-72);
+    padding-bottom: var(--space-72);
 }
 
 .gv-section-sm {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
+    padding-top: var(--space-48);
+    padding-bottom: var(--space-48);
+}
+
+.gv-section-tag {
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-nw-500);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+}
+
+.gv-section-tag::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 1.5px;
+    background-color: var(--color-nw-500);
 }
 
 /* -------------------------------------------------------------
  * 4. Header & Navigation
  * ----------------------------------------------------------- */
-.gv-topbar {
-    background-color: var(--color-dark);
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 0.75rem;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    letter-spacing: 0.025em;
-}
-
 .gv-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: rgba(253, 251, 247, 0.96);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--color-stone-200);
+    background-color: rgba(251, 247, 244, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-nb-100);
 }
 
 .gv-nav-wrap {
@@ -155,22 +189,18 @@ ul {
 .gv-brand-logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    color: var(--color-primary);
+    gap: var(--space-12);
 }
 
-.gv-brand-logo span {
-    color: var(--color-stone-800);
+.gv-brand-logo img {
+    height: 42px;
+    width: auto;
 }
 
 .gv-nav-menu {
     display: none;
     align-items: center;
-    gap: 2rem;
+    gap: var(--space-32);
 }
 
 @media (min-width: 768px) {
@@ -180,28 +210,18 @@ ul {
 }
 
 .gv-nav-link {
-    font-size: 0.875rem;
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--color-stone-700);
+    color: var(--color-pitch-black);
     position: relative;
-    padding: 0.5rem 0;
+    padding: var(--space-8) 0;
 }
 
 .gv-nav-link:hover,
-.gv-nav-link.current-menu-item,
-.gv-nav-link.active {
-    color: var(--color-primary);
-}
-
-.gv-nav-cta {
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .gv-nav-cta {
-        display: flex;
-        align-items: center;
-    }
+.gv-nav-link.active,
+.gv-nav-link.current-menu-item {
+    color: var(--color-dark-khaki);
 }
 
 .gv-mobile-toggle {
@@ -209,8 +229,8 @@ ul {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
-    color: var(--color-stone-800);
+    padding: var(--space-8);
+    color: var(--color-pitch-black);
 }
 
 @media (min-width: 768px) {
@@ -221,9 +241,9 @@ ul {
 
 .gv-mobile-drawer {
     display: none;
-    padding: 1.25rem 1.5rem 2rem;
-    border-top: 1px solid var(--color-stone-200);
-    background-color: var(--color-cream);
+    padding: var(--space-16) var(--space-24) var(--space-32);
+    border-top: 1px solid var(--color-nb-100);
+    background-color: var(--color-parchment);
 }
 
 .gv-mobile-drawer.is-open {
@@ -232,20 +252,20 @@ ul {
 
 .gv-mobile-drawer .gv-nav-link {
     display: block;
-    padding: 0.75rem 0;
-    font-size: 1rem;
-    border-bottom: 1px solid var(--color-stone-100);
+    padding: var(--space-12) 0;
+    font-size: 1.0625rem;
+    border-bottom: 1px solid var(--color-nb-100);
 }
 
 /* -------------------------------------------------------------
- * 5. Buttons & Badges
+ * 5. Buttons & Pills
  * ----------------------------------------------------------- */
 .gv-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.75rem;
+    gap: var(--space-8);
+    padding: 0.75rem 1.75rem;
     border-radius: var(--radius-full);
     font-size: 0.875rem;
     font-weight: 700;
@@ -257,169 +277,104 @@ ul {
 }
 
 .gv-btn-primary {
-    background-color: var(--color-primary);
+    background-color: var(--color-dark-khaki);
     color: var(--color-white);
-    box-shadow: 0 4px 12px rgba(139, 90, 43, 0.25);
 }
 
 .gv-btn-primary:hover {
-    background-color: var(--color-primary-dark);
+    background-color: var(--color-dark-khaki-hover);
     color: var(--color-white);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(139, 90, 43, 0.35);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .gv-btn-outline {
-    background-color: var(--color-white);
-    color: var(--color-stone-800);
-    border-color: var(--color-stone-300);
+    background-color: transparent;
+    color: var(--color-pitch-black);
+    border-color: var(--color-nb-300);
 }
 
 .gv-btn-outline:hover {
-    background-color: var(--color-cream-card);
-    border-color: var(--color-primary);
-    color: var(--color-primary);
+    background-color: var(--color-warm-sand);
+    border-color: var(--color-dark-khaki);
+    color: var(--color-dark-khaki);
 }
 
 .gv-btn-sm {
-    padding: 0.5rem 1.25rem;
-    font-size: 0.75rem;
+    padding: 0.45rem 1.25rem;
+    font-size: 0.8125rem;
 }
 
-.gv-badge {
+.gv-pill {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 0.85rem;
+    gap: var(--space-8);
+    padding: 0.45rem 1.1rem;
     border-radius: var(--radius-full);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    border: 1px solid var(--color-nb-200);
+    background-color: var(--color-white);
+    color: var(--color-pitch-black);
 }
 
-.gv-badge-primary {
-    background-color: rgba(139, 90, 43, 0.12);
-    color: var(--color-primary);
-}
-
-.gv-badge-accent {
-    background-color: var(--color-accent-light);
-    color: var(--color-accent);
-}
-
-.gv-badge-dark {
-    background-color: rgba(0, 0, 0, 0.7);
+.gv-pill-khaki {
+    background-color: var(--color-dark-khaki);
     color: var(--color-white);
-    backdrop-filter: blur(4px);
+    border-color: var(--color-dark-khaki);
 }
 
 /* -------------------------------------------------------------
- * 6. Hero Section
+ * 6. Hero Banner Sections
  * ----------------------------------------------------------- */
-.gv-hero {
+.gv-hero-page {
     position: relative;
-    padding: 5rem 0 6rem;
-    background: linear-gradient(180deg, #f7efe4 0%, var(--color-cream) 100%);
-    border-bottom: 1px solid var(--color-stone-200);
+    background-color: var(--color-pitch-black);
+    color: var(--color-white);
+    padding: var(--space-80) 0;
     text-align: center;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
 }
 
-.gv-hero-title {
-    font-size: 2.5rem;
+.gv-hero-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 8, 4, 0.65);
+    z-index: 1;
+}
+
+.gv-hero-page .gv-container {
+    position: relative;
+    z-index: 2;
+}
+
+.gv-hero-tag {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
     font-weight: 800;
-    max-width: 54rem;
-    margin: 1rem auto 1.5rem;
-    color: var(--color-stone-800);
+    color: var(--color-white);
+    margin-bottom: var(--space-8);
     letter-spacing: -0.02em;
 }
 
-@media (min-width: 768px) {
-    .gv-hero-title {
-        font-size: 3.5rem;
-    }
-}
-
-.gv-hero-subtitle {
-    font-size: 1.125rem;
-    color: var(--color-stone-600);
-    max-width: 42rem;
-    margin: 0 auto 2.5rem;
-    line-height: 1.7;
-}
-
-.gv-hero-actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-}
-
-@media (min-width: 640px) {
-    .gv-hero-actions {
-        flex-direction: row;
-    }
+.gv-hero-subtag {
+    font-size: 1.0625rem;
+    color: var(--color-nw-200);
+    max-width: 38rem;
+    margin: 0 auto;
 }
 
 /* -------------------------------------------------------------
- * 7. Feature Cards / Value Propositions
- * ----------------------------------------------------------- */
-.gv-grid-4 {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 1.5rem;
-}
-
-@media (min-width: 640px) {
-    .gv-grid-4 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1024px) {
-    .gv-grid-4 {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-}
-
-.gv-feature-card {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-stone-200);
-    border-radius: var(--radius-md);
-    padding: 2rem 1.5rem;
-    transition: var(--transition);
-}
-
-.gv-feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-primary-light);
-}
-
-.gv-feature-icon {
-    font-size: 2.25rem;
-    margin-bottom: 1rem;
-}
-
-.gv-feature-title {
-    font-size: 1.125rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.gv-feature-desc {
-    font-size: 0.875rem;
-    color: var(--color-stone-600);
-    line-height: 1.5;
-}
-
-/* -------------------------------------------------------------
- * 8. Product Cards & Grids
+ * 7. Grids & Cards
  * ----------------------------------------------------------- */
 .gv-grid-3 {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 2rem;
+    gap: var(--space-24);
 }
 
 @media (min-width: 768px) {
@@ -434,185 +389,109 @@ ul {
     }
 }
 
-.gv-product-card {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-stone-200);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: var(--transition);
+.gv-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: var(--space-24);
 }
 
-.gv-product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-primary-light);
+@media (min-width: 640px) {
+    .gv-grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
-.gv-product-thumb {
-    position: relative;
-    height: 240px;
-    background-color: var(--color-cream-card);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.gv-product-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.gv-product-card:hover .gv-product-thumb img {
-    transform: scale(1.06);
-}
-
-.gv-product-badge {
-    position: absolute;
-    bottom: 0.75rem;
-    left: 0.75rem;
-}
-
-.gv-product-body {
-    padding: 1.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.gv-product-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.gv-product-title a:hover {
-    color: var(--color-primary);
-}
-
-.gv-product-desc {
-    font-size: 0.875rem;
-    color: var(--color-stone-600);
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-}
-
-.gv-specs-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.25rem;
-}
-
-.gv-spec-pill {
-    background-color: var(--color-cream);
-    border: 1px solid var(--color-stone-200);
-    font-size: 0.75rem;
-    padding: 0.25rem 0.65rem;
-    border-radius: var(--radius-sm);
-    color: var(--color-stone-700);
-}
-
-.gv-product-footer {
-    padding-top: 1rem;
-    border-top: 1px solid var(--color-stone-100);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* -------------------------------------------------------------
- * 9. Content & Prose
- * ----------------------------------------------------------- */
-.gv-content {
-    line-height: 1.8;
-    color: var(--color-stone-800);
-}
-
-.gv-content p {
-    margin-bottom: 1.5rem;
-}
-
-.gv-content h2, .gv-content h3 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+@media (min-width: 1024px) {
+    .gv-grid-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 
 .gv-card {
-    background: var(--color-white);
-    border: 1px solid var(--color-stone-200);
-    border-radius: var(--radius-md);
-    padding: 2.5rem;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-nb-100);
+    border-radius: var(--radius-16);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.gv-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-nb-300);
+}
+
+.gv-card-sand {
+    background-color: var(--color-warm-sand);
+    border-color: var(--color-warm-sand-alt);
 }
 
 /* -------------------------------------------------------------
- * 10. Footer
+ * 8. CTA Banner
+ * ----------------------------------------------------------- */
+.gv-cta-banner {
+    position: relative;
+    background-color: var(--color-warm-sand);
+    border-top: 1px solid var(--color-nb-100);
+    border-bottom: 1px solid var(--color-nb-100);
+    padding: var(--space-64) 0;
+    text-align: center;
+}
+
+.gv-cta-banner h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: var(--space-24);
+}
+
+/* -------------------------------------------------------------
+ * 9. Footer
  * ----------------------------------------------------------- */
 .gv-footer {
-    background-color: var(--color-dark);
-    color: var(--color-stone-300);
-    padding-top: 4.5rem;
-    padding-bottom: 2rem;
-    border-top: 1px solid #292524;
+    background-color: var(--color-parchment);
+    border-top: 1px solid var(--color-nb-100);
+    padding-top: var(--space-64);
+    padding-bottom: var(--space-32);
+    color: var(--color-pitch-black);
 }
 
 .gv-footer-grid {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 2.5rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid #292524;
+    gap: var(--space-48);
+    padding-bottom: var(--space-48);
+    border-bottom: 1px solid var(--color-nb-100);
 }
 
 @media (min-width: 768px) {
     .gv-footer-grid {
-        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
     }
 }
 
 .gv-footer h4 {
-    color: var(--color-white);
-    font-size: 0.875rem;
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 1.25rem;
+    color: var(--color-nw-500);
+    margin-bottom: var(--space-16);
 }
 
 .gv-footer ul li {
-    margin-bottom: 0.65rem;
+    margin-bottom: var(--space-8);
     font-size: 0.875rem;
+    font-family: var(--font-heading);
+    font-weight: 500;
 }
 
 .gv-footer ul li a:hover {
-    color: var(--color-white);
-}
-
-.gv-footer-contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    font-size: 0.875rem;
-    margin-bottom: 0.75rem;
+    color: var(--color-dark-khaki);
 }
 
 .gv-footer-bottom {
-    padding-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    color: var(--color-stone-500);
-    gap: 0.5rem;
-}
-
-@media (min-width: 640px) {
-    .gv-footer-bottom {
-        flex-direction: row;
-    }
+    padding-top: var(--space-24);
+    text-align: center;
+    font-size: 0.8125rem;
+    color: var(--color-nw-500);
 }

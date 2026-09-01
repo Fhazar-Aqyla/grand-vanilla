@@ -6,103 +6,132 @@
  */
 
 get_header();
+
+$img_dir = get_template_directory_uri() . '/assets/images/';
 ?>
 
-<div class="gv-section-sm" style="background: linear-gradient(180deg, #f7efe4 0%, var(--color-cream) 100%); border-bottom: 1px solid var(--color-stone-200); text-align: center;">
+<!-- 1. Hero Section -->
+<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $img_dir . 'Gallery Hero Section.png' ); ?>');">
     <div class="gv-container">
-        <span class="gv-badge gv-badge-primary" style="margin-bottom: 0.75rem;">Proof of Harvest & Processing</span>
-        <h1 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem;">Harvest & Sun Curing Gallery</h1>
-        <p style="color: var(--color-stone-600); max-width: 38rem; margin: 0 auto; font-size: 0.9375rem;">
-            Visual documentation of our agroforestry vanilla plantations, hand pollination, sun drying decks, wooden crate sweating, and export packaging.
-        </p>
+        <h1 class="gv-hero-tag">#ourGallery</h1>
+        <p class="gv-hero-subtag">See Our People, Products, And Operations</p>
     </div>
-</div>
+</section>
 
-<div class="gv-section">
+<!-- 2. A Closer Look Carousel -->
+<section class="gv-section">
     <div class="gv-container">
         
-        <div class="gv-grid-3">
-            <?php
-            $gallery_query = new WP_Query( array(
-                'post_type'      => 'vanilla_gallery',
-                'posts_per_page' => 12,
-                'post_status'    => 'publish',
-            ) );
+        <div style="margin-bottom: 2.5rem;">
+            <span class="gv-section-tag">Gallery</span>
+            <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem;">A Closer Look At Grand Vanilla</h2>
+            <p style="color: var(--color-nw-500); font-size: 0.9375rem;">
+                Explore the people, products, sourcing, and processes behind our Indonesian vanilla.
+            </p>
+        </div>
 
-            if ( $gallery_query->have_posts() ) :
-                while ( $gallery_query->have_posts() ) : $gallery_query->the_post();
-                    ?>
-                    <div class="gv-card" style="padding: 1rem;">
-                        <div style="height: 220px; overflow: hidden; border-radius: var(--radius-sm); margin-bottom: 1rem; background: var(--color-cream-card);">
-                            <?php if ( has_post_thumbnail() ) : ?>
-                                <?php the_post_thumbnail( 'gallery-thumb', array( 'style' => 'width: 100%; height: 100%; object-fit: cover;' ) ); ?>
-                            <?php else : ?>
-                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 2.5rem;">
-                                    📷
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                        <h3 style="font-size: 1.125rem; font-weight: 700;"><?php the_title(); ?></h3>
-                        <?php if ( get_the_content() ) : ?>
-                            <p style="font-size: 0.8125rem; color: var(--color-stone-600); margin-top: 0.5rem;"><?php echo get_the_excerpt(); ?></p>
-                        <?php endif; ?>
-                    </div>
-                    <?php
-                endwhile;
-                wp_reset_postdata();
-            else :
-                // Realistic documentation cards matching harvest & curing processes
-                $dummy_galleries = array(
-                    array(
-                        'title' => 'Harvest at Peak Yellow Tips',
-                        'desc'  => 'Vanilla beans are carefully hand-picked individually only when the blossom end turns pale golden yellow.',
-                        'icon'  => '🌱'
-                    ),
-                    array(
-                        'title' => 'Traditional Sun Drying Decks',
-                        'desc'  => 'Pods spread on clean wooden blankets for 2-3 hours of gentle morning sun exposure.',
-                        'icon'  => '☀️'
-                    ),
-                    array(
-                        'title' => 'Wooden Box Night Sweating',
-                        'desc'  => 'Wrapped in woolen blankets and stored in pinewood crates to induce enzyme hydrolyzation into vanillin.',
-                        'icon'  => '📦'
-                    ),
-                    array(
-                        'title' => 'Manual Pod Sorting & Grading',
-                        'desc'  => 'Experienced artisan sorters measuring length, moisture retention, and aroma purity.',
-                        'icon'  => '🔍'
-                    ),
-                    array(
-                        'title' => 'Aroma-Sealed Wax Bundling',
-                        'desc'  => 'Tied with raffia and enveloped in European food-grade wax paper to preserve volatile oils.',
-                        'icon'  => '✨'
-                    ),
-                    array(
-                        'title' => 'Vacuum Packaging for Export',
-                        'desc'  => 'Multilayer food-grade vacuum sealing ensuring freshness during transatlantic cargo flights.',
-                        'icon'  => '✈️'
-                    ),
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 5rem;">
+            <div class="gv-card">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 1.png' ); ?>" alt="Fresh Vanilla Pods" style="width: 100%; height: 220px; object-fit: cover;">
+                <div style="padding: 1.25rem;">
+                    <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase;">Vanilla Collection</span>
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-top: 0.25rem;">Fresh Vanilla Pods</h3>
+                </div>
+            </div>
+            <div class="gv-card">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 2.png' ); ?>" alt="Premium Vanilla Beans" style="width: 100%; height: 220px; object-fit: cover;">
+                <div style="padding: 1.25rem;">
+                    <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase;">Vanilla Collection</span>
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-top: 0.25rem;">Premium Vanilla Beans</h3>
+                </div>
+            </div>
+            <div class="gv-card">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 3.png' ); ?>" alt="Vanilla in Bloom" style="width: 100%; height: 220px; object-fit: cover;">
+                <div style="padding: 1.25rem;">
+                    <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase;">Vanilla Collection</span>
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-top: 0.25rem;">Vanilla in Bloom</h3>
+                </div>
+            </div>
+            <div class="gv-card">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 4.png' ); ?>" alt="Indonesian Vanilla Selection" style="width: 100%; height: 220px; object-fit: cover;">
+                <div style="padding: 1.25rem;">
+                    <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase;">Vanilla Collection</span>
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-top: 0.25rem;">Indonesian Vanilla Selection</h3>
+                </div>
+            </div>
+            <div class="gv-card">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 5.png' ); ?>" alt="Handcrafted Vanilla" style="width: 100%; height: 220px; object-fit: cover;">
+                <div style="padding: 1.25rem;">
+                    <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase;">Vanilla Collection</span>
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-top: 0.25rem;">Handcrafted Vanilla</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Explore More Gallery (Tabs & 12 Grid) -->
+        <div>
+            <div style="display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 2.5rem; gap: 1rem;">
+                <h2 style="font-size: 2rem; font-weight: 800;">Explore More Gallery</h2>
+                
+                <!-- Category Filter Tabs -->
+                <div style="display: flex; gap: 0.75rem;">
+                    <button type="button" class="gv-pill gv-pill-khaki" style="cursor: pointer;">All Gallery</button>
+                    <button type="button" class="gv-pill" style="cursor: pointer;">Vanilla</button>
+                    <button type="button" class="gv-pill" style="cursor: pointer;">Company</button>
+                </div>
+            </div>
+
+            <!-- 12 Gallery Items Grid -->
+            <div class="gv-grid-4" style="gap: 1.5rem; margin-bottom: 3.5rem;">
+                <?php
+                $gallery_samples = array(
+                    array( 'img' => 'Gallery Example Carroussel 1.png', 'title' => 'Sun Drying Decks', 'desc' => 'Patient sun drying under equatorial sunshine in East Java.' ),
+                    array( 'img' => 'Gallery Example Carroussel 2.png', 'title' => 'Wooden Sweat Boxes', 'desc' => 'Nightly sweat box conditioning to maximize natural vanillin.' ),
+                    array( 'img' => 'Gallery Example Carroussel 3.png', 'title' => 'Orchid Hand Pollination', 'desc' => 'Delicate hand pollination during morning floral bloom.' ),
+                    array( 'img' => 'Gallery Example Carroussel 4.png', 'title' => 'Pod Length Sorting', 'desc' => 'Precision manual sorting by length and moisture.' ),
+                    array( 'img' => 'Gallery Example Carroussel 5.png', 'title' => 'Wax Paper Bundling', 'desc' => 'Aroma-sealed wax wrapping for export safety.' ),
+                    array( 'img' => 'Our Story.png', 'title' => 'Agroforestry Canopy', 'desc' => 'Shade-grown vanilla vines climbing live Gamal trees.' ),
+                    array( 'img' => 'Sourcing.png', 'title' => 'Fresh Pod Harvest', 'desc' => 'Harvesting only when pods develop yellow blossom tips.' ),
+                    array( 'img' => 'Processing.png', 'title' => 'Inspection Facility', 'desc' => 'Laboratory moisture testing and quality inspection.' ),
+                    array( 'img' => 'Warehouse.png', 'title' => 'Clean Room Storage', 'desc' => 'Climate-controlled warehouse and logistics staging.' ),
+                    array( 'img' => 'Bulk  Wholesale Vanilla 1.png', 'title' => 'Export Shipping Staging', 'desc' => 'FOB / CIF export packaging for global buyers.' ),
+                    array( 'img' => 'Planifolia Carroussel 1.png', 'title' => 'Planifolia Grade A Pods', 'desc' => 'Supple, glossy caviar-rich Gourmet vanilla beans.' ),
+                    array( 'img' => 'Tahitensis Carroussel 1.png', 'title' => 'Tahitensis Floral Pods', 'desc' => 'Aromatic floral pods for boutique confectionery.' ),
                 );
 
-                foreach ( $dummy_galleries as $dg ) :
+                foreach ( $gallery_samples as $item ) :
                     ?>
-                    <div class="gv-card" style="padding: 1.5rem;">
-                        <div style="height: 180px; overflow: hidden; border-radius: var(--radius-sm); margin-bottom: 1.25rem; background: var(--color-cream-card); display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                            <span style="font-size: 3rem; margin-bottom: 0.5rem;"><?php echo esc_html( $dg['icon'] ); ?></span>
-                            <span style="font-size: 0.75rem; color: var(--color-stone-500); font-weight: 700; text-transform: uppercase;">Harvest & Curing Process</span>
+                    <div class="gv-card">
+                        <div style="height: 180px; overflow: hidden; background: var(--color-warm-sand-alt);">
+                            <img src="<?php echo esc_url( $img_dir . $item['img'] ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                        <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;"><?php echo esc_html( $dg['title'] ); ?></h3>
-                        <p style="font-size: 0.8125rem; color: var(--color-stone-600); line-height: 1.5;"><?php echo esc_html( $dg['desc'] ); ?></p>
+                        <div style="padding: 1.25rem;">
+                            <span style="font-size: 0.6875rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase;">Vanilla Operations</span>
+                            <h3 style="font-size: 0.9375rem; font-weight: 700; margin: 0.25rem 0 0.5rem;"><?php echo esc_html( $item['title'] ); ?></h3>
+                            <p style="font-size: 0.75rem; color: var(--color-nw-500); line-height: 1.5;"><?php echo esc_html( $item['desc'] ); ?></p>
+                        </div>
                     </div>
                     <?php
                 endforeach;
-            endif;
-            ?>
+                ?>
+            </div>
+
         </div>
 
     </div>
-</div>
+</section>
+
+<!-- 4. CTA Banner -->
+<section class="gv-cta-banner">
+    <div class="gv-container">
+        <h2>Looking For A Reliable<br>Indonesian Vanilla Supplier?</h2>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="gv-btn gv-btn-primary">
+                Request a Quote
+            </a>
+        </div>
+    </div>
+</section>
 
 <?php
 get_footer();

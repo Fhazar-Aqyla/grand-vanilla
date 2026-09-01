@@ -1,90 +1,70 @@
-# Grand Vanilla ID — Database Schema Reference
+# 🏛️ JSON-LD Structured Data (Schema.org) — Grand Vanilla ID
 
-This document outlines the complete relational database schema for **Grand Vanilla ID** (`grand_vanilla_id`).
-
----
-
-## 1. Tables Overview
-
-| Table Name | Primary Purpose | Soft Deletes |
-|---|---|:---:|
-| `users` | Administrator, editor, and staff accounts | ❌ |
-| `products` | Vanilla commodity catalog, lab characteristics, and applications | ✅ |
-| `galleries` | Harvest, plantation, and curing process documentation photos | ✅ |
-| `inquiries` | B2B buyer leads and wholesale sample inquiries | ❌ |
-| `categories` | Blog article categories | ✅ |
-| `blogs` | Industry articles and export market insights | ✅ |
-| `blog_category` | Pivot table linking blogs and categories | ❌ |
-| `media` | Polymorphic media library and product gallery images | ✅ |
-| `page_seos` | Per-page SEO metadata configuration | ❌ |
-| `settings` | Global business profile, ports, and contact info | ❌ |
-| `activity_logs` | Audit trail for security and sensitive data modifications | ❌ |
-| `cache` / `api_cache` | High-performance cache stores | ❌ |
+Dokumen ini mendefinisikan skema data terstruktur (**JSON-LD**) untuk website **Grand Vanilla ID** guna membantu mesin pencari (Google & Bing) memahami entitas bisnis, lokasi, produk komoditas vanili, dan breadcrumbs.
 
 ---
 
-## 2. Table Schemas
+## 1. Schema Organization (Global)
 
-### `users`
-| Column | Type | Nullable | Default | Description |
-|---|---|:---:|:---:|---|
-| `id` | `BIGINT UNSIGNED` | ❌ | AUTO | Primary Key |
-| `name` | `VARCHAR(255)` | ❌ | - | Full name |
-| `email` | `VARCHAR(255)` | ❌ | - | Unique login email |
-| `role` | `VARCHAR(20)` | ❌ | `'admin'` | `super_admin`, `admin`, `staff` |
-| `is_active` | `BOOLEAN` | ❌ | `TRUE` | Login enabled flag |
-| `avatar` | `VARCHAR(255)` | ✅ | `NULL` | Avatar path |
-| `password` | `VARCHAR(255)` | ❌ | - | Bcrypt hash |
-| `email_verified_at` | `TIMESTAMP` | ✅ | `NULL` | Verification date |
-| `remember_token` | `VARCHAR(100)` | ✅ | `NULL` | Session token |
-| `created_at` / `updated_at` | `TIMESTAMP` | ✅ | `NULL` | Timestamps |
+Ditempatkan pada `header.php` atau homepage:
 
-### `products`
-| Column | Type | Nullable | Default | Description |
-|---|---|:---:|:---:|---|
-| `id` | `BIGINT UNSIGNED` | ❌ | AUTO | Primary Key |
-| `name` | `VARCHAR(255)` | ❌ | - | Product commodity name |
-| `slug` | `VARCHAR(255)` | ❌ | - | Unique URL slug |
-| `photo` | `VARCHAR(255)` | ✅ | `NULL` | Main cover photo path |
-| `description` | `LONGTEXT` | ✅ | `NULL` | Product aroma profile & overview |
-| `varieties` | `JSON` | ✅ | `NULL` | Array of grades (`["Gourmet Grade A", "Extraction"]`) |
-| `characteristics` | `JSON` | ✅ | `NULL` | Key-value lab specs (`[{"label":"Vanillin","value":"2.0%"}]`) |
-| `applications` | `JSON` | ✅ | `NULL` | Usage guides (`[{"title":"Bakery","description":"..."}]`) |
-| `is_active` | `BOOLEAN` | ❌ | `TRUE` | Public visibility flag |
-| `sort_order` | `INT` | ❌ | `0` | Catalog display order (1-3 on homepage) |
-| `meta_title` | `VARCHAR(255)` | ✅ | `NULL` | SEO meta title |
-| `meta_description` | `TEXT` | ✅ | `NULL` | SEO meta description |
-| `og_image` | `VARCHAR(255)` | ✅ | `NULL` | Social sharing image |
-| `created_at` / `updated_at` | `TIMESTAMP` | ✅ | `NULL` | Timestamps |
-| `deleted_at` | `TIMESTAMP` | ✅ | `NULL` | Soft delete timestamp |
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Grand Vanilla Indonesia",
+  "alternateName": "Grand Vanilla ID",
+  "url": "https://grandvanilla.id",
+  "logo": "https://grandvanilla.id/wp-content/themes/grand-vanilla-theme/assets/images/Logo.png",
+  "description": "Premier Indonesian vanilla bean supplier and exporter, providing certified Planifolia and Tahitensis vanilla pods for global food industries.",
+  "foundingDate": "2019",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Sumbersari 2 Street",
+    "addressLocality": "Jember",
+    "addressRegion": "East Java",
+    "addressCountry": "ID"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+62-812-2697-4731",
+    "contactType": "Sales & Export Desk",
+    "email": "grandvanilla@gmail.com",
+    "availableLanguage": ["English", "Indonesian"]
+  },
+  "sameAs": [
+    "https://instagram.com/grandvanilla.id",
+    "https://linkedin.com/company/grand-vanilla-id"
+  ]
+}
+```
 
-### `galleries`
-| Column | Type | Nullable | Default | Description |
-|---|---|:---:|:---:|---|
-| `id` | `BIGINT UNSIGNED` | ❌ | AUTO | Primary Key |
-| `title` | `VARCHAR(255)` | ❌ | - | Image title / process description |
-| `category` | `VARCHAR(100)` | ✅ | `NULL` | Process stage (`Plantation`, `Curing`, etc.) |
-| `image_path` | `VARCHAR(255)` | ❌ | - | File path in storage |
-| `alt_text` | `VARCHAR(255)` | ✅ | `NULL` | SEO image alt text |
-| `caption` | `TEXT` | ✅ | `NULL` | Additional description |
-| `sort_order` | `INT` | ❌ | `0` | Display order |
-| `is_active` | `BOOLEAN` | ❌ | `TRUE` | Visibility flag |
-| `created_at` / `updated_at` | `TIMESTAMP` | ✅ | `NULL` | Timestamps |
-| `deleted_at` | `TIMESTAMP` | ✅ | `NULL` | Soft delete timestamp |
+---
 
-### `inquiries`
-| Column | Type | Nullable | Default | Description |
-|---|---|:---:|:---:|---|
-| `id` | `BIGINT UNSIGNED` | ❌ | AUTO | Primary Key |
-| `name` | `VARCHAR(255)` | ❌ | - | Buyer / representative name |
-| `email` | `VARCHAR(255)` | ❌ | - | Business contact email |
-| `company` | `VARCHAR(255)` | ✅ | `NULL` | Importer company name |
-| `phone` | `VARCHAR(50)` | ✅ | `NULL` | Phone / WhatsApp number |
-| `country` | `VARCHAR(100)` | ✅ | `NULL` | Destination export country |
-| `subject` | `VARCHAR(255)` | ❌ | - | Inquiry topic |
-| `product_id` | `BIGINT UNSIGNED` | ✅ | `NULL` | Foreign key to `products.id` |
-| `message` | `TEXT` | ❌ | - | Volume and order requirement details |
-| `status` | `VARCHAR(50)` | ❌ | `'new'` | `new`, `contacted`, `in_negotiation`, `closed`, `spam` |
-| `ip_address` | `VARCHAR(45)` | ✅ | `NULL` | Sender IP address |
-| `user_agent` | `TEXT` | ✅ | `NULL` | Browser information |
-| `created_at` / `updated_at` | `TIMESTAMP` | ✅ | `NULL` | Timestamps |
+## 2. Schema Product (Halaman Produk Vanili)
+
+Ditempatkan pada single product template (`single-vanilla_product.php`):
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Indonesian Planifolia Gourmet Vanilla Beans (Grade A)",
+  "image": "https://grandvanilla.id/wp-content/themes/grand-vanilla-theme/assets/images/Product%20Unggulan%201.png",
+  "description": "Premium Gourmet Grade A Indonesian Planifolia vanilla beans with 2.0% - 2.4% certified vanillin content and rich floral-bourbon aroma.",
+  "brand": {
+    "@type": "Brand",
+    "name": "Grand Vanilla"
+  },
+  "countryOfOrigin": {
+    "@type": "Country",
+    "name": "Indonesia"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+}
+```
