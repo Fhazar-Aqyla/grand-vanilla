@@ -1,0 +1,618 @@
+/*
+Theme Name: Grand Vanilla ID
+Theme URI: https://grandvanilla.id
+Author: Jasa Digital Nirwana
+Author URI: https://jasadigitalnirwana.com
+Description: Premium Custom WordPress Theme for Grand Vanilla Indonesia — Indonesian Vanilla Beans B2B Supplier & Exporter.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 8.0
+Text Domain: grand-vanilla
+Tags: custom-theme, company-profile, b2b, exporter, clean, responsive, vanilla
+*/
+
+/* -------------------------------------------------------------
+ * 1. CSS Variables & Design Tokens
+ * ----------------------------------------------------------- */
+:root {
+    --font-heading: 'Jost', sans-serif;
+    --font-body: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* Vanilla Palette */
+    --color-primary: #8b5a2b;          /* Vanilla Warm Brown */
+    --color-primary-dark: #653e1b;     /* Deep Cured Brown */
+    --color-primary-light: #d4a373;    /* Golden Vanilla Pod */
+    --color-cream: #fdfbf7;            /* Organic Cream Background */
+    --color-cream-card: #f8f4ec;       /* Soft Sand / Card Tint */
+    --color-accent: #2e6040;           /* Agroforestry Orchid Green */
+    --color-accent-light: #e8f3ec;     /* Soft Green Tint */
+    
+    /* Neutral Shades */
+    --color-dark: #1b1917;             /* Obsidian / Dark Charcoal */
+    --color-stone-800: #292524;
+    --color-stone-700: #44403c;
+    --color-stone-600: #57534e;
+    --color-stone-500: #78716c;
+    --color-stone-300: #d6d3d1;
+    --color-stone-200: #e7e5e4;
+    --color-stone-100: #f5f5f4;
+    --color-white: #ffffff;
+
+    /* Transitions & Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -------------------------------------------------------------
+ * 2. Reset & Global Styles
+ * ----------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-cream);
+    color: var(--color-stone-800);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-heading);
+    color: var(--color-stone-800);
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+/* -------------------------------------------------------------
+ * 3. Container & Layout Utilities
+ * ----------------------------------------------------------- */
+.gv-container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.gv-main {
+    flex: 1;
+}
+
+.gv-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.gv-section-sm {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+}
+
+/* -------------------------------------------------------------
+ * 4. Header & Navigation
+ * ----------------------------------------------------------- */
+.gv-topbar {
+    background-color: var(--color-dark);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    letter-spacing: 0.025em;
+}
+
+.gv-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(253, 251, 247, 0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-stone-200);
+}
+
+.gv-nav-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5rem;
+}
+
+.gv-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+}
+
+.gv-brand-logo span {
+    color: var(--color-stone-800);
+}
+
+.gv-nav-menu {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .gv-nav-menu {
+        display: flex;
+    }
+}
+
+.gv-nav-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-stone-700);
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.gv-nav-link:hover,
+.gv-nav-link.current-menu-item,
+.gv-nav-link.active {
+    color: var(--color-primary);
+}
+
+.gv-nav-cta {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .gv-nav-cta {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.gv-mobile-toggle {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--color-stone-800);
+}
+
+@media (min-width: 768px) {
+    .gv-mobile-toggle {
+        display: none;
+    }
+}
+
+.gv-mobile-drawer {
+    display: none;
+    padding: 1.25rem 1.5rem 2rem;
+    border-top: 1px solid var(--color-stone-200);
+    background-color: var(--color-cream);
+}
+
+.gv-mobile-drawer.is-open {
+    display: block;
+}
+
+.gv-mobile-drawer .gv-nav-link {
+    display: block;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--color-stone-100);
+}
+
+/* -------------------------------------------------------------
+ * 5. Buttons & Badges
+ * ----------------------------------------------------------- */
+.gv-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.gv-btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 4px 12px rgba(139, 90, 43, 0.25);
+}
+
+.gv-btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(139, 90, 43, 0.35);
+}
+
+.gv-btn-outline {
+    background-color: var(--color-white);
+    color: var(--color-stone-800);
+    border-color: var(--color-stone-300);
+}
+
+.gv-btn-outline:hover {
+    background-color: var(--color-cream-card);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.gv-btn-sm {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.75rem;
+}
+
+.gv-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.gv-badge-primary {
+    background-color: rgba(139, 90, 43, 0.12);
+    color: var(--color-primary);
+}
+
+.gv-badge-accent {
+    background-color: var(--color-accent-light);
+    color: var(--color-accent);
+}
+
+.gv-badge-dark {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--color-white);
+    backdrop-filter: blur(4px);
+}
+
+/* -------------------------------------------------------------
+ * 6. Hero Section
+ * ----------------------------------------------------------- */
+.gv-hero {
+    position: relative;
+    padding: 5rem 0 6rem;
+    background: linear-gradient(180deg, #f7efe4 0%, var(--color-cream) 100%);
+    border-bottom: 1px solid var(--color-stone-200);
+    text-align: center;
+}
+
+.gv-hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    max-width: 54rem;
+    margin: 1rem auto 1.5rem;
+    color: var(--color-stone-800);
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .gv-hero-title {
+        font-size: 3.5rem;
+    }
+}
+
+.gv-hero-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-stone-600);
+    max-width: 42rem;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+}
+
+.gv-hero-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .gv-hero-actions {
+        flex-direction: row;
+    }
+}
+
+/* -------------------------------------------------------------
+ * 7. Feature Cards / Value Propositions
+ * ----------------------------------------------------------- */
+.gv-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .gv-grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .gv-grid-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.gv-feature-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-stone-200);
+    border-radius: var(--radius-md);
+    padding: 2rem 1.5rem;
+    transition: var(--transition);
+}
+
+.gv-feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-light);
+}
+
+.gv-feature-icon {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+}
+
+.gv-feature-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.gv-feature-desc {
+    font-size: 0.875rem;
+    color: var(--color-stone-600);
+    line-height: 1.5;
+}
+
+/* -------------------------------------------------------------
+ * 8. Product Cards & Grids
+ * ----------------------------------------------------------- */
+.gv-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .gv-grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .gv-grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.gv-product-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-stone-200);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.gv-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary-light);
+}
+
+.gv-product-thumb {
+    position: relative;
+    height: 240px;
+    background-color: var(--color-cream-card);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gv-product-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gv-product-card:hover .gv-product-thumb img {
+    transform: scale(1.06);
+}
+
+.gv-product-badge {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+}
+
+.gv-product-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gv-product-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.gv-product-title a:hover {
+    color: var(--color-primary);
+}
+
+.gv-product-desc {
+    font-size: 0.875rem;
+    color: var(--color-stone-600);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+}
+
+.gv-specs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.gv-spec-pill {
+    background-color: var(--color-cream);
+    border: 1px solid var(--color-stone-200);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-stone-700);
+}
+
+.gv-product-footer {
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-stone-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* -------------------------------------------------------------
+ * 9. Content & Prose
+ * ----------------------------------------------------------- */
+.gv-content {
+    line-height: 1.8;
+    color: var(--color-stone-800);
+}
+
+.gv-content p {
+    margin-bottom: 1.5rem;
+}
+
+.gv-content h2, .gv-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.gv-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-stone-200);
+    border-radius: var(--radius-md);
+    padding: 2.5rem;
+}
+
+/* -------------------------------------------------------------
+ * 10. Footer
+ * ----------------------------------------------------------- */
+.gv-footer {
+    background-color: var(--color-dark);
+    color: var(--color-stone-300);
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
+    border-top: 1px solid #292524;
+}
+
+.gv-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2.5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #292524;
+}
+
+@media (min-width: 768px) {
+    .gv-footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    }
+}
+
+.gv-footer h4 {
+    color: var(--color-white);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+}
+
+.gv-footer ul li {
+    margin-bottom: 0.65rem;
+    font-size: 0.875rem;
+}
+
+.gv-footer ul li a:hover {
+    color: var(--color-white);
+}
+
+.gv-footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.gv-footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--color-stone-500);
+    gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .gv-footer-bottom {
+        flex-direction: row;
+    }
+}
