@@ -18,11 +18,6 @@
 
 <div id="page" class="site">
 
-    <!-- Top Announcement Bar -->
-    <div style="background-color: var(--color-pitch-black); color: var(--color-nw-200); font-size: 0.75rem; padding: 0.5rem 1rem; text-align: center; font-family: var(--font-heading); letter-spacing: 0.02em;">
-        <span>🌱 Direct Indonesian Farm-Gate Vanilla Exporter &bull; Wholesale Inquiries & Worldwide FOB/CIF Shipping</span>
-    </div>
-
     <!-- Main Navigation Header -->
     <header id="masthead" class="gv-header">
         <div class="gv-container">
@@ -100,4 +95,4 @@
     });
     </script>
 
-    <main id="primary" class="gv-main">
+    <main id="primary" class="site-main">
