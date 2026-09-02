@@ -8,14 +8,15 @@
 get_header();
 
 $img_dir = get_template_directory_uri() . '/assets/images/';
+$contact = grand_vanilla_get_contact_info();
 ?>
 
 <div class="gv-section-sm" style="border-bottom: 1px solid var(--color-nb-100); padding-bottom: 1.5rem;">
     <div class="gv-container" style="max-width: 860px;">
         <!-- Breadcrumbs -->
         <div style="font-size: 0.8125rem; color: var(--color-nw-500); font-family: var(--font-heading); margin-bottom: 2rem;">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: var(--color-nw-500);">Home</a> // 
-            <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" style="color: var(--color-nw-500);">Blog</a> // 
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="color: var(--color-nw-500);">Home</a> / 
+            <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" style="color: var(--color-nw-500);">Blog</a> / 
             <span style="color: var(--color-pitch-black); font-weight: 700;"><?php the_title(); ?></span>
         </div>
 
@@ -46,14 +47,14 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 
         <!-- Article Content -->
         <article style="font-size: 1.0625rem; line-height: 1.8; color: var(--color-pitch-black); margin-bottom: 4rem;">
-            <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 1.25rem;">A Vanilla Shaped by Its Origin</h2>
-            
-            <p style="color: var(--color-nw-500); margin-bottom: 1.5rem;">
-                In the competitive landscape of industrial food manufacturing and premium culinary distribution, the origin and quality of ingredients are paramount. Indonesian vanilla has emerged as a cornerstone for F&B businesses seeking robust, versatile, and high-quality flavor profiles.
-            </p>
-            <p style="color: var(--color-nw-500); margin-bottom: 2rem;">
-                The journey of every pod begins in the nutrient-rich volcanic soils and tropical climate of the archipelago. This unique environment imparts distinct characteristics that set it apart from vanilla grown anywhere else in the world, making it highly sought after by flavor houses and extract manufacturers.
-            </p>
+            <?php
+            if ( have_posts() ) :
+                while ( have_posts() ) :
+                    the_post();
+                    the_content();
+                endwhile;
+            endif;
+            ?>
 
             <!-- Pull Quote Box -->
             <blockquote style="background: var(--color-warm-sand); border-left: 4px solid var(--color-dark-khaki); padding: 1.75rem 2rem; border-radius: 0 var(--radius-12) var(--radius-12) 0; margin: 2.5rem 0; font-style: italic; font-size: 1.125rem; line-height: 1.7; color: var(--color-pitch-black);">
@@ -88,14 +89,14 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
             <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
                 <div class="gv-card" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; align-items: center;" class="gv-blog-card-split">
                     <div style="position: relative; border-radius: var(--radius-12); overflow: hidden; height: 180px;">
-                        <img src="<?php echo esc_url( $img_dir . 'Buat Blog Example 1.png' ); ?>" alt="More Insights" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="<?php echo esc_url( $img_dir . 'Buat blog example 2.png' ); ?>" alt="From Vanilla Bean to Global Ingredient" style="width: 100%; height: 100%; object-fit: cover;">
                         <span style="position: absolute; top: 1rem; left: 1rem; font-size: 2rem; font-weight: 800; font-family: var(--font-heading); color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.6);">11/12</span>
                     </div>
                     <div>
-                        <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase;">Vanilla Guide</span>
-                        <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0.35rem 0 0.5rem;">What Makes Indonesian Vanilla Exceptional?</h3>
-                        <p style="color: var(--color-nw-500); font-size: 0.875rem; margin-bottom: 1rem;">Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient.</p>
-                        <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">Continue Reading &rarr;</a>
+                        <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase;">Vanilla Insight</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0.35rem 0 0.5rem;">From Vanilla Bean to Global Ingredient</h3>
+                        <p style="color: var(--color-nw-500); font-size: 0.875rem; margin-bottom: 1rem;">Explore how quality vanilla is sourced, processed, and prepared to meet the needs of international B2B buyers.</p>
+                        <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">Continue Reading &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -115,7 +116,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
     <div class="gv-container">
         <h2>Looking For A Reliable<br>Indonesian Vanilla Supplier?</h2>
         <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="gv-btn gv-btn-primary">
+            <a href="<?php echo esc_url( $contact['whatsapp_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="gv-btn gv-btn-primary">
                 Request a Quote
             </a>
         </div>

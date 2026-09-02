@@ -94,12 +94,12 @@ $contact = grand_vanilla_get_contact_info();
                     <div>
                         <span style="font-size: 0.8125rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase; font-family: var(--font-heading); display: block; margin-bottom: 0.5rem;"><?php echo esc_html( $art['cat'] ); ?></span>
                         <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.75rem;">
-                            <a href="<?php echo esc_url( home_url( '/articles/' . $art['slug'] . '/' ) ); ?>"><?php echo esc_html( $art['title'] ); ?></a>
+                            <a href="<?php echo esc_url( home_url( '/' . $art['slug'] . '/' ) ); ?>"><?php echo esc_html( $art['title'] ); ?></a>
                         </h3>
                         <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1.25rem;">
                             <?php echo esc_html( $art['desc'] ); ?>
                         </p>
-                        <a href="<?php echo esc_url( home_url( '/articles/' . $art['slug'] . '/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                        <a href="<?php echo esc_url( home_url( '/' . $art['slug'] . '/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
                             Continue Reading &rarr;
                         </a>
                     </div>

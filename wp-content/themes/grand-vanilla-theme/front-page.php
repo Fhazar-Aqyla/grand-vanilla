@@ -399,7 +399,7 @@ $hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesi
                     <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1.25rem;">
                         Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient for global food industries.
                     </p>
-                    <a href="<?php echo esc_url( home_url( '/articles/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
                         Continue Reading &rarr;
                     </a>
                 </div>
@@ -417,7 +417,7 @@ $hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesi
                     <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1.25rem;">
                         Explore how quality vanilla is sourced, processed, and prepared to meet the needs of international B2B buyers.
                     </p>
-                    <a href="<?php echo esc_url( home_url( '/articles/from-vanilla-bean-to-global-ingredient/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
                         Continue Reading &rarr;
                     </a>
                 </div>
