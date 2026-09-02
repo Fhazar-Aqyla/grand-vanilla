@@ -566,10 +566,11 @@ ul {
  * 9. Footer
  * ----------------------------------------------------------- */
 .gv-footer {
-    background-color: var(--color-parchment);
-    border-top: 1px solid var(--color-nb-100);
+    background-color: #FAF8F5;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
     padding-top: var(--space-64);
-    padding-bottom: var(--space-32);
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
     color: var(--color-pitch-black);
 }
 

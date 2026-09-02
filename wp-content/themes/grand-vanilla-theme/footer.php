@@ -12,7 +12,7 @@ $contact = grand_vanilla_get_contact_info();
     </main><!-- #primary -->
 
     <!-- Main Footer -->
-    <footer id="colophon" class="gv-footer" style="background-color: #FAF8F5; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 4rem; color: #363E19;">
+    <footer id="colophon" class="gv-footer" style="background-color: #FAF8F5; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 4rem; padding-bottom: 0 !important; margin-bottom: 0 !important; color: #363E19;">
         <div class="gv-container">
             
             <div class="gv-footer-main-wrap">
