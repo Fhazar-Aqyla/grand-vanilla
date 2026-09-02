@@ -1,6 +1,7 @@
 <?php
 /**
- * The template for displaying the Front Page (Home)
+ * The template for displaying the Landing Page (Homepage)
+ * High-Fidelity Implementation based on Figma Desktop/Landing Page.pdf
  *
  * @package GrandVanilla
  */
@@ -9,167 +10,271 @@ get_header();
 
 $img_dir = get_template_directory_uri() . '/assets/images/';
 $contact = grand_vanilla_get_contact_info();
-$hero_title = get_theme_mod( 'gv_hero_title', 'Premium Indonesian vanilla, sourced for the global market.' );
-$hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.' );
 ?>
 
 <!-- 1. Hero Section -->
-<section style="position: relative; background: url('<?php echo esc_url( $img_dir . 'Hero Image.png' ); ?>') center/cover no-repeat; padding: 7rem 0 6rem; color: #FFFFFF; overflow: hidden;">
-    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 8, 4, 0.72) 0%, rgba(10, 8, 4, 0.85) 100%); z-index: 1;"></div>
-    <div class="gv-container" style="position: relative; z-index: 2;">
-        <div style="max-width: 48rem;">
-            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; color: #FFFFFF; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.02em;">
-                <?php echo esc_html( $hero_title ); ?>
+<section class="gv-hero" style="position: relative; min-height: 85vh; background: url('<?php echo esc_url( $img_dir . 'Hero Image.png' ); ?>') center center / cover no-repeat; display: flex; align-items: center; padding: 6rem 0 5rem;">
+    <!-- Dark Gradient Overlay for optimal readability -->
+    <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%); pointer-events: none;"></div>
+
+    <div class="gv-container" style="position: relative; z-index: 2; width: 100%;">
+        <div style="max-width: 680px;">
+            
+            <!-- Main Hero Headline -->
+            <h1 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.5rem, 5vw, 3.85rem); font-weight: 700; color: #FFFFFF; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.01em;">
+                <?php echo esc_html( get_theme_mod( 'grand_vanilla_hero_title', 'Premium Indonesian vanilla, sourced for the global market.' ) ); ?>
             </h1>
-            <p style="font-size: 1.125rem; color: var(--color-nw-200); line-height: 1.7; margin-bottom: 2.5rem; max-width: 38rem;">
-                <?php echo esc_html( $hero_subtitle ); ?>
+
+            <!-- Subtitle -->
+            <p style="font-size: clamp(1rem, 1.5vw, 1.125rem); color: rgba(255,255,255,0.92); line-height: 1.6; margin-bottom: 2.25rem; max-width: 580px;">
+                <?php echo esc_html( get_theme_mod( 'grand_vanilla_hero_subtitle', 'We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.' ) ); ?>
             </p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem;">
-                <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" class="gv-btn gv-btn-primary">
+
+            <!-- Dual Action Buttons -->
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem;">
+                <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" 
+                   style="display: inline-block; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.25); transition: all 0.2s ease;">
                     Explore Products
                 </a>
-                <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="gv-btn gv-btn-outline" style="color: #FFFFFF; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08);">
+                <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" 
+                   style="display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.7); color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
                     Request a Quote
                 </a>
             </div>
 
-            <!-- Floating Badge: Trusted Customers -->
-            <div style="display: inline-flex; align-items: center; gap: 1rem; background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(8px); padding: 0.75rem 1.5rem; border-radius: var(--radius-full); border: 1px solid rgba(255,255,255,0.2);">
-                <div style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-heading); color: #FFFFFF;">12+</div>
-                <div style="font-size: 0.75rem; color: var(--color-nw-200); font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.05em;">
-                    Trusted Customers Worldwide &bull; 8+ Countries
+            <!-- Floating Badge: Trusted Customers Worldwide -->
+            <div style="display: inline-flex; flex-direction: column; background: #0E110A; border-radius: 10px; padding: 1rem 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08);">
+                <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.75rem; color: #D1D5DB; font-weight: 500; margin-bottom: 0.35rem;">
+                    Trusted Customers Worldwide
+                </span>
+                <div style="display: flex; align-items: center; gap: 1.25rem;">
+                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 2.25rem; font-weight: 800; color: #FFFFFF; line-height: 1;">
+                        12+
+                    </span>
+                    <!-- Overlapping Flag Circles (US, FR, DE, NL, +8) -->
+                    <div style="display: flex; align-items: center;">
+                        <!-- USA Flag Circle -->
+                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; background: #002868; display: flex; align-items: center; justify-content: center; z-index: 5;">
+                            <svg viewBox="0 0 32 32" width="28" height="28">
+                                <rect width="32" height="32" fill="#bf0a30"/>
+                                <rect y="4.6" width="32" height="4.6" fill="#fff"/>
+                                <rect y="13.8" width="32" height="4.6" fill="#fff"/>
+                                <rect y="23" width="32" height="4.6" fill="#fff"/>
+                                <rect width="14" height="17" fill="#002868"/>
+                                <circle cx="4" cy="4" r="1" fill="#fff"/>
+                                <circle cx="10" cy="4" r="1" fill="#fff"/>
+                                <circle cx="7" cy="8" r="1" fill="#fff"/>
+                                <circle cx="4" cy="12" r="1" fill="#fff"/>
+                                <circle cx="10" cy="12" r="1" fill="#fff"/>
+                            </svg>
+                        </div>
+                        <!-- France Flag Circle -->
+                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 4;">
+                            <svg viewBox="0 0 32 32" width="28" height="28">
+                                <rect width="10.6" height="32" fill="#002395"/>
+                                <rect x="10.6" width="10.6" height="32" fill="#fff"/>
+                                <rect x="21.2" width="10.8" height="32" fill="#ed2939"/>
+                            </svg>
+                        </div>
+                        <!-- Germany Flag Circle -->
+                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 3;">
+                            <svg viewBox="0 0 32 32" width="28" height="28">
+                                <rect width="32" height="10.6" fill="#000"/>
+                                <rect y="10.6" width="32" height="10.6" fill="#dd0000"/>
+                                <rect y="21.2" width="32" height="10.8" fill="#ffce00"/>
+                            </svg>
+                        </div>
+                        <!-- Netherlands Flag Circle -->
+                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 2;">
+                            <svg viewBox="0 0 32 32" width="28" height="28">
+                                <rect width="32" height="10.6" fill="#ae1c28"/>
+                                <rect y="10.6" width="32" height="10.6" fill="#fff"/>
+                                <rect y="21.2" width="32" height="10.8" fill="#21468b"/>
+                            </svg>
+                        </div>
+                        <!-- +8 Pill -->
+                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; background: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.6875rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-left: -8px; z-index: 1;">
+                            8+
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
 
-<!-- 2. About Us Teaser Section -->
-<section class="gv-section">
+<!-- 2. About Us Section (Sage Green Canvas with Orchid Watermark) -->
+<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0;">
     <div class="gv-container">
-        <div style="display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center;" class="gv-about-split">
-            <!-- Left: Image -->
-            <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
-                <img src="<?php echo esc_url( $img_dir . 'About Us Image.png' ); ?>" alt="Grand Vanilla Indonesian Vanilla Beans" style="width: 100%; height: auto; object-fit: cover;">
-            </div>
-
-            <!-- Right: Content -->
+        <div style="display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center;" class="gv-grid-split-about">
+            
+            <!-- Left Column: High-Res Rustic Photo -->
             <div>
-                <span class="gv-section-tag">About Us</span>
-                <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.25rem;">Grand Vanilla Indonesia</h2>
-                
-                <p style="color: var(--color-nw-500); line-height: 1.7; margin-bottom: 1.25rem; font-size: 0.9375rem;">
-                    Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
-                </p>
-                <p style="color: var(--color-nw-500); line-height: 1.7; margin-bottom: 2rem; font-size: 0.9375rem;">
-                    Operating from Java and sourcing across Indonesian growing hubs, we specialize in high-vanillin Planifolia and aromatic Tahitensis beans, carefully graded for luxury pastry, extract houses, and industrial flavor manufacturing.
-                </p>
-
-                <!-- 4 Value Pills -->
-                <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 2rem;">
-                    <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Premium Product Quality</div>
-                    <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Consistent Global Supply</div>
-                    <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Reliable Business Service</div>
-                    <div class="gv-pill gv-pill-khaki" style="justify-content: center; font-size: 0.75rem;">Flexible Custom Solutions</div>
-                </div>
-
-                <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
-                    Learn More &rarr;
-                </a>
+                <img src="<?php echo esc_url( $img_dir . 'About Us Image.png' ); ?>" 
+                     alt="Grand Vanilla Indonesia Rustic Vanilla Curing" 
+                     style="width: 100%; height: auto; max-height: 540px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); display: block;">
             </div>
+
+            <!-- Right Column: Content + Watermark + 2x2 Feature Boxes -->
+            <div style="position: relative;">
+                <!-- Subtle Orchid Flower Watermark -->
+                <img src="<?php echo esc_url( $img_dir . 'Logo.png' ); ?>" 
+                     alt="" 
+                     aria-hidden="true" 
+                     style="position: absolute; top: -30px; right: -15px; width: 190px; height: auto; opacity: 0.15; pointer-events: none; z-index: 0; transform: rotate(15deg);">
+
+                <div style="position: relative; z-index: 1;">
+                    <!-- Section Tag -->
+                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.9375rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
+                        <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                        About Us
+                    </div>
+
+                    <!-- Heading -->
+                    <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 1.5rem;">
+                        Grand Vanilla Indonesia
+                    </h2>
+
+                    <!-- Paragraphs -->
+                    <p style="font-size: 0.9375rem; line-height: 1.7; color: #4A5239; margin-bottom: 1rem;">
+                        Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
+                    </p>
+                    <p style="font-size: 0.9375rem; line-height: 1.7; color: #4A5239; margin-bottom: 2rem;">
+                        Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
+                    </p>
+
+                    <!-- 4 Solid Dark Khaki Feature Boxes (2x2 Grid) -->
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-bottom: 2.25rem;">
+                        <div style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                            Premium Product Quality
+                        </div>
+                        <div style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                            Consistent Global Supply
+                        </div>
+                        <div style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                            Reliable Business Service
+                        </div>
+                        <div style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                            Flexible Custom Solutions
+                        </div>
+                    </div>
+
+                    <!-- Learn More CTA -->
+                    <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" 
+                       style="display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.75rem 2rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
+                        Learn More &rarr;
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 
-<style>
-@media (min-width: 900px) {
-    .gv-about-split { grid-template-columns: 1fr 1.15fr !important; }
-}
-</style>
-
-<!-- 3. Products Showcase Section (#1, #2, #3) -->
-<section class="gv-section" style="background-color: var(--color-warm-sand); border-top: 1px solid var(--color-nb-100); border-bottom: 1px solid var(--color-nb-100);">
+<!-- 3. Premium Products Section -->
+<section class="gv-section" style="background-color: #DDE2D9; padding: 5rem 0 6rem; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
-        <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem; gap: 1rem;">
+        <!-- Header Split -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
-                <span class="gv-section-tag">Products</span>
-                <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem;">Premium Indonesian Vanilla Products</h2>
-                <p style="color: var(--color-nw-500); font-size: 0.9375rem; max-width: 40rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.9375rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                    <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                    Products
+                </div>
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.15;">
+                    Premium Indonesian<br>Vanilla Products
+                </h2>
+            </div>
+            <div style="max-width: 440px;">
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: #4A5239; margin: 0;">
                     Explore our range of quality Indonesian vanilla products, carefully sourced and prepared to meet the needs of global B2B buyers.
                 </p>
             </div>
         </div>
 
-        <div class="gv-grid-3" style="margin-bottom: 3rem;">
+        <!-- 3 Product Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.75rem; margin-bottom: 3.5rem;">
             
-            <!-- #1 Vanilla Beans -->
-            <div class="gv-card">
-                <div style="position: relative; height: 260px; overflow: hidden; background: var(--color-warm-sand-alt);">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 1.png' ); ?>" alt="Vanilla Beans" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; background: var(--color-dark-khaki); color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 0.8125rem; padding: 0.25rem 0.65rem; border-radius: var(--radius-4);">#1</span>
+            <!-- Card 1: Vanilla Beans -->
+            <div style="background-color: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+                <div style="position: absolute; top: 1.25rem; left: 1.25rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
+                    #1
                 </div>
-                <div style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px;">
+                <div style="height: 220px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 1.png' ); ?>" alt="Vanilla Beans" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;">
                     <div>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Vanilla Beans</h3>
-                        <p style="font-size: 0.875rem; color: var(--color-nw-500); line-height: 1.6;">
-                            Premium vanilla beans with a rich aroma, high vanillin concentration, and distinctive floral-bourbon flavor.
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.375rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                            Vanilla Beans
+                        </h3>
+                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.5;">
+                            Premium vanilla beans with a rich aroma and distinctive flavor.
                         </p>
                     </div>
-                    <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-planifolia-gourmet-vanilla-beans-grade-a/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
-                            Detail &rarr;
-                        </a>
-                    </div>
+                    <a href="<?php echo esc_url( home_url( '/products/indonesian-planifolia-vanilla-beans/' ) ); ?>" 
+                       style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; white-space: nowrap;">
+                        Detail &rarr;
+                    </a>
                 </div>
             </div>
 
-            <!-- #2 Vanilla Powder -->
-            <div class="gv-card">
-                <div style="position: relative; height: 260px; overflow: hidden; background: var(--color-warm-sand-alt);">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 2.png' ); ?>" alt="Vanilla Powder" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; background: var(--color-dark-khaki); color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 0.8125rem; padding: 0.25rem 0.65rem; border-radius: var(--radius-4);">#2</span>
+            <!-- Card 2: Vanilla Powder -->
+            <div style="background-color: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+                <div style="position: absolute; top: 1.25rem; left: 1.25rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
+                    #2
                 </div>
-                <div style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px;">
+                <div style="height: 220px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 2.png' ); ?>" alt="Vanilla Powder" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;">
                     <div>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Vanilla Powder</h3>
-                        <p style="font-size: 0.875rem; color: var(--color-nw-500); line-height: 1.6;">
-                            Finely ground vanilla made from pure cured pods for versatile food and beverage formulations.
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.375rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                            Vanilla Powder
+                        </h3>
+                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.5;">
+                            Finely ground vanilla for versatile food and beverage applications.
                         </p>
                     </div>
-                    <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-tahitensis-vanilla-beans-floral-gourmet/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
-                            Detail &rarr;
-                        </a>
-                    </div>
+                    <a href="<?php echo esc_url( home_url( '/products/indonesian-tahitensis-vanilla-beans/' ) ); ?>" 
+                       style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid #363E19; color: #363E19; background: transparent; border-radius: 4px; text-decoration: none; flex-shrink: 0;">
+                        &rarr;
+                    </a>
                 </div>
             </div>
 
-            <!-- #3 Vanilla Extract -->
-            <div class="gv-card">
-                <div style="position: relative; height: 260px; overflow: hidden; background: var(--color-warm-sand-alt);">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 3.png' ); ?>" alt="Vanilla Extract" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; background: var(--color-dark-khaki); color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 0.8125rem; padding: 0.25rem 0.65rem; border-radius: var(--radius-4);">#3</span>
+            <!-- Card 3: Vanilla Extract -->
+            <div style="background-color: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+                <div style="position: absolute; top: 1.25rem; left: 1.25rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
+                    #3
                 </div>
-                <div style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px;">
+                <div style="height: 220px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 3.png' ); ?>" alt="Vanilla Extract" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;">
                     <div>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Vanilla Extract</h3>
-                        <p style="font-size: 0.875rem; color: var(--color-nw-500); line-height: 1.6;">
-                            Rich, concentrated vanilla extract crafted with meticulous extraction for consistent flavor and fragrance.
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.375rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                            Vanilla Extract
+                        </h3>
+                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.5;">
+                            Rich vanilla extract crafted for consistent flavor and aroma.
                         </p>
                     </div>
-                    <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-extraction-grade-vanilla-beans-grade-b/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
-                            Detail &rarr;
-                        </a>
-                    </div>
+                    <a href="<?php echo esc_url( home_url( '/products/gourmet-vanilla-extract-paste/' ) ); ?>" 
+                       style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid #363E19; color: #363E19; background: transparent; border-radius: 4px; text-decoration: none; flex-shrink: 0;">
+                        &rarr;
+                    </a>
                 </div>
             </div>
 
         </div>
 
+        <!-- View All Products CTA Button -->
         <div style="text-align: center;">
-            <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" class="gv-btn gv-btn-primary">
+            <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" 
+               style="display: inline-flex; align-items: center; gap: 0.5rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Products &rarr;
             </a>
         </div>
@@ -177,49 +282,82 @@ $hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesi
     </div>
 </section>
 
-<!-- 4. Value Propositions (Your Trusted Partner) -->
-<section class="gv-section">
+<!-- 4. Value Propositions (4 White Cards with Exact SVG Icons - NO EMOJIS) -->
+<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
-        <div style="text-align: center; max-width: 44rem; margin: 0 auto 3.5rem;">
-            <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem;">
-                Your Trusted Partner For Quality Indonesian Vanilla
+        <div style="text-align: center; max-width: 700px; margin: 0 auto 4rem;">
+            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 0.75rem;">
+                Your Trusted Partner For Quality<br>Indonesian Vanilla
             </h2>
-            <p style="color: var(--color-nw-500); font-size: 0.9375rem;">
+            <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin: 0;">
                 At Grand Vanilla Indonesia, we go beyond supplying vanilla. We connect international B2B buyers with quality Indonesian vanilla.
             </p>
         </div>
 
-        <div class="gv-grid-4">
+        <!-- 4 White Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
             
-            <div class="gv-card" style="padding: 2rem 1.5rem; text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🛡️</div>
-                <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Quality Focused</h3>
-                <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">
+            <!-- Card 1: Quality Focused -->
+            <div style="background: #FAF8F5; border-radius: 12px; padding: 2.5rem 1.5rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
+                    <!-- Shield SVG Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/>
+                    </svg>
+                </div>
+                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                    Quality Focused
+                </h3>
+                <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
                     We maintain product quality to meet international standards and diverse industry requirements.
                 </p>
             </div>
 
-            <div class="gv-card" style="padding: 2rem 1.5rem; text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">📦</div>
-                <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Consistent Supply</h3>
-                <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">
+            <!-- Card 2: Consistent Supply -->
+            <div style="background: #FAF8F5; border-radius: 12px; padding: 2.5rem 1.5rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
+                    <!-- Package / Box SVG Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 16.5l-9 5.2-9-5.2V7.5L12 2.3l9 5.2v9zM12 4.1L5.3 8 12 11.9 18.7 8 12 4.1zm-7 5.6v7.4l6.5 3.7v-7.4L5 9.7zm8 11.1l6.5-3.7V9.7L13 13.4v7.4z"/>
+                    </svg>
+                </div>
+                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                    Consistent Supply
+                </h3>
+                <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
                     We provide reliable vanilla supply for wholesale, bulk, and ongoing business needs.
                 </p>
             </div>
 
-            <div class="gv-card" style="padding: 2rem 1.5rem; text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🇮🇩</div>
-                <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Indonesian Origin</h3>
-                <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">
+            <!-- Card 3: Indonesian Origin -->
+            <div style="background: #FAF8F5; border-radius: 12px; padding: 2.5rem 1.5rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
+                    <!-- Folded Map SVG Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
+                    </svg>
+                </div>
+                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                    Indonesian Origin
+                </h3>
+                <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
                     We connect global buyers with quality Indonesian vanilla known for its rich aroma and flavor.
                 </p>
             </div>
 
-            <div class="gv-card" style="padding: 2rem 1.5rem; text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🎧</div>
-                <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Reliable Service</h3>
-                <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">
+            <!-- Card 4: Reliable Service -->
+            <div style="background: #FAF8F5; border-radius: 12px; padding: 2.5rem 1.5rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
+                    <!-- Headset Support SVG Icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/>
+                    </svg>
+                </div>
+                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                    Reliable Service
+                </h3>
+                <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
                     We provide responsive support for international buyers and their sourcing needs.
                 </p>
             </div>
@@ -229,141 +367,255 @@ $hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesi
     </div>
 </section>
 
-<!-- 5. Flexible Vanilla Supply & Special OEM -->
-<section class="gv-section" style="background-color: var(--color-warm-sand); border-top: 1px solid var(--color-nb-100); border-bottom: 1px solid var(--color-nb-100);">
+<!-- 5. Flexible Vanilla Supply & Special OEM Section -->
+<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
-        <div style="display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center;" class="gv-oem-split">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center;" class="gv-grid-split-oem">
             
+            <!-- Left Column: Title + Bulk Packaging Photo -->
             <div>
-                <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2;">
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 2rem;">
                     Flexible Vanilla Supply<br>For Your Business
                 </h2>
-                <p style="color: var(--color-nw-500); font-size: 0.9375rem; margin-bottom: 2rem; line-height: 1.7;">
-                    From high volume wholesale supply to customized vanilla solutions, we provide flexible products and services designed to meet the needs of international buyers and business partners.
+                <img src="<?php echo esc_url( $img_dir . 'Bulk  Wholesale Vanilla 1.png' ); ?>" 
+                     alt="Grand Vanilla Indonesia Bulk Export Packaging" 
+                     style="width: 100%; height: auto; border-radius: 12px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
+            </div>
+
+            <!-- Right Column: Subtitle + OEM Content Block -->
+            <div>
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: #4A5239; margin-bottom: 2.5rem;">
+                    From high-volume wholesale supply to customized vanilla solutions, we provide flexible products and services designed to meet the needs of international buyers and business partners.
                 </p>
 
-                <div class="gv-card" style="padding: 2rem; background: var(--color-parchment);">
-                    <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--color-dark-khaki);">Special OEM & Bulk Vanilla</h3>
-                    <p style="font-size: 0.8125rem; color: var(--color-nw-500); margin-bottom: 1.5rem;">
-                        Vanilla products supplied in larger quantities to support wholesalers, distributors, manufacturers, and businesses with ongoing or high volume requirements.
+                <div>
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.75rem, 2.5vw, 2.25rem); font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                        Special OEM & Bulk Vanilla
+                    </h3>
+                    <p style="font-size: 0.9375rem; line-height: 1.6; color: #4A5239; margin-bottom: 2rem;">
+                        Vanilla products supplied in larger quantities to support wholesalers, distributors, manufacturers, and businesses with ongoing or high-volume requirements.
                     </p>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                    <!-- 4 Feature Points (2x2 Grid) -->
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem 1.5rem;">
                         <div>
-                            <strong style="font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">High-Volume Supply</strong>
-                            <p style="font-size: 0.75rem; color: var(--color-nw-500);">Supporting larger orders for wholesalers, distributors, and manufacturers.</p>
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                                High-Volume Supply
+                            </h4>
+                            <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
+                                Supporting larger orders for wholesalers, distributors, and manufacturers.
+                            </p>
                         </div>
                         <div>
-                            <strong style="font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">Consistent Quality</strong>
-                            <p style="font-size: 0.75rem; color: var(--color-nw-500);">Carefully sourced vanilla with quality standards maintained across orders.</p>
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                                Consistent Quality
+                            </h4>
+                            <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
+                                Carefully sourced vanilla with quality standards maintained across orders.
+                            </p>
                         </div>
                         <div>
-                            <strong style="font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">Custom Packaging</strong>
-                            <p style="font-size: 0.75rem; color: var(--color-nw-500);">Packaging options can be adapted to your branding and requirements.</p>
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                                Custom Packaging
+                            </h4>
+                            <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
+                                Packaging options can be adapted to your product, branding, and requirements.
+                            </p>
                         </div>
                         <div>
-                            <strong style="font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">Flexible Quantities</strong>
-                            <p style="font-size: 0.75rem; color: var(--color-nw-500);">Order volumes can be adjusted based on production needs.</p>
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                                Flexible Quantities
+                            </h4>
+                            <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
+                                Order volumes can be adjusted based on your production and business needs.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
-                <img src="<?php echo esc_url( $img_dir . 'Bulk  Wholesale Vanilla 1.png' ); ?>" alt="Special OEM and Bulk Vanilla" style="width: 100%; height: auto; object-fit: cover;">
-            </div>
-
         </div>
 
     </div>
 </section>
 
-<style>
-@media (min-width: 900px) {
-    .gv-oem-split { grid-template-columns: 1.2fr 1fr !important; }
-}
-</style>
-
-<!-- 6. From Indonesia To Global Markets (Peta Dunia & Buyer B2B) -->
-<section class="gv-section" style="background-color: var(--color-pitch-black); color: #FFFFFF;">
-    <div class="gv-container" style="text-align: center;">
-        
-        <div style="max-width: 44rem; margin: 0 auto 3rem;">
-            <h2 style="font-size: 2.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.75rem;">
-                From Indonesia To Global Markets
-            </h2>
-            <p style="color: var(--color-nw-200); font-size: 0.9375rem; line-height: 1.7;">
-                We connect international B2B buyers with quality Indonesian vanilla, providing reliable wholesale and export solutions for businesses across global markets.
-            </p>
-        </div>
-
-        <!-- World Map Visual -->
-        <div style="margin-bottom: 3.5rem; border-radius: var(--radius-16); overflow: hidden; background: rgba(255,255,255,0.03); padding: 1.5rem; border: 1px solid rgba(255,255,255,0.1);">
-            <div style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-nw-400); margin-bottom: 1rem; font-family: var(--font-heading);">
-                Connecting Indonesia To The World
-            </div>
-            <img src="<?php echo esc_url( $img_dir . 'Worldwide maps.png' ); ?>" alt="Global Vanilla Export Map" style="width: 100%; max-width: 860px; margin: 0 auto; height: auto;">
-        </div>
-
-        <!-- Who We Serve in Global B2B Markets -->
-        <div>
-            <h3 style="font-size: 1.125rem; font-weight: 700; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem;">
-                Who We Serve In Global B2B Markets
-            </h3>
-
-            <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
-                <span class="gv-pill" style="background: transparent; color: #FFFFFF; border-color: rgba(255,255,255,0.3);">🌐 IMPORTERS</span>
-                <span class="gv-pill" style="background: transparent; color: #FFFFFF; border-color: rgba(255,255,255,0.3);">📦 DISTRIBUTORS</span>
-                <span class="gv-pill" style="background: transparent; color: #FFFFFF; border-color: rgba(255,255,255,0.3);">🏭 FOOD MANUFACTURERS</span>
-                <span class="gv-pill" style="background: transparent; color: #FFFFFF; border-color: rgba(255,255,255,0.3);">🌿 SPICE TRADERS</span>
-                <span class="gv-pill" style="background: transparent; color: #FFFFFF; border-color: rgba(255,255,255,0.3);">🥐 BAKERIES</span>
-                <span class="gv-pill" style="background: transparent; color: #FFFFFF; border-color: rgba(255,255,255,0.3);">🍫 CONFECTIONERY COMPANIES</span>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- 7. Gallery Teaser (A Closer Look At Grand Vanilla) -->
-<section class="gv-section">
+<!-- 6. From Indonesia To Global Markets (Exact Figma High-Fidelity Showcase) -->
+<section class="gv-section" style="background-color: #363E19; color: #FFFFFF; padding: 6.5rem 0;">
     <div class="gv-container">
         
-        <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; gap: 1rem;">
+        <!-- Header Split: Left Title, Right Subtitle -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
-                <span class="gv-section-tag">Gallery</span>
-                <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem;">A Closer Look At Grand Vanilla</h2>
-                <p style="color: var(--color-nw-500); font-size: 0.9375rem;">
-                    Explore the people, products, sourcing, and processes behind our Indonesian vanilla.
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 700; color: #FFFFFF; line-height: 1.15; margin: 0;">
+                    From Indonesia To<br>Global Markets
+                </h2>
+            </div>
+            <div style="max-width: 440px;">
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: rgba(255,255,255,0.85); margin: 0; text-align: left;">
+                    We connect international B2B buyers with quality Indonesian vanilla, providing reliable wholesale and export solutions for businesses across global markets.
                 </p>
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
-            <div class="gv-card">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 1.png' ); ?>" alt="Fresh Vanilla Pods" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1rem;"><strong style="font-size: 0.875rem;">Fresh Vanilla Pods</strong></div>
+        <!-- Connecting Indonesia To The World Map -->
+        <div style="text-align: center; margin-bottom: 5rem;">
+            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.5vw, 1.875rem); font-weight: 400; font-style: italic; color: #FFFFFF; margin-bottom: 2.5rem; letter-spacing: 0.02em;">
+                Connecting Indonesia To The World
+            </h3>
+            
+            <div style="max-width: 980px; margin: 0 auto;">
+                <img src="<?php echo esc_url( $img_dir . 'Worldwide maps.png' ); ?>" 
+                     alt="Grand Vanilla Indonesia Worldwide Export Routes Map" 
+                     style="width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));">
             </div>
-            <div class="gv-card">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 2.png' ); ?>" alt="Premium Vanilla Beans" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1rem;"><strong style="font-size: 0.875rem;">Premium Vanilla Beans</strong></div>
+        </div>
+
+        <!-- Who We Serve In Global B2B Markets -->
+        <div>
+            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.5vw, 1.875rem); font-weight: 400; font-style: italic; color: #FFFFFF; text-align: center; margin-bottom: 2.5rem; letter-spacing: 0.02em;">
+                Who We Serve In Global B2B Markets
+            </h3>
+
+            <!-- 6 Grid Cards (3 Columns x 2 Rows) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+                
+                <!-- Card 1: IMPORTERS -->
+                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
+                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
+                        <!-- Globe Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                    </div>
+                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                        IMPORTERS
+                    </span>
+                </div>
+
+                <!-- Card 2: DISTRIBUTORS -->
+                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
+                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
+                        <!-- Truck Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>
+                    </div>
+                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                        DISTRIBUTORS
+                    </span>
+                </div>
+
+                <!-- Card 3: FOOD MANUFACTURERS -->
+                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
+                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
+                        <!-- Factory Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 20h20M5 20V9l5 4V9l5 4V5l5 4v11"></path>
+                        </svg>
+                    </div>
+                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                        FOOD MANUFACTURERS
+                    </span>
+                </div>
+
+                <!-- Card 4: SPICE TRADERS -->
+                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
+                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
+                        <!-- Chili / Spice Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 3c-1.5 1-2.5 3-2.5 4.5 0 0-4 1-7 4s-4 7-4 7 4 0 7-3 4-7 4-7c1.5 0 3.5-1 4.5-2.5-1-1-2-2-2-3z"></path>
+                        </svg>
+                    </div>
+                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                        SPICE TRADERS
+                    </span>
+                </div>
+
+                <!-- Card 5: BAKERIES -->
+                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
+                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
+                        <!-- Croissant / Bakery Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 14c2-4 7-6 9-6s7 2 9 6c-2 2-5 3-9 3s-7-1-9-3z"></path>
+                            <path d="M7 11c1-2 3-3 5-3s4 1 5 3"></path>
+                            <path d="M5 14c1 1 2 2 4 2"></path>
+                            <path d="M19 14c-1 1-2 2-4 2"></path>
+                        </svg>
+                    </div>
+                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                        BAKERIES
+                    </span>
+                </div>
+
+                <!-- Card 6: CONFECTIONERY COMPANIES -->
+                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
+                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
+                        <!-- Cookie Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a10 10 0 1 0 10 10 3.5 3.5 0 0 1-3.5-3.5 3.5 3.5 0 0 1-3.5-3.5A3.5 3.5 0 0 1 12 2z"></path>
+                            <circle cx="8.5" cy="8.5" r="1" fill="currentColor"></circle>
+                            <circle cx="7.5" cy="14.5" r="1" fill="currentColor"></circle>
+                            <circle cx="14.5" cy="14.5" r="1" fill="currentColor"></circle>
+                            <circle cx="11.5" cy="11.5" r="1" fill="currentColor"></circle>
+                            <circle cx="16.5" cy="9.5" r="1" fill="currentColor"></circle>
+                        </svg>
+                    </div>
+                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                        CONFECTIONERY COMPANIES
+                    </span>
+                </div>
+
             </div>
-            <div class="gv-card">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 3.png' ); ?>" alt="Vanilla in Bloom" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1rem;"><strong style="font-size: 0.875rem;">Vanilla in Bloom</strong></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- 7. Gallery Section Teaser -->
+<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+    <div class="gv-container">
+        
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 3.5rem;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; color: #363E19; font-size: 0.9375rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                Gallery
             </div>
-            <div class="gv-card">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 4.png' ); ?>" alt="Indonesian Vanilla Selection" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1rem;"><strong style="font-size: 0.875rem;">Indonesian Vanilla Selection</strong></div>
+            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 0.75rem;">
+                A Closer Look At Grand Vanilla
+            </h2>
+            <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin: 0;">
+                Explore our cultivation, curing, and warehouse operations in Indonesia.
+            </p>
+        </div>
+
+        <!-- 5 Gallery Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 3.5rem;">
+            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 1.png' ); ?>" alt="Vanilla Greenhouse Operations" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
-            <div class="gv-card">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 5.png' ); ?>" alt="Handcrafted Curing" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1rem;"><strong style="font-size: 0.875rem;">Handcrafted Curing</strong></div>
+            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 2.png' ); ?>" alt="Hand Pollination in East Java" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 3.png' ); ?>" alt="Sun Curing Decks" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 4.png' ); ?>" alt="Sweating Process in Wooden Boxes" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
+                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 5.png' ); ?>" alt="Aroma Conditioning Warehouse" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
         </div>
 
         <div style="text-align: center;">
-            <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" class="gv-btn gv-btn-primary">
+            <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" 
+               style="display: inline-flex; align-items: center; gap: 0.5rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Gallery &rarr;
             </a>
         </div>
@@ -371,53 +623,67 @@ $hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesi
     </div>
 </section>
 
-<!-- 8. Blog Insights Teaser -->
-<section class="gv-section" style="background-color: var(--color-warm-sand); border-top: 1px solid var(--color-nb-100); border-bottom: 1px solid var(--color-nb-100);">
+<!-- 8. Insights Section (Blog Teaser) -->
+<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
-        <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem; gap: 1rem;">
-            <div>
-                <span class="gv-section-tag">Blog</span>
-                <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem;">Insights From The World Of Vanilla</h2>
-                <p style="color: var(--color-nw-500); font-size: 0.9375rem;">
-                    Discover insights on Indonesian vanilla, sourcing, quality, industry trends, and applications.
-                </p>
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 3.5rem;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; color: #363E19; font-size: 0.9375rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                Blog
             </div>
+            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 0.75rem;">
+                Insights From The World Of Vanilla
+            </h2>
+            <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin: 0;">
+                Discover insights on Indonesian vanilla, sourcing, quality, industry trends, and applications.
+            </p>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
+        <!-- 2 Big Article Cards -->
+        <div style="display: flex; flex-direction: column; gap: 1.75rem; margin-bottom: 3.5rem;">
             
-            <!-- Article 1 -->
-            <div class="gv-card" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; align-items: center;" class="gv-blog-card-split">
-                <div style="position: relative; border-radius: var(--radius-12); overflow: hidden; height: 220px;">
-                    <img src="<?php echo esc_url( $img_dir . 'Buat Blog Example 1.png' ); ?>" alt="What Makes Indonesian Vanilla Exceptional" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; font-size: 2.25rem; font-weight: 800; font-family: var(--font-heading); color: rgba(255,255,255,0.9); text-shadow: 0 2px 8px rgba(0,0,0,0.6);">12/12</span>
+            <!-- Article Card 1 -->
+            <div style="background: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: grid; grid-template-columns: 1fr; gap: 1.75rem; align-items: center;" class="gv-blog-card-split">
+                <div style="position: relative; border-radius: 10px; overflow: hidden; height: 220px;">
+                    <img src="<?php echo esc_url( $img_dir . 'Buat Blog Example 1.png' ); ?>" alt="What Makes Indonesian Vanilla Exceptional?" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; top: 1rem; left: 1rem; font-size: 2.25rem; font-weight: 800; font-family: var(--font-heading, 'Jost', sans-serif); color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.6);">12/12</span>
                 </div>
                 <div>
-                    <span style="font-size: 0.8125rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase; font-family: var(--font-heading); display: block; margin-bottom: 0.5rem;">Vanilla Guide</span>
-                    <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.75rem;">What Makes Indonesian Vanilla Exceptional?</h3>
-                    <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1.25rem;">
+                    <span style="font-size: 0.75rem; color: #363E19; font-weight: 700; text-transform: uppercase; font-family: var(--font-heading, 'Jost', sans-serif); display: block; margin-bottom: 0.5rem;">Vanilla Guide</span>
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.5rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                        <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" style="color: #363E19; text-decoration: none;">
+                            What Makes Indonesian Vanilla Exceptional?
+                        </a>
+                    </h3>
+                    <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin-bottom: 1.25rem;">
                         Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient for global food industries.
                     </p>
-                    <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" 
+                       style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 4px; text-decoration: none;">
                         Continue Reading &rarr;
                     </a>
                 </div>
             </div>
 
-            <!-- Article 2 -->
-            <div class="gv-card" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; align-items: center;" class="gv-blog-card-split">
-                <div style="position: relative; border-radius: var(--radius-12); overflow: hidden; height: 220px;">
+            <!-- Article Card 2 -->
+            <div style="background: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: grid; grid-template-columns: 1fr; gap: 1.75rem; align-items: center;" class="gv-blog-card-split">
+                <div style="position: relative; border-radius: 10px; overflow: hidden; height: 220px;">
                     <img src="<?php echo esc_url( $img_dir . 'Buat blog example 2.png' ); ?>" alt="From Vanilla Bean to Global Ingredient" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; font-size: 2.25rem; font-weight: 800; font-family: var(--font-heading); color: rgba(255,255,255,0.9); text-shadow: 0 2px 8px rgba(0,0,0,0.6);">11/12</span>
+                    <span style="position: absolute; top: 1rem; left: 1rem; font-size: 2.25rem; font-weight: 800; font-family: var(--font-heading, 'Jost', sans-serif); color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.6);">11/12</span>
                 </div>
                 <div>
-                    <span style="font-size: 0.8125rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase; font-family: var(--font-heading); display: block; margin-bottom: 0.5rem;">Vanilla Insight</span>
-                    <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.75rem;">From Vanilla Bean to Global Ingredient</h3>
-                    <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1.25rem;">
+                    <span style="font-size: 0.75rem; color: #363E19; font-weight: 700; text-transform: uppercase; font-family: var(--font-heading, 'Jost', sans-serif); display: block; margin-bottom: 0.5rem;">Vanilla Insight</span>
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.5rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                        <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" style="color: #363E19; text-decoration: none;">
+                            From Vanilla Bean to Global Ingredient
+                        </a>
+                    </h3>
+                    <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin-bottom: 1.25rem;">
                         Explore how quality vanilla is sourced, processed, and prepared to meet the needs of international B2B buyers.
                     </p>
-                    <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" 
+                       style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 4px; text-decoration: none;">
                         Continue Reading &rarr;
                     </a>
                 </div>
@@ -426,19 +692,14 @@ $hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesi
         </div>
 
         <div style="text-align: center;">
-            <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="gv-btn gv-btn-primary">
+            <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" 
+               style="display: inline-flex; align-items: center; gap: 0.5rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Blog &rarr;
             </a>
         </div>
 
     </div>
 </section>
-
-<style>
-@media (min-width: 800px) {
-    .gv-blog-card-split { grid-template-columns: 320px 1fr !important; }
-}
-</style>
 
 <!-- 9. CTA Banner (High-Fidelity Figma Component) -->
 <?php
@@ -448,6 +709,14 @@ get_template_part( 'template-parts/cta-banner', null, array(
     'btn_url'  => home_url( '/contact/' ),
 ) );
 ?>
+
+<style>
+@media (min-width: 900px) {
+    .gv-grid-split-about { grid-template-columns: 1fr 1.15fr !important; }
+    .gv-grid-split-oem { grid-template-columns: 1fr 1.25fr !important; }
+    .gv-blog-card-split { grid-template-columns: 320px 1fr !important; }
+}
+</style>
 
 <?php
 get_footer();
