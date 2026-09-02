@@ -9,8 +9,8 @@
 $img_dir = get_template_directory_uri() . '/assets/images/';
 $contact = grand_vanilla_get_contact_info();
 
-$cta_title    = isset( $args['title'] ) ? $args['title'] : 'Looking For A Reliable<br>Indonesian Vanilla Supplier?';
-$cta_btn_text = isset( $args['btn_text'] ) ? $args['btn_text'] : 'Request a Quote';
+$cta_title    = isset( $args['title'] ) ? $args['title'] : 'Ready To Get Your Vanilla<br>Supply Started?';
+$cta_btn_text = isset( $args['btn_text'] ) ? $args['btn_text'] : 'Get a Sample';
 $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/contact/' );
 ?>
 
@@ -29,11 +29,13 @@ $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/conta
 
     <div class="gv-container gv-cta-container">
         <h2 class="gv-cta-heading">
-            <?php echo wp_kses_post( $cta_title ); ?>
+            <span class="gv-cta-heading-desktop"><?php echo wp_kses_post( $cta_title ); ?></span>
+            <span class="gv-cta-heading-responsive">LOOKING FOR A RELIABLE<br>INDONESIAN VANILLA<br>SUPPLIER?</span>
         </h2>
         <div class="gv-cta-btn-wrap">
             <a href="<?php echo esc_url( $cta_btn_url ); ?>" class="gv-btn gv-cta-btn">
-                <?php echo esc_html( $cta_btn_text ); ?>
+                <span class="gv-cta-btn-desktop"><?php echo esc_html( $cta_btn_text ); ?></span>
+                <span class="gv-cta-btn-responsive">REQUEST A QUOTE</span>
             </a>
         </div>
     </div>
@@ -41,7 +43,7 @@ $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/conta
 
 <style>
 /* -------------------------------------------------------------
- * CTA Banner Responsive Styling (Desktop Title Case vs Tablet/Mobile ALL CAPS)
+ * CTA Banner Responsive Styling (Desktop vs Tablet/Mobile Figma Alignment)
  * ----------------------------------------------------------- */
 .gv-cta-banner {
     position: relative !important;
@@ -83,7 +85,12 @@ $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/conta
     padding: 0 1rem !important;
 }
 
-/* Desktop View (> 1024px) - Exact Title Case as in Figma Desktop */
+.gv-cta-heading-responsive,
+.gv-cta-btn-responsive {
+    display: none !important;
+}
+
+/* Desktop View (> 1024px) */
 .gv-cta-heading {
     font-family: var(--font-heading, 'Jost', sans-serif) !important;
     font-size: 2.5rem !important;
@@ -122,10 +129,20 @@ $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/conta
     transform: translateY(-2px) !important;
 }
 
-/* Tablet View (768px - 1024px) - Exact ALL CAPS as in Figma Tablet */
+/* Tablet View (768px - 1024px) */
 @media (max-width: 1024px) {
     .gv-cta-banner {
         padding: 5rem 1.5rem !important;
+    }
+    .gv-cta-heading-desktop,
+    .gv-cta-btn-desktop {
+        display: none !important;
+    }
+    .gv-cta-heading-responsive {
+        display: inline !important;
+    }
+    .gv-cta-btn-responsive {
+        display: inline !important;
     }
     .gv-cta-heading {
         font-size: 2.125rem !important;
@@ -151,10 +168,20 @@ $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/conta
     }
 }
 
-/* Mobile View (< 768px) - Exact ALL CAPS as in Figma Mobile */
+/* Mobile View (< 768px) */
 @media (max-width: 767px) {
     .gv-cta-banner {
         padding: 4.5rem 1.25rem !important;
+    }
+    .gv-cta-heading-desktop,
+    .gv-cta-btn-desktop {
+        display: none !important;
+    }
+    .gv-cta-heading-responsive {
+        display: inline !important;
+    }
+    .gv-cta-btn-responsive {
+        display: inline !important;
     }
     .gv-cta-heading {
         font-size: 1.625rem !important;

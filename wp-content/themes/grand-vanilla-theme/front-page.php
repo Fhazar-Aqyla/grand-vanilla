@@ -704,8 +704,8 @@ $contact = grand_vanilla_get_contact_info();
 <!-- 9. CTA Banner (High-Fidelity Figma Component) -->
 <?php
 get_template_part( 'template-parts/cta-banner', null, array(
-    'title'    => 'Looking For A Reliable<br>Indonesian Vanilla Supplier?',
-    'btn_text' => 'Request a Quote',
+    'title'    => 'Ready To Get Your Vanilla<br>Supply Started?',
+    'btn_text' => 'Get a Sample',
     'btn_url'  => home_url( '/contact/' ),
 ) );
 ?>
