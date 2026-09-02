@@ -443,8 +443,8 @@ $hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesi
 <!-- 9. CTA Banner (High-Fidelity Figma Component) -->
 <?php
 get_template_part( 'template-parts/cta-banner', null, array(
-    'title'    => 'Ready To Get Your Vanilla<br>Supply Started?',
-    'btn_text' => 'Get a Sample',
+    'title'    => 'Looking For A Reliable<br>Indonesian Vanilla Supplier?',
+    'btn_text' => 'Request a Quote',
     'btn_url'  => home_url( '/contact/' ),
 ) );
 ?>

@@ -1,6 +1,7 @@
 <?php
 /**
  * Template Part: CTA Banner with Corner Orchid Flower Watermarks
+ * Matches Desktop (Title Case), Tablet (ALL CAPS), and Mobile (ALL CAPS) Figma Designs
  *
  * @package GrandVanilla
  */
@@ -13,31 +14,172 @@ $cta_btn_text = isset( $args['btn_text'] ) ? $args['btn_text'] : 'Request a Quot
 $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/contact/' );
 ?>
 
-<section class="gv-cta-banner" style="position: relative; background-color: #B9C1B4; padding: 5rem 1.5rem; text-align: center; overflow: hidden; width: 100%;">
+<section class="gv-cta-banner">
     <!-- Top-Right Corner Orchid Flower -->
     <img src="<?php echo esc_url( $img_dir . 'Logo.png' ); ?>" 
          class="gv-cta-flower gv-cta-flower-tr" 
          alt="" 
-         aria-hidden="true" 
-         style="position: absolute; top: -50px; right: -40px; width: 220px; height: auto; pointer-events: none; user-select: none; z-index: 1; opacity: 0.8; transform: rotate(225deg);">
+         aria-hidden="true">
     
     <!-- Bottom-Left Corner Orchid Flower -->
     <img src="<?php echo esc_url( $img_dir . 'Logo.png' ); ?>" 
          class="gv-cta-flower gv-cta-flower-bl" 
          alt="" 
-         aria-hidden="true" 
-         style="position: absolute; bottom: -50px; left: -40px; width: 220px; height: auto; pointer-events: none; user-select: none; z-index: 1; opacity: 0.8; transform: rotate(45deg);">
+         aria-hidden="true">
 
-    <div class="gv-container" style="position: relative; z-index: 2; max-width: 900px; margin: 0 auto;">
-        <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.25; margin: 0 0 1.75rem; letter-spacing: -0.01em;">
+    <div class="gv-container gv-cta-container">
+        <h2 class="gv-cta-heading">
             <?php echo wp_kses_post( $cta_title ); ?>
         </h2>
-        <div style="display: flex; justify-content: center;">
-            <a href="<?php echo esc_url( $cta_btn_url ); ?>" 
-               class="gv-btn" 
-               style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.75rem 2.25rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 12px rgba(54, 62, 25, 0.15); display: inline-block;">
+        <div class="gv-cta-btn-wrap">
+            <a href="<?php echo esc_url( $cta_btn_url ); ?>" class="gv-btn gv-cta-btn">
                 <?php echo esc_html( $cta_btn_text ); ?>
             </a>
         </div>
     </div>
 </section>
+
+<style>
+/* -------------------------------------------------------------
+ * CTA Banner Responsive Styling (Desktop Title Case vs Tablet/Mobile ALL CAPS)
+ * ----------------------------------------------------------- */
+.gv-cta-banner {
+    position: relative !important;
+    background-color: #B9C1B4 !important;
+    padding: 5.5rem 1.5rem !important;
+    text-align: center !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.gv-cta-flower {
+    position: absolute !important;
+    width: 220px !important;
+    height: auto !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    z-index: 1 !important;
+    opacity: 0.8 !important;
+}
+
+.gv-cta-flower-tr {
+    top: -45px !important;
+    right: -40px !important;
+    transform: rotate(225deg) !important;
+}
+
+.gv-cta-flower-bl {
+    bottom: -45px !important;
+    left: -40px !important;
+    transform: rotate(45deg) !important;
+}
+
+.gv-cta-container {
+    position: relative !important;
+    z-index: 2 !important;
+    max-width: 820px !important;
+    margin: 0 auto !important;
+    padding: 0 1rem !important;
+}
+
+/* Desktop View (> 1024px) - Exact Title Case as in Figma Desktop */
+.gv-cta-heading {
+    font-family: var(--font-heading, 'Jost', sans-serif) !important;
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    color: #363E19 !important;
+    line-height: 1.25 !important;
+    margin: 0 0 2rem 0 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: none !important;
+}
+
+.gv-cta-btn-wrap {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.gv-cta-btn {
+    display: inline-block !important;
+    background-color: #363E19 !important;
+    color: #FFFFFF !important;
+    font-family: var(--font-heading, 'Jost', sans-serif) !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: none !important;
+    padding: 0.8rem 2.25rem !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba(54, 62, 25, 0.15) !important;
+    transition: all 0.2s ease !important;
+}
+
+.gv-cta-btn:hover {
+    background-color: #0A0804 !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Tablet View (768px - 1024px) - Exact ALL CAPS as in Figma Tablet */
+@media (max-width: 1024px) {
+    .gv-cta-banner {
+        padding: 5rem 1.5rem !important;
+    }
+    .gv-cta-heading {
+        font-size: 2.125rem !important;
+        margin-bottom: 1.75rem !important;
+        max-width: 650px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-transform: uppercase !important;
+    }
+    .gv-cta-btn {
+        text-transform: uppercase !important;
+    }
+    .gv-cta-flower {
+        width: 180px !important;
+    }
+    .gv-cta-flower-tr {
+        top: -35px !important;
+        right: -30px !important;
+    }
+    .gv-cta-flower-bl {
+        bottom: -35px !important;
+        left: -30px !important;
+    }
+}
+
+/* Mobile View (< 768px) - Exact ALL CAPS as in Figma Mobile */
+@media (max-width: 767px) {
+    .gv-cta-banner {
+        padding: 4.5rem 1.25rem !important;
+    }
+    .gv-cta-heading {
+        font-size: 1.625rem !important;
+        line-height: 1.28 !important;
+        margin-bottom: 1.75rem !important;
+        max-width: 320px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-transform: uppercase !important;
+    }
+    .gv-cta-flower {
+        width: 125px !important;
+    }
+    .gv-cta-flower-tr {
+        top: -20px !important;
+        right: -20px !important;
+    }
+    .gv-cta-flower-bl {
+        bottom: -20px !important;
+        left: -20px !important;
+    }
+    .gv-cta-btn {
+        padding: 0.75rem 1.75rem !important;
+        font-size: 0.8125rem !important;
+        text-transform: uppercase !important;
+    }
+}
+</style>

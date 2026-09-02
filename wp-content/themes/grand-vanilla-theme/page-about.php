@@ -245,8 +245,8 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 <!-- 7. CTA Banner (High-Fidelity Figma Component) -->
 <?php
 get_template_part( 'template-parts/cta-banner', null, array(
-    'title'    => 'Ready To Source Premium<br>Indonesian Vanilla?',
-    'btn_text' => 'Get a Sample',
+    'title'    => 'Looking For A Reliable<br>Indonesian Vanilla Supplier?',
+    'btn_text' => 'Request a Quote',
     'btn_url'  => home_url( '/contact/' ),
 ) );
 ?>

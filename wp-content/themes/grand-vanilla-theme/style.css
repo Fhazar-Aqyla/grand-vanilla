@@ -426,7 +426,7 @@ ul {
 }
 
 /* -------------------------------------------------------------
- * 8. CTA Banner (High-Fidelity Figma Design)
+ * 8. CTA Banner (High-Fidelity Figma Design - Desktop, Tablet, Mobile)
  * ----------------------------------------------------------- */
 .gv-cta-banner {
     position: relative;
@@ -434,68 +434,119 @@ ul {
     padding: 5.5rem 1.5rem;
     text-align: center;
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.gv-cta-banner h2 {
-    font-family: var(--font-heading);
-    font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+.gv-cta-container {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.gv-cta-heading {
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--color-dark-khaki);
     line-height: 1.25;
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: 2;
+    margin: 0 0 2rem 0;
     letter-spacing: -0.01em;
+    text-transform: none; /* Title Case on Desktop */
 }
 
-.gv-cta-banner .gv-btn {
-    position: relative;
-    z-index: 2;
+.gv-cta-btn-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.gv-cta-btn {
+    display: inline-block;
     background-color: var(--color-dark-khaki);
     color: #FFFFFF;
-    border-radius: var(--radius-4);
-    padding: 0.75rem 2.25rem;
+    font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.875rem;
     font-weight: 600;
-    font-family: var(--font-heading);
-    transition: all var(--transition-normal);
+    letter-spacing: 0.02em;
+    text-transform: none; /* Title Case on Desktop */
+    padding: 0.8rem 2.25rem;
+    border-radius: var(--radius-4);
+    text-decoration: none;
     box-shadow: 0 4px 12px rgba(54, 62, 25, 0.15);
+    transition: all var(--transition-normal);
 }
 
-.gv-cta-banner .gv-btn:hover {
+.gv-cta-btn:hover {
     background-color: var(--color-pitch-black);
+    color: #FFFFFF;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(10, 8, 4, 0.2);
 }
 
 .gv-cta-flower {
     position: absolute;
-    width: 240px;
+    width: 220px;
     height: auto;
     pointer-events: none;
     user-select: none;
     z-index: 1;
-    opacity: 0.75;
+    opacity: 0.8;
 }
 
 .gv-cta-flower-tr {
-    top: -40px;
+    top: -45px;
     right: -40px;
-    transform: rotate(205deg);
+    transform: rotate(225deg);
 }
 
 .gv-cta-flower-bl {
-    bottom: -40px;
+    bottom: -45px;
     left: -40px;
-    transform: rotate(25deg);
+    transform: rotate(45deg);
 }
 
-@media (max-width: 768px) {
+/* Tablet Breakpoint (768px - 1024px) */
+@media (max-width: 1024px) {
     .gv-cta-banner {
-        padding: 4rem 1.25rem;
+        padding: 5rem 1.5rem;
+    }
+    .gv-cta-heading {
+        font-size: 2.125rem;
+        margin-bottom: 1.75rem;
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
     }
     .gv-cta-flower {
-        width: 140px;
+        width: 180px;
+    }
+    .gv-cta-flower-tr {
+        top: -35px;
+        right: -30px;
+    }
+    .gv-cta-flower-bl {
+        bottom: -35px;
+        left: -30px;
+    }
+}
+
+/* Mobile Breakpoint (< 768px) */
+@media (max-width: 767px) {
+    .gv-cta-banner {
+        padding: 4.5rem 1.25rem;
+    }
+    .gv-cta-heading {
+        font-size: 1.625rem;
+        line-height: 1.28;
+        margin-bottom: 1.75rem;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .gv-cta-flower {
+        width: 125px;
     }
     .gv-cta-flower-tr {
         top: -20px;
@@ -504,6 +555,10 @@ ul {
     .gv-cta-flower-bl {
         bottom: -20px;
         left: -20px;
+    }
+    .gv-cta-btn {
+        padding: 0.75rem 1.75rem;
+        font-size: 0.8125rem;
     }
 }
 
