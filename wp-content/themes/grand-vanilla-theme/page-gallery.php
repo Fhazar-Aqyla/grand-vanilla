@@ -142,17 +142,14 @@ $contact = grand_vanilla_get_contact_info();
     </div>
 </section>
 
-<!-- 4. CTA Banner -->
-<section class="gv-cta-banner">
-    <div class="gv-container">
-        <h2>Looking For A Reliable<br>Indonesian Vanilla Supplier?</h2>
-        <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="<?php echo esc_url( $contact['whatsapp_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="gv-btn gv-btn-primary">
-                Request a Quote
-            </a>
-        </div>
-    </div>
-</section>
+<!-- 4. CTA Banner (High-Fidelity Figma Component) -->
+<?php
+get_template_part( 'template-parts/cta-banner', null, array(
+    'title'    => 'Looking For A Reliable<br>Indonesian Vanilla Supplier?',
+    'btn_text' => 'Request a Quote',
+    'btn_url'  => home_url( '/contact/' ),
+) );
+?>
 
 <?php
 get_footer();

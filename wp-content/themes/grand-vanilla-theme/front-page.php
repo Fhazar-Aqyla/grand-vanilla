@@ -440,17 +440,14 @@ $hero_subtitle = get_theme_mod( 'gv_hero_subtitle', 'We deliver premium Indonesi
 }
 </style>
 
-<!-- 9. CTA Banner -->
-<section class="gv-cta-banner">
-    <div class="gv-container">
-        <h2>Ready To Get Your Vanilla<br>Supply Started?</h2>
-        <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="gv-btn gv-btn-primary">
-                Get a Sample
-            </a>
-        </div>
-    </div>
-</section>
+<!-- 9. CTA Banner (High-Fidelity Figma Component) -->
+<?php
+get_template_part( 'template-parts/cta-banner', null, array(
+    'title'    => 'Ready To Get Your Vanilla<br>Supply Started?',
+    'btn_text' => 'Get a Sample',
+    'btn_url'  => home_url( '/contact/' ),
+) );
+?>
 
 <?php
 get_footer();

@@ -426,21 +426,85 @@ ul {
 }
 
 /* -------------------------------------------------------------
- * 8. CTA Banner
+ * 8. CTA Banner (High-Fidelity Figma Design)
  * ----------------------------------------------------------- */
 .gv-cta-banner {
     position: relative;
-    background-color: var(--color-warm-sand);
-    border-top: 1px solid var(--color-nb-100);
-    border-bottom: 1px solid var(--color-nb-100);
-    padding: var(--space-64) 0;
+    background-color: #B9C1B4; /* Soft Sage Green from Figma */
+    padding: 5.5rem 1.5rem;
     text-align: center;
+    overflow: hidden;
 }
 
 .gv-cta-banner h2 {
-    font-size: 2.25rem;
-    font-weight: 800;
-    margin-bottom: var(--space-24);
+    font-family: var(--font-heading);
+    font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    color: var(--color-dark-khaki);
+    line-height: 1.25;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+    letter-spacing: -0.01em;
+}
+
+.gv-cta-banner .gv-btn {
+    position: relative;
+    z-index: 2;
+    background-color: var(--color-dark-khaki);
+    color: #FFFFFF;
+    border-radius: var(--radius-4);
+    padding: 0.75rem 2.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    transition: all var(--transition-normal);
+    box-shadow: 0 4px 12px rgba(54, 62, 25, 0.15);
+}
+
+.gv-cta-banner .gv-btn:hover {
+    background-color: var(--color-pitch-black);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(10, 8, 4, 0.2);
+}
+
+.gv-cta-flower {
+    position: absolute;
+    width: 240px;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    opacity: 0.75;
+}
+
+.gv-cta-flower-tr {
+    top: -40px;
+    right: -40px;
+    transform: rotate(205deg);
+}
+
+.gv-cta-flower-bl {
+    bottom: -40px;
+    left: -40px;
+    transform: rotate(25deg);
+}
+
+@media (max-width: 768px) {
+    .gv-cta-banner {
+        padding: 4rem 1.25rem;
+    }
+    .gv-cta-flower {
+        width: 140px;
+    }
+    .gv-cta-flower-tr {
+        top: -20px;
+        right: -20px;
+    }
+    .gv-cta-flower-bl {
+        bottom: -20px;
+        left: -20px;
+    }
 }
 
 /* -------------------------------------------------------------

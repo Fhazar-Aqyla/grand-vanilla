@@ -60,12 +60,12 @@ function grand_vanilla_scripts() {
         null
     );
 
-    // Main Theme Stylesheet
+    // Main Theme Stylesheet (with cache-busting timestamp during active development)
     wp_enqueue_style(
         'grand-vanilla-style',
         get_stylesheet_uri(),
         array( 'grand-vanilla-google-fonts' ),
-        '1.1.0'
+        filemtime( get_stylesheet_directory() . '/style.css' )
     );
 }
 add_action( 'wp_enqueue_scripts', 'grand_vanilla_scripts' );

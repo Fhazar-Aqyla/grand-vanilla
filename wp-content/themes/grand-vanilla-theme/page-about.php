@@ -242,17 +242,14 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 }
 </style>
 
-<!-- 7. CTA Banner -->
-<section class="gv-cta-banner">
-    <div class="gv-container">
-        <h2>Ready To Source Premium<br>Indonesian Vanilla?</h2>
-        <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="gv-btn gv-btn-primary">
-                Get a Sample
-            </a>
-        </div>
-    </div>
-</section>
+<!-- 7. CTA Banner (High-Fidelity Figma Component) -->
+<?php
+get_template_part( 'template-parts/cta-banner', null, array(
+    'title'    => 'Ready To Source Premium<br>Indonesian Vanilla?',
+    'btn_text' => 'Get a Sample',
+    'btn_url'  => home_url( '/contact/' ),
+) );
+?>
 
 <?php
 get_footer();
