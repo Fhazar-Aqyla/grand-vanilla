@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the Landing Page (Homepage)
  * High-Fidelity Implementation based on Figma Desktop/Landing Page.pdf
@@ -13,31 +14,31 @@ $contact = grand_vanilla_get_contact_info();
 ?>
 
 <!-- 1. Hero Section -->
-<section class="gv-hero" style="position: relative; min-height: 85vh; background: url('<?php echo esc_url( $img_dir . 'Hero Image.png' ); ?>') center center / cover no-repeat; display: flex; align-items: center; padding: 6rem 0 5rem;">
+<section class="gv-hero" style="position: relative; min-height: 85vh; background: url('<?php echo esc_url($img_dir . 'Hero Image.png'); ?>') center center / cover no-repeat; display: flex; align-items: center; padding: 6rem 0 5rem;">
     <!-- Dark Gradient Overlay for optimal readability -->
     <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%); pointer-events: none;"></div>
 
     <div class="gv-container" style="position: relative; z-index: 2; width: 100%;">
         <div style="max-width: 680px;">
-            
+
             <!-- Main Hero Headline -->
             <h1 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.5rem, 5vw, 3.85rem); font-weight: 700; color: #FFFFFF; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.01em;">
-                <?php echo esc_html( get_theme_mod( 'grand_vanilla_hero_title', 'Premium Indonesian vanilla, sourced for the global market.' ) ); ?>
+                <?php echo esc_html(get_theme_mod('grand_vanilla_hero_title', 'Premium Indonesian vanilla, sourced for the global market.')); ?>
             </h1>
 
             <!-- Subtitle -->
             <p style="font-size: clamp(1rem, 1.5vw, 1.125rem); color: rgba(255,255,255,0.92); line-height: 1.6; margin-bottom: 2.25rem; max-width: 580px;">
-                <?php echo esc_html( get_theme_mod( 'grand_vanilla_hero_subtitle', 'We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.' ) ); ?>
+                <?php echo esc_html(get_theme_mod('grand_vanilla_hero_subtitle', 'We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.')); ?>
             </p>
 
             <!-- Dual Action Buttons -->
             <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem;">
-                <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" 
-                   style="display: inline-block; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.25); transition: all 0.2s ease;">
+                <a href="<?php echo esc_url(home_url('/products/')); ?>"
+                    style="display: inline-block; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.25); transition: all 0.2s ease;">
                     Explore Products
                 </a>
-                <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" 
-                   style="display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.7); color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
+                <a href="<?php echo esc_url(home_url('/contact/')); ?>"
+                    style="display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.7); color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
                     Request a Quote
                 </a>
             </div>
@@ -56,40 +57,40 @@ $contact = grand_vanilla_get_contact_info();
                         <!-- USA Flag Circle -->
                         <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; background: #002868; display: flex; align-items: center; justify-content: center; z-index: 5;">
                             <svg viewBox="0 0 32 32" width="28" height="28">
-                                <rect width="32" height="32" fill="#bf0a30"/>
-                                <rect y="4.6" width="32" height="4.6" fill="#fff"/>
-                                <rect y="13.8" width="32" height="4.6" fill="#fff"/>
-                                <rect y="23" width="32" height="4.6" fill="#fff"/>
-                                <rect width="14" height="17" fill="#002868"/>
-                                <circle cx="4" cy="4" r="1" fill="#fff"/>
-                                <circle cx="10" cy="4" r="1" fill="#fff"/>
-                                <circle cx="7" cy="8" r="1" fill="#fff"/>
-                                <circle cx="4" cy="12" r="1" fill="#fff"/>
-                                <circle cx="10" cy="12" r="1" fill="#fff"/>
+                                <rect width="32" height="32" fill="#bf0a30" />
+                                <rect y="4.6" width="32" height="4.6" fill="#fff" />
+                                <rect y="13.8" width="32" height="4.6" fill="#fff" />
+                                <rect y="23" width="32" height="4.6" fill="#fff" />
+                                <rect width="14" height="17" fill="#002868" />
+                                <circle cx="4" cy="4" r="1" fill="#fff" />
+                                <circle cx="10" cy="4" r="1" fill="#fff" />
+                                <circle cx="7" cy="8" r="1" fill="#fff" />
+                                <circle cx="4" cy="12" r="1" fill="#fff" />
+                                <circle cx="10" cy="12" r="1" fill="#fff" />
                             </svg>
                         </div>
                         <!-- France Flag Circle -->
                         <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 4;">
                             <svg viewBox="0 0 32 32" width="28" height="28">
-                                <rect width="10.6" height="32" fill="#002395"/>
-                                <rect x="10.6" width="10.6" height="32" fill="#fff"/>
-                                <rect x="21.2" width="10.8" height="32" fill="#ed2939"/>
+                                <rect width="10.6" height="32" fill="#002395" />
+                                <rect x="10.6" width="10.6" height="32" fill="#fff" />
+                                <rect x="21.2" width="10.8" height="32" fill="#ed2939" />
                             </svg>
                         </div>
                         <!-- Germany Flag Circle -->
                         <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 3;">
                             <svg viewBox="0 0 32 32" width="28" height="28">
-                                <rect width="32" height="10.6" fill="#000"/>
-                                <rect y="10.6" width="32" height="10.6" fill="#dd0000"/>
-                                <rect y="21.2" width="32" height="10.8" fill="#ffce00"/>
+                                <rect width="32" height="10.6" fill="#000" />
+                                <rect y="10.6" width="32" height="10.6" fill="#dd0000" />
+                                <rect y="21.2" width="32" height="10.8" fill="#ffce00" />
                             </svg>
                         </div>
                         <!-- Netherlands Flag Circle -->
                         <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 2;">
                             <svg viewBox="0 0 32 32" width="28" height="28">
-                                <rect width="32" height="10.6" fill="#ae1c28"/>
-                                <rect y="10.6" width="32" height="10.6" fill="#fff"/>
-                                <rect y="21.2" width="32" height="10.8" fill="#21468b"/>
+                                <rect width="32" height="10.6" fill="#ae1c28" />
+                                <rect y="10.6" width="32" height="10.6" fill="#fff" />
+                                <rect y="21.2" width="32" height="10.8" fill="#21468b" />
                             </svg>
                         </div>
                         <!-- +8 Pill -->
@@ -108,21 +109,21 @@ $contact = grand_vanilla_get_contact_info();
 <section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0;">
     <div class="gv-container">
         <div style="display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center;" class="gv-grid-split-about">
-            
+
             <!-- Left Column: High-Res Rustic Photo -->
             <div>
-                <img src="<?php echo esc_url( $img_dir . 'About Us Image.png' ); ?>" 
-                     alt="Grand Vanilla Indonesia Rustic Vanilla Curing" 
-                     style="width: 100%; height: auto; max-height: 540px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); display: block;">
+                <img src="<?php echo esc_url($img_dir . 'About Us Image.png'); ?>"
+                    alt="Grand Vanilla Indonesia Rustic Vanilla Curing"
+                    style="width: 100%; height: auto; max-height: 540px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); display: block;">
             </div>
 
             <!-- Right Column: Content + Watermark + 2x2 Feature Boxes -->
             <div style="position: relative;">
                 <!-- Subtle Orchid Flower Watermark -->
-                <img src="<?php echo esc_url( $img_dir . 'Logo.png' ); ?>" 
-                     alt="" 
-                     aria-hidden="true" 
-                     style="position: absolute; top: -30px; right: -15px; width: 190px; height: auto; opacity: 0.15; pointer-events: none; z-index: 0; transform: rotate(15deg);">
+                <img src="<?php echo esc_url($img_dir . 'Logo.png'); ?>"
+                    alt=""
+                    aria-hidden="true"
+                    style="position: absolute; top: -30px; right: -15px; width: 190px; height: auto; opacity: 0.15; pointer-events: none; z-index: 0; transform: rotate(15deg);">
 
                 <div style="position: relative; z-index: 1;">
                     <!-- Section Tag -->
@@ -161,8 +162,8 @@ $contact = grand_vanilla_get_contact_info();
                     </div>
 
                     <!-- Learn More CTA -->
-                    <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" 
-                       style="display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.75rem 2rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
+                    <a href="<?php echo esc_url(home_url('/about/')); ?>"
+                        style="display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.75rem 2rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
                         Learn More &rarr;
                     </a>
                 </div>
@@ -175,7 +176,7 @@ $contact = grand_vanilla_get_contact_info();
 <!-- 3. Premium Products Section (Exact Figma UI/UX Alignment) -->
 <section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
-        
+
         <!-- Header Split -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
@@ -194,42 +195,42 @@ $contact = grand_vanilla_get_contact_info();
             </div>
         </div>
 
-        <!-- 3 Product Cards Grid (Buttery Smooth Flex Accordion: Active Card is 1.85x, Inactive are 1x) -->
+        <!-- 3 Product Cards Grid (Exact UI/UX Reference Match: #1 Large, #2 & #3 Compact, Smooth Shifting) -->
         <div class="gv-products-cards-grid" id="gvProductsCardsGrid">
-            
+
             <!-- Card 1: Vanilla Beans -->
             <div class="gv-product-card is-active" data-card-index="1">
                 <!-- Badge #1 -->
-                <div style="position: absolute; top: 1.25rem; left: 1.25rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
+                <div class="gv-card-badge">
                     #1
                 </div>
 
                 <!-- Product Image -->
-                <div style="height: 190px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 1.png' ); ?>" 
-                         alt="Vanilla Beans" 
-                         style="max-height: 100%; max-width: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));">
+                <div class="gv-card-img-wrap">
+                    <img src="<?php echo esc_url($img_dir . 'Product Unggulan 1.png'); ?>"
+                        alt="Vanilla Beans"
+                        class="gv-card-img">
                 </div>
 
                 <!-- Product Content & Actions -->
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;">
-                    <div>
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.45rem; font-weight: 700; color: #363E19; margin: 0 0 0.35rem 0; line-height: 1.2;">
+                <div class="gv-card-bottom">
+                    <div class="gv-card-text">
+                        <h3 class="gv-card-title">
                             Vanilla Beans
                         </h3>
-                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.45; max-width: 280px;">
+                        <p class="gv-card-desc">
                             Premium vanilla beans with a rich aroma and distinctive flavor.
                         </p>
                     </div>
                     <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
                     <div class="gv-card-actions-slot">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-planifolia-vanilla-beans/' ) ); ?>" 
-                           class="gv-card-btn-detail">
+                        <a href="<?php echo esc_url(home_url('/products/indonesian-planifolia-vanilla-beans/')); ?>"
+                            class="gv-card-btn-detail">
                             Detail &rarr;
                         </a>
-                        <button type="button" 
-                                class="gv-card-btn-arrow" 
-                                aria-label="Expand Vanilla Beans">
+                        <button type="button"
+                            class="gv-card-btn-arrow"
+                            aria-label="Expand Vanilla Beans">
                             &rarr;
                         </button>
                     </div>
@@ -239,36 +240,36 @@ $contact = grand_vanilla_get_contact_info();
             <!-- Card 2: Vanilla Powder -->
             <div class="gv-product-card is-collapsed" data-card-index="2">
                 <!-- Badge #2 -->
-                <div style="position: absolute; top: 1.25rem; left: 1.25rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
+                <div class="gv-card-badge">
                     #2
                 </div>
 
                 <!-- Product Image -->
-                <div style="height: 190px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 2.png' ); ?>" 
-                         alt="Vanilla Powder" 
-                         style="max-height: 100%; max-width: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));">
+                <div class="gv-card-img-wrap">
+                    <img src="<?php echo esc_url($img_dir . 'Product Unggulan 2.png'); ?>"
+                        alt="Vanilla Powder"
+                        class="gv-card-img">
                 </div>
 
-                <!-- Product Content & Actions (Side by Side) -->
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 0.75rem;">
-                    <div style="flex: 1 1 auto; min-width: 0;">
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.35rem; font-weight: 700; color: #363E19; margin: 0 0 0.35rem 0; line-height: 1.2; white-space: nowrap;">
+                <!-- Product Content & Actions -->
+                <div class="gv-card-bottom">
+                    <div class="gv-card-text">
+                        <h3 class="gv-card-title">
                             Vanilla Powder
                         </h3>
-                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.45;">
+                        <p class="gv-card-desc">
                             Finely ground vanilla for versatile food and beverage applications.
                         </p>
                     </div>
                     <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
                     <div class="gv-card-actions-slot">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-tahitensis-vanilla-beans/' ) ); ?>" 
-                           class="gv-card-btn-detail">
+                        <a href="<?php echo esc_url(home_url('/products/indonesian-tahitensis-vanilla-beans/')); ?>"
+                            class="gv-card-btn-detail">
                             Detail &rarr;
                         </a>
-                        <button type="button" 
-                                class="gv-card-btn-arrow" 
-                                aria-label="Expand Vanilla Powder">
+                        <button type="button"
+                            class="gv-card-btn-arrow"
+                            aria-label="Expand Vanilla Powder">
                             &rarr;
                         </button>
                     </div>
@@ -278,36 +279,36 @@ $contact = grand_vanilla_get_contact_info();
             <!-- Card 3: Vanilla Extract -->
             <div class="gv-product-card is-collapsed" data-card-index="3">
                 <!-- Badge #3 -->
-                <div style="position: absolute; top: 1.25rem; left: 1.25rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
+                <div class="gv-card-badge">
                     #3
                 </div>
 
                 <!-- Product Image -->
-                <div style="height: 190px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 3.png' ); ?>" 
-                         alt="Vanilla Extract" 
-                         style="max-height: 100%; max-width: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));">
+                <div class="gv-card-img-wrap">
+                    <img src="<?php echo esc_url($img_dir . 'Product Unggulan 3.png'); ?>"
+                        alt="Vanilla Extract"
+                        class="gv-card-img">
                 </div>
 
-                <!-- Product Content & Actions (Side by Side) -->
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 0.75rem;">
-                    <div style="flex: 1 1 auto; min-width: 0;">
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.35rem; font-weight: 700; color: #363E19; margin: 0 0 0.35rem 0; line-height: 1.2; white-space: nowrap;">
+                <!-- Product Content & Actions -->
+                <div class="gv-card-bottom">
+                    <div class="gv-card-text">
+                        <h3 class="gv-card-title">
                             Vanilla Extract
                         </h3>
-                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.45;">
+                        <p class="gv-card-desc">
                             Rich vanilla extract crafted for consistent flavor and aroma.
                         </p>
                     </div>
                     <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
                     <div class="gv-card-actions-slot">
-                        <a href="<?php echo esc_url( home_url( '/products/gourmet-vanilla-extract-paste/' ) ); ?>" 
-                           class="gv-card-btn-detail">
+                        <a href="<?php echo esc_url(home_url('/products/gourmet-vanilla-extract-paste/')); ?>"
+                            class="gv-card-btn-detail">
                             Detail &rarr;
                         </a>
-                        <button type="button" 
-                                class="gv-card-btn-arrow" 
-                                aria-label="Expand Vanilla Extract">
+                        <button type="button"
+                            class="gv-card-btn-arrow"
+                            aria-label="Expand Vanilla Extract">
                             &rarr;
                         </button>
                     </div>
@@ -316,31 +317,25 @@ $contact = grand_vanilla_get_contact_info();
 
         </div>
 
-        <!-- Script for Interactive Products Accordion Expansion -->
+        <!-- Script for Interactive Products Carousel / Card Expansion & Auto-Shift -->
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const grid = document.getElementById('gvProductsCardsGrid');
-            if (!grid) return;
-            const cards = grid.querySelectorAll('.gv-product-card');
-            
-            cards.forEach(function(card) {
-                card.addEventListener('click', function(e) {
-                    // If clicking the active 'Detail →' link, allow normal navigation
-                    if (e.target.closest('.gv-card-btn-detail')) {
-                        return;
-                    }
-                    
+            document.addEventListener('DOMContentLoaded', function() {
+                const grid = document.getElementById('gvProductsCardsGrid');
+                if (!grid) return;
+                const cards = grid.querySelectorAll('.gv-product-card');
+
+                function activateCard(card) {
                     const idx = card.getAttribute('data-card-index');
                     if (!idx) return;
-                    
+
                     if (grid.classList.contains('active-' + idx)) {
                         return;
                     }
-                    
+
                     // Switch active class on grid
                     grid.classList.remove('active-1', 'active-2', 'active-3');
                     grid.classList.add('active-' + idx);
-                    
+
                     // Switch active and collapsed states on cards
                     cards.forEach(function(c) {
                         if (c === card) {
@@ -351,15 +346,57 @@ $contact = grand_vanilla_get_contact_info();
                             c.classList.add('is-collapsed');
                         }
                     });
+                }
+
+                cards.forEach(function(card) {
+                    card.addEventListener('click', function(e) {
+                        // If clicking the active 'Detail →' link, allow normal navigation
+                        if (e.target.closest('.gv-card-btn-detail')) {
+                            return;
+                        }
+
+                        activateCard(card);
+                        // Reset timer on manual click
+                        startAutoRotate();
+                    });
                 });
+
+                // Auto-rotation mechanism (cycles cards every 6s, pauses on hover)
+                let autoTimer = null;
+
+                function startAutoRotate() {
+                    stopAutoRotate();
+                    autoTimer = setInterval(function() {
+                        let activeIdx = 0;
+                        cards.forEach(function(c, i) {
+                            if (c.classList.contains('is-active')) {
+                                activeIdx = i;
+                            }
+                        });
+                        const nextIdx = (activeIdx + 1) % cards.length;
+                        activateCard(cards[nextIdx]);
+                    }, 6000);
+                }
+
+                function stopAutoRotate() {
+                    if (autoTimer) {
+                        clearInterval(autoTimer);
+                        autoTimer = null;
+                    }
+                }
+
+                grid.addEventListener('mouseenter', stopAutoRotate);
+                grid.addEventListener('mouseleave', startAutoRotate);
+                grid.addEventListener('touchstart', stopAutoRotate, { passive: true });
+
+                startAutoRotate();
             });
-        });
         </script>
 
         <!-- View All Products CTA Button -->
         <div style="text-align: center;">
-            <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" 
-               style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
+            <a href="<?php echo esc_url(home_url('/products/')); ?>"
+                style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Products &rarr;
             </a>
         </div>
@@ -370,7 +407,7 @@ $contact = grand_vanilla_get_contact_info();
 <!-- 4. Value Propositions (4 White Cards with Exact SVG Icons - NO EMOJIS) -->
 <section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
-        
+
         <div style="text-align: center; max-width: 700px; margin: 0 auto 4rem;">
             <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 0.75rem;">
                 Your Trusted Partner For Quality<br>Indonesian Vanilla
@@ -382,13 +419,13 @@ $contact = grand_vanilla_get_contact_info();
 
         <!-- 4 White Cards Grid -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
-            
+
             <!-- Card 1: Quality Focused -->
             <div style="background: #FAF8F5; border-radius: 12px; padding: 2.5rem 1.5rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
                     <!-- Shield SVG Icon -->
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/>
+                        <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z" />
                     </svg>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
@@ -404,7 +441,7 @@ $contact = grand_vanilla_get_contact_info();
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
                     <!-- Package / Box SVG Icon -->
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21 16.5l-9 5.2-9-5.2V7.5L12 2.3l9 5.2v9zM12 4.1L5.3 8 12 11.9 18.7 8 12 4.1zm-7 5.6v7.4l6.5 3.7v-7.4L5 9.7zm8 11.1l6.5-3.7V9.7L13 13.4v7.4z"/>
+                        <path d="M21 16.5l-9 5.2-9-5.2V7.5L12 2.3l9 5.2v9zM12 4.1L5.3 8 12 11.9 18.7 8 12 4.1zm-7 5.6v7.4l6.5 3.7v-7.4L5 9.7zm8 11.1l6.5-3.7V9.7L13 13.4v7.4z" />
                     </svg>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
@@ -420,7 +457,7 @@ $contact = grand_vanilla_get_contact_info();
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
                     <!-- Folded Map SVG Icon -->
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
+                        <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
                     </svg>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
@@ -436,7 +473,7 @@ $contact = grand_vanilla_get_contact_info();
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
                     <!-- Headset Support SVG Icon -->
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/>
+                        <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z" />
                     </svg>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
@@ -455,17 +492,17 @@ $contact = grand_vanilla_get_contact_info();
 <!-- 5. Flexible Vanilla Supply & Special OEM Section -->
 <section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
-        
+
         <div style="display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center;" class="gv-grid-split-oem">
-            
+
             <!-- Left Column: Title + Bulk Packaging Photo -->
             <div>
                 <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 2rem;">
                     Flexible Vanilla Supply<br>For Your Business
                 </h2>
-                <img src="<?php echo esc_url( $img_dir . 'Bulk  Wholesale Vanilla 1.png' ); ?>" 
-                     alt="Grand Vanilla Indonesia Bulk Export Packaging" 
-                     style="width: 100%; height: auto; border-radius: 12px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
+                <img src="<?php echo esc_url($img_dir . 'Bulk  Wholesale Vanilla 1.png'); ?>"
+                    alt="Grand Vanilla Indonesia Bulk Export Packaging"
+                    style="width: 100%; height: auto; border-radius: 12px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
             </div>
 
             <!-- Right Column: Subtitle + OEM Content Block -->
@@ -528,7 +565,7 @@ $contact = grand_vanilla_get_contact_info();
 <!-- 6. From Indonesia To Global Markets (Exact Figma High-Fidelity Showcase) -->
 <section class="gv-section" style="background-color: #363E19; color: #FFFFFF; padding: 6.5rem 0;">
     <div class="gv-container">
-        
+
         <!-- Header Split: Left Title, Right Subtitle -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
@@ -548,11 +585,11 @@ $contact = grand_vanilla_get_contact_info();
             <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.5vw, 1.875rem); font-weight: 400; font-style: italic; color: #FFFFFF; margin-bottom: 2.5rem; letter-spacing: 0.02em;">
                 Connecting Indonesia To The World
             </h3>
-            
+
             <div style="max-width: 980px; margin: 0 auto;">
-                <img src="<?php echo esc_url( $img_dir . 'Worldwide maps.png' ); ?>" 
-                     alt="Grand Vanilla Indonesia Worldwide Export Routes Map" 
-                     style="width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));">
+                <img src="<?php echo esc_url($img_dir . 'Worldwide maps.png'); ?>"
+                    alt="Grand Vanilla Indonesia Worldwide Export Routes Map"
+                    style="width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));">
             </div>
         </div>
 
@@ -564,7 +601,7 @@ $contact = grand_vanilla_get_contact_info();
 
             <!-- 6 Grid Cards (3 Columns x 2 Rows) -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-                
+
                 <!-- Card 1: IMPORTERS -->
                 <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
                     <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
@@ -699,7 +736,7 @@ $gallery_carousel_items = array(
 ?>
 <section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04); overflow: hidden;">
     <div class="gv-container">
-        
+
         <!-- Header Split (Left Title, Right Description) -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
@@ -725,30 +762,30 @@ $gallery_carousel_items = array(
         <div class="gv-gallery-carousel-track">
             <?php
             // Output 2 identical sets of cards for seamless infinite looping
-            for ( $set = 0; $set < 2; $set++ ) :
-                foreach ( $gallery_carousel_items as $item ) :
+            for ($set = 0; $set < 2; $set++) :
+                foreach ($gallery_carousel_items as $item) :
             ?>
-                <div class="gv-gallery-card" style="flex: 0 0 290px; width: 290px; background: #FAF8F5; border-radius: 0; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.03); display: flex; flex-direction: column;">
-                    <!-- Card Image -->
-                    <div style="height: 310px; width: 100%; overflow: hidden;">
-                        <img src="<?php echo esc_url( $img_dir . $item['img'] ); ?>" 
-                             alt="<?php echo esc_attr( $item['title'] . ' - ' . $item['subtitle'] ); ?>" 
-                             style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                    </div>
-                    <!-- Card Content -->
-                    <div style="padding: 1.35rem 1.5rem 1.5rem; background: #FAF8F5; display: flex; flex-direction: column;">
-                        <div style="display: flex; align-items: center; gap: 0.6rem; color: #363E19; font-size: 0.75rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.35rem;">
-                            <span style="display: inline-block; width: 18px; height: 1.5px; background: #363E19;"></span>
-                            <?php echo esc_html( $item['tag'] ); ?>
+                    <div class="gv-gallery-card" style="flex: 0 0 290px; width: 290px; background: #FAF8F5; border-radius: 0; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.03); display: flex; flex-direction: column;">
+                        <!-- Card Image -->
+                        <div style="height: 310px; width: 100%; overflow: hidden;">
+                            <img src="<?php echo esc_url($img_dir . $item['img']); ?>"
+                                alt="<?php echo esc_attr($item['title'] . ' - ' . $item['subtitle']); ?>"
+                                style="width: 100%; height: 100%; object-fit: cover; display: block;">
                         </div>
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin: 0 0 0.25rem 0; line-height: 1.3;">
-                            <?php echo esc_html( $item['title'] ); ?>
-                        </h3>
-                        <p style="font-size: 0.8125rem; color: #716F6E; margin: 0; line-height: 1.4;">
-                            <?php echo esc_html( $item['subtitle'] ); ?>
-                        </p>
+                        <!-- Card Content -->
+                        <div style="padding: 1.35rem 1.5rem 1.5rem; background: #FAF8F5; display: flex; flex-direction: column;">
+                            <div style="display: flex; align-items: center; gap: 0.6rem; color: #363E19; font-size: 0.75rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.35rem;">
+                                <span style="display: inline-block; width: 18px; height: 1.5px; background: #363E19;"></span>
+                                <?php echo esc_html($item['tag']); ?>
+                            </div>
+                            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin: 0 0 0.25rem 0; line-height: 1.3;">
+                                <?php echo esc_html($item['title']); ?>
+                            </h3>
+                            <p style="font-size: 0.8125rem; color: #716F6E; margin: 0; line-height: 1.4;">
+                                <?php echo esc_html($item['subtitle']); ?>
+                            </p>
+                        </div>
                     </div>
-                </div>
             <?php
                 endforeach;
             endfor;
@@ -759,8 +796,8 @@ $gallery_carousel_items = array(
     <div class="gv-container">
         <!-- View All Gallery Button -->
         <div style="text-align: center;">
-            <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" 
-               style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
+            <a href="<?php echo esc_url(home_url('/gallery/')); ?>"
+                style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Gallery &rarr;
             </a>
         </div>
@@ -770,7 +807,7 @@ $gallery_carousel_items = array(
 <!-- 8. Insights Section (Blog Teaser - Exact Figma UI/UX Static Layout) -->
 <section class="gv-section" style="background-color: #DDE2D9; padding: 6.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
-        
+
         <!-- Header Split (Left Tag & Title, Right Description) -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; gap: 2rem; flex-wrap: wrap;">
             <div>
@@ -791,7 +828,7 @@ $gallery_carousel_items = array(
 
         <!-- 2 Clean Articles Stack (Exact Figma Layout) -->
         <div style="display: flex; flex-direction: column; gap: 4.5rem; margin-bottom: 4rem;">
-            
+
             <!-- Article 1: 12/12 -->
             <div class="gv-blog-article-row" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: center;">
                 <!-- Left Column: Big Number & Photo -->
@@ -800,9 +837,9 @@ $gallery_carousel_items = array(
                         12/12
                     </div>
                     <div style="position: relative; z-index: 2; border-radius: 0; overflow: hidden; aspect-ratio: 16 / 10; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
-                        <img src="<?php echo esc_url( $img_dir . 'Buat Blog Example 1.png' ); ?>" 
-                             alt="What Makes Indonesian Vanilla Exceptional?" 
-                             style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
+                        <img src="<?php echo esc_url($img_dir . 'Buat Blog Example 1.png'); ?>"
+                            alt="What Makes Indonesian Vanilla Exceptional?"
+                            style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
                     </div>
                 </div>
 
@@ -813,7 +850,7 @@ $gallery_carousel_items = array(
                         Vanilla Guide
                     </div>
                     <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 700; color: #363E19; margin: 0 0 0.85rem 0; line-height: 1.25;">
-                        <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
+                        <a href="<?php echo esc_url(home_url('/what-makes-indonesian-vanilla-exceptional/')); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
                             What Makes Indonesian Vanilla Exceptional?
                         </a>
                     </h3>
@@ -821,8 +858,8 @@ $gallery_carousel_items = array(
                         Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient for global food industries.
                     </p>
                     <div>
-                        <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" 
-                           style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
+                        <a href="<?php echo esc_url(home_url('/what-makes-indonesian-vanilla-exceptional/')); ?>"
+                            style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
                             Continue Reading &rarr;
                         </a>
                     </div>
@@ -837,9 +874,9 @@ $gallery_carousel_items = array(
                         11/12
                     </div>
                     <div style="position: relative; z-index: 2; border-radius: 0; overflow: hidden; aspect-ratio: 16 / 10; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
-                        <img src="<?php echo esc_url( $img_dir . 'Buat blog example 2.png' ); ?>" 
-                             alt="From Vanilla Bean to Global Ingredient" 
-                             style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
+                        <img src="<?php echo esc_url($img_dir . 'Buat blog example 2.png'); ?>"
+                            alt="From Vanilla Bean to Global Ingredient"
+                            style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
                     </div>
                 </div>
 
@@ -850,7 +887,7 @@ $gallery_carousel_items = array(
                         Vanilla Insight
                     </div>
                     <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 700; color: #363E19; margin: 0 0 0.85rem 0; line-height: 1.25;">
-                        <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
+                        <a href="<?php echo esc_url(home_url('/from-vanilla-bean-to-global-ingredient/')); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
                             From Vanilla Bean to Global Ingredient
                         </a>
                     </h3>
@@ -858,8 +895,8 @@ $gallery_carousel_items = array(
                         Explore how quality vanilla is sourced, processed, and prepared to meet the needs of international B2B buyers.
                     </p>
                     <div>
-                        <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" 
-                           style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
+                        <a href="<?php echo esc_url(home_url('/from-vanilla-bean-to-global-ingredient/')); ?>"
+                            style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
                             Continue Reading &rarr;
                         </a>
                     </div>
@@ -870,8 +907,8 @@ $gallery_carousel_items = array(
 
         <!-- View All Blog Button -->
         <div style="text-align: center;">
-            <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" 
-               style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
+            <a href="<?php echo esc_url(home_url('/articles/')); ?>"
+                style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Blog &rarr;
             </a>
         </div>
@@ -881,160 +918,304 @@ $gallery_carousel_items = array(
 
 <!-- 9. CTA Banner (High-Fidelity Figma Component) -->
 <?php
-get_template_part( 'template-parts/cta-banner', null, array(
+get_template_part('template-parts/cta-banner', null, array(
     'title'    => 'Ready To Get Your Vanilla<br>Supply Started?',
     'btn_text' => 'Get a Sample',
-    'btn_url'  => home_url( '/contact/' ),
-) );
+    'btn_url'  => home_url('/contact/'),
+));
 ?>
 
 <style>
-/* Product Cards Layout (Exact Reference Match: 2:1:1 Ratio, 8px Radius, 380px Height) */
-.gv-products-cards-grid {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 3.5rem;
-    align-items: stretch;
-    width: 100%;
-}
-
-.gv-product-card {
-    background-color: #BDC4B8;
-    border-radius: 8px;
-    padding: 1.5rem 1.5rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-    min-width: 0;
-    height: 380px;
-    box-sizing: border-box;
-    transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease;
-    will-change: flex;
-}
-
-@media (min-width: 992px) {
-    .gv-product-card.is-active {
-        flex: 2 1 0px !important;
-        cursor: default;
-    }
-    .gv-product-card.is-collapsed {
-        flex: 1 1 0px !important;
-        cursor: pointer;
-    }
-    .gv-product-card.is-collapsed:hover {
-        background-color: #B5BCB0;
-    }
-}
-
-.gv-product-card img {
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.gv-product-card.is-active img {
-    transform: scale(1.03);
-}
-
-/* Cross-fade Action Buttons (Zero Layout Jumps) */
-.gv-card-actions-slot {
-    position: relative;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-shrink: 0;
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.gv-product-card.is-collapsed .gv-card-actions-slot {
-    min-width: 38px;
-    width: 38px;
-}
-.gv-product-card.is-active .gv-card-actions-slot {
-    min-width: 105px;
-    width: 105px;
-}
-
-.gv-card-btn-detail {
-    position: absolute;
-    right: 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translate3d(8px, 0, 0);
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, background-color 0.2s ease, color 0.2s ease;
-    pointer-events: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    border: 1px solid #363E19;
-    color: #363E19;
-    background: transparent !important;
-    font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    padding: 0.6rem 1.4rem;
-    border-radius: 2px;
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.gv-card-btn-arrow {
-    position: absolute;
-    right: 0;
-    opacity: 1;
-    visibility: visible;
-    transform: translate3d(0, 0, 0);
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, background-color 0.2s ease, color 0.2s ease;
-    pointer-events: auto;
-    width: 38px;
-    height: 38px;
-    border: 1px solid #363E19;
-    color: #363E19;
-    background: transparent !important;
-    border-radius: 2px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.gv-product-card.is-active .gv-card-btn-detail {
-    opacity: 1;
-    visibility: visible;
-    transform: translate3d(0, 0, 0);
-    pointer-events: auto;
-}
-
-.gv-product-card.is-active .gv-card-btn-arrow {
-    opacity: 0;
-    visibility: hidden;
-    transform: translate3d(-8px, 0, 0);
-    pointer-events: none;
-}
-
-.gv-card-btn-detail:hover {
-    background-color: #363E19 !important;
-    color: #FFFFFF !important;
-}
-.gv-card-btn-arrow:hover {
-    background-color: #363E19 !important;
-    color: #FFFFFF !important;
-}
-
-@media (min-width: 900px) {
-    .gv-grid-split-about { grid-template-columns: 1fr 1.15fr !important; }
-    .gv-grid-split-oem { grid-template-columns: 1fr 1.25fr !important; }
-    .gv-blog-card-split { grid-template-columns: 320px 1fr !important; }
-}
-@media (max-width: 991px) {
+    /* Product Cards Layout (Exact UI/UX Reference Match: #1 Large, #2 & #3 Compact, 12px Radius, 450px Height) */
     .gv-products-cards-grid {
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 3.5rem;
+        align-items: stretch;
+        width: 100%;
     }
-    .gv-blog-article-row {
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
+
+    .gv-product-card {
+        background-color: #BDC4B8;
+        border-radius: 12px;
+        padding: 2rem 1.75rem 2.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        min-width: 0;
+        height: 450px;
+        box-sizing: border-box;
+        transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, padding 0.4s ease;
+        will-change: flex;
     }
-}
+
+    .gv-card-badge {
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        background-color: #363E19;
+        color: #FFFFFF;
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-size: 0.875rem;
+        font-weight: 700;
+        width: 34px;
+        height: 34px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        line-height: 1;
+        user-select: none;
+    }
+
+    @media (min-width: 992px) {
+        .gv-product-card.is-active {
+            flex: 1.95 1 0px !important;
+            cursor: default;
+            padding: 2.25rem 2rem 2.25rem;
+        }
+
+        .gv-product-card.is-collapsed {
+            flex: 1 1 0px !important;
+            cursor: pointer;
+            padding: 2rem 1.5rem 2.25rem;
+        }
+
+        .gv-product-card.is-collapsed:hover {
+            background-color: #B5BCB0;
+        }
+    }
+
+    /* Product Image Containers */
+    .gv-card-img-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        width: 100%;
+        transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gv-product-card.is-active .gv-card-img-wrap {
+        height: 225px;
+    }
+
+    .gv-product-card.is-collapsed .gv-card-img-wrap {
+        height: 195px;
+    }
+
+    .gv-card-img {
+        width: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 10px 20px rgba(0,0,0,0.06));
+        transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), max-width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gv-product-card.is-active .gv-card-img {
+        max-height: 95%;
+        max-width: 92%;
+    }
+
+    .gv-product-card.is-collapsed .gv-card-img {
+        max-height: 88%;
+        max-width: 88%;
+    }
+
+    /* Bottom Content Area (Title, Desc & Buttons) */
+    .gv-card-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .gv-card-text {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .gv-card-title {
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-weight: 700;
+        color: #363E19;
+        margin: 0 0 0.45rem 0;
+        line-height: 1.2;
+    }
+
+    .gv-product-card.is-active .gv-card-title {
+        font-size: clamp(1.45rem, 1.8vw, 1.625rem);
+    }
+
+    .gv-product-card.is-collapsed .gv-card-title {
+        font-size: 1.35rem;
+        white-space: nowrap;
+    }
+
+    .gv-card-desc {
+        color: #4A5239;
+        margin: 0;
+    }
+
+    .gv-product-card.is-active .gv-card-desc {
+        font-size: 0.875rem;
+        line-height: 1.55;
+        max-width: 300px;
+    }
+
+    .gv-product-card.is-collapsed .gv-card-desc {
+        font-size: 0.8125rem;
+        line-height: 1.45;
+        max-width: 175px;
+    }
+
+    /* Cross-fade Action Buttons (Zero Layout Jumps) */
+    .gv-card-actions-slot {
+        position: relative;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-shrink: 0;
+        transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gv-product-card.is-collapsed .gv-card-actions-slot {
+        min-width: 38px;
+        width: 38px;
+    }
+
+    .gv-product-card.is-active .gv-card-actions-slot {
+        min-width: 110px;
+        width: 110px;
+    }
+
+    .gv-card-btn-detail {
+        position: absolute;
+        right: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(8px, 0, 0);
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, background-color 0.2s ease, color 0.2s ease;
+        pointer-events: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px solid #363E19;
+        color: #363E19;
+        background: transparent !important;
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.6rem 1.4rem;
+        border-radius: 2px;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .gv-card-btn-arrow {
+        position: absolute;
+        right: 0;
+        opacity: 1;
+        visibility: visible;
+        transform: translate3d(0, 0, 0);
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, background-color 0.2s ease, color 0.2s ease;
+        pointer-events: auto;
+        width: 38px;
+        height: 38px;
+        border: 1px solid #363E19;
+        color: #363E19;
+        background: transparent !important;
+        border-radius: 2px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        line-height: 1;
+    }
+
+    .gv-product-card.is-active .gv-card-btn-detail {
+        opacity: 1;
+        visibility: visible;
+        transform: translate3d(0, 0, 0);
+        pointer-events: auto;
+    }
+
+    .gv-product-card.is-active .gv-card-btn-arrow {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(-8px, 0, 0);
+        pointer-events: none;
+    }
+
+    .gv-card-btn-detail:hover {
+        background-color: #363E19 !important;
+        color: #FFFFFF !important;
+    }
+
+    .gv-card-btn-arrow:hover {
+        background-color: #363E19 !important;
+        color: #FFFFFF !important;
+    }
+
+    @media (min-width: 900px) {
+        .gv-grid-split-about {
+            grid-template-columns: 1fr 1.15fr !important;
+        }
+
+        .gv-grid-split-oem {
+            grid-template-columns: 1fr 1.25fr !important;
+        }
+
+        .gv-blog-card-split {
+            grid-template-columns: 320px 1fr !important;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .gv-products-cards-grid {
+            flex-direction: column !important;
+            gap: 2rem !important;
+        }
+
+        .gv-product-card {
+            height: auto !important;
+            min-height: 380px !important;
+            flex: 1 1 auto !important;
+            padding: 2rem 1.5rem 2.25rem !important;
+        }
+
+        .gv-card-img-wrap {
+            height: 200px !important;
+        }
+
+        .gv-product-card .gv-card-actions-slot {
+            min-width: 110px !important;
+            width: 110px !important;
+        }
+
+        .gv-product-card .gv-card-btn-detail {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translate3d(0, 0, 0) !important;
+            pointer-events: auto !important;
+        }
+
+        .gv-product-card .gv-card-btn-arrow {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        .gv-blog-article-row {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+        }
+    }
 </style>
 
 <?php
