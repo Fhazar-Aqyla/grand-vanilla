@@ -356,40 +356,8 @@ $contact = grand_vanilla_get_contact_info();
                         }
 
                         activateCard(card);
-                        // Reset timer on manual click
-                        startAutoRotate();
                     });
                 });
-
-                // Auto-rotation mechanism (cycles cards every 6s, pauses on hover)
-                let autoTimer = null;
-
-                function startAutoRotate() {
-                    stopAutoRotate();
-                    autoTimer = setInterval(function() {
-                        let activeIdx = 0;
-                        cards.forEach(function(c, i) {
-                            if (c.classList.contains('is-active')) {
-                                activeIdx = i;
-                            }
-                        });
-                        const nextIdx = (activeIdx + 1) % cards.length;
-                        activateCard(cards[nextIdx]);
-                    }, 6000);
-                }
-
-                function stopAutoRotate() {
-                    if (autoTimer) {
-                        clearInterval(autoTimer);
-                        autoTimer = null;
-                    }
-                }
-
-                grid.addEventListener('mouseenter', stopAutoRotate);
-                grid.addEventListener('mouseleave', startAutoRotate);
-                grid.addEventListener('touchstart', stopAutoRotate, { passive: true });
-
-                startAutoRotate();
             });
         </script>
 
@@ -938,14 +906,14 @@ get_template_part('template-parts/cta-banner', null, array(
     .gv-product-card {
         background-color: #BDC4B8;
         border-radius: 12px;
-        padding: 2rem 1.75rem 2.25rem;
+        padding: 1.25rem 1.25rem 1.25rem;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
         position: relative;
         overflow: hidden;
         min-width: 0;
-        height: 450px;
+        height: 330px;
         box-sizing: border-box;
         transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, padding 0.4s ease;
         will-change: flex;
@@ -953,15 +921,15 @@ get_template_part('template-parts/cta-banner', null, array(
 
     .gv-card-badge {
         position: absolute;
-        top: 1.5rem;
-        left: 1.5rem;
+        top: 1.15rem;
+        left: 1.15rem;
         background-color: #363E19;
         color: #FFFFFF;
         font-family: var(--font-heading, 'Jost', sans-serif);
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
         font-weight: 700;
-        width: 34px;
-        height: 34px;
+        width: 30px;
+        height: 30px;
         border-radius: 4px;
         display: flex;
         align-items: center;
@@ -975,13 +943,13 @@ get_template_part('template-parts/cta-banner', null, array(
         .gv-product-card.is-active {
             flex: 1.95 1 0px !important;
             cursor: default;
-            padding: 2.25rem 2rem 2.25rem;
+            padding: 1.35rem 1.6rem 1.25rem;
         }
 
         .gv-product-card.is-collapsed {
             flex: 1 1 0px !important;
             cursor: pointer;
-            padding: 2rem 1.5rem 2.25rem;
+            padding: 1.25rem 1.25rem 1.25rem;
         }
 
         .gv-product-card.is-collapsed:hover {
@@ -991,37 +959,33 @@ get_template_part('template-parts/cta-banner', null, array(
 
     /* Product Image Containers */
     .gv-card-img-wrap {
+        flex: 1 1 auto;
+        min-height: 0;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: center;
-        margin-bottom: 1.5rem;
+        margin-top: auto;
+        margin-bottom: 0.5rem;
         width: 100%;
-        transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .gv-product-card.is-active .gv-card-img-wrap {
-        height: 225px;
-    }
-
-    .gv-product-card.is-collapsed .gv-card-img-wrap {
-        height: 195px;
+        overflow: visible;
     }
 
     .gv-card-img {
         width: auto;
+        height: auto;
         object-fit: contain;
-        filter: drop-shadow(0 10px 20px rgba(0,0,0,0.06));
-        transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), max-width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        filter: drop-shadow(0 6px 14px rgba(0,0,0,0.06));
+        transition: transform 0.4s ease;
     }
 
     .gv-product-card.is-active .gv-card-img {
-        max-height: 95%;
-        max-width: 92%;
+        max-height: 175px;
+        max-width: 95%;
     }
 
     .gv-product-card.is-collapsed .gv-card-img {
-        max-height: 88%;
-        max-width: 88%;
+        max-height: 155px;
+        max-width: 98%;
     }
 
     /* Bottom Content Area (Title, Desc & Buttons) */
@@ -1029,8 +993,9 @@ get_template_part('template-parts/cta-banner', null, array(
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        gap: 1rem;
+        gap: 0.85rem;
         width: 100%;
+        flex-shrink: 0;
     }
 
     .gv-card-text {
@@ -1042,16 +1007,16 @@ get_template_part('template-parts/cta-banner', null, array(
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-weight: 700;
         color: #363E19;
-        margin: 0 0 0.45rem 0;
+        margin: 0 0 0.35rem 0;
         line-height: 1.2;
     }
 
     .gv-product-card.is-active .gv-card-title {
-        font-size: clamp(1.45rem, 1.8vw, 1.625rem);
+        font-size: clamp(1.4rem, 1.7vw, 1.55rem);
     }
 
     .gv-product-card.is-collapsed .gv-card-title {
-        font-size: 1.35rem;
+        font-size: 1.28rem;
         white-space: nowrap;
     }
 
@@ -1061,21 +1026,21 @@ get_template_part('template-parts/cta-banner', null, array(
     }
 
     .gv-product-card.is-active .gv-card-desc {
-        font-size: 0.875rem;
-        line-height: 1.55;
-        max-width: 300px;
+        font-size: 0.8125rem;
+        line-height: 1.45;
+        max-width: 290px;
     }
 
     .gv-product-card.is-collapsed .gv-card-desc {
-        font-size: 0.8125rem;
-        line-height: 1.45;
+        font-size: 0.775rem;
+        line-height: 1.38;
         max-width: 175px;
     }
 
     /* Cross-fade Action Buttons (Zero Layout Jumps) */
     .gv-card-actions-slot {
         position: relative;
-        height: 38px;
+        height: 36px;
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -1084,13 +1049,13 @@ get_template_part('template-parts/cta-banner', null, array(
     }
 
     .gv-product-card.is-collapsed .gv-card-actions-slot {
-        min-width: 38px;
-        width: 38px;
+        min-width: 36px;
+        width: 36px;
     }
 
     .gv-product-card.is-active .gv-card-actions-slot {
-        min-width: 110px;
-        width: 110px;
+        min-width: 105px;
+        width: 105px;
     }
 
     .gv-card-btn-detail {
@@ -1103,14 +1068,14 @@ get_template_part('template-parts/cta-banner', null, array(
         pointer-events: none;
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.45rem;
         border: 1px solid #363E19;
         color: #363E19;
         background: transparent !important;
         font-family: var(--font-heading, 'Jost', sans-serif);
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
         font-weight: 600;
-        padding: 0.6rem 1.4rem;
+        padding: 0.55rem 1.25rem;
         border-radius: 2px;
         text-decoration: none;
         white-space: nowrap;
@@ -1124,8 +1089,8 @@ get_template_part('template-parts/cta-banner', null, array(
         transform: translate3d(0, 0, 0);
         transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, background-color 0.2s ease, color 0.2s ease;
         pointer-events: auto;
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
         border: 1px solid #363E19;
         color: #363E19;
         background: transparent !important;
@@ -1134,7 +1099,7 @@ get_template_part('template-parts/cta-banner', null, array(
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         line-height: 1;
     }
 
