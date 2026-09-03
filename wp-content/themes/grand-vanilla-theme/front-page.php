@@ -703,77 +703,111 @@ $gallery_carousel_items = array(
     </div>
 </section>
 
-<!-- 8. Insights Section (Blog Teaser) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<!-- 8. Insights Section (Blog Teaser - Exact Figma UI/UX Static Layout) -->
+<section class="gv-section" style="background-color: #DDE2D9; padding: 6.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
-        <div style="text-align: center; max-width: 680px; margin: 0 auto 3.5rem;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; color: #363E19; font-size: 0.9375rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
-                <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
-                Blog
+        <!-- Header Split (Left Tag & Title, Right Description) -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; gap: 2rem; flex-wrap: wrap;">
+            <div>
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                    <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                    Blog
+                </div>
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #363E19; line-height: 1.15; margin: 0;">
+                    Insights From The World<br>Of Vanilla
+                </h2>
             </div>
-            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 0.75rem;">
-                Insights From The World Of Vanilla
-            </h2>
-            <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin: 0;">
-                Discover insights on Indonesian vanilla, sourcing, quality, industry trends, and applications.
-            </p>
+            <div style="max-width: 440px;">
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: #716F6E; margin: 0;">
+                    Discover insights on Indonesian vanilla, sourcing, quality, industry trends, and applications.
+                </p>
+            </div>
         </div>
 
-        <!-- 2 Big Article Cards -->
-        <div style="display: flex; flex-direction: column; gap: 1.75rem; margin-bottom: 3.5rem;">
+        <!-- 2 Clean Articles Stack (Exact Figma Layout) -->
+        <div style="display: flex; flex-direction: column; gap: 4.5rem; margin-bottom: 4rem;">
             
-            <!-- Article Card 1 -->
-            <div style="background: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: grid; grid-template-columns: 1fr; gap: 1.75rem; align-items: center;" class="gv-blog-card-split">
-                <div style="position: relative; border-radius: 10px; overflow: hidden; height: 220px;">
-                    <img src="<?php echo esc_url( $img_dir . 'Buat Blog Example 1.png' ); ?>" alt="What Makes Indonesian Vanilla Exceptional?" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; font-size: 2.25rem; font-weight: 800; font-family: var(--font-heading, 'Jost', sans-serif); color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.6);">12/12</span>
+            <!-- Article 1: 12/12 -->
+            <div class="gv-blog-article-row" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: center;">
+                <!-- Left Column: Big Number & Photo -->
+                <div style="position: relative; width: 100%;">
+                    <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(3.75rem, 5.5vw, 4.75rem); font-weight: 700; color: #BAC4B5; line-height: 0.9; margin-bottom: -1rem; position: relative; z-index: 1; letter-spacing: -0.02em; user-select: none;">
+                        12/12
+                    </div>
+                    <div style="position: relative; z-index: 2; border-radius: 0; overflow: hidden; aspect-ratio: 16 / 10; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+                        <img src="<?php echo esc_url( $img_dir . 'Buat Blog Example 1.png' ); ?>" 
+                             alt="What Makes Indonesian Vanilla Exceptional?" 
+                             style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
+                    </div>
                 </div>
-                <div>
-                    <span style="font-size: 0.75rem; color: #363E19; font-weight: 700; text-transform: uppercase; font-family: var(--font-heading, 'Jost', sans-serif); display: block; margin-bottom: 0.5rem;">Vanilla Guide</span>
-                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.5rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
-                        <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" style="color: #363E19; text-decoration: none;">
+
+                <!-- Right Column: Details & Underline Link -->
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <div style="display: flex; align-items: center; gap: 0.65rem; color: #363E19; font-size: 0.8125rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
+                        <span style="display: inline-block; width: 22px; height: 1.5px; background: #363E19;"></span>
+                        Vanilla Guide
+                    </div>
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 700; color: #363E19; margin: 0 0 0.85rem 0; line-height: 1.25;">
+                        <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
                             What Makes Indonesian Vanilla Exceptional?
                         </a>
                     </h3>
-                    <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin-bottom: 1.25rem;">
+                    <p style="font-size: 0.9375rem; color: #716F6E; line-height: 1.65; margin: 0 0 1.5rem 0; max-width: 520px;">
                         Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient for global food industries.
                     </p>
-                    <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" 
-                       style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 4px; text-decoration: none;">
-                        Continue Reading &rarr;
-                    </a>
+                    <div>
+                        <a href="<?php echo esc_url( home_url( '/what-makes-indonesian-vanilla-exceptional/' ) ); ?>" 
+                           style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
+                            Continue Reading &rarr;
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Article Card 2 -->
-            <div style="background: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: grid; grid-template-columns: 1fr; gap: 1.75rem; align-items: center;" class="gv-blog-card-split">
-                <div style="position: relative; border-radius: 10px; overflow: hidden; height: 220px;">
-                    <img src="<?php echo esc_url( $img_dir . 'Buat blog example 2.png' ); ?>" alt="From Vanilla Bean to Global Ingredient" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; font-size: 2.25rem; font-weight: 800; font-family: var(--font-heading, 'Jost', sans-serif); color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.6);">11/12</span>
+            <!-- Article 2: 11/12 -->
+            <div class="gv-blog-article-row" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: center;">
+                <!-- Left Column: Big Number & Photo -->
+                <div style="position: relative; width: 100%;">
+                    <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(3.75rem, 5.5vw, 4.75rem); font-weight: 700; color: #BAC4B5; line-height: 0.9; margin-bottom: -1rem; position: relative; z-index: 1; letter-spacing: -0.02em; user-select: none;">
+                        11/12
+                    </div>
+                    <div style="position: relative; z-index: 2; border-radius: 0; overflow: hidden; aspect-ratio: 16 / 10; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+                        <img src="<?php echo esc_url( $img_dir . 'Buat blog example 2.png' ); ?>" 
+                             alt="From Vanilla Bean to Global Ingredient" 
+                             style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
+                    </div>
                 </div>
-                <div>
-                    <span style="font-size: 0.75rem; color: #363E19; font-weight: 700; text-transform: uppercase; font-family: var(--font-heading, 'Jost', sans-serif); display: block; margin-bottom: 0.5rem;">Vanilla Insight</span>
-                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.5rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
-                        <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" style="color: #363E19; text-decoration: none;">
+
+                <!-- Right Column: Details & Underline Link -->
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <div style="display: flex; align-items: center; gap: 0.65rem; color: #363E19; font-size: 0.8125rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
+                        <span style="display: inline-block; width: 22px; height: 1.5px; background: #363E19;"></span>
+                        Vanilla Insight
+                    </div>
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 700; color: #363E19; margin: 0 0 0.85rem 0; line-height: 1.25;">
+                        <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
                             From Vanilla Bean to Global Ingredient
                         </a>
                     </h3>
-                    <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin-bottom: 1.25rem;">
+                    <p style="font-size: 0.9375rem; color: #716F6E; line-height: 1.65; margin: 0 0 1.5rem 0; max-width: 520px;">
                         Explore how quality vanilla is sourced, processed, and prepared to meet the needs of international B2B buyers.
                     </p>
-                    <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" 
-                       style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 4px; text-decoration: none;">
-                        Continue Reading &rarr;
-                    </a>
+                    <div>
+                        <a href="<?php echo esc_url( home_url( '/from-vanilla-bean-to-global-ingredient/' ) ); ?>" 
+                           style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
+                            Continue Reading &rarr;
+                        </a>
+                    </div>
                 </div>
             </div>
 
         </div>
 
+        <!-- View All Blog Button -->
         <div style="text-align: center;">
             <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" 
-               style="display: inline-flex; align-items: center; gap: 0.5rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
+               style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Blog &rarr;
             </a>
         </div>
@@ -798,6 +832,10 @@ get_template_part( 'template-parts/cta-banner', null, array(
 }
 @media (max-width: 991px) {
     .gv-products-cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    .gv-blog-article-row {
         grid-template-columns: 1fr !important;
         gap: 2rem !important;
     }
