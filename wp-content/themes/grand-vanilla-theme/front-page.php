@@ -502,19 +502,18 @@ $contact = grand_vanilla_get_contact_info();
                     style="width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));">
             </div>
         </div>
-
-        <!-- Who We Serve In Global B2B Markets -->
-        <div>
-            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.5vw, 1.875rem); font-weight: 400; font-style: italic; color: #FFFFFF; text-align: center; margin-bottom: 2.5rem; letter-spacing: 0.02em;">
+        <!-- Who We Serve In Global B2B Markets (Exact Figma 3x2 Grid) -->
+        <div style="margin-top: 2.5rem;">
+            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.6rem, 2.6vw, 1.95rem); font-weight: 600; font-style: italic; color: #FFFFFF; text-align: center; margin-bottom: 2.5rem; letter-spacing: 0.02em;">
                 Who We Serve In Global B2B Markets
             </h3>
 
-            <!-- 6 Grid Cards (3 Columns x 2 Rows) -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+            <!-- 6 Grid Cards (Strictly 3 Columns x 2 Rows on Desktop) -->
+            <div class="gv-who-we-serve-grid">
 
                 <!-- Card 1: IMPORTERS -->
-                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
-                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
+                <div class="gv-who-we-serve-card">
+                    <div class="gv-who-we-serve-icon">
                         <!-- Globe Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -522,89 +521,147 @@ $contact = grand_vanilla_get_contact_info();
                             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                         </svg>
                     </div>
-                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                    <span class="gv-who-we-serve-label">
                         IMPORTERS
                     </span>
                 </div>
 
                 <!-- Card 2: DISTRIBUTORS -->
-                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
-                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
+                <div class="gv-who-we-serve-card">
+                    <div class="gv-who-we-serve-icon">
                         <!-- Truck Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="1" y="3" width="15" height="13" rx="2"></rect>
-                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
                             <circle cx="5.5" cy="18.5" r="2.5"></circle>
                             <circle cx="18.5" cy="18.5" r="2.5"></circle>
                         </svg>
                     </div>
-                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                    <span class="gv-who-we-serve-label">
                         DISTRIBUTORS
                     </span>
                 </div>
 
                 <!-- Card 3: FOOD MANUFACTURERS -->
-                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
-                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
+                <div class="gv-who-we-serve-card">
+                    <div class="gv-who-we-serve-icon">
                         <!-- Factory Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 20h20M5 20V9l5 4V9l5 4V5l5 4v11"></path>
+                            <path d="M2 20h20"></path>
+                            <path d="M5 20V10l5 3V9l5 3V5l5 3v12"></path>
                         </svg>
                     </div>
-                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                    <span class="gv-who-we-serve-label">
                         FOOD MANUFACTURERS
                     </span>
                 </div>
 
                 <!-- Card 4: SPICE TRADERS -->
-                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
-                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
-                        <!-- Chili / Spice Icon -->
+                <div class="gv-who-we-serve-card">
+                    <div class="gv-who-we-serve-icon">
+                        <!-- Spice / Bean Pod Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 3c-1.5 1-2.5 3-2.5 4.5 0 0-4 1-7 4s-4 7-4 7 4 0 7-3 4-7 4-7c1.5 0 3.5-1 4.5-2.5-1-1-2-2-2-3z"></path>
+                            <path d="M6 18l-3 3"></path>
+                            <path d="M17.5 4.5c-3 0-6.5 3-8.5 7.5l-2.5 2.5 3 3 2.5-2.5c4.5-2 7.5-5.5 7.5-8.5a2 2 0 0 0-2-2z"></path>
                         </svg>
                     </div>
-                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                    <span class="gv-who-we-serve-label">
                         SPICE TRADERS
                     </span>
                 </div>
 
                 <!-- Card 5: BAKERIES -->
-                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
-                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
-                        <!-- Croissant / Bakery Icon -->
+                <div class="gv-who-we-serve-card">
+                    <div class="gv-who-we-serve-icon">
+                        <!-- Bakery Croissant / Bread Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 14c2-4 7-6 9-6s7 2 9 6c-2 2-5 3-9 3s-7-1-9-3z"></path>
-                            <path d="M7 11c1-2 3-3 5-3s4 1 5 3"></path>
-                            <path d="M5 14c1 1 2 2 4 2"></path>
-                            <path d="M19 14c-1 1-2 2-4 2"></path>
+                            <path d="M8 12c1.5-1.5 6.5-1.5 8 0"></path>
                         </svg>
                     </div>
-                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                    <span class="gv-who-we-serve-label">
                         BAKERIES
                     </span>
                 </div>
 
                 <!-- Card 6: CONFECTIONERY COMPANIES -->
-                <div style="border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; background: rgba(0,0,0,0.04);">
-                    <div style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.45); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #FFFFFF;">
-                        <!-- Cookie Icon -->
+                <div class="gv-who-we-serve-card">
+                    <div class="gv-who-we-serve-icon">
+                        <!-- Confectionery / Sweets Icon -->
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2a10 10 0 1 0 10 10 3.5 3.5 0 0 1-3.5-3.5 3.5 3.5 0 0 1-3.5-3.5A3.5 3.5 0 0 1 12 2z"></path>
-                            <circle cx="8.5" cy="8.5" r="1" fill="currentColor"></circle>
-                            <circle cx="7.5" cy="14.5" r="1" fill="currentColor"></circle>
-                            <circle cx="14.5" cy="14.5" r="1" fill="currentColor"></circle>
-                            <circle cx="11.5" cy="11.5" r="1" fill="currentColor"></circle>
-                            <circle cx="16.5" cy="9.5" r="1" fill="currentColor"></circle>
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <circle cx="12" cy="8.5" r="1.5" fill="currentColor"></circle>
+                            <circle cx="8.5" cy="14" r="1.5" fill="currentColor"></circle>
+                            <circle cx="15.5" cy="14" r="1.5" fill="currentColor"></circle>
+                            <circle cx="12" cy="12" r="1" fill="currentColor"></circle>
                         </svg>
                     </div>
-                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 700; color: #FFFFFF; letter-spacing: 0.06em; text-transform: uppercase;">
+                    <span class="gv-who-we-serve-label">
                         CONFECTIONERY COMPANIES
                     </span>
                 </div>
 
             </div>
         </div>
+
+        <style>
+        .gv-who-we-serve-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+        .gv-who-we-serve-card {
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.25s ease;
+        }
+        .gv-who-we-serve-card:hover {
+            border-color: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        .gv-who-we-serve-icon {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #FFFFFF;
+            transition: all 0.25s ease;
+        }
+        .gv-who-we-serve-card:hover .gv-who-we-serve-icon {
+            border-color: rgba(255, 255, 255, 0.6);
+            color: #E8D3A2;
+        }
+        .gv-who-we-serve-label {
+            font-family: var(--font-heading, 'Jost', sans-serif);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        @media (max-width: 991px) {
+            .gv-who-we-serve-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .gv-who-we-serve-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        </style>
 
     </div>
 </section>
