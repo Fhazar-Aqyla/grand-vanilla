@@ -117,12 +117,12 @@ $contact = grand_vanilla_get_contact_info();
                      alt="Our Story Jember Facility" 
                      style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
                 
-                <!-- Bottom Floating Dark Text Box -->
-                <div style="position: relative; z-index: 1; background: rgba(10, 8, 4, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 1.75rem 2rem; border-top: 1px solid rgba(255,255,255,0.12);">
-                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">
+                <!-- Bottom Floating Dark Text Box (Softened & Transparent) -->
+                <div style="position: relative; z-index: 1; background: linear-gradient(to top, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.18) 65%, transparent 100%); padding: 3rem 2rem 1.75rem;">
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.35rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.65rem; text-shadow: 0 2px 8px rgba(0,0,0,0.75);">
                         Our Story
                     </h3>
-                    <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.88); line-height: 1.6; margin: 0;">
+                    <p style="font-size: 0.84rem; color: rgba(255,255,255,0.95); line-height: 1.65; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.7);">
                         Grand Vanilla Indonesia was founded in 2019 in Jember, East Java, with a simple goal: to bring Indonesia's rich vanilla resources to a wider global market. Starting from local vanilla sourcing and small-scale supply, the company gradually expanded its network and began serving wholesale and international B2B buyers.
                     </p>
                 </div>
