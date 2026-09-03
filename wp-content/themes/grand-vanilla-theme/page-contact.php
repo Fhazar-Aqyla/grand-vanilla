@@ -160,7 +160,7 @@ $contact = grand_vanilla_get_contact_info();
 <style>
 /* ── Contact Section ─────────────────────────────────── */
 .gv-contact-section {
-    background: #e8e8df;
+    background: #E1E2DD;
     padding: 5rem 0;
 }
 
@@ -446,7 +446,7 @@ $contact = grand_vanilla_get_contact_info();
 
 <style>
 .gv-map-section {
-    background: #e8e8df;
+    background: #E1E2DD;
 }
 
 .gv-map-header {

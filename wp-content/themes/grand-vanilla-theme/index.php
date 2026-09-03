@@ -233,7 +233,7 @@ $filter_categories = array(
 <style>
 /* ── Blog Archive Section ─────────────────────────────── */
 .gv-blog-archive-section {
-    background: #e8e8df;
+    background: #E1E2DD;
     padding: 5rem 0 6rem;
 }
 

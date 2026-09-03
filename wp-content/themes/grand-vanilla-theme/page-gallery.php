@@ -45,7 +45,7 @@ if ( $gallery_carousel_query->have_posts() ) {
 </section>
 
 <!-- 2. A Closer Look — Carousel (Dynamic WP_Query) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; overflow: hidden;">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 6rem 0; overflow: hidden;">
     <div class="gv-container">
 
         <!-- Header Split (Left Title, Right Description) — identical to homepage -->
@@ -107,7 +107,7 @@ if ( $gallery_carousel_query->have_posts() ) {
 </section>
 
 <!-- 3. Explore More Gallery (Interactive Tabs & Grid - Dynamic WP_Query) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 4rem 0 6rem; border-top: 1px solid rgba(0,0,0,0.04);">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 4rem 0 6rem; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
 
         <div style="margin-bottom: 2rem;">
@@ -260,7 +260,7 @@ if ( $gallery_carousel_query->have_posts() ) {
     width: 100%;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    background: #DDE2D9;
+    background: #E1E2DD;
 }
 
 .gv-gallery-explore-img {

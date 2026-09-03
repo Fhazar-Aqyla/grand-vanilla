@@ -20,7 +20,7 @@ Tags: custom-theme, b2b, vanilla-exporter, corporate, clean, responsive
     --color-dark-khaki: #363E19;
     --color-dark-khaki-hover: #2a3113;
     --color-pitch-black: #0A0804;
-    --color-parchment: #FBF7F4;
+    --color-parchment: #E1E2DD;
     --color-warm-sand: #F3ECE6;
     --color-warm-sand-alt: #EBE4DD;
     --color-white: #FFFFFF;
@@ -155,11 +155,13 @@ ul {
 .gv-section {
     padding-top: var(--space-72);
     padding-bottom: var(--space-72);
+    background-color: var(--color-parchment);
 }
 
 .gv-section-sm {
     padding-top: var(--space-48);
     padding-bottom: var(--space-48);
+    background-color: var(--color-parchment);
 }
 
 .gv-section-tag {

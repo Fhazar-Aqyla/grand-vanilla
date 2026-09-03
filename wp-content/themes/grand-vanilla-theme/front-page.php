@@ -107,7 +107,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 2. About Us Section (Sage Green Canvas with Orchid Watermark) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0;">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 6rem 0;">
     <div class="gv-container">
         <div style="display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center;" class="gv-grid-split-about">
 
@@ -175,7 +175,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 3. Premium Products Section (Exact Figma UI/UX Alignment) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
 
         <!-- Header Split -->
@@ -316,7 +316,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 4. Value Propositions (4 White Cards with Exact SVG Icons - NO EMOJIS) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
 
         <div style="text-align: center; max-width: 700px; margin: 0 auto 4rem;">
@@ -401,7 +401,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 5. Flexible Vanilla Supply & Special OEM Section -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
 
         <div style="display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center;" class="gv-grid-split-oem">
@@ -668,7 +668,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 7. Gallery Section (Exact Figma Carousel Slider) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04); overflow: hidden;">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04); overflow: hidden;">
     <div class="gv-container">
 
         <!-- Header Split (Left Title, Right Description) -->
@@ -763,7 +763,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 8. Insights Section (Blog Teaser - Exact Figma UI/UX Static Layout) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 6.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
 
         <!-- Header Split (Left Tag & Title, Right Description) -->

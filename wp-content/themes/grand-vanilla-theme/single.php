@@ -540,7 +540,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     overflow: hidden;
     aspect-ratio: 16 / 10;
     border-radius: 0;
-    background: #DDE2D9;
+    background: #E1E2DD;
 }
 
 .gv-detail-more-img {

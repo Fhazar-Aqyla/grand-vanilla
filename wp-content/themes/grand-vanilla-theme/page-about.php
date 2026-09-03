@@ -21,7 +21,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 2. Section: About Overview (Grand Vanilla Indonesia) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 5.5rem 0;">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 5.5rem 0;">
     <div class="gv-container">
         <div class="gv-about-overview-grid" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 3.5rem; align-items: stretch;">
             
@@ -91,7 +91,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 3. Section: Our Journey And Purpose -->
-<section id="journey" class="gv-section" style="background-color: #DDE2D9; padding: 5.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<section id="journey" class="gv-section" style="background-color: #E1E2DD; padding: 5.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
         <!-- Header Split (Title on Left, Description on Right) -->
@@ -159,7 +159,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 4. Section: Your Trusted Partner For Quality Indonesian Vanilla (Value Propositions) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 5.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 5.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
         <!-- Header Centered -->
@@ -314,7 +314,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 6. Section: What Is Our Export Capability? (4 Clean White Cards with SVG Vector Icons) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0;">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 6rem 0;">
     <div class="gv-container">
         
         <!-- Header Centered -->
@@ -403,7 +403,7 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 7. Section: Our Facilities (Consistent with Products 'Explore More Products' Architecture) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<section class="gv-section" style="background-color: #E1E2DD; padding: 6.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
         <!-- Header Split (Consistent across theme) -->
