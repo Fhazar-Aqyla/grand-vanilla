@@ -1,6 +1,7 @@
 <?php
 /**
  * The main template file (Blog Archive)
+ * CMS-driven via WordPress Posts & Categories
  *
  * @package GrandVanilla
  */
@@ -9,6 +10,44 @@ get_header();
 
 $img_dir = get_template_directory_uri() . '/assets/images/';
 $contact = grand_vanilla_get_contact_info();
+
+// ── Filter & Pagination ───────────────────────────────
+$active_filter = isset( $_GET['blog_cat'] ) ? sanitize_text_field( wp_unslash( $_GET['blog_cat'] ) ) : 'all';
+$posts_per_page = 4;
+$current_page   = max( 1, isset( $_GET['blog_page'] ) ? absint( $_GET['blog_page'] ) : 1 );
+
+$query_args = array(
+    'post_type'      => 'post',
+    'post_status'    => 'publish',
+    'posts_per_page' => $posts_per_page,
+    'offset'         => ( $current_page - 1 ) * $posts_per_page,
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+);
+
+if ( $active_filter !== 'all' ) {
+    $query_args['category_name'] = $active_filter;
+}
+
+$blog_query  = new WP_Query( $query_args );
+$total_posts = $blog_query->found_posts;
+$total_pages = (int) ceil( $total_posts / $posts_per_page );
+
+// Build base URL for pagination/filter links
+$base_url = get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/' );
+
+// Fallback images (alternates when no featured image set)
+$fallback_imgs = array(
+    $img_dir . 'Buat Blog Example 1.png',
+    $img_dir . 'Buat blog example 2.png',
+);
+
+// Categories for filter tabs
+$filter_categories = array(
+    array( 'slug' => 'vanilla-guide',   'label' => 'Vanilla Guide' ),
+    array( 'slug' => 'vanilla-insight', 'label' => 'Vanilla Insight' ),
+    array( 'slug' => 'global-market',   'label' => 'Global Market' ),
+);
 ?>
 
 <!-- 1. Hero Section -->
@@ -37,98 +76,156 @@ $contact = grand_vanilla_get_contact_info();
             </div>
         </div>
 
-        <!-- Filter Tabs -->
-        <div class="gv-blog-tabs" id="gv-blog-tabs">
-            <button type="button" class="gv-blog-tab active" data-filter="all">All Blogs</button>
-            <button type="button" class="gv-blog-tab" data-filter="guide">Vanilla Guide</button>
-            <button type="button" class="gv-blog-tab" data-filter="insight">Vanilla Insight</button>
-            <button type="button" class="gv-blog-tab" data-filter="market">Global Market</button>
+        <!-- Filter Tabs (link-based, CMS-friendly) -->
+        <div class="gv-blog-tabs">
+            <a href="<?php echo esc_url( $base_url ); ?>"
+               class="gv-blog-tab <?php echo $active_filter === 'all' ? 'active' : ''; ?>">
+                All Blogs
+            </a>
+            <?php foreach ( $filter_categories as $fc ) : ?>
+            <a href="<?php echo esc_url( add_query_arg( 'blog_cat', $fc['slug'], $base_url ) ); ?>"
+               class="gv-blog-tab <?php echo $active_filter === $fc['slug'] ? 'active' : ''; ?>">
+                <?php echo esc_html( $fc['label'] ); ?>
+            </a>
+            <?php endforeach; ?>
         </div>
 
         <!-- Blog Articles List -->
         <div class="gv-blog-list" id="gv-blog-list">
 
-            <?php
-            $articles_list = array(
-                array(
-                    'badge'  => '12/12',
-                    'cat'    => 'Vanilla Guide',
-                    'filter' => 'guide',
-                    'title'  => 'What Makes Indonesian Vanilla Exceptional?',
-                    'desc'   => 'Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient for global food industries.',
-                    'img'    => 'Buat Blog Example 1.png',
-                    'slug'   => 'what-makes-indonesian-vanilla-exceptional',
-                ),
-                array(
-                    'badge'  => '11/12',
-                    'cat'    => 'Vanilla Insight',
-                    'filter' => 'insight',
-                    'title'  => 'From Vanilla Bean to Global Ingredient',
-                    'desc'   => 'Explore how quality vanilla is sourced, processed, and prepared to meet the needs of international B2B buyers.',
-                    'img'    => 'Buat blog example 2.png',
-                    'slug'   => 'from-vanilla-bean-to-global-ingredient',
-                ),
-                array(
-                    'badge'  => '10/12',
-                    'cat'    => 'Vanilla Guide',
-                    'filter' => 'guide',
-                    'title'  => 'The Science of Traditional Sun Curing in Indonesian Agroforestry',
-                    'desc'   => 'How temperature-controlled wooden sweat boxes and natural sun drying optimize natural vanillin hydrolyzation without chemical accelerators.',
-                    'img'    => 'Buat Blog Example 1.png',
-                    'slug'   => 'the-science-of-traditional-sun-curing-in-indonesian-agroforestry',
-                ),
-                array(
-                    'badge'  => '09/12',
-                    'cat'    => 'Global Market',
-                    'filter' => 'market',
-                    'title'  => 'FOB vs. CIF Shipping: Sourcing Vanilla Beans Directly from Indonesia',
-                    'desc'   => 'A complete logistical guide for spice importers navigating phytosanitary quarantine clearance, airway bills, and vacuum packaging standards.',
-                    'img'    => 'Buat blog example 2.png',
-                    'slug'   => 'fob-vs-cif-shipping-sourcing-vanilla-beans-directly-from-indonesia',
-                ),
-            );
+            <?php if ( $blog_query->have_posts() ) :
+                $post_index = 0;
+                while ( $blog_query->have_posts() ) :
+                    $blog_query->the_post();
 
-            foreach ( $articles_list as $i => $art ) :
-                ?>
-                <div class="gv-blog-item" data-cat="<?php echo esc_attr( $art['filter'] ); ?>">
-                    <!-- Badge number above the image row -->
-                    <span class="gv-blog-badge"><?php echo esc_html( $art['badge'] ); ?></span>
+                    // Badge: counts down from total (e.g. "12/12")
+                    $global_index   = ( $current_page - 1 ) * $posts_per_page + $post_index;
+                    $badge_current  = str_pad( $total_posts - $global_index, 2, '0', STR_PAD_LEFT );
+                    $badge_total    = str_pad( $total_posts, 2, '0', STR_PAD_LEFT );
+                    $badge          = $badge_current . '/' . $badge_total;
 
-                    <!-- Image + Content row -->
-                    <div class="gv-blog-row">
-                        <div class="gv-blog-img-wrap">
-                            <img
-                                src="<?php echo esc_url( $img_dir . $art['img'] ); ?>"
-                                alt="<?php echo esc_attr( $art['title'] ); ?>"
-                                class="gv-blog-img"
-                                loading="lazy"
-                            >
-                        </div>
+                    // Featured image or fallback
+                    if ( has_post_thumbnail() ) {
+                        $img_src = get_the_post_thumbnail_url( null, 'large' );
+                    } else {
+                        $img_src = $fallback_imgs[ $post_index % 2 ];
+                    }
 
-                        <div class="gv-blog-content">
-                            <span class="gv-blog-cat-tag">
-                                <span class="gv-blog-cat-line"></span>
-                                <?php echo esc_html( $art['cat'] ); ?>
-                            </span>
-                            <h3 class="gv-blog-title">
-                                <a href="<?php echo esc_url( home_url( '/' . $art['slug'] . '/' ) ); ?>">
-                                    <?php echo esc_html( $art['title'] ); ?>
+                    // Category (first category)
+                    $cats     = get_the_category();
+                    $cat_name = ! empty( $cats ) ? $cats[0]->name : 'Blog';
+
+                    $post_index++;
+                    ?>
+                    <div class="gv-blog-item">
+                        <!-- Badge number -->
+                        <span class="gv-blog-badge"><?php echo esc_html( $badge ); ?></span>
+
+                        <!-- Image + Content row -->
+                        <div class="gv-blog-row">
+                            <div class="gv-blog-img-wrap">
+                                <img
+                                    src="<?php echo esc_url( $img_src ); ?>"
+                                    alt="<?php echo esc_attr( get_the_title() ); ?>"
+                                    class="gv-blog-img"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="gv-blog-content">
+                                <span class="gv-blog-cat-tag">
+                                    <span class="gv-blog-cat-line"></span>
+                                    <?php echo esc_html( $cat_name ); ?>
+                                </span>
+                                <h3 class="gv-blog-title">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php the_title(); ?>
+                                    </a>
+                                </h3>
+                                <p class="gv-blog-excerpt">
+                                    <?php echo wp_trim_words( get_the_excerpt(), 28, '...' ); ?>
+                                </p>
+                                <a href="<?php the_permalink(); ?>" class="gv-blog-readmore">
+                                    Continue Reading &nbsp;&rarr;
                                 </a>
-                            </h3>
-                            <p class="gv-blog-excerpt">
-                                <?php echo esc_html( $art['desc'] ); ?>
-                            </p>
-                            <a href="<?php echo esc_url( home_url( '/' . $art['slug'] . '/' ) ); ?>" class="gv-blog-readmore">
-                                Continue Reading &nbsp;&rarr;
-                            </a>
+                            </div>
                         </div>
                     </div>
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+
+            else : ?>
+                <div class="gv-blog-empty">
+                    <p>No articles found in this category yet. Check back soon!</p>
                 </div>
-                <?php
+            <?php endif; ?>
+
+        </div><!-- /.gv-blog-list -->
+
+        <!-- Pagination -->
+        <?php if ( $total_pages > 1 ) : ?>
+        <nav class="gv-blog-pagination" aria-label="Blog pagination">
+
+            <?php
+            // Build prev/next & page links
+            $prev_page = $current_page - 1;
+            $next_page = $current_page + 1;
+
+            function gv_page_url( $page, $base_url, $active_filter ) {
+                $args = array( 'blog_page' => $page );
+                if ( $active_filter !== 'all' ) {
+                    $args['blog_cat'] = $active_filter;
+                }
+                return add_query_arg( $args, $base_url );
+            }
+
+            $prev_svg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>';
+            $next_svg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+            ?>
+
+            <!-- Prev -->
+            <?php if ( $current_page > 1 ) : ?>
+                <a href="<?php echo esc_url( gv_page_url( $prev_page, $base_url, $active_filter ) ); ?>" class="gv-page-btn" aria-label="Previous page"><?php echo $prev_svg; ?></a>
+            <?php else : ?>
+                <span class="gv-page-btn" style="opacity:.35; cursor:not-allowed;"><?php echo $prev_svg; ?></span>
+            <?php endif; ?>
+
+            <!-- Page numbers -->
+            <?php
+            $page_range = array();
+            if ( $total_pages <= 7 ) {
+                $page_range = range( 1, $total_pages );
+            } else {
+                $page_range[] = 1;
+                if ( $current_page > 3 ) { $page_range[] = '...'; }
+                for ( $p = max( 2, $current_page - 1 ); $p <= min( $total_pages - 1, $current_page + 1 ); $p++ ) {
+                    $page_range[] = $p;
+                }
+                if ( $current_page < $total_pages - 2 ) { $page_range[] = '...'; }
+                $page_range[] = $total_pages;
+            }
+
+            foreach ( $page_range as $p ) :
+                if ( $p === '...' ) : ?>
+                    <span class="gv-page-dots">...</span>
+                <?php elseif ( $p === $current_page ) : ?>
+                    <span class="gv-page-btn active" aria-current="page"><?php echo esc_html( $p ); ?></span>
+                <?php else : ?>
+                    <a href="<?php echo esc_url( gv_page_url( $p, $base_url, $active_filter ) ); ?>" class="gv-page-btn" aria-label="Page <?php echo esc_attr( $p ); ?>"><?php echo esc_html( $p ); ?></a>
+                <?php endif;
             endforeach;
             ?>
 
-        </div><!-- /.gv-blog-list -->
+            <!-- Next -->
+            <?php if ( $current_page < $total_pages ) : ?>
+                <a href="<?php echo esc_url( gv_page_url( $next_page, $base_url, $active_filter ) ); ?>" class="gv-page-btn" aria-label="Next page"><?php echo $next_svg; ?></a>
+            <?php else : ?>
+                <span class="gv-page-btn" style="opacity:.35; cursor:not-allowed;"><?php echo $next_svg; ?></span>
+            <?php endif; ?>
+
+        </nav>
+        <?php endif; ?>
 
     </div><!-- /.gv-container -->
 </section>
@@ -217,7 +314,10 @@ $contact = grand_vanilla_get_contact_info();
     font-weight: 600;
     color: var(--color-dark-khaki);
     cursor: pointer;
+    text-decoration: none;
     transition: background 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
 }
 
 .gv-blog-tab:hover,
@@ -231,6 +331,14 @@ $contact = grand_vanilla_get_contact_info();
     display: flex;
     flex-direction: column;
     gap: 0;
+}
+
+/* Empty state */
+.gv-blog-empty {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--color-nw-500);
+    font-size: 1rem;
 }
 
 /* Individual item */
@@ -355,27 +463,62 @@ $contact = grand_vanilla_get_contact_info();
 .gv-blog-readmore:hover {
     color: var(--color-dark-khaki-hover);
 }
+
+/* ── Pagination ─────────────────────────────────────── */
+.gv-blog-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.gv-page-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 0.625rem;
+    border: 1.5px solid var(--color-dark-khaki);
+    border-radius: var(--radius-4);
+    background: transparent;
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-dark-khaki);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    user-select: none;
+    line-height: 1;
+}
+
+.gv-page-btn:hover {
+    background: rgba(54,62,25,0.08);
+    transform: translateY(-1px);
+}
+
+.gv-page-btn.active {
+    background: var(--color-dark-khaki);
+    color: #fff;
+    pointer-events: none;
+}
+
+.gv-page-dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--color-nw-500);
+    pointer-events: none;
+    user-select: none;
+}
 </style>
-
-<script>
-document.querySelectorAll('#gv-blog-tabs .gv-blog-tab').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('#gv-blog-tabs .gv-blog-tab').forEach(function(b) {
-            b.classList.remove('active');
-        });
-        btn.classList.add('active');
-
-        var filter = btn.getAttribute('data-filter');
-        document.querySelectorAll('#gv-blog-list .gv-blog-item').forEach(function(card) {
-            if (filter === 'all' || card.getAttribute('data-cat') === filter) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    });
-});
-</script>
 
 <!-- 3. CTA Banner -->
 <?php
