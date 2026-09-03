@@ -106,40 +106,40 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Applications Section (What Can It Be Used For?) -->
-        <div style="margin-bottom: 5rem;">
-            <div style="text-align: center; margin-bottom: 3rem;">
+        <div class="gv-applications-section" style="margin-bottom: 5rem;">
+            <div class="gv-applications-header" style="text-align: center; margin-bottom: 3rem;">
                 <span class="gv-section-tag" style="justify-content: center;">Applications</span>
                 <h2 style="font-size: 2.25rem; font-weight: 800;">What Can It Be Used For?</h2>
             </div>
 
-            <div class="gv-grid-3">
-                <div class="gv-card" style="padding: 1.75rem; text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">1</div>
+            <div class="gv-grid-3 gv-applications-grid">
+                <div class="gv-card gv-app-card" style="padding: 1.75rem; text-align: center;">
+                    <div class="gv-app-num" style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">1</div>
                     <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Bakery</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">Adds rich vanilla aroma and flavor to cakes, pastries, and baked goods.</p>
                 </div>
-                <div class="gv-card" style="padding: 1.75rem; text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">2</div>
+                <div class="gv-card gv-app-card" style="padding: 1.75rem; text-align: center;">
+                    <div class="gv-app-num" style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">2</div>
                     <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Beverage</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">Used to enhance the aroma and flavor of coffee, drinks, and specialty beverages.</p>
                 </div>
-                <div class="gv-card" style="padding: 1.75rem; text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">3</div>
+                <div class="gv-card gv-app-card" style="padding: 1.75rem; text-align: center;">
+                    <div class="gv-app-num" style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">3</div>
                     <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Confectionery</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">Suitable for chocolates, candies, and other sweet confectionery products.</p>
                 </div>
-                <div class="gv-card" style="padding: 1.75rem; text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">4</div>
+                <div class="gv-card gv-app-card" style="padding: 1.75rem; text-align: center;">
+                    <div class="gv-app-num" style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">4</div>
                     <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Dairy</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">Provides a natural vanilla profile for ice cream, yogurt, milk, and dairy-based products.</p>
                 </div>
-                <div class="gv-card" style="padding: 1.75rem; text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">5</div>
+                <div class="gv-card gv-app-card" style="padding: 1.75rem; text-align: center;">
+                    <div class="gv-app-num" style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">5</div>
                     <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Food Manufacturing</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">Suitable as a natural vanilla ingredient for various processed food applications.</p>
                 </div>
-                <div class="gv-card" style="padding: 1.75rem; text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">6</div>
+                <div class="gv-card gv-app-card" style="padding: 1.75rem; text-align: center;">
+                    <div class="gv-app-num" style="font-size: 1.5rem; font-weight: 800; color: var(--color-dark-khaki); font-family: var(--font-heading); margin-bottom: 0.5rem;">6</div>
                     <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Perfume & Fragrance</h3>
                     <p style="font-size: 0.8125rem; color: var(--color-nw-500); line-height: 1.6;">Used to add warm, sweet, and distinctive vanilla notes to perfumes and fragrance.</p>
                 </div>
@@ -158,41 +158,41 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 
         if ( $other_products_query->have_posts() ) :
         ?>
-        <div style="margin-bottom: 3.5rem;">
-            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 2.5rem;">Explore More Products</h2>
+        <div class="gv-explore-more-section" style="margin-bottom: 3.5rem;">
+            <h2 class="gv-explore-title" style="font-size: 2rem; font-weight: 800; margin-bottom: 2.5rem;">Explore More Products</h2>
 
-            <div style="display: flex; flex-direction: column; gap: 3rem; margin-bottom: 3rem;">
+            <div class="gv-explore-rows" style="display: flex; flex-direction: column; gap: 3rem; margin-bottom: 3rem;">
                 <?php
                 $o_idx = 0;
                 while ( $other_products_query->have_posts() ) :
                     $other_products_query->the_post();
                     $o_idx++;
                     $is_rev    = ( $o_idx % 2 === 0 );
-                    $row_class = $is_rev ? 'gv-product-row-reverse' : 'gv-product-row';
+                    $row_class = $is_rev ? 'gv-explore-row gv-explore-row-reverse' : 'gv-explore-row';
                     $o_img     = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Product Unggulan 1.png';
                 ?>
                     <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center;" class="<?php echo esc_attr( $row_class ); ?>">
                         <?php if ( $is_rev ) : ?>
-                            <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
-                                <img src="<?php echo esc_url( $o_img ); ?>" alt="<?php the_title(); ?>" style="width: 100%; height: auto; object-fit: cover;">
+                            <div class="gv-explore-img-card">
+                                <img src="<?php echo esc_url( $o_img ); ?>" alt="<?php the_title(); ?>" class="gv-explore-img" style="width: 100%; height: auto; object-fit: cover;">
                             </div>
-                            <div>
-                                <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;"><?php the_title(); ?></h3>
-                                <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
+                            <div class="gv-explore-text-col">
+                                <h3 class="gv-explore-item-title" style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;"><?php the_title(); ?></h3>
+                                <p class="gv-explore-item-desc" style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
                                     <?php echo esc_html( get_the_excerpt() ); ?>
                                 </p>
-                                <a href="<?php the_permalink(); ?>" class="gv-btn gv-btn-outline gv-btn-sm">Detail &rarr;</a>
+                                <a href="<?php the_permalink(); ?>" class="gv-btn gv-btn-outline gv-btn-sm gv-explore-btn">Detail &rarr;</a>
                             </div>
                         <?php else : ?>
-                            <div>
-                                <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;"><?php the_title(); ?></h3>
-                                <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
+                            <div class="gv-explore-text-col">
+                                <h3 class="gv-explore-item-title" style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;"><?php the_title(); ?></h3>
+                                <p class="gv-explore-item-desc" style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
                                     <?php echo esc_html( get_the_excerpt() ); ?>
                                 </p>
-                                <a href="<?php the_permalink(); ?>" class="gv-btn gv-btn-outline gv-btn-sm">Detail &rarr;</a>
+                                <a href="<?php the_permalink(); ?>" class="gv-btn gv-btn-outline gv-btn-sm gv-explore-btn">Detail &rarr;</a>
                             </div>
-                            <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
-                                <img src="<?php echo esc_url( $o_img ); ?>" alt="<?php the_title(); ?>" style="width: 100%; height: auto; object-fit: cover;">
+                            <div class="gv-explore-img-card">
+                                <img src="<?php echo esc_url( $o_img ); ?>" alt="<?php the_title(); ?>" class="gv-explore-img" style="width: 100%; height: auto; object-fit: cover;">
                             </div>
                         <?php endif; ?>
                     </div>

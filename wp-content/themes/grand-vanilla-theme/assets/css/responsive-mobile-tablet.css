@@ -1,0 +1,829 @@
+/*
+ * =====================================================================
+ * Grand Vanilla ID — Responsive UI Refinement
+ * Mobile (≤ 767px) & Tablet (768px–1024px) breakpoints only.
+ * Desktop/Laptop (≥ 1025px) is STRICTLY FROZEN.
+ * Source of truth: Reference PDFs (Mobile/ and Tablet/ directories).
+ * =====================================================================
+ */
+
+/* =====================================================================
+   1. GLOBAL CONTAINER & OVERFLOW PROTECTION
+   ===================================================================== */
+@media (max-width: 1024px) {
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
+    #page, .site, .site-main, .gv-header {
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .gv-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    img:not(.gv-header-logo-img):not(.gv-footer-logo-img) {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Brand Logo Constraints for Mobile & Tablet */
+    .gv-header-logo-img,
+    .gv-brand-logo img {
+        height: 30px !important;
+        max-height: 30px !important;
+        width: auto !important;
+        max-width: 140px !important;
+        object-fit: contain !important;
+        display: block !important;
+    }
+
+    .gv-footer-logo-img,
+    .gv-footer-logo-wrap img {
+        height: 34px !important;
+        max-height: 34px !important;
+        width: auto !important;
+        max-width: 155px !important;
+        object-fit: contain !important;
+        display: block !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .gv-container {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+    }
+    .gv-section {
+        padding-top: 3.5rem !important;
+        padding-bottom: 3.5rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-container {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+    .gv-section {
+        padding-top: 4.5rem !important;
+        padding-bottom: 4.5rem !important;
+    }
+}
+
+/* =====================================================================
+   2. HEADER / NAVIGATION
+   PDF: Mobile + Tablet both show hamburger menu, no desktop nav bar.
+   ===================================================================== */
+@media (max-width: 1024px) {
+    #site-navigation { display: none !important; }
+    .gv-nav-cta-wrap { display: none !important; }
+    #gv-mobile-btn { 
+        display: inline-flex !important; 
+        align-items: center !important; 
+        justify-content: center !important;
+        cursor: pointer !important;
+    }
+    .gv-mobile-drawer {
+        background-color: #FAF8F5 !important;
+        border-top: 1px solid rgba(0,0,0,0.06) !important;
+    }
+}
+
+@media (min-width: 1025px) {
+    #site-navigation { display: flex !important; }
+    .gv-nav-cta-wrap { display: flex !important; }
+    #gv-mobile-btn { display: none !important; }
+}
+
+/* =====================================================================
+   3. HERO PAGES (Inner Pages: About, Products, Gallery, Blog, Contact)
+   ===================================================================== */
+@media (max-width: 767px) {
+    .gv-hero-page {
+        padding: 4.5rem 1.25rem !important;
+        min-height: 220px !important;
+    }
+    .gv-hero-tag {
+        font-size: 2rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    .gv-hero-subtag {
+        font-size: 0.9375rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-hero-page {
+        padding: 5.5rem 2rem !important;
+        min-height: 250px !important;
+    }
+    .gv-hero-tag {
+        font-size: 2.35rem !important;
+    }
+    .gv-hero-subtag {
+        font-size: 1rem !important;
+    }
+}
+
+/* =====================================================================
+   4. LANDING PAGE — HERO SECTION
+   PDF Mobile: Full-height dark overlay, headline uppercase, side-by-side buttons.
+   PDF Tablet: Left-aligned, side-by-side buttons.
+   ===================================================================== */
+@media (max-width: 767px) {
+    .gv-hero {
+        min-height: 100svh !important;
+        min-height: 100vh !important;
+        padding: 5rem 0 4rem !important;
+        background-position: center center !important;
+    }
+
+    .gv-hero > div:first-child {
+        background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.5) 0%,
+            rgba(0,0,0,0.32) 50%,
+            rgba(0,0,0,0.18) 100%
+        ) !important;
+    }
+
+    .gv-hero h1 {
+        font-size: 1.85rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.02em !important;
+        line-height: 1.2 !important;
+        font-weight: 700 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .gv-hero p {
+        font-size: 0.9375rem !important;
+        margin-bottom: 1.75rem !important;
+        max-width: 100% !important;
+    }
+
+    .gv-hero > .gv-container > div > div[style*="display: flex; gap: 1rem"] {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.65rem !important;
+        margin-bottom: 2.25rem !important;
+        width: 100% !important;
+    }
+
+    .gv-hero-btn-primary,
+    .gv-hero-btn-outline {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 0.75rem 0.5rem !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.04em !important;
+        text-transform: uppercase !important;
+        white-space: nowrap !important;
+        box-sizing: border-box !important;
+    }
+
+    .gv-trusted-badge {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0.85rem 1.15rem !important;
+    }
+
+    .gv-trusted-badge span[style*="font-size: 2.25rem"] {
+        font-size: 1.65rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-hero {
+        min-height: 75vh !important;
+        padding: 6rem 0 5rem !important;
+    }
+
+    .gv-hero h1 {
+        font-size: clamp(2rem, 3.8vw, 2.75rem) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.02em !important;
+        line-height: 1.2 !important;
+    }
+
+    .gv-trusted-badge {
+        width: 360px !important;
+    }
+}
+
+/* =====================================================================
+   5. ABOUT US SECTION (Landing Page & About Page Overview)
+   PDF Mobile & Tablet: Dark khaki container with white text and
+   bordered feature boxes.
+   ===================================================================== */
+@media (max-width: 1024px) {
+    .gv-grid-split-about > div:last-child,
+    .gv-about-overview-grid > div:last-child {
+        background-color: #363E19 !important;
+        border-radius: 12px !important;
+        padding: 2.25rem 1.5rem !important;
+        color: #FFFFFF !important;
+        box-sizing: border-box !important;
+    }
+
+    .gv-grid-split-about > div:last-child h2,
+    .gv-about-overview-grid > div:last-child h2 {
+        color: #FFFFFF !important;
+    }
+
+    .gv-grid-split-about > div:last-child p,
+    .gv-about-overview-grid > div:last-child p {
+        color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    .gv-grid-split-about > div:last-child div[style*="color: #363E19; font-size: 0.9375rem"],
+    .gv-about-overview-grid > div:last-child div[style*="color: #363E19; font-size: 0.875rem"] {
+        color: #FFFFFF !important;
+    }
+
+    .gv-grid-split-about > div:last-child div[style*="color: #363E19; font-size: 0.9375rem"] span,
+    .gv-about-overview-grid > div:last-child div[style*="color: #363E19; font-size: 0.875rem"] span {
+        background: #FFFFFF !important;
+    }
+
+    .gv-grid-split-about > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] > div,
+    .gv-about-overview-grid > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] > div {
+        background-color: transparent !important;
+        border: 1px solid rgba(255, 255, 255, 0.28) !important;
+        color: #FFFFFF !important;
+        font-size: 0.75rem !important;
+        padding: 0.75rem 0.5rem !important;
+    }
+
+    .gv-grid-split-about > div:last-child a,
+    .gv-about-overview-grid > div:last-child a {
+        border-color: rgba(255, 255, 255, 0.85) !important;
+        color: #FFFFFF !important;
+    }
+
+    .gv-grid-split-about img[aria-hidden="true"],
+    .gv-about-overview-grid img[aria-hidden="true"] {
+        display: none !important;
+    }
+
+    /* Hide OEM section on homepage (not present in Mobile/Tablet PDF) */
+    .gv-grid-split-oem,
+    section:has(.gv-grid-split-oem) {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .gv-grid-split-about,
+    .gv-about-overview-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    .gv-grid-split-about img[style*="max-height: 540px"],
+    .gv-about-overview-grid img {
+        max-height: 280px !important;
+        height: 280px !important;
+        object-fit: cover !important;
+        border-radius: 12px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-grid-split-about,
+    .gv-about-overview-grid {
+        grid-template-columns: 1fr 1.15fr !important;
+        gap: 2rem !important;
+        align-items: stretch !important;
+    }
+}
+
+/* =====================================================================
+   6. PRODUCT CARDS COMPONENT (Homepage & Products Page)
+   PDF Mobile: 3 cards stacked vertically, each expanded.
+   PDF Tablet: 3 cards horizontal side-by-side matching Tablet PDF.
+   ===================================================================== */
+@media (max-width: 767px) {
+    .gv-products-cards-grid {
+        flex-direction: column !important;
+        gap: 1.25rem !important;
+    }
+
+    .gv-product-card {
+        height: auto !important;
+        min-height: 320px !important;
+        flex: none !important;
+        padding: 1.25rem !important;
+        cursor: default !important;
+        pointer-events: none !important;
+    }
+
+    .gv-product-card a {
+        pointer-events: auto !important;
+    }
+
+    .gv-card-img-wrap {
+        height: 200px !important;
+    }
+
+    .gv-card-img {
+        max-height: 180px !important;
+        max-width: 90% !important;
+    }
+
+    .gv-product-card .gv-card-btn-detail {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translate3d(0,0,0) !important;
+        pointer-events: auto !important;
+    }
+
+    .gv-product-card .gv-card-btn-arrow {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    .gv-product-card .gv-card-actions-slot {
+        min-width: 105px !important;
+        width: 105px !important;
+    }
+
+    .gv-card-title {
+        font-size: 1.25rem !important;
+        white-space: normal !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-products-cards-grid {
+        flex-direction: row !important;
+        gap: 0.75rem !important;
+    }
+
+    .gv-product-card {
+        height: 380px !important;
+        min-height: 380px !important;
+        padding: 1.25rem 1rem !important;
+        box-sizing: border-box !important;
+    }
+
+    .gv-product-card.is-active {
+        flex: 1.75 1 0px !important;
+    }
+
+    .gv-product-card.is-collapsed {
+        flex: 1 1 0px !important;
+    }
+
+    .gv-product-card.is-active .gv-card-img {
+        max-height: 190px !important;
+    }
+
+    .gv-product-card.is-collapsed .gv-card-img {
+        max-height: 170px !important;
+    }
+
+    .gv-product-card.is-active .gv-card-btn-detail {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    .gv-product-card.is-active .gv-card-btn-arrow {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    .gv-product-card.is-collapsed .gv-card-btn-detail {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    .gv-product-card.is-collapsed .gv-card-btn-arrow {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    .gv-product-card .gv-card-actions-slot {
+        min-width: 36px !important;
+    }
+
+    .gv-product-card.is-active .gv-card-actions-slot {
+        min-width: 95px !important;
+        width: 95px !important;
+    }
+}
+
+/* =====================================================================
+   7. VALUE PROPOSITIONS SECTION
+   PDF Mobile: 1-col stacked. PDF Tablet: 2-col (2x2 grid).
+   ===================================================================== */
+@media (max-width: 767px) {
+    div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+    }
+}
+
+/* =====================================================================
+   8. WHO WE SERVE SECTION (FROM INDONESIA TO GLOBAL MARKETS)
+   PDF Mobile: 1 column with black numbered box.
+   PDF Tablet: 2 columns with black numbered box.
+   ===================================================================== */
+@media (max-width: 1024px) {
+    .gv-who-we-serve-grid {
+        counter-reset: who-we-serve-count;
+        gap: 0.85rem !important;
+    }
+    .gv-who-we-serve-card {
+        counter-increment: who-we-serve-count;
+        padding: 0.85rem 1.25rem !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+        border: 1px solid rgba(255, 255, 255, 0.16) !important;
+        border-radius: 6px !important;
+    }
+    .gv-who-we-serve-icon svg {
+        display: none !important;
+    }
+    .gv-who-we-serve-icon {
+        width: 32px !important;
+        height: 32px !important;
+        border: none !important;
+        background: #0E110A !important;
+        border-radius: 4px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .gv-who-we-serve-icon::after {
+        content: counter(who-we-serve-count);
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: #FFFFFF;
+    }
+    .gv-who-we-serve-label {
+        font-size: 0.8125rem !important;
+        letter-spacing: 0.05em !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .gv-who-we-serve-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-who-we-serve-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* =====================================================================
+   9. EXPLORE MORE PRODUCTS (Products Archive & Single Product)
+   PDF Mobile & Tablet: Dark green photo box on top, light sage text box below.
+   ===================================================================== */
+@media (max-width: 1024px) {
+    .gv-explore-more-section .gv-explore-row,
+    .gv-explore-more-section .gv-explore-row.gv-explore-row-reverse,
+    .gv-product-row,
+    .gv-product-row-reverse {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.25rem !important;
+        margin-bottom: 3rem !important;
+    }
+
+    .gv-explore-more-section .gv-explore-img-card,
+    div[style*="display: flex; flex-direction: column; gap: 3rem; margin-bottom: 3rem"] .gv-explore-img-card {
+        order: 1 !important;
+        background-color: #363E19 !important;
+        border-radius: 12px !important;
+        width: 100% !important;
+        aspect-ratio: 1 / 1 !important;
+        padding: 2.5rem !important;
+        box-sizing: border-box !important;
+    }
+
+    .gv-explore-more-section .gv-explore-text-col,
+    div[style*="display: flex; flex-direction: column; gap: 3rem; margin-bottom: 3rem"] .gv-explore-text-col {
+        order: 2 !important;
+        background-color: #BDC4B8 !important;
+        border-radius: 12px !important;
+        padding: 2.25rem 2rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .gv-explore-item-title {
+        font-size: 1.75rem !important;
+        color: #1C230C !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .gv-explore-item-desc {
+        color: #4A5239 !important;
+        margin-bottom: 1.5rem !important;
+        max-width: 100% !important;
+    }
+
+    .gv-explore-btn {
+        border-color: #363E19 !important;
+        color: #363E19 !important;
+        background: transparent !important;
+    }
+}
+
+/* =====================================================================
+   10. ABOUT US PAGE — FACILITIES SECTION
+   PDF Mobile: Stacked (photo top, text below).
+   PDF Tablet: Side-by-side (1fr 1fr).
+   ===================================================================== */
+@media (max-width: 1024px) {
+    .gv-facility-card {
+        background-color: transparent !important;
+        padding: 0 !important;
+        aspect-ratio: auto !important;
+    }
+    .gv-facility-card img {
+        border-radius: 12px !important;
+        width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+    }
+    section:has(.gv-facility-card) .gv-explore-text-col {
+        background-color: transparent !important;
+        padding: 0 !important;
+    }
+}
+
+@media (max-width: 767px) {
+    section:has(.gv-facility-card) .gv-explore-row {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+        margin-bottom: 2.5rem !important;
+    }
+    section:has(.gv-facility-card) .gv-facility-card {
+        order: 1 !important;
+    }
+    section:has(.gv-facility-card) .gv-explore-text-col {
+        order: 2 !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    section:has(.gv-facility-card) .gv-explore-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2.5rem !important;
+        align-items: center !important;
+    }
+    section:has(.gv-facility-card) .gv-explore-row.gv-explore-row-reverse .gv-facility-card {
+        order: 1 !important;
+    }
+    section:has(.gv-facility-card) .gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
+        order: 2 !important;
+    }
+}
+
+/* =====================================================================
+   11. PRODUCT DETAIL PAGE (single-vanilla_product.php)
+   PDF Mobile: Applications stacked 1 col.
+   PDF Tablet: Left title column, right stacked application cards.
+   ===================================================================== */
+@media (max-width: 1024px) {
+    .gv-app-card {
+        background: #FFFFFF !important;
+        border-radius: 8px !important;
+        padding: 1.5rem !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.02) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+    }
+    .gv-app-num {
+        width: 32px !important;
+        height: 32px !important;
+        background: #363E19 !important;
+        color: #FFFFFF !important;
+        font-family: var(--font-heading) !important;
+        font-weight: 700 !important;
+        border-radius: 4px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-bottom: 1rem !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .gv-specs-split {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    .gv-applications-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-specs-split {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+    }
+    .gv-applications-section {
+        display: grid !important;
+        grid-template-columns: 1fr 1.5fr !important;
+        gap: 2.5rem !important;
+    }
+    .gv-applications-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}
+
+/* =====================================================================
+   12. GALLERY PAGE (page-gallery.php)
+   PDF Mobile: 1 column grid.
+   PDF Tablet: 2 columns grid.
+   ===================================================================== */
+@media (max-width: 1024px) {
+    .gv-gallery-tab {
+        font-size: 0.8125rem !important;
+        padding: 0.5rem 1.25rem !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .gv-gallery-explore-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+    .gv-gallery-filter-tabs {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+    .gv-gallery-tab {
+        text-align: center !important;
+        padding: 0.5rem 0.25rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-gallery-explore-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+    }
+}
+
+/* =====================================================================
+   13. BLOG ARCHIVE PAGE (index.php)
+   PDF Mobile: Stacked (large date on top, image below, text below).
+   PDF Tablet: Large date on left, image left, text right (side-by-side).
+   ===================================================================== */
+@media (max-width: 767px) {
+    .gv-blog-tabs {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+    .gv-blog-tab {
+        text-align: center !important;
+        padding: 0.5rem 0.25rem !important;
+        font-size: 0.75rem !important;
+    }
+    .gv-blog-row {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        margin-bottom: 2.5rem !important;
+    }
+    .gv-blog-badge {
+        font-size: 3.5rem !important;
+        margin-bottom: -0.75rem !important;
+    }
+    .gv-blog-img-wrap {
+        aspect-ratio: 16/9 !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-blog-row {
+        grid-template-columns: 2fr 3fr !important;
+        gap: 2rem !important;
+    }
+}
+
+/* =====================================================================
+   14. BLOG DETAIL PAGE (single.php)
+   ===================================================================== */
+@media (max-width: 767px) {
+    .gv-detail-title {
+        font-size: 1.75rem !important;
+        line-height: 1.25 !important;
+    }
+    .gv-detail-featured-wrap {
+        max-height: 260px !important;
+    }
+    .gv-detail-featured-img {
+        max-height: 260px !important;
+        object-fit: cover !important;
+    }
+    .gv-detail-more-row {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-detail-featured-wrap {
+        max-height: 420px !important;
+    }
+    .gv-detail-more-row {
+        grid-template-columns: 5fr 6fr !important;
+        gap: 2rem !important;
+    }
+}
+
+/* =====================================================================
+   15. CONTACT US PAGE (page-contact.php)
+   PDF Mobile & Tablet: 2x2 details grid, form card, map full width.
+   ===================================================================== */
+@media (max-width: 767px) {
+    .gv-contact-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+    }
+    .gv-contact-details {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1.25rem 1.5rem !important;
+    }
+    .gv-contact-form-card {
+        padding: 2rem 1.25rem !important;
+    }
+    .gv-map-wrapper iframe {
+        height: 300px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-contact-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 3rem !important;
+    }
+    .gv-contact-details {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1.5rem 2rem !important;
+    }
+}
+
+/* =====================================================================
+   16. FOOTER COMPONENT
+   PDF Mobile: 1 column centered.
+   PDF Tablet: 3 columns.
+   ===================================================================== */
+@media (max-width: 767px) {
+    .gv-footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+        text-align: center !important;
+    }
+    .gv-footer-grid > div {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    .gv-footer {
+        padding-top: 3.5rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr !important;
+        gap: 2rem !important;
+    }
+}

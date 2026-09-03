@@ -26,7 +26,7 @@
                 <!-- Brand Logo -->
                 <div class="gv-brand-logo">
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo with text.png' ); ?>" alt="Grand Vanilla Indonesia" style="height: 38px; width: auto; object-fit: contain;">
+                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo with text.png' ); ?>" alt="Grand Vanilla Indonesia" class="gv-header-logo-img" style="height: 38px; width: auto; object-fit: contain;">
                     </a>
                 </div>
 
@@ -62,7 +62,7 @@
                 </div>
 
                 <!-- Mobile Menu Toggle Button -->
-                <button type="button" class="gv-mobile-toggle" id="gv-mobile-btn" aria-label="Toggle Navigation" style="display: none; background: none; border: none; cursor: pointer; color: #363E19;">
+                <button type="button" class="gv-mobile-toggle" id="gv-mobile-btn" aria-label="Toggle Navigation" style="background: none; border: none; cursor: pointer; color: #363E19; padding: 0.25rem;">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -104,7 +104,7 @@
     </header>
 
     <style>
-    @media (max-width: 899px) {
+    @media (max-width: 1024px) {
         #site-navigation { display: none !important; }
         .gv-nav-cta-wrap { display: none !important; }
         #gv-mobile-btn { display: block !important; }

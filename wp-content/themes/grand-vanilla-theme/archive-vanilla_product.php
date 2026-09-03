@@ -445,7 +445,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         color: #FFFFFF !important;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 767px) {
         .gv-products-cards-grid {
             flex-direction: column !important;
             gap: 2rem !important;

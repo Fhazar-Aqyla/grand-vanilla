@@ -117,6 +117,17 @@ function grand_vanilla_scripts() {
         array( 'grand-vanilla-google-fonts' ),
         filemtime( get_stylesheet_directory() . '/style.css' )
     );
+
+    // Responsive Mobile & Tablet Refinements (isolated from desktop)
+    $responsive_css = get_stylesheet_directory() . '/assets/css/responsive-mobile-tablet.css';
+    if ( file_exists( $responsive_css ) ) {
+        wp_enqueue_style(
+            'grand-vanilla-responsive',
+            get_stylesheet_directory_uri() . '/assets/css/responsive-mobile-tablet.css',
+            array( 'grand-vanilla-style' ),
+            filemtime( $responsive_css )
+        );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'grand_vanilla_scripts' );
 
