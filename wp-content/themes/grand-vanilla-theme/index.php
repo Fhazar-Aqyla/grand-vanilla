@@ -42,12 +42,21 @@ $fallback_imgs = array(
     $img_dir . 'Buat blog example 2.png',
 );
 
-// Categories for filter tabs
-$filter_categories = array(
-    array( 'slug' => 'vanilla-guide',   'label' => 'Vanilla Guide' ),
-    array( 'slug' => 'vanilla-insight', 'label' => 'Vanilla Insight' ),
-    array( 'slug' => 'global-market',   'label' => 'Global Market' ),
-);
+// Categories for filter tabs (dynamic from native WordPress 'category')
+$categories_list = get_categories( array(
+    'taxonomy'   => 'category',
+    'hide_empty' => true,
+    'exclude'    => get_cat_ID( 'Uncategorized' ),
+) );
+$filter_categories = array();
+if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
+    foreach ( $categories_list as $cat_item ) {
+        $filter_categories[] = array(
+            'slug'  => $cat_item->slug,
+            'label' => $cat_item->name,
+        );
+    }
+}
 ?>
 
 <!-- 1. Hero Section -->

@@ -23,12 +23,12 @@ $contact = grand_vanilla_get_contact_info();
 
             <!-- Main Hero Headline (Clean 3-Line Structure) -->
             <h1 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.35rem, 4.6vw, 3.65rem); font-weight: 600; color: #FFFFFF; line-height: 1.18; margin-bottom: 1.25rem; letter-spacing: -0.01em; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-                <?php echo esc_html(get_theme_mod('grand_vanilla_hero_title', 'Premium Indonesian vanilla, sourced for the global market.')); ?>
+                <?php echo esc_html(get_theme_mod('gv_hero_title', 'Premium Indonesian vanilla, sourced for the global market.')); ?>
             </h1>
 
             <!-- Subtitle (Clean 2-Line Structure) -->
             <p style="font-family: var(--font-body, 'Lato', sans-serif); font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 2.25rem; max-width: 520px; text-shadow: 0 1px 4px rgba(0,0,0,0.3);">
-                <?php echo esc_html(get_theme_mod('grand_vanilla_hero_subtitle', 'We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.')); ?>
+                <?php echo esc_html(get_theme_mod('gv_hero_subtitle', 'We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.')); ?>
             </p>
 
             <!-- Dual Action Buttons (Solid Olive + Clean Transparent Outline) -->

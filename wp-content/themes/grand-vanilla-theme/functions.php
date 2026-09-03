@@ -401,6 +401,17 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'section'  => 'grand_vanilla_options',
         'type'     => 'text',
     ) );
+
+    // Instagram URL
+    $wp_customize->add_setting( 'gv_instagram', array(
+        'default'           => 'https://instagram.com',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'gv_instagram', array(
+        'label'    => __( 'Instagram Profile URL', 'grand-vanilla' ),
+        'section'  => 'grand_vanilla_options',
+        'type'     => 'url',
+    ) );
 }
 add_action( 'customize_register', 'grand_vanilla_customize_register' );
 
@@ -415,10 +426,12 @@ function grand_vanilla_get_contact_info() {
     }
 
     return array(
-        'whatsapp'     => $whatsapp,
-        'whatsapp_url' => 'https://wa.me/' . $clean_wa . '?text=' . rawurlencode('Hello Grand Vanilla Indonesia, I would like to inquire about sourcing your Indonesian vanilla beans for export.'),
-        'email'        => get_theme_mod( 'gv_email', 'grandvanilla@gmail.com' ),
-        'address'      => get_theme_mod( 'gv_address', 'Sumbersari 2 Street, Jember, East Java, Indonesia' ),
-        'export_hubs'  => 'Jakarta (CGK) & Bali (DPS), Indonesia',
+        'whatsapp'      => $whatsapp,
+        'clean_wa'      => $clean_wa,
+        'whatsapp_url'  => 'https://wa.me/' . $clean_wa . '?text=' . rawurlencode('Hello Grand Vanilla Indonesia, I would like to inquire about sourcing your Indonesian vanilla beans for export.'),
+        'email'         => get_theme_mod( 'gv_email', 'grandvanilla@gmail.com' ),
+        'address'       => get_theme_mod( 'gv_address', 'Sumbersari 2 Street, Jember, East Java, Indonesia' ),
+        'instagram_url' => get_theme_mod( 'gv_instagram', 'https://instagram.com' ),
+        'export_hubs'   => 'Jakarta (CGK) & Bali (DPS), Indonesia',
     );
 }

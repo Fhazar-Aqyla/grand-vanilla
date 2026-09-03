@@ -179,7 +179,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                             <p class="gv-explore-item-desc">
                                 <?php echo esc_html( get_the_excerpt() ); ?>
                             </p>
-                            <a href="<?php echo esc_url( home_url( '/contact/?product=' . urlencode( get_the_title() ) ) ); ?>" class="gv-explore-btn">
+                            <a href="<?php the_permalink(); ?>" class="gv-explore-btn">
                                 Detail &rarr;
                             </a>
                         </div>
@@ -189,7 +189,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                             <p class="gv-explore-item-desc">
                                 <?php echo esc_html( get_the_excerpt() ); ?>
                             </p>
-                            <a href="<?php echo esc_url( home_url( '/contact/?product=' . urlencode( get_the_title() ) ) ); ?>" class="gv-explore-btn">
+                            <a href="<?php the_permalink(); ?>" class="gv-explore-btn">
                                 Detail &rarr;
                             </a>
                         </div>

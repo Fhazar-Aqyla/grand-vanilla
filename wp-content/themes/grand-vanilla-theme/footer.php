@@ -34,7 +34,7 @@ $contact = grand_vanilla_get_contact_info();
                     <!-- Social Icons (Clean Line-Art SVG Icons - Instagram, Facebook, YouTube) -->
                     <div class="gv-footer-social-wrap" style="display: flex; gap: 0.85rem; align-items: center; margin-bottom: 1.25rem;">
                         <!-- Instagram Icon -->
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: #363E19; display: flex; align-items: center; transition: opacity 0.2s ease;">
+                        <a href="<?php echo esc_url( $contact['instagram_url'] ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: #363E19; display: flex; align-items: center; transition: opacity 0.2s ease;">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
