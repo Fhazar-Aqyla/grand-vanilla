@@ -615,3 +615,52 @@ ul {
     font-size: 0.8125rem;
     color: var(--color-nw-500);
 }
+
+/* ==========================================================================
+   Homepage Gallery Infinite Carousel Slider
+   ========================================================================== */
+.gv-gallery-carousel-viewport {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gv-gallery-carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    will-change: transform;
+    animation: gvGalleryAutoScroll 35s linear infinite;
+}
+
+.gv-gallery-carousel-viewport:hover .gv-gallery-carousel-track {
+    animation-play-state: paused;
+}
+
+.gv-gallery-card {
+    flex: 0 0 290px;
+    width: 290px;
+    background: #FAF8F5;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gv-gallery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes gvGalleryAutoScroll {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        /* 5 cards * 290px + 5 gaps * 24px = 1570px */
+        transform: translate3d(-1570px, 0, 0);
+    }
+}
+

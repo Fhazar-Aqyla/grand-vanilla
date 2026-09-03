@@ -598,49 +598,108 @@ $contact = grand_vanilla_get_contact_info();
     </div>
 </section>
 
-<!-- 7. Gallery Section Teaser -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<!-- 7. Gallery Section (Exact Figma Carousel Slider) -->
+<?php
+$gallery_carousel_items = array(
+    array(
+        'img'      => 'Gallery Example Carroussel 1.png',
+        'tag'      => 'Vanilla',
+        'title'    => 'Vanilla Collection',
+        'subtitle' => 'Pure Vanilla',
+    ),
+    array(
+        'img'      => 'Gallery Example Carroussel 2.png',
+        'tag'      => 'Vanilla',
+        'title'    => 'Vanilla Collection',
+        'subtitle' => 'Handcrafter Vanilla',
+    ),
+    array(
+        'img'      => 'Gallery Example Carroussel 3.png',
+        'tag'      => 'Vanilla',
+        'title'    => 'Vanilla Collection',
+        'subtitle' => 'Fresh Vanilla Pods',
+    ),
+    array(
+        'img'      => 'Gallery Example Carroussel 4.png',
+        'tag'      => 'Vanilla',
+        'title'    => 'Vanilla Collection',
+        'subtitle' => 'Premium Vanilla Beans',
+    ),
+    array(
+        'img'      => 'Gallery Example Carroussel 5.png',
+        'tag'      => 'Vanilla',
+        'title'    => 'Vanilla Collection',
+        'subtitle' => 'Vanilla in Bloom',
+    ),
+);
+?>
+<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04); overflow: hidden;">
     <div class="gv-container">
         
-        <div style="text-align: center; max-width: 680px; margin: 0 auto 3.5rem;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; color: #363E19; font-size: 0.9375rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
-                <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
-                Gallery
+        <!-- Header Split (Left Title, Right Description) -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap;">
+            <div>
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                    <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                    Gallery
+                </div>
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #363E19; line-height: 1.15; margin: 0;">
+                    A Closer Look At<br>Grand Vanilla
+                </h2>
             </div>
-            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 0.75rem;">
-                A Closer Look At Grand Vanilla
-            </h2>
-            <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin: 0;">
-                Explore our cultivation, curing, and warehouse operations in Indonesia.
-            </p>
-        </div>
-
-        <!-- 5 Gallery Cards Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 3.5rem;">
-            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 1.png' ); ?>" alt="Vanilla Greenhouse Operations" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 2.png' ); ?>" alt="Hand Pollination in East Java" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 3.png' ); ?>" alt="Sun Curing Decks" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 4.png' ); ?>" alt="Sweating Process in Wooden Boxes" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div style="border-radius: 12px; overflow: hidden; height: 260px; box-shadow: 0 6px 18px rgba(0,0,0,0.06);">
-                <img src="<?php echo esc_url( $img_dir . 'Gallery Example Carroussel 5.png' ); ?>" alt="Aroma Conditioning Warehouse" style="width: 100%; height: 100%; object-fit: cover;">
+            <div style="max-width: 440px;">
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: #716F6E; margin: 0;">
+                    Explore the people, products, sourcing, and processes behind our Indonesian vanilla
+                </p>
             </div>
         </div>
 
+    </div><!-- .gv-container -->
+
+    <!-- Infinite Seamless Horizontal Carousel Track -->
+    <div class="gv-gallery-carousel-viewport" style="width: 100%; overflow: hidden; padding: 0.5rem 0 3.5rem; position: relative;">
+        <div class="gv-gallery-carousel-track">
+            <?php
+            // Output 2 identical sets of cards for seamless infinite looping
+            for ( $set = 0; $set < 2; $set++ ) :
+                foreach ( $gallery_carousel_items as $item ) :
+            ?>
+                <div class="gv-gallery-card" style="flex: 0 0 290px; width: 290px; background: #FAF8F5; border-radius: 0; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.03); display: flex; flex-direction: column;">
+                    <!-- Card Image -->
+                    <div style="height: 310px; width: 100%; overflow: hidden;">
+                        <img src="<?php echo esc_url( $img_dir . $item['img'] ); ?>" 
+                             alt="<?php echo esc_attr( $item['title'] . ' - ' . $item['subtitle'] ); ?>" 
+                             style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
+                    <!-- Card Content -->
+                    <div style="padding: 1.35rem 1.5rem 1.5rem; background: #FAF8F5; display: flex; flex-direction: column;">
+                        <div style="display: flex; align-items: center; gap: 0.6rem; color: #363E19; font-size: 0.75rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.35rem;">
+                            <span style="display: inline-block; width: 18px; height: 1.5px; background: #363E19;"></span>
+                            <?php echo esc_html( $item['tag'] ); ?>
+                        </div>
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin: 0 0 0.25rem 0; line-height: 1.3;">
+                            <?php echo esc_html( $item['title'] ); ?>
+                        </h3>
+                        <p style="font-size: 0.8125rem; color: #716F6E; margin: 0; line-height: 1.4;">
+                            <?php echo esc_html( $item['subtitle'] ); ?>
+                        </p>
+                    </div>
+                </div>
+            <?php
+                endforeach;
+            endfor;
+            ?>
+        </div>
+    </div>
+
+    <div class="gv-container">
+        <!-- View All Gallery Button -->
         <div style="text-align: center;">
             <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" 
-               style="display: inline-flex; align-items: center; gap: 0.5rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
+               style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Gallery &rarr;
             </a>
         </div>
-
     </div>
 </section>
 
