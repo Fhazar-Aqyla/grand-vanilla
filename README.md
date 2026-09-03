@@ -10,25 +10,29 @@
 - **Custom Theme Architecture (`grand-vanilla-theme`)**: Clean, lightweight custom WordPress theme crafted without heavy page-builder bloat.
 - **Vanilla Products CMS (`vanilla_product`)**: Full management of vanilla beans, lab specifications (Vanillin %, Moisture %, Pod Length, Origin, Grade), and direct B2B inquiry actions.
 - **Harvest & Curing Gallery (`vanilla_gallery`)**: Visual proof of agroforestry farming, traditional sun drying, and vacuum packaging.
-- **6 Core PRD Pages**:
+- **Core Page Templates (8 Key Views)**:
   1. `Home` (`front-page.php`)
   2. `About Us` (`page-about.php`)
-  3. `Products` (`archive-vanilla_product.php`)
-  4. `Gallery` (`page-gallery.php`)
-  5. `Articles` (`index.php`)
-  6. `Contact Us` (`page-contact.php`)
-- **Direct WhatsApp & Lead Routing**: Integrated WhatsApp CTA (`+62 812-2697-4731`) and official export email (`export@grandvanilla.id`).
+  3. `Products Archive` (`archive-vanilla_product.php`)
+  4. `Product Detail` (`single-vanilla_product.php`)
+  5. `Gallery` (`page-gallery.php`)
+  6. `Blog Archive` (`index.php`)
+  7. `Article Detail` (`single.php`)
+  8. `Contact Us` (`page-contact.php`)
+- **Direct WhatsApp & Lead Routing**: Integrated WhatsApp CTA and dynamic inquiry routing configured via WordPress Customizer.
 
 ---
 
 ## 🚀 Local Development (Laragon)
 
 ### 1. Requirements
+
 - **Web Server**: Apache / Nginx (Laragon)
 - **PHP**: 8.0+ (Tested on PHP 8.4)
 - **Database**: MySQL 8.0+ / MariaDB
 
 ### 2. Local URLs & Credentials
+
 - **Frontend URL**: `http://localhost/grand-vanilla-id/` (or `http://grand-vanilla-id.test/`)
 - **Admin Dashboard**: `http://localhost/grand-vanilla-id/wp-admin/`
 - **Username**: `admin`
@@ -69,6 +73,7 @@ grand-vanilla-id/
 ---
 
 ## 📚 Documentation
+
 - [CMS Requirements Specification](docs/CMS_REQUIREMENTS_SPECIFICATION.md)
 - [Admin Guide (WP-Admin)](ADMIN_GUIDE.md)
 - [Deployment Guide](DEPLOYMENT.md)

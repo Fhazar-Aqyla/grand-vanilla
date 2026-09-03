@@ -14,9 +14,10 @@
 2. [Managing Vanilla Products (Catalog & Lab Specs)](#2-managing-vanilla-products)
 3. [Managing Harvest & Curing Gallery](#3-managing-harvest--curing-gallery)
 4. [Publishing SEO Articles & Market Insights](#4-publishing-seo-articles)
-5. [Editing Static Pages (About, Contact, Home)](#5-editing-static-pages)
-6. [Managing Navigation Menus](#6-managing-navigation-menus)
-7. [Media Library Best Practices](#7-media-library-best-practices)
+5. [Customizing Hero, Contact & Social Settings (Theme Customizer)](#5-customizing-hero-contact--social-settings)
+6. [Editing Static Pages (About, Contact, Home)](#6-editing-static-pages)
+7. [Managing Navigation Menus](#7-managing-navigation-menus)
+8. [Media Library Best Practices](#8-media-library-best-practices)
 
 ---
 
@@ -53,35 +54,56 @@ The custom **Vanilla Products** module allows you to showcase vanilla bean grade
 2. **Title**: Step or activity name (e.g. *Sun Drying on Elevated Decks*).
 3. **Featured Image**: Upload photo from the farm or curing facility.
 4. **Description**: Add 1–2 sentences explaining the quality step.
-5. Click **Publish**.
+5. **Gallery Category**: Assign to `Company` or `Vanilla`.
+6. Click **Publish**.
 
 ---
 
 ## 4. Publishing SEO Articles
 
 1. In the left sidebar, click **Posts** &rarr; **Add New Post**.
-2. Write article title, body, add categories (e.g. *Market Trends*, *Harvest Updates*), and set a featured image.
+2. Write article title, body, add categories (e.g. *Vanilla Guide*, *Vanilla Insight*, *Global Market*), and set a featured image. Categories created here automatically appear as dynamic filter tabs on the Blog page.
 3. Click **Publish** — the post will automatically appear on `/articles/`.
 
 ---
 
-## 5. Editing Static Pages
+## 5. Customizing Hero, Contact & Social Settings (Theme Customizer)
+
+1. In the left sidebar, navigate to **Appearance** &rarr; **Customize**.
+2. Select **Grand Vanilla Settings**.
+3. Live settings that automatically synchronize across the website:
+   - **Hero Main Headline (`gv_hero_title`)**: Custom headline displayed on the homepage Hero section.
+   - **Hero Subtitle (`gv_hero_subtitle`)**: Value proposition subtitle below the main headline.
+   - **Primary Export WhatsApp (`gv_whatsapp`)**: Official export desk phone number. Dynamically synchronizes both direct chat links and the Contact form redirect handler.
+   - **Primary Export Email (`gv_email`)**: Displayed on the footer and Contact Us page for buyer inquiries.
+   - **Office / Warehouse Location (`gv_address`)**: Physical facility address.
+   - **Instagram Profile URL (`gv_instagram`)**: Link for the Instagram icon in both the footer and Contact Us page.
+4. Click **Publish** to save changes.
+
+---
+
+## 6. Editing Static Pages
 
 - Go to **Pages** &rarr; **All Pages**.
 - Click **Edit** on any page (*Home*, *About Us*, *Contact Us*, *Products*, *Gallery*).
 
 ---
 
-## 6. Managing Navigation Menus
+## 7. Managing Navigation Menus
 
 1. Go to **Appearance** &rarr; **Menus**.
 2. Ensure **Primary Navigation Menu** is selected.
-3. Rearrange or add new custom links as needed.
-4. Click **Save Menu**.
+3. The active navigation links are:
+   - **Home** (`/`)
+   - **About Us** (`/about/`)
+   - **Products** (`/products/`)
+   - **Gallery** (`/gallery/`)
+   - **Blog** (`/articles/`)
+4. Rearrange or add new custom links as needed and click **Save Menu**.
 
 ---
 
-## 7. Media Library Best Practices
+## 8. Media Library Best Practices
 
 - **Image Dimensions**: Recommended 1200x800px for products and gallery items.
 - **File Format**: WebP or compressed JPG (under 300 KB) for maximum page speed.
