@@ -664,3 +664,393 @@ ul {
     }
 }
 
+/* ==========================================================================
+   10. Products Cards Grid Component (Interactive Flex Expansion)
+   ========================================================================== */
+.gv-products-cards-grid {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+    align-items: stretch;
+    width: 100%;
+}
+
+.gv-product-card {
+    background-color: #BDC4B8;
+    border-radius: 12px;
+    padding: 1.25rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    height: 330px;
+    box-sizing: border-box;
+    transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, padding 0.4s ease;
+    will-change: flex;
+}
+
+.gv-card-badge {
+    position: absolute;
+    top: 1.15rem;
+    left: 1.15rem;
+    background-color: #363E19;
+    color: #FFFFFF;
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    line-height: 1;
+    user-select: none;
+}
+
+@media (min-width: 992px) {
+    .gv-product-card.is-active {
+        flex: 1.95 1 0px !important;
+        cursor: default;
+        padding: 1.35rem 1.6rem 1.25rem;
+    }
+
+    .gv-product-card.is-collapsed {
+        flex: 1 1 0px !important;
+        cursor: pointer;
+        padding: 1.25rem 1.25rem 1.25rem;
+    }
+
+    .gv-product-card.is-collapsed:hover {
+        background-color: #B5BCB0;
+    }
+}
+
+/* Product Image Containers */
+.gv-card-img-wrap {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    overflow: visible;
+}
+
+.gv-card-img {
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.06));
+    transition: transform 0.4s ease;
+}
+
+.gv-product-card.is-active .gv-card-img {
+    max-height: 175px;
+    max-width: 95%;
+}
+
+.gv-product-card.is-collapsed .gv-card-img {
+    max-height: 155px;
+    max-width: 98%;
+}
+
+/* Bottom Content Area (Title, Desc & Buttons) */
+.gv-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.85rem;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.gv-card-text {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.gv-card-title {
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-weight: 700;
+    color: #363E19;
+    margin: 0 0 0.35rem 0;
+    line-height: 1.2;
+}
+
+.gv-product-card.is-active .gv-card-title {
+    font-size: clamp(1.4rem, 1.7vw, 1.55rem);
+}
+
+.gv-product-card.is-collapsed .gv-card-title {
+    font-size: 1.28rem;
+    white-space: nowrap;
+}
+
+.gv-card-desc {
+    color: #4A5239;
+    margin: 0;
+}
+
+.gv-product-card.is-active .gv-card-desc {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    max-width: 290px;
+}
+
+.gv-product-card.is-collapsed .gv-card-desc {
+    font-size: 0.775rem;
+    line-height: 1.38;
+    max-width: 175px;
+}
+
+/* Cross-fade Action Buttons (Zero Layout Jumps) */
+.gv-card-actions-slot {
+    position: relative;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gv-product-card.is-collapsed .gv-card-actions-slot {
+    min-width: 36px;
+    width: 36px;
+}
+
+.gv-product-card.is-active .gv-card-actions-slot {
+    min-width: 105px;
+    width: 105px;
+}
+
+.gv-card-btn-detail {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(8px, 0, 0);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, background-color 0.2s ease, color 0.2s ease;
+    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border: 1px solid #363E19;
+    color: #363E19;
+    background: transparent !important;
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.55rem 1.25rem;
+    border-radius: 2px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.gv-card-btn-arrow {
+    position: absolute;
+    right: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, background-color 0.2s ease, color 0.2s ease;
+    pointer-events: auto;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #363E19;
+    color: #363E19;
+    background: transparent !important;
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    line-height: 1;
+}
+
+.gv-product-card.is-active .gv-card-btn-detail {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+}
+
+.gv-product-card.is-active .gv-card-btn-arrow {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(-8px, 0, 0);
+    pointer-events: none;
+}
+
+.gv-card-btn-detail:hover {
+    background-color: #363E19 !important;
+    color: #FFFFFF !important;
+}
+
+.gv-card-btn-arrow:hover {
+    background-color: #363E19 !important;
+    color: #FFFFFF !important;
+}
+
+@media (max-width: 991px) {
+    .gv-products-cards-grid {
+        flex-direction: column !important;
+        gap: 2rem !important;
+    }
+
+    .gv-product-card {
+        height: auto !important;
+        min-height: 340px !important;
+        flex: 1 1 auto !important;
+        padding: 1.5rem 1.25rem 1.5rem !important;
+    }
+
+    .gv-card-img-wrap {
+        height: 180px !important;
+    }
+
+    .gv-product-card .gv-card-actions-slot {
+        min-width: 105px !important;
+        width: 105px !important;
+    }
+
+    .gv-product-card .gv-card-btn-detail {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translate3d(0, 0, 0) !important;
+        pointer-events: auto !important;
+    }
+
+    .gv-product-card .gv-card-btn-arrow {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+}
+
+/* ==========================================================================
+   11. Explore More Products Component (Consistent 1:1 Squares)
+   ========================================================================== */
+.gv-explore-more-section {
+    margin-bottom: 6rem;
+}
+
+.gv-explore-title {
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    color: #1C230C;
+    margin: 0 0 3.5rem 0;
+}
+
+.gv-explore-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.gv-explore-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .gv-explore-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .gv-explore-row.gv-explore-row-reverse {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .gv-explore-row:not(.gv-explore-row-reverse) .gv-explore-text-col {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
+        padding-left: 3rem;
+        padding-right: 1rem;
+    }
+}
+
+.gv-explore-text-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.gv-explore-item-title {
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-size: clamp(1.85rem, 2.5vw, 2.35rem);
+    font-weight: 700;
+    color: #363E19;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+.gv-explore-item-desc {
+    color: #4A5239;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    margin: 0 0 2rem 0;
+    max-width: 380px;
+}
+
+.gv-explore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid #363E19;
+    color: #363E19;
+    background: transparent;
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.65rem 1.6rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.gv-explore-btn:hover {
+    background-color: #363E19;
+    color: #FFFFFF;
+}
+
+.gv-explore-img-card {
+    background-color: #BDC4B8;
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.gv-explore-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.07));
+    transition: transform 0.4s ease;
+}
+
+.gv-explore-img-card:hover .gv-explore-img {
+    transform: scale(1.03);
+}

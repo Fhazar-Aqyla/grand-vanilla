@@ -22,115 +22,219 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 <section class="gv-section">
     <div class="gv-container">
         
-        <div style="max-width: 44rem; margin-bottom: 3.5rem;">
-            <span class="gv-section-tag">Products</span>
-            <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem;">Premium Indonesian Vanilla Products</h2>
-            <p style="color: var(--color-nw-500); font-size: 0.9375rem;">
-                Explore our range of quality Indonesian vanilla products, carefully sourced and prepared to meet the needs of global B2B buyers.
-            </p>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;">
+            <div>
+                <span class="gv-section-tag">Products</span>
+                <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; line-height: 1.15; margin: 0.5rem 0 0; color: #1C230C;">Premium Indonesian<br>Vanilla Products</h2>
+            </div>
+            <div style="max-width: 440px;">
+                <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.6; margin: 0;">
+                    Explore our range of quality Indonesian vanilla products, carefully sourced and prepared to meet the needs of global B2B buyers.
+                </p>
+            </div>
         </div>
 
-        <!-- 3 Main Products (#1, #2, #3) -->
-        <div class="gv-grid-3" style="margin-bottom: 5rem;">
-            
-            <!-- #1 Vanilla Beans -->
-            <div class="gv-card">
-                <div style="position: relative; height: 260px; overflow: hidden; background: var(--color-warm-sand-alt);">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 1.png' ); ?>" alt="Vanilla Beans" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; background: var(--color-dark-khaki); color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 0.8125rem; padding: 0.25rem 0.65rem; border-radius: var(--radius-4);">#1</span>
+        <!-- 3 Product Cards Grid (Identical to Homepage: #1 Large, #2 & #3 Compact, Smooth Shifting) -->
+        <div class="gv-products-cards-grid" id="gvProductsCardsGrid" style="margin-bottom: 5rem;">
+
+            <!-- Card 1: Vanilla Beans -->
+            <div class="gv-product-card is-active" data-card-index="1">
+                <!-- Badge #1 -->
+                <div class="gv-card-badge">
+                    #1
                 </div>
-                <div style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px;">
-                    <div>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Vanilla Beans</h3>
-                        <p style="font-size: 0.875rem; color: var(--color-nw-500); line-height: 1.6;">
+
+                <!-- Product Image -->
+                <div class="gv-card-img-wrap">
+                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 1.png' ); ?>"
+                        alt="Vanilla Beans"
+                        class="gv-card-img">
+                </div>
+
+                <!-- Product Content & Actions -->
+                <div class="gv-card-bottom">
+                    <div class="gv-card-text">
+                        <h3 class="gv-card-title">
+                            Vanilla Beans
+                        </h3>
+                        <p class="gv-card-desc">
                             Premium vanilla beans with a rich aroma and distinctive flavor.
                         </p>
                     </div>
-                    <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-planifolia-gourmet-vanilla-beans-grade-a/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
+                    <div class="gv-card-actions-slot">
+                        <a href="<?php echo esc_url( home_url( '/products/indonesian-planifolia-gourmet-vanilla-beans-grade-a/' ) ); ?>"
+                            class="gv-card-btn-detail">
                             Detail &rarr;
                         </a>
+                        <button type="button"
+                            class="gv-card-btn-arrow"
+                            aria-label="Expand Vanilla Beans">
+                            &rarr;
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- #2 Vanilla Powder -->
-            <div class="gv-card">
-                <div style="position: relative; height: 260px; overflow: hidden; background: var(--color-warm-sand-alt);">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 2.png' ); ?>" alt="Vanilla Powder" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; background: var(--color-dark-khaki); color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 0.8125rem; padding: 0.25rem 0.65rem; border-radius: var(--radius-4);">#2</span>
+            <!-- Card 2: Vanilla Powder -->
+            <div class="gv-product-card is-collapsed" data-card-index="2">
+                <!-- Badge #2 -->
+                <div class="gv-card-badge">
+                    #2
                 </div>
-                <div style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px;">
-                    <div>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Vanilla Powder</h3>
-                        <p style="font-size: 0.875rem; color: var(--color-nw-500); line-height: 1.6;">
+
+                <!-- Product Image -->
+                <div class="gv-card-img-wrap">
+                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 2.png' ); ?>"
+                        alt="Vanilla Powder"
+                        class="gv-card-img">
+                </div>
+
+                <!-- Product Content & Actions -->
+                <div class="gv-card-bottom">
+                    <div class="gv-card-text">
+                        <h3 class="gv-card-title">
+                            Vanilla Powder
+                        </h3>
+                        <p class="gv-card-desc">
                             Finely ground vanilla for versatile food and beverage applications.
                         </p>
                     </div>
-                    <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-tahitensis-vanilla-beans-floral-gourmet/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
+                    <div class="gv-card-actions-slot">
+                        <a href="<?php echo esc_url( home_url( '/products/indonesian-tahitensis-vanilla-beans-floral-gourmet/' ) ); ?>"
+                            class="gv-card-btn-detail">
                             Detail &rarr;
                         </a>
+                        <button type="button"
+                            class="gv-card-btn-arrow"
+                            aria-label="Expand Vanilla Powder">
+                            &rarr;
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- #3 Vanilla Extract -->
-            <div class="gv-card">
-                <div style="position: relative; height: 260px; overflow: hidden; background: var(--color-warm-sand-alt);">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 3.png' ); ?>" alt="Vanilla Extract" style="width: 100%; height: 100%; object-fit: cover;">
-                    <span style="position: absolute; top: 1rem; left: 1rem; background: var(--color-dark-khaki); color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 0.8125rem; padding: 0.25rem 0.65rem; border-radius: var(--radius-4);">#3</span>
+            <!-- Card 3: Vanilla Extract -->
+            <div class="gv-product-card is-collapsed" data-card-index="3">
+                <!-- Badge #3 -->
+                <div class="gv-card-badge">
+                    #3
                 </div>
-                <div style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px;">
-                    <div>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Vanilla Extract</h3>
-                        <p style="font-size: 0.875rem; color: var(--color-nw-500); line-height: 1.6;">
+
+                <!-- Product Image -->
+                <div class="gv-card-img-wrap">
+                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 3.png' ); ?>"
+                        alt="Vanilla Extract"
+                        class="gv-card-img">
+                </div>
+
+                <!-- Product Content & Actions -->
+                <div class="gv-card-bottom">
+                    <div class="gv-card-text">
+                        <h3 class="gv-card-title">
+                            Vanilla Extract
+                        </h3>
+                        <p class="gv-card-desc">
                             Rich vanilla extract crafted for consistent flavor and aroma.
                         </p>
                     </div>
-                    <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-extraction-grade-vanilla-beans-grade-b/' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                    <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
+                    <div class="gv-card-actions-slot">
+                        <a href="<?php echo esc_url( home_url( '/products/indonesian-extraction-grade-vanilla-beans-grade-b/' ) ); ?>"
+                            class="gv-card-btn-detail">
                             Detail &rarr;
                         </a>
+                        <button type="button"
+                            class="gv-card-btn-arrow"
+                            aria-label="Expand Vanilla Extract">
+                            &rarr;
+                        </button>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- 3. Explore More Products (Seeds, Paste, Bulk) -->
-        <div style="margin-bottom: 3.5rem;">
-            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 2.5rem;">Explore More Products</h2>
+        <!-- Script for Interactive Products Card Expansion (Manual click only) -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const grid = document.getElementById('gvProductsCardsGrid');
+                if (!grid) return;
+                const cards = grid.querySelectorAll('.gv-product-card');
 
-            <div style="display: flex; flex-direction: column; gap: 3rem;">
+                function activateCard(card) {
+                    const idx = card.getAttribute('data-card-index');
+                    if (!idx) return;
+
+                    if (grid.classList.contains('active-' + idx)) {
+                        return;
+                    }
+
+                    grid.classList.remove('active-1', 'active-2', 'active-3');
+                    grid.classList.add('active-' + idx);
+
+                    cards.forEach(function(c) {
+                        if (c === card) {
+                            c.classList.add('is-active');
+                            c.classList.remove('is-collapsed');
+                        } else {
+                            c.classList.remove('is-active');
+                            c.classList.add('is-collapsed');
+                        }
+                    });
+                }
+
+                cards.forEach(function(card) {
+                    card.addEventListener('click', function(e) {
+                        // If clicking the active 'Detail →' link, allow normal navigation
+                        if (e.target.closest('.gv-card-btn-detail')) {
+                            return;
+                        }
+
+                        activateCard(card);
+                    });
+                });
+            });
+        </script>
+
+        <!-- 3. Explore More Products (Seeds & Paste) -->
+        <div class="gv-explore-more-section">
+            <h2 class="gv-explore-title">Explore More Products</h2>
+
+            <div class="gv-explore-rows">
                 
-                <!-- Vanilla Seeds -->
-                <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center;" class="gv-product-row">
-                    <div style="order: 2;">
-                        <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;">Vanilla Seeds</h3>
-                        <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
+                <!-- Row 1: Vanilla Seeds (Text Left, Image Right) -->
+                <div class="gv-explore-row">
+                    <div class="gv-explore-text-col">
+                        <h3 class="gv-explore-item-title">Vanilla Seeds</h3>
+                        <p class="gv-explore-item-desc">
                             Finely sourced vanilla seeds offering concentrated natural aroma and flavor, ideal for products that require authentic vanilla characteristics and visual appeal.
                         </p>
-                        <a href="<?php echo esc_url( home_url( '/contact/?product=Vanilla+Seeds' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                        <a href="<?php echo esc_url( home_url( '/contact/?product=Vanilla+Seeds' ) ); ?>" class="gv-explore-btn">
                             Detail &rarr;
                         </a>
                     </div>
-                    <div style="order: 1; border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
-                        <img src="<?php echo esc_url( $img_dir . 'Seeds Vanilla.png' ); ?>" alt="Vanilla Seeds" style="width: 100%; height: auto; object-fit: cover;">
+                    <div class="gv-explore-img-card">
+                        <img src="<?php echo esc_url( $img_dir . 'Seeds Vanilla.png' ); ?>" 
+                            alt="Vanilla Seeds" 
+                            class="gv-explore-img">
                     </div>
                 </div>
 
-                <!-- Vanilla Paste -->
-                <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center;" class="gv-product-row-reverse">
-                    <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
-                        <img src="<?php echo esc_url( $img_dir . 'Paste Vanilla.png' ); ?>" alt="Vanilla Paste" style="width: 100%; height: auto; object-fit: cover;">
+                <!-- Row 2: Vanilla Paste (Image Left, Text Right) -->
+                <div class="gv-explore-row gv-explore-row-reverse">
+                    <div class="gv-explore-img-card">
+                        <img src="<?php echo esc_url( $img_dir . 'Paste Vanilla.png' ); ?>" 
+                            alt="Vanilla Paste" 
+                            class="gv-explore-img">
                     </div>
-                    <div>
-                        <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;">Vanilla Paste</h3>
-                        <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
+                    <div class="gv-explore-text-col">
+                        <h3 class="gv-explore-item-title">Vanilla Paste</h3>
+                        <p class="gv-explore-item-desc">
                             A rich and concentrated vanilla product with natural seeds, offering an intense aroma and authentic flavor for food and beverage applications.
                         </p>
-                        <a href="<?php echo esc_url( home_url( '/contact/?product=Vanilla+Paste' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">
+                        <a href="<?php echo esc_url( home_url( '/contact/?product=Vanilla+Paste' ) ); ?>" class="gv-explore-btn">
                             Detail &rarr;
                         </a>
                     </div>
@@ -143,12 +247,392 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 </section>
 
 <style>
-@media (min-width: 800px) {
-    .gv-product-row { grid-template-columns: 1.2fr 1fr !important; }
-    .gv-product-row > div:nth-child(1) { order: 1 !important; }
-    .gv-product-row > div:nth-child(2) { order: 2 !important; }
-    .gv-product-row-reverse { grid-template-columns: 1fr 1.2fr !important; }
-}
+    /* Products Cards Grid (Flex Accordion Architecture) */
+    .gv-products-cards-grid {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 3.5rem;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .gv-product-card {
+        background-color: #BDC4B8;
+        border-radius: 12px;
+        padding: 1.25rem 1.25rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: relative;
+        overflow: hidden;
+        min-width: 0;
+        height: 330px;
+        box-sizing: border-box;
+        transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, padding 0.4s ease;
+        will-change: flex;
+    }
+
+    .gv-card-badge {
+        position: absolute;
+        top: 1.15rem;
+        left: 1.15rem;
+        background-color: #363E19;
+        color: #FFFFFF;
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-size: 0.8125rem;
+        font-weight: 700;
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        line-height: 1;
+        user-select: none;
+    }
+
+    @media (min-width: 992px) {
+        .gv-product-card.is-active {
+            flex: 1.95 1 0px !important;
+            cursor: default;
+            padding: 1.35rem 1.6rem 1.25rem;
+        }
+
+        .gv-product-card.is-collapsed {
+            flex: 1 1 0px !important;
+            cursor: pointer;
+            padding: 1.25rem 1.25rem 1.25rem;
+        }
+
+        .gv-product-card.is-collapsed:hover {
+            background-color: #B5BCB0;
+        }
+    }
+
+    /* Product Image Containers */
+    .gv-card-img-wrap {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        margin-top: auto;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        overflow: visible;
+    }
+
+    .gv-card-img {
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 6px 14px rgba(0,0,0,0.06));
+        transition: transform 0.4s ease;
+    }
+
+    .gv-product-card.is-active .gv-card-img {
+        max-height: 175px;
+        max-width: 95%;
+    }
+
+    .gv-product-card.is-collapsed .gv-card-img {
+        max-height: 155px;
+        max-width: 98%;
+    }
+
+    /* Bottom Content Area (Title, Desc & Buttons) */
+    .gv-card-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 0.85rem;
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    .gv-card-text {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .gv-card-title {
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-weight: 700;
+        color: #363E19;
+        margin: 0 0 0.35rem 0;
+        line-height: 1.2;
+    }
+
+    .gv-product-card.is-active .gv-card-title {
+        font-size: clamp(1.4rem, 1.7vw, 1.55rem);
+    }
+
+    .gv-product-card.is-collapsed .gv-card-title {
+        font-size: 1.28rem;
+        white-space: nowrap;
+    }
+
+    .gv-card-desc {
+        color: #4A5239;
+        margin: 0;
+    }
+
+    .gv-product-card.is-active .gv-card-desc {
+        font-size: 0.8125rem;
+        line-height: 1.45;
+        max-width: 290px;
+    }
+
+    .gv-product-card.is-collapsed .gv-card-desc {
+        font-size: 0.775rem;
+        line-height: 1.38;
+        max-width: 175px;
+    }
+
+    /* Cross-fade Action Buttons (Zero Layout Jumps) */
+    .gv-card-actions-slot {
+        position: relative;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-shrink: 0;
+        transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gv-product-card.is-collapsed .gv-card-actions-slot {
+        min-width: 36px;
+        width: 36px;
+    }
+
+    .gv-product-card.is-active .gv-card-actions-slot {
+        min-width: 105px;
+        width: 105px;
+    }
+
+    .gv-card-btn-detail {
+        position: absolute;
+        right: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(8px, 0, 0);
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, background-color 0.2s ease, color 0.2s ease;
+        pointer-events: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        border: 1px solid #363E19;
+        color: #363E19;
+        background: transparent !important;
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 0.55rem 1.25rem;
+        border-radius: 2px;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .gv-card-btn-arrow {
+        position: absolute;
+        right: 0;
+        opacity: 1;
+        visibility: visible;
+        transform: translate3d(0, 0, 0);
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s, background-color 0.2s ease, color 0.2s ease;
+        pointer-events: auto;
+        width: 36px;
+        height: 36px;
+        border: 1px solid #363E19;
+        color: #363E19;
+        background: transparent !important;
+        border-radius: 2px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+        line-height: 1;
+    }
+
+    .gv-product-card.is-active .gv-card-btn-detail {
+        opacity: 1;
+        visibility: visible;
+        transform: translate3d(0, 0, 0);
+        pointer-events: auto;
+    }
+
+    .gv-product-card.is-active .gv-card-btn-arrow {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(-8px, 0, 0);
+        pointer-events: none;
+    }
+
+    .gv-card-btn-detail:hover {
+        background-color: #363E19 !important;
+        color: #FFFFFF !important;
+    }
+
+    .gv-card-btn-arrow:hover {
+        background-color: #363E19 !important;
+        color: #FFFFFF !important;
+    }
+
+    @media (max-width: 991px) {
+        .gv-products-cards-grid {
+            flex-direction: column !important;
+            gap: 2rem !important;
+        }
+
+        .gv-product-card {
+            height: auto !important;
+            min-height: 340px !important;
+            flex: 1 1 auto !important;
+            padding: 1.5rem 1.25rem 1.5rem !important;
+        }
+
+        .gv-card-img-wrap {
+            height: 180px !important;
+        }
+
+        .gv-product-card .gv-card-actions-slot {
+            min-width: 105px !important;
+            width: 105px !important;
+        }
+
+        .gv-product-card .gv-card-btn-detail {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translate3d(0, 0, 0) !important;
+            pointer-events: auto !important;
+        }
+
+        .gv-product-card .gv-card-btn-arrow {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+    }
+
+    /* Explore More Products Section */
+    .gv-explore-more-section {
+        margin-bottom: 6rem;
+    }
+
+    .gv-explore-title {
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-size: clamp(2rem, 3.5vw, 2.75rem);
+        font-weight: 700;
+        color: #1C230C;
+        margin: 0 0 3.5rem 0;
+    }
+
+    .gv-explore-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .gv-explore-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    @media (min-width: 900px) {
+        .gv-explore-row {
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .gv-explore-row.gv-explore-row-reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .gv-explore-row:not(.gv-explore-row-reverse) .gv-explore-text-col {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
+            padding-left: 3rem;
+            padding-right: 1rem;
+        }
+    }
+
+    .gv-explore-text-col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .gv-explore-item-title {
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-size: clamp(1.85rem, 2.5vw, 2.35rem);
+        font-weight: 700;
+        color: #363E19;
+        margin: 0 0 1rem 0;
+        line-height: 1.2;
+    }
+
+    .gv-explore-item-desc {
+        color: #4A5239;
+        font-size: 0.9375rem;
+        line-height: 1.65;
+        margin: 0 0 2rem 0;
+        max-width: 380px;
+    }
+
+    .gv-explore-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px solid #363E19;
+        color: #363E19;
+        background: transparent;
+        font-family: var(--font-heading, 'Jost', sans-serif);
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.65rem 1.6rem;
+        border-radius: 2px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .gv-explore-btn:hover {
+        background-color: #363E19;
+        color: #FFFFFF;
+    }
+
+    .gv-explore-img-card {
+        background-color: #BDC4B8;
+        border-radius: 12px;
+        padding: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        aspect-ratio: 1 / 1 !important;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .gv-explore-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 12px 24px rgba(0,0,0,0.07));
+        transition: transform 0.4s ease;
+    }
+
+    .gv-explore-img-card:hover .gv-explore-img {
+        transform: scale(1.03);
+    }
 </style>
 
 <!-- 4. CTA Banner (High-Fidelity Figma Component) -->
