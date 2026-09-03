@@ -245,56 +245,65 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 5. Section: Sourced From Local Indonesia, Built Around Quality (Deep Dark Background #14180C) -->
-<section class="gv-section" style="background-color: #14180C; color: #FFFFFF; padding: 6rem 0;">
+<section class="gv-section" style="background-color: #14180C; color: #FFFFFF; padding: 6.5rem 0;">
     <div class="gv-container">
         
-        <div class="gv-sourcing-dark-grid" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: flex-start;">
+        <div class="gv-sourcing-dark-grid" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4.5rem; align-items: stretch;">
             
-            <!-- Left Column: Tagline + Heading + Subtitle -->
-            <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: #A4B29A; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 1.5rem;">
-                    <span style="display: inline-block; width: 28px; height: 2px; background: #A4B29A;"></span>
-                    Our Sourcing
+            <!-- Left Column: Tagline at Top, Heading & Subtitle at Bottom -->
+            <div class="gv-sourcing-left-col" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                <!-- Top: Tag Label "Our Sourcing" -->
+                <div style="padding-top: 0.25rem;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #BAC4B2; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif);">
+                        <span style="display: inline-block; width: 28px; height: 2px; background: #BAC4B2;"></span>
+                        Our Sourcing
+                    </div>
                 </div>
 
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 4vw, 3.25rem); font-weight: 700; color: #FFFFFF; line-height: 1.18; margin-bottom: 1.75rem;">
-                    Sourced From Local<br>Indonesia, Built Around<br>Quality
-                </h2>
+                <!-- Bottom: Main Heading & Description -->
+                <div class="gv-sourcing-left-bottom" style="padding-top: 4rem;">
+                    <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #FFFFFF; line-height: 1.18; margin: 0 0 1.5rem 0;">
+                        Sourced From Local<br>Indonesia, Built Around<br>Quality
+                    </h2>
 
-                <p style="font-size: 0.9375rem; color: #BAC4B2; line-height: 1.7; margin: 0; max-width: 440px;">
-                    We work with trusted local sources to connect international buyers with quality Indonesian vanilla.
-                </p>
+                    <p style="font-size: 0.9375rem; color: #BAC4B2; line-height: 1.65; margin: 0; max-width: 440px;">
+                        We work with trusted local sources to connect international buyers with quality Indonesian vanilla.
+                    </p>
+                </div>
             </div>
 
             <!-- Right Column: 3 Numbered Steps & Farm Photo -->
-            <div style="display: flex; flex-direction: column; gap: 2.5rem;">
+            <div class="gv-sourcing-right-col" style="display: flex; flex-direction: column; justify-content: space-between; gap: 2.25rem;">
                 
-                <!-- Steps 1 & 2 in 2-Column Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                    <div>
-                        <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.75rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">1.</div>
-                        <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Local Product</h4>
-                        <p style="font-size: 0.8125rem; color: #BAC4B2; line-height: 1.6; margin: 0;">Vanilla sourced from Indonesia and connected to local growing regions.</p>
+                <!-- Steps Group: 1, 2, and 3 -->
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    <!-- Steps 1 & 2 in 2-Column Grid -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.75rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.35rem; line-height: 1;">1.</div>
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Local Product</h4>
+                            <p style="font-size: 0.8125rem; color: #BAC4B2; line-height: 1.6; margin: 0;">Vanilla sourced from Indonesia and connected to local growing regions.</p>
+                        </div>
+                        <div>
+                            <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.75rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.35rem; line-height: 1;">2.</div>
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Trusted Sourcing</h4>
+                            <p style="font-size: 0.8125rem; color: #BAC4B2; line-height: 1.6; margin: 0;">Working with selected local sources to maintain product quality and consistency.</p>
+                        </div>
                     </div>
+
+                    <!-- Step 3 Full Width -->
                     <div>
-                        <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.75rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">2.</div>
-                        <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Trusted Sourcing</h4>
-                        <p style="font-size: 0.8125rem; color: #BAC4B2; line-height: 1.6; margin: 0;">Working with selected local sources to maintain product quality and consistency.</p>
+                        <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.75rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.35rem; line-height: 1;">3.</div>
+                        <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Quality Selection</h4>
+                        <p style="font-size: 0.8125rem; color: #BAC4B2; line-height: 1.6; margin: 0; max-width: 580px;">Products are selected according to buyer requirements and intended applications, ensuring the right quality and specifications for every order.</p>
                     </div>
                 </div>
 
-                <!-- Step 3 Full Width -->
-                <div>
-                    <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.75rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">3.</div>
-                    <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Quality Selection</h4>
-                    <p style="font-size: 0.8125rem; color: #BAC4B2; line-height: 1.6; margin: 0;">Products are selected according to buyer requirements and intended applications, ensuring the right quality and specifications for every order.</p>
-                </div>
-
-                <!-- Farm Photo -->
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <!-- Farm Photo: Sourcing.png -->
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); aspect-ratio: 16 / 9; width: 100%;">
                     <img src="<?php echo esc_url( $img_dir . 'Sourcing.png' ); ?>" 
                          alt="Indonesian Local Vanilla Sourcing Plantation" 
-                         style="width: 100%; height: auto; max-height: 280px; object-fit: cover; display: block; border-radius: 12px;">
+                         style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 12px;">
                 </div>
 
             </div>
@@ -481,7 +490,9 @@ get_template_part( 'template-parts/cta-banner', null, array(
     .gv-about-overview-grid { grid-template-columns: 1fr !important; }
     .gv-journey-header-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
     .gv-journey-body-grid { grid-template-columns: 1fr !important; }
-    .gv-sourcing-dark-grid { grid-template-columns: 1fr !important; }
+    .gv-sourcing-dark-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
+    .gv-sourcing-left-col { justify-content: flex-start !important; gap: 1.5rem !important; }
+    .gv-sourcing-left-bottom { padding-top: 0 !important; }
     .gv-facilities-header-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
     .gv-facility-row-1 { grid-template-columns: 1fr !important; }
     .gv-facility-row-2 { grid-template-columns: 1fr !important; }
