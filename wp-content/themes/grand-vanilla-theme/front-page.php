@@ -13,50 +13,51 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 $contact = grand_vanilla_get_contact_info();
 ?>
 
-<!-- 1. Hero Section -->
-<section class="gv-hero" style="position: relative; min-height: 85vh; background: url('<?php echo esc_url($img_dir . 'Hero Image.png'); ?>') center center / cover no-repeat; display: flex; align-items: center; padding: 6rem 0 5rem;">
-    <!-- Dark Gradient Overlay for optimal readability -->
-    <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%); pointer-events: none;"></div>
+<!-- 1. Hero Section (Exact Match to Figma Reference) -->
+<section class="gv-hero" style="position: relative; min-height: 88vh; background: url('<?php echo esc_url($img_dir . 'Hero Image.png'); ?>') center right / cover no-repeat; display: flex; align-items: center; padding: 6.5rem 0 5.5rem;">
+    <!-- Gentle Subtle Ambient Tint for optimal contrast without darkening the warm sunlight -->
+    <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.06) 45%, transparent 65%); pointer-events: none;"></div>
 
     <div class="gv-container" style="position: relative; z-index: 2; width: 100%;">
-        <div style="max-width: 680px;">
+        <div style="max-width: 620px;">
 
-            <!-- Main Hero Headline -->
-            <h1 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.5rem, 5vw, 3.85rem); font-weight: 700; color: #FFFFFF; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.01em;">
+            <!-- Main Hero Headline (Clean 3-Line Structure) -->
+            <h1 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.35rem, 4.6vw, 3.65rem); font-weight: 600; color: #FFFFFF; line-height: 1.18; margin-bottom: 1.25rem; letter-spacing: -0.01em; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
                 <?php echo esc_html(get_theme_mod('grand_vanilla_hero_title', 'Premium Indonesian vanilla, sourced for the global market.')); ?>
             </h1>
 
-            <!-- Subtitle -->
-            <p style="font-size: clamp(1rem, 1.5vw, 1.125rem); color: rgba(255,255,255,0.92); line-height: 1.6; margin-bottom: 2.25rem; max-width: 580px;">
+            <!-- Subtitle (Clean 2-Line Structure) -->
+            <p style="font-family: var(--font-body, 'Lato', sans-serif); font-size: 1.0625rem; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 2.25rem; max-width: 520px; text-shadow: 0 1px 4px rgba(0,0,0,0.3);">
                 <?php echo esc_html(get_theme_mod('grand_vanilla_hero_subtitle', 'We deliver premium Indonesian vanilla with consistent quality, reliable supply, and tailored solutions for global B2B buyers.')); ?>
             </p>
 
-            <!-- Dual Action Buttons -->
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 4rem;">
-                <a href="<?php echo esc_url(home_url('/products/')); ?>"
-                    style="display: inline-block; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.25); transition: all 0.2s ease;">
+            <!-- Dual Action Buttons (Solid Olive + Clean Transparent Outline) -->
+            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 4rem;">
+                <a href="<?php echo esc_url(home_url('/products/')); ?>" class="gv-hero-btn-primary"
+                    style="display: inline-flex; align-items: center; justify-content: center; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.8rem 1.85rem; border-radius: 4px; text-decoration: none; border: 1px solid #363E19; box-shadow: 0 4px 14px rgba(0,0,0,0.18); transition: all 0.25s ease;">
                     Explore Products
                 </a>
-                <a href="<?php echo esc_url(home_url('/contact/')); ?>"
-                    style="display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.7); color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
+                <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="gv-hero-btn-outline"
+                    style="display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 1px solid rgba(255,255,255,0.75); color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.8rem 1.85rem; border-radius: 4px; text-decoration: none; transition: all 0.25s ease;">
                     Request a Quote
                 </a>
             </div>
 
-            <!-- Floating Badge: Trusted Customers Worldwide -->
-            <div style="display: inline-flex; flex-direction: column; background: #0E110A; border-radius: 10px; padding: 1rem 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08);">
-                <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.75rem; color: #D1D5DB; font-weight: 500; margin-bottom: 0.35rem;">
+            <!-- Floating Badge: Trusted Customers Worldwide (Extended Width Matching Reference) -->
+            <div class="gv-trusted-badge"
+                style="display: inline-flex; flex-direction: column; width: 395px; max-width: 100%; background: #0E110A; border-radius: 8px; padding: 1.15rem 1.85rem; box-shadow: 0 12px 32px rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s ease; box-sizing: border-box;">
+                <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.75rem; color: #D1D5DB; font-weight: 500; margin-bottom: 0.5rem; letter-spacing: 0.01em;">
                     Trusted Customers Worldwide
                 </span>
-                <div style="display: flex; align-items: center; gap: 1.25rem;">
-                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 2.25rem; font-weight: 800; color: #FFFFFF; line-height: 1;">
+                <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 2.25rem; font-weight: 700; color: #FFFFFF; line-height: 1;">
                         12+
                     </span>
-                    <!-- Overlapping Flag Circles (US, FR, DE, NL, +8) -->
+                    <!-- Overlapping Flag Circles (US, FR, DE, NL, 18+) -->
                     <div style="display: flex; align-items: center;">
                         <!-- USA Flag Circle -->
-                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; background: #002868; display: flex; align-items: center; justify-content: center; z-index: 5;">
-                            <svg viewBox="0 0 32 32" width="28" height="28">
+                        <div style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; background: #002868; display: flex; align-items: center; justify-content: center; z-index: 5;">
+                            <svg viewBox="0 0 32 32" width="30" height="30">
                                 <rect width="32" height="32" fill="#bf0a30" />
                                 <rect y="4.6" width="32" height="4.6" fill="#fff" />
                                 <rect y="13.8" width="32" height="4.6" fill="#fff" />
@@ -70,32 +71,32 @@ $contact = grand_vanilla_get_contact_info();
                             </svg>
                         </div>
                         <!-- France Flag Circle -->
-                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 4;">
-                            <svg viewBox="0 0 32 32" width="28" height="28">
+                        <div style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 4;">
+                            <svg viewBox="0 0 32 32" width="30" height="30">
                                 <rect width="10.6" height="32" fill="#002395" />
                                 <rect x="10.6" width="10.6" height="32" fill="#fff" />
                                 <rect x="21.2" width="10.8" height="32" fill="#ed2939" />
                             </svg>
                         </div>
                         <!-- Germany Flag Circle -->
-                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 3;">
-                            <svg viewBox="0 0 32 32" width="28" height="28">
+                        <div style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 3;">
+                            <svg viewBox="0 0 32 32" width="30" height="30">
                                 <rect width="32" height="10.6" fill="#000" />
                                 <rect y="10.6" width="32" height="10.6" fill="#dd0000" />
                                 <rect y="21.2" width="32" height="10.8" fill="#ffce00" />
                             </svg>
                         </div>
                         <!-- Netherlands Flag Circle -->
-                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 2;">
-                            <svg viewBox="0 0 32 32" width="28" height="28">
+                        <div style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid #0E110A; overflow: hidden; margin-left: -8px; z-index: 2;">
+                            <svg viewBox="0 0 32 32" width="30" height="30">
                                 <rect width="32" height="10.6" fill="#ae1c28" />
                                 <rect y="10.6" width="32" height="10.6" fill="#fff" />
                                 <rect y="21.2" width="32" height="10.8" fill="#21468b" />
                             </svg>
                         </div>
-                        <!-- +8 Pill -->
-                        <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #0E110A; background: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.6875rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-left: -8px; z-index: 1;">
-                            8+
+                        <!-- 18+ Pill -->
+                        <div style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid #0E110A; background: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.6875rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-left: -8px; z-index: 1;">
+                            18+
                         </div>
                     </div>
                 </div>

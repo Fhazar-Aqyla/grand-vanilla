@@ -87,6 +87,8 @@ Tags: custom-theme, b2b, vanilla-exporter, corporate, clean, responsive
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 body {
@@ -98,6 +100,18 @@ body {
     flex-direction: column;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar globally for Chrome, Safari, Edge, and Opera while preserving scrolling */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
 }
 
 h1, h2, h3, h4, h5, h6, .font-heading {
