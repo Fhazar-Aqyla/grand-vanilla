@@ -56,24 +56,31 @@ $contact = grand_vanilla_get_contact_info();
                         </a>
                     </div>
 
-                    <!-- Contact Numbers & Email -->
+                    <!-- Contact Numbers & Email (Dynamic from Customizer) -->
                     <div class="gv-footer-contact-info" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; color: #363E19; line-height: 1.6;">
-                        <div>+123 (456) 789</div>
-                        <div>grandvanilla@gmail.com</div>
+                        <div><?php echo esc_html( $contact['whatsapp'] ); ?></div>
+                        <div><?php echo esc_html( $contact['email'] ); ?></div>
                     </div>
                 </div>
 
-                <!-- Col 2: Products Links -->
+                <!-- Col 2: Products Links (Dynamic from vanilla_product CPT) -->
                 <div class="gv-footer-products-col">
                     <h4 class="gv-footer-col-header" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; color: #8C9286; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem;">
                         PRODUCTS
                     </h4>
                     <div class="gv-footer-nav-col" style="display: flex; flex-direction: column; gap: 0.65rem;">
-                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Vanilla Beans</a>
-                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Vanilla Powder</a>
-                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Vanilla Extract</a>
-                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Vanilla Seed</a>
-                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Vanilla Paste</a>
+                        <?php
+                        $footer_prods = get_posts( array(
+                            'post_type'      => 'vanilla_product',
+                            'posts_per_page' => 5,
+                            'post_status'    => 'publish',
+                            'orderby'        => 'menu_order date',
+                            'order'          => 'ASC',
+                        ) );
+                        foreach ( $footer_prods as $fp ) :
+                        ?>
+                            <a href="<?php echo esc_url( get_permalink( $fp->ID ) ); ?>"><?php echo esc_html( $fp->post_title ); ?></a>
+                        <?php endforeach; ?>
                         <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Bulk / Wholesale</a>
                         <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Custom / OEM</a>
                     </div>
@@ -81,18 +88,31 @@ $contact = grand_vanilla_get_contact_info();
 
                 <!-- Nav Split Group for Mobile (Navigation & About Us/Help) -->
                 <div class="gv-footer-secondary-group">
-                    <!-- Col 3: Company / Navigation Links -->
+                    <!-- Col 3: Company / Navigation Links (Dynamic wp_nav_menu) -->
                     <div class="gv-footer-nav-section">
                         <h4 class="gv-footer-col-header" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; color: #8C9286; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem;">
                             <span class="gv-header-desktop">COMPANY</span>
                             <span class="gv-header-mobile">NAVIGATION</span>
                         </h4>
                         <div class="gv-footer-nav-col" style="display: flex; flex-direction: column; gap: 0.65rem;">
-                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-                            <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About Us</a>
-                            <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Products</a>
-                            <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a>
-                            <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>">Blog</a>
+                            <?php
+                            if ( has_nav_menu( 'primary' ) ) {
+                                wp_nav_menu( array(
+                                    'theme_location' => 'primary',
+                                    'container'      => false,
+                                    'items_wrap'     => '%3$s',
+                                    'walker'         => new Grand_Vanilla_Footer_Walker(),
+                                ) );
+                            } else {
+                                ?>
+                                <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+                                <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About Us</a>
+                                <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Products</a>
+                                <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a>
+                                <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>">Blog</a>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
 

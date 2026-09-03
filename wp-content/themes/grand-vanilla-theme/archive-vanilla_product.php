@@ -34,129 +34,72 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
             </div>
         </div>
 
-        <!-- 3 Product Cards Grid (Identical to Homepage: #1 Large, #2 & #3 Compact, Smooth Shifting) -->
-        <div class="gv-products-cards-grid" id="gvProductsCardsGrid" style="margin-bottom: 5rem;">
+        <!-- 3 Product Cards Grid (Dynamic WP_Query) -->
+        <div class="gv-products-cards-grid active-1" id="gvProductsCardsGrid" style="margin-bottom: 5rem;">
+            <?php
+            $catalog_products_query = new WP_Query( array(
+                'post_type'      => 'vanilla_product',
+                'posts_per_page' => 3,
+                'post_status'    => 'publish',
+                'orderby'        => 'menu_order date',
+                'order'          => 'ASC',
+            ) );
 
-            <!-- Card 1: Vanilla Beans -->
-            <div class="gv-product-card is-active" data-card-index="1">
-                <!-- Badge #1 -->
-                <div class="gv-card-badge">
-                    #1
-                </div>
+            if ( $catalog_products_query->have_posts() ) :
+                $prod_idx = 0;
+                while ( $catalog_products_query->have_posts() ) :
+                    $catalog_products_query->the_post();
+                    $prod_idx++;
+                    $is_active  = ( $prod_idx === 1 );
+                    $card_class = $is_active ? 'is-active' : 'is-collapsed';
+                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Product Unggulan ' . $prod_idx . '.png';
+                    ?>
+                    <!-- Card <?php echo esc_attr( $prod_idx ); ?>: <?php the_title(); ?> -->
+                    <div class="gv-product-card <?php echo esc_attr( $card_class ); ?>" data-card-index="<?php echo esc_attr( $prod_idx ); ?>">
+                        <!-- Badge #<?php echo esc_attr( $prod_idx ); ?> -->
+                        <div class="gv-card-badge">
+                            #<?php echo esc_html( $prod_idx ); ?>
+                        </div>
 
-                <!-- Product Image -->
-                <div class="gv-card-img-wrap">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 1.png' ); ?>"
-                        alt="Vanilla Beans"
-                        class="gv-card-img">
-                </div>
+                        <!-- Product Image -->
+                        <div class="gv-card-img-wrap">
+                            <img src="<?php echo esc_url( $prod_img ); ?>"
+                                alt="<?php echo esc_attr( get_the_title() ); ?>"
+                                class="gv-card-img">
+                        </div>
 
-                <!-- Product Content & Actions -->
-                <div class="gv-card-bottom">
-                    <div class="gv-card-text">
-                        <h3 class="gv-card-title">
-                            Vanilla Beans
-                        </h3>
-                        <p class="gv-card-desc">
-                            Premium vanilla beans with a rich aroma and distinctive flavor.
-                        </p>
+                        <!-- Product Content & Actions -->
+                        <div class="gv-card-bottom">
+                            <div class="gv-card-text">
+                                <h3 class="gv-card-title">
+                                    <?php the_title(); ?>
+                                </h3>
+                                <p class="gv-card-desc">
+                                    <?php echo esc_html( get_the_excerpt() ); ?>
+                                </p>
+                            </div>
+                            <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
+                            <div class="gv-card-actions-slot">
+                                <a href="<?php the_permalink(); ?>"
+                                    class="gv-card-btn-detail">
+                                    Detail &rarr;
+                                </a>
+                                <button type="button"
+                                    class="gv-card-btn-arrow"
+                                    aria-label="Expand <?php echo esc_attr( get_the_title() ); ?>">
+                                    &rarr;
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
-                    <div class="gv-card-actions-slot">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-planifolia-gourmet-vanilla-beans-grade-a/' ) ); ?>"
-                            class="gv-card-btn-detail">
-                            Detail &rarr;
-                        </a>
-                        <button type="button"
-                            class="gv-card-btn-arrow"
-                            aria-label="Expand Vanilla Beans">
-                            &rarr;
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 2: Vanilla Powder -->
-            <div class="gv-product-card is-collapsed" data-card-index="2">
-                <!-- Badge #2 -->
-                <div class="gv-card-badge">
-                    #2
-                </div>
-
-                <!-- Product Image -->
-                <div class="gv-card-img-wrap">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 2.png' ); ?>"
-                        alt="Vanilla Powder"
-                        class="gv-card-img">
-                </div>
-
-                <!-- Product Content & Actions -->
-                <div class="gv-card-bottom">
-                    <div class="gv-card-text">
-                        <h3 class="gv-card-title">
-                            Vanilla Powder
-                        </h3>
-                        <p class="gv-card-desc">
-                            Finely ground vanilla for versatile food and beverage applications.
-                        </p>
-                    </div>
-                    <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
-                    <div class="gv-card-actions-slot">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-tahitensis-vanilla-beans-floral-gourmet/' ) ); ?>"
-                            class="gv-card-btn-detail">
-                            Detail &rarr;
-                        </a>
-                        <button type="button"
-                            class="gv-card-btn-arrow"
-                            aria-label="Expand Vanilla Powder">
-                            &rarr;
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 3: Vanilla Extract -->
-            <div class="gv-product-card is-collapsed" data-card-index="3">
-                <!-- Badge #3 -->
-                <div class="gv-card-badge">
-                    #3
-                </div>
-
-                <!-- Product Image -->
-                <div class="gv-card-img-wrap">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 3.png' ); ?>"
-                        alt="Vanilla Extract"
-                        class="gv-card-img">
-                </div>
-
-                <!-- Product Content & Actions -->
-                <div class="gv-card-bottom">
-                    <div class="gv-card-text">
-                        <h3 class="gv-card-title">
-                            Vanilla Extract
-                        </h3>
-                        <p class="gv-card-desc">
-                            Rich vanilla extract crafted for consistent flavor and aroma.
-                        </p>
-                    </div>
-                    <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
-                    <div class="gv-card-actions-slot">
-                        <a href="<?php echo esc_url( home_url( '/products/indonesian-extraction-grade-vanilla-beans-grade-b/' ) ); ?>"
-                            class="gv-card-btn-detail">
-                            Detail &rarr;
-                        </a>
-                        <button type="button"
-                            class="gv-card-btn-arrow"
-                            aria-label="Expand Vanilla Extract">
-                            &rarr;
-                        </button>
-                    </div>
-                </div>
-            </div>
-
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
         </div>
 
-        <!-- Script for Interactive Products Card Expansion (Manual click only) -->
+        <!-- Script for Interactive Products Card Expansion (Dynamic click handler) -->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const grid = document.getElementById('gvProductsCardsGrid');
@@ -171,8 +114,8 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                         return;
                     }
 
-                    grid.classList.remove('active-1', 'active-2', 'active-3');
-                    grid.classList.add('active-' + idx);
+                    // Switch active class on grid dynamically
+                    grid.className = grid.className.replace(/\bactive-\d+\b/g, '').trim() + ' active-' + idx;
 
                     cards.forEach(function(c) {
                         if (c === card) {
@@ -198,50 +141,72 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
             });
         </script>
 
-        <!-- 3. Explore More Products (Seeds & Paste) -->
+        <!-- 3. Explore More Products (Dynamic WP_Query) -->
+        <?php
+        $explore_products_query = new WP_Query( array(
+            'post_type'      => 'vanilla_product',
+            'posts_per_page' => 2,
+            'offset'         => 3,
+            'post_status'    => 'publish',
+            'orderby'        => 'menu_order date',
+            'order'          => 'ASC',
+        ) );
+
+        if ( $explore_products_query->have_posts() ) :
+        ?>
         <div class="gv-explore-more-section">
             <h2 class="gv-explore-title">Explore More Products</h2>
 
             <div class="gv-explore-rows">
-                
-                <!-- Row 1: Vanilla Seeds (Text Left, Image Right) -->
-                <div class="gv-explore-row">
-                    <div class="gv-explore-text-col">
-                        <h3 class="gv-explore-item-title">Vanilla Seeds</h3>
-                        <p class="gv-explore-item-desc">
-                            Finely sourced vanilla seeds offering concentrated natural aroma and flavor, ideal for products that require authentic vanilla characteristics and visual appeal.
-                        </p>
-                        <a href="<?php echo esc_url( home_url( '/contact/?product=Vanilla+Seeds' ) ); ?>" class="gv-explore-btn">
-                            Detail &rarr;
-                        </a>
-                    </div>
-                    <div class="gv-explore-img-card">
-                        <img src="<?php echo esc_url( $img_dir . 'Seeds Vanilla.png' ); ?>" 
-                            alt="Vanilla Seeds" 
-                            class="gv-explore-img">
-                    </div>
+                <?php
+                $exp_idx = 0;
+                while ( $explore_products_query->have_posts() ) :
+                    $explore_products_query->the_post();
+                    $exp_idx++;
+                    $is_reverse = ( $exp_idx % 2 === 0 );
+                    $row_class  = $is_reverse ? 'gv-explore-row gv-explore-row-reverse' : 'gv-explore-row';
+                    $exp_img    = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Seeds Vanilla.png';
+                ?>
+                <div class="<?php echo esc_attr( $row_class ); ?>">
+                    <?php if ( $is_reverse ) : ?>
+                        <div class="gv-explore-img-card">
+                            <img src="<?php echo esc_url( $exp_img ); ?>" 
+                                alt="<?php echo esc_attr( get_the_title() ); ?>" 
+                                class="gv-explore-img">
+                        </div>
+                        <div class="gv-explore-text-col">
+                            <h3 class="gv-explore-item-title"><?php the_title(); ?></h3>
+                            <p class="gv-explore-item-desc">
+                                <?php echo esc_html( get_the_excerpt() ); ?>
+                            </p>
+                            <a href="<?php echo esc_url( home_url( '/contact/?product=' . urlencode( get_the_title() ) ) ); ?>" class="gv-explore-btn">
+                                Detail &rarr;
+                            </a>
+                        </div>
+                    <?php else : ?>
+                        <div class="gv-explore-text-col">
+                            <h3 class="gv-explore-item-title"><?php the_title(); ?></h3>
+                            <p class="gv-explore-item-desc">
+                                <?php echo esc_html( get_the_excerpt() ); ?>
+                            </p>
+                            <a href="<?php echo esc_url( home_url( '/contact/?product=' . urlencode( get_the_title() ) ) ); ?>" class="gv-explore-btn">
+                                Detail &rarr;
+                            </a>
+                        </div>
+                        <div class="gv-explore-img-card">
+                            <img src="<?php echo esc_url( $exp_img ); ?>" 
+                                alt="<?php echo esc_attr( get_the_title() ); ?>" 
+                                class="gv-explore-img">
+                        </div>
+                    <?php endif; ?>
                 </div>
-
-                <!-- Row 2: Vanilla Paste (Image Left, Text Right) -->
-                <div class="gv-explore-row gv-explore-row-reverse">
-                    <div class="gv-explore-img-card">
-                        <img src="<?php echo esc_url( $img_dir . 'Paste Vanilla.png' ); ?>" 
-                            alt="Vanilla Paste" 
-                            class="gv-explore-img">
-                    </div>
-                    <div class="gv-explore-text-col">
-                        <h3 class="gv-explore-item-title">Vanilla Paste</h3>
-                        <p class="gv-explore-item-desc">
-                            A rich and concentrated vanilla product with natural seeds, offering an intense aroma and authentic flavor for food and beverage applications.
-                        </p>
-                        <a href="<?php echo esc_url( home_url( '/contact/?product=Vanilla+Paste' ) ); ?>" class="gv-explore-btn">
-                            Detail &rarr;
-                        </a>
-                    </div>
-                </div>
-
+                <?php
+                endwhile;
+                wp_reset_postdata();
+                ?>
             </div>
         </div>
+        <?php endif; ?>
 
     </div>
 </section>

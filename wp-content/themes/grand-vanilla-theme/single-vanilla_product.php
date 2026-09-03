@@ -19,14 +19,23 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
             <span style="color: var(--color-pitch-black); font-weight: 700;"><?php the_title(); ?></span>
         </div>
 
-        <!-- Product Sub-tabs -->
+        <!-- Product Sub-tabs (Dynamic from vanilla_product CPT) -->
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <a href="<?php echo esc_url( home_url( '/products/indonesian-planifolia-gourmet-vanilla-beans-grade-a/' ) ); ?>" class="gv-pill <?php echo is_single('indonesian-planifolia-gourmet-vanilla-beans-grade-a') ? 'gv-pill-khaki' : ''; ?>">
-                Vanilla Planifolia Beans
-            </a>
-            <a href="<?php echo esc_url( home_url( '/products/indonesian-tahitensis-vanilla-beans-floral-gourmet/' ) ); ?>" class="gv-pill <?php echo is_single('indonesian-tahitensis-vanilla-beans-floral-gourmet') ? 'gv-pill-khaki' : ''; ?>">
-                Vanilla Tahitensis Beans
-            </a>
+            <?php
+            $tab_products = get_posts( array(
+                'post_type'      => 'vanilla_product',
+                'posts_per_page' => 5,
+                'post_status'    => 'publish',
+                'orderby'        => 'menu_order date',
+                'order'          => 'ASC',
+            ) );
+            foreach ( $tab_products as $t_prod ) :
+                $is_current = ( $t_prod->ID === get_the_ID() );
+            ?>
+                <a href="<?php echo esc_url( get_permalink( $t_prod->ID ) ); ?>" class="gv-pill <?php echo $is_current ? 'gv-pill-khaki' : ''; ?>">
+                    <?php echo esc_html( $t_prod->post_title ); ?>
+                </a>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
@@ -34,11 +43,14 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 <div class="gv-section">
     <div class="gv-container">
         
-        <!-- Product Carousel & Overview Grid -->
+        <!-- Product Showcase & Overview Grid -->
         <div style="margin-bottom: 4rem;">
-            <!-- Main Product Image -->
+            <!-- Main Product Image (Dynamic Thumbnail) -->
+            <?php
+            $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : $img_dir . 'Planifolia Carroussel 1.png';
+            ?>
             <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md); margin-bottom: 3rem; background: var(--color-warm-sand-alt); max-height: 480px;">
-                <img src="<?php echo esc_url( $img_dir . 'Planifolia Carroussel 1.png' ); ?>" alt="<?php the_title(); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="<?php echo esc_url( $main_img ); ?>" alt="<?php the_title(); ?>" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
 
             <!-- Overview & Characteristics Grid -->
@@ -48,26 +60,45 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                 <div class="gv-card" style="padding: 2rem; background: var(--color-parchment);">
                     <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase; font-family: var(--font-heading); display: block; margin-bottom: 0.5rem;">PRODUCT OVERVIEW</span>
                     <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem;"><?php the_title(); ?></h2>
-                    <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem;">
-                        Premium Indonesian vanilla Planifolia beans with a rich aroma, naturally sweet flavor, and distinctive characteristics, suitable for various food and beverage applications.
-                    </p>
+                    <div style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        <?php
+                        $prod_desc = get_the_content();
+                        if ( empty( $prod_desc ) ) {
+                            $prod_desc = get_the_excerpt();
+                        }
+                        echo wp_kses_post( wpautop( $prod_desc ) );
+                        ?>
+                    </div>
                     <div>
                         <strong style="font-size: 0.875rem; display: block; margin-bottom: 0.25rem;">Product Variety:</strong>
-                        <span style="font-size: 0.875rem; color: var(--color-nw-500);">&bull; Vanilla Planifolia</span>
+                        <span style="font-size: 0.875rem; color: var(--color-nw-500);">&bull; <?php the_title(); ?></span>
                     </div>
                 </div>
 
-                <!-- Right: Product Characteristics -->
+                <!-- Right: Product Characteristics (Dynamic postmeta _gv_*) -->
+                <?php
+                $grade    = get_post_meta( get_the_ID(), '_gv_grade', true );
+                $vanillin = get_post_meta( get_the_ID(), '_gv_vanillin', true );
+                $moisture = get_post_meta( get_the_ID(), '_gv_moisture', true );
+                $length   = get_post_meta( get_the_ID(), '_gv_length', true );
+                $origin   = get_post_meta( get_the_ID(), '_gv_origin', true );
+
+                if ( empty( $grade ) )    $grade    = 'Gourmet Export Grade';
+                if ( empty( $vanillin ) ) $vanillin = '2.0% - 2.4%';
+                if ( empty( $moisture ) ) $moisture = '30% - 35%';
+                if ( empty( $length ) )   $length   = '16 - 20 cm';
+                if ( empty( $origin ) )   $origin   = 'East Java, Indonesia';
+                ?>
                 <div class="gv-card" style="padding: 2rem; background: var(--color-parchment);">
                     <span style="font-size: 0.75rem; color: var(--color-dark-khaki); font-weight: 700; text-transform: uppercase; font-family: var(--font-heading); display: block; margin-bottom: 1rem;">PRODUCT CHARACTERISTICS</span>
                     
                     <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.875rem;">
-                        <div><strong style="color: var(--color-pitch-black);">Aroma :</strong> <span style="color: var(--color-nw-500);">Rich, sweet, warm, and naturally aromatic</span></div>
-                        <div><strong style="color: var(--color-pitch-black);">Flavor Profile :</strong> <span style="color: var(--color-nw-500);">Smooth, sweet, creamy, with distinctive vanilla notes</span></div>
-                        <div><strong style="color: var(--color-pitch-black);">Appearance / Color :</strong> <span style="color: var(--color-nw-500);">Dark brown to deep black with a naturally glossy surface</span></div>
-                        <div><strong style="color: var(--color-pitch-black);">Texture / Consistency :</strong> <span style="color: var(--color-nw-500);">Soft, pliable, moist, and slightly oily</span></div>
-                        <div><strong style="color: var(--color-pitch-black);">Bean Form :</strong> <span style="color: var(--color-nw-500);">Whole vanilla beans / pods</span></div>
-                        <div><strong style="color: var(--color-pitch-black);">Origin :</strong> <span style="color: var(--color-nw-500);">Jember, Indonesia</span></div>
+                        <div><strong style="color: var(--color-pitch-black);">Grade / Quality :</strong> <span style="color: var(--color-nw-500);"><?php echo esc_html( $grade ); ?></span></div>
+                        <div><strong style="color: var(--color-pitch-black);">Vanillin Content :</strong> <span style="color: var(--color-nw-500);"><?php echo esc_html( $vanillin ); ?></span></div>
+                        <div><strong style="color: var(--color-pitch-black);">Moisture Level :</strong> <span style="color: var(--color-nw-500);"><?php echo esc_html( $moisture ); ?></span></div>
+                        <div><strong style="color: var(--color-pitch-black);">Length / Size :</strong> <span style="color: var(--color-nw-500);"><?php echo esc_html( $length ); ?></span></div>
+                        <div><strong style="color: var(--color-pitch-black);">Origin / Terroir :</strong> <span style="color: var(--color-nw-500);"><?php echo esc_html( $origin ); ?></span></div>
+                        <div><strong style="color: var(--color-pitch-black);">Cultivation :</strong> <span style="color: var(--color-nw-500);">Sustainable Agroforestry Sun Cured</span></div>
                     </div>
                 </div>
 
@@ -115,36 +146,60 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
             </div>
         </div>
 
-        <!-- Explore More Products Section -->
+        <!-- Explore More Products Section (Dynamic WP_Query) -->
+        <?php
+        $other_products_query = new WP_Query( array(
+            'post_type'      => 'vanilla_product',
+            'posts_per_page' => 2,
+            'post__not_in'   => array( get_the_ID() ),
+            'post_status'    => 'publish',
+            'orderby'        => 'rand',
+        ) );
+
+        if ( $other_products_query->have_posts() ) :
+        ?>
         <div style="margin-bottom: 3.5rem;">
             <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 2.5rem;">Explore More Products</h2>
 
             <div style="display: flex; flex-direction: column; gap: 3rem; margin-bottom: 3rem;">
-                <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center;" class="gv-product-row">
-                    <div>
-                        <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;">Vanilla Seeds</h3>
-                        <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
-                            Finely sourced vanilla seeds offering concentrated natural aroma and flavor, ideal for products that require authentic vanilla characteristics and visual appeal.
-                        </p>
-                        <a href="<?php echo esc_url( home_url( '/contact/?product=Vanilla+Seeds' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">Detail &rarr;</a>
+                <?php
+                $o_idx = 0;
+                while ( $other_products_query->have_posts() ) :
+                    $other_products_query->the_post();
+                    $o_idx++;
+                    $is_rev    = ( $o_idx % 2 === 0 );
+                    $row_class = $is_rev ? 'gv-product-row-reverse' : 'gv-product-row';
+                    $o_img     = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Product Unggulan 1.png';
+                ?>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center;" class="<?php echo esc_attr( $row_class ); ?>">
+                        <?php if ( $is_rev ) : ?>
+                            <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
+                                <img src="<?php echo esc_url( $o_img ); ?>" alt="<?php the_title(); ?>" style="width: 100%; height: auto; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;"><?php the_title(); ?></h3>
+                                <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
+                                    <?php echo esc_html( get_the_excerpt() ); ?>
+                                </p>
+                                <a href="<?php the_permalink(); ?>" class="gv-btn gv-btn-outline gv-btn-sm">Detail &rarr;</a>
+                            </div>
+                        <?php else : ?>
+                            <div>
+                                <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;"><?php the_title(); ?></h3>
+                                <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
+                                    <?php echo esc_html( get_the_excerpt() ); ?>
+                                </p>
+                                <a href="<?php the_permalink(); ?>" class="gv-btn gv-btn-outline gv-btn-sm">Detail &rarr;</a>
+                            </div>
+                            <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
+                                <img src="<?php echo esc_url( $o_img ); ?>" alt="<?php the_title(); ?>" style="width: 100%; height: auto; object-fit: cover;">
+                            </div>
+                        <?php endif; ?>
                     </div>
-                    <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
-                        <img src="<?php echo esc_url( $img_dir . 'Seeds Vanilla.png' ); ?>" alt="Vanilla Seeds" style="width: 100%; height: auto; object-fit: cover;">
-                    </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center;" class="gv-product-row-reverse">
-                    <div style="border-radius: var(--radius-16); overflow: hidden; box-shadow: var(--shadow-md);">
-                        <img src="<?php echo esc_url( $img_dir . 'Paste Vanilla.png' ); ?>" alt="Vanilla Paste" style="width: 100%; height: auto; object-fit: cover;">
-                    </div>
-                    <div>
-                        <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem;">Vanilla Paste</h3>
-                        <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 32rem;">
-                            A rich and concentrated vanilla product with natural seeds, offering an intense aroma and authentic flavor for food and beverage applications.
-                        </p>
-                        <a href="<?php echo esc_url( home_url( '/contact/?product=Vanilla+Paste' ) ); ?>" class="gv-btn gv-btn-outline gv-btn-sm">Detail &rarr;</a>
-                    </div>
-                </div>
+                <?php
+                endwhile;
+                wp_reset_postdata();
+                ?>
             </div>
 
             <div style="text-align: center;">
@@ -153,6 +208,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                 </a>
             </div>
         </div>
+        <?php endif; ?>
 
     </div>
 </div>

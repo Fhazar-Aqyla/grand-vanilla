@@ -195,129 +195,72 @@ $contact = grand_vanilla_get_contact_info();
             </div>
         </div>
 
-        <!-- 3 Product Cards Grid (Exact UI/UX Reference Match: #1 Large, #2 & #3 Compact, Smooth Shifting) -->
-        <div class="gv-products-cards-grid" id="gvProductsCardsGrid">
+        <!-- 3 Product Cards Grid (Dynamic WP_Query) -->
+        <div class="gv-products-cards-grid active-1" id="gvProductsCardsGrid">
+            <?php
+            $featured_products_query = new WP_Query( array(
+                'post_type'      => 'vanilla_product',
+                'posts_per_page' => 3,
+                'post_status'    => 'publish',
+                'orderby'        => 'menu_order date',
+                'order'          => 'ASC',
+            ) );
 
-            <!-- Card 1: Vanilla Beans -->
-            <div class="gv-product-card is-active" data-card-index="1">
-                <!-- Badge #1 -->
-                <div class="gv-card-badge">
-                    #1
-                </div>
+            if ( $featured_products_query->have_posts() ) :
+                $prod_idx = 0;
+                while ( $featured_products_query->have_posts() ) :
+                    $featured_products_query->the_post();
+                    $prod_idx++;
+                    $is_active  = ( $prod_idx === 1 );
+                    $card_class = $is_active ? 'is-active' : 'is-collapsed';
+                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Product Unggulan ' . $prod_idx . '.png';
+                    ?>
+                    <!-- Card <?php echo esc_attr( $prod_idx ); ?>: <?php the_title(); ?> -->
+                    <div class="gv-product-card <?php echo esc_attr( $card_class ); ?>" data-card-index="<?php echo esc_attr( $prod_idx ); ?>">
+                        <!-- Badge #<?php echo esc_attr( $prod_idx ); ?> -->
+                        <div class="gv-card-badge">
+                            #<?php echo esc_html( $prod_idx ); ?>
+                        </div>
 
-                <!-- Product Image -->
-                <div class="gv-card-img-wrap">
-                    <img src="<?php echo esc_url($img_dir . 'Product Unggulan 1.png'); ?>"
-                        alt="Vanilla Beans"
-                        class="gv-card-img">
-                </div>
+                        <!-- Product Image -->
+                        <div class="gv-card-img-wrap">
+                            <img src="<?php echo esc_url( $prod_img ); ?>"
+                                alt="<?php echo esc_attr( get_the_title() ); ?>"
+                                class="gv-card-img">
+                        </div>
 
-                <!-- Product Content & Actions -->
-                <div class="gv-card-bottom">
-                    <div class="gv-card-text">
-                        <h3 class="gv-card-title">
-                            Vanilla Beans
-                        </h3>
-                        <p class="gv-card-desc">
-                            Premium vanilla beans with a rich aroma and distinctive flavor.
-                        </p>
+                        <!-- Product Content & Actions -->
+                        <div class="gv-card-bottom">
+                            <div class="gv-card-text">
+                                <h3 class="gv-card-title">
+                                    <?php the_title(); ?>
+                                </h3>
+                                <p class="gv-card-desc">
+                                    <?php echo esc_html( get_the_excerpt() ); ?>
+                                </p>
+                            </div>
+                            <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
+                            <div class="gv-card-actions-slot">
+                                <a href="<?php the_permalink(); ?>"
+                                    class="gv-card-btn-detail">
+                                    Detail &rarr;
+                                </a>
+                                <button type="button"
+                                    class="gv-card-btn-arrow"
+                                    aria-label="Expand <?php echo esc_attr( get_the_title() ); ?>">
+                                    &rarr;
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
-                    <div class="gv-card-actions-slot">
-                        <a href="<?php echo esc_url(home_url('/products/indonesian-planifolia-vanilla-beans/')); ?>"
-                            class="gv-card-btn-detail">
-                            Detail &rarr;
-                        </a>
-                        <button type="button"
-                            class="gv-card-btn-arrow"
-                            aria-label="Expand Vanilla Beans">
-                            &rarr;
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 2: Vanilla Powder -->
-            <div class="gv-product-card is-collapsed" data-card-index="2">
-                <!-- Badge #2 -->
-                <div class="gv-card-badge">
-                    #2
-                </div>
-
-                <!-- Product Image -->
-                <div class="gv-card-img-wrap">
-                    <img src="<?php echo esc_url($img_dir . 'Product Unggulan 2.png'); ?>"
-                        alt="Vanilla Powder"
-                        class="gv-card-img">
-                </div>
-
-                <!-- Product Content & Actions -->
-                <div class="gv-card-bottom">
-                    <div class="gv-card-text">
-                        <h3 class="gv-card-title">
-                            Vanilla Powder
-                        </h3>
-                        <p class="gv-card-desc">
-                            Finely ground vanilla for versatile food and beverage applications.
-                        </p>
-                    </div>
-                    <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
-                    <div class="gv-card-actions-slot">
-                        <a href="<?php echo esc_url(home_url('/products/indonesian-tahitensis-vanilla-beans/')); ?>"
-                            class="gv-card-btn-detail">
-                            Detail &rarr;
-                        </a>
-                        <button type="button"
-                            class="gv-card-btn-arrow"
-                            aria-label="Expand Vanilla Powder">
-                            &rarr;
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 3: Vanilla Extract -->
-            <div class="gv-product-card is-collapsed" data-card-index="3">
-                <!-- Badge #3 -->
-                <div class="gv-card-badge">
-                    #3
-                </div>
-
-                <!-- Product Image -->
-                <div class="gv-card-img-wrap">
-                    <img src="<?php echo esc_url($img_dir . 'Product Unggulan 3.png'); ?>"
-                        alt="Vanilla Extract"
-                        class="gv-card-img">
-                </div>
-
-                <!-- Product Content & Actions -->
-                <div class="gv-card-bottom">
-                    <div class="gv-card-text">
-                        <h3 class="gv-card-title">
-                            Vanilla Extract
-                        </h3>
-                        <p class="gv-card-desc">
-                            Rich vanilla extract crafted for consistent flavor and aroma.
-                        </p>
-                    </div>
-                    <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
-                    <div class="gv-card-actions-slot">
-                        <a href="<?php echo esc_url(home_url('/products/gourmet-vanilla-extract-paste/')); ?>"
-                            class="gv-card-btn-detail">
-                            Detail &rarr;
-                        </a>
-                        <button type="button"
-                            class="gv-card-btn-arrow"
-                            aria-label="Expand Vanilla Extract">
-                            &rarr;
-                        </button>
-                    </div>
-                </div>
-            </div>
-
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
         </div>
 
-        <!-- Script for Interactive Products Carousel / Card Expansion & Auto-Shift -->
+        <!-- Script for Interactive Products Carousel / Card Expansion & Dynamic Auto-Shift -->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const grid = document.getElementById('gvProductsCardsGrid');
@@ -332,9 +275,8 @@ $contact = grand_vanilla_get_contact_info();
                         return;
                     }
 
-                    // Switch active class on grid
-                    grid.classList.remove('active-1', 'active-2', 'active-3');
-                    grid.classList.add('active-' + idx);
+                    // Switch active class on grid dynamically
+                    grid.className = grid.className.replace(/\bactive-\d+\b/g, '').trim() + ' active-' + idx;
 
                     // Switch active and collapsed states on cards
                     cards.forEach(function(c) {
@@ -668,40 +610,6 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 7. Gallery Section (Exact Figma Carousel Slider) -->
-<?php
-$gallery_carousel_items = array(
-    array(
-        'img'      => 'Gallery Example Carroussel 1.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Pure Vanilla',
-    ),
-    array(
-        'img'      => 'Gallery Example Carroussel 2.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Handcrafter Vanilla',
-    ),
-    array(
-        'img'      => 'Gallery Example Carroussel 3.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Fresh Vanilla Pods',
-    ),
-    array(
-        'img'      => 'Gallery Example Carroussel 4.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Premium Vanilla Beans',
-    ),
-    array(
-        'img'      => 'Gallery Example Carroussel 5.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Vanilla in Bloom',
-    ),
-);
-?>
 <section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04); overflow: hidden;">
     <div class="gv-container">
 
@@ -725,18 +633,42 @@ $gallery_carousel_items = array(
 
     </div><!-- .gv-container -->
 
-    <!-- Infinite Seamless Horizontal Carousel Track -->
+    <!-- Infinite Seamless Horizontal Carousel Track (Dynamic WP_Query) -->
     <div class="gv-gallery-carousel-viewport" style="width: 100%; overflow: hidden; padding: 0.5rem 0 3.5rem; position: relative;">
         <div class="gv-gallery-carousel-track">
             <?php
+            $gallery_query = new WP_Query( array(
+                'post_type'      => 'vanilla_gallery',
+                'posts_per_page' => 8,
+                'post_status'    => 'publish',
+                'orderby'        => 'menu_order date',
+                'order'          => 'ASC',
+            ) );
+
+            $gallery_carousel_dynamic = array();
+            if ( $gallery_query->have_posts() ) {
+                while ( $gallery_query->have_posts() ) {
+                    $gallery_query->the_post();
+                    $terms = get_the_terms( get_the_ID(), 'gallery_category' );
+                    $tag   = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : 'Vanilla';
+                    $gallery_carousel_dynamic[] = array(
+                        'img'      => has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Gallery Example Carroussel 1.png',
+                        'tag'      => $tag,
+                        'title'    => 'Vanilla Collection',
+                        'subtitle' => get_the_title(),
+                    );
+                }
+                wp_reset_postdata();
+            }
+
             // Output 2 identical sets of cards for seamless infinite looping
             for ($set = 0; $set < 2; $set++) :
-                foreach ($gallery_carousel_items as $item) :
+                foreach ($gallery_carousel_dynamic as $item) :
             ?>
                     <div class="gv-gallery-card" style="flex: 0 0 290px; width: 290px; background: #FAF8F5; border-radius: 0; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.03); display: flex; flex-direction: column;">
                         <!-- Card Image -->
                         <div style="height: 310px; width: 100%; overflow: hidden;">
-                            <img src="<?php echo esc_url($img_dir . $item['img']); ?>"
+                            <img src="<?php echo esc_url($item['img']); ?>"
                                 alt="<?php echo esc_attr($item['title'] . ' - ' . $item['subtitle']); ?>"
                                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
                         </div>
@@ -794,83 +726,72 @@ $gallery_carousel_items = array(
             </div>
         </div>
 
-        <!-- 2 Clean Articles Stack (Exact Figma Layout) -->
+        <!-- 2 Clean Articles Stack (Dynamic WP_Query) -->
         <div style="display: flex; flex-direction: column; gap: 4.5rem; margin-bottom: 4rem;">
+            <?php
+            $hp_blog_query = new WP_Query( array(
+                'post_type'      => 'post',
+                'posts_per_page' => 2,
+                'post_status'    => 'publish',
+                'orderby'        => 'date',
+                'order'          => 'DESC',
+            ) );
+            $hp_total_posts = wp_count_posts( 'post' )->publish;
 
-            <!-- Article 1: 12/12 -->
-            <div class="gv-blog-article-row" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: center;">
-                <!-- Left Column: Big Number & Photo -->
-                <div style="position: relative; width: 100%;">
-                    <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(3.75rem, 5.5vw, 4.75rem); font-weight: 700; color: #BAC4B5; line-height: 0.9; margin-bottom: -1rem; position: relative; z-index: 1; letter-spacing: -0.02em; user-select: none;">
-                        12/12
-                    </div>
-                    <div style="position: relative; z-index: 2; border-radius: 0; overflow: hidden; aspect-ratio: 16 / 10; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
-                        <img src="<?php echo esc_url($img_dir . 'Buat Blog Example 1.png'); ?>"
-                            alt="What Makes Indonesian Vanilla Exceptional?"
-                            style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
-                    </div>
-                </div>
+            if ( $hp_blog_query->have_posts() ) :
+                $b_idx = 0;
+                while ( $hp_blog_query->have_posts() ) :
+                    $hp_blog_query->the_post();
+                    $badge_num = str_pad( max( 1, $hp_total_posts - $b_idx ), 2, '0', STR_PAD_LEFT );
+                    $badge_tot = str_pad( $hp_total_posts, 2, '0', STR_PAD_LEFT );
+                    $badge_str = $badge_num . '/' . $badge_tot;
 
-                <!-- Right Column: Details & Underline Link -->
-                <div style="display: flex; flex-direction: column; justify-content: center;">
-                    <div style="display: flex; align-items: center; gap: 0.65rem; color: #363E19; font-size: 0.8125rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
-                        <span style="display: inline-block; width: 22px; height: 1.5px; background: #363E19;"></span>
-                        Vanilla Guide
-                    </div>
-                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 700; color: #363E19; margin: 0 0 0.85rem 0; line-height: 1.25;">
-                        <a href="<?php echo esc_url(home_url('/what-makes-indonesian-vanilla-exceptional/')); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
-                            What Makes Indonesian Vanilla Exceptional?
-                        </a>
-                    </h3>
-                    <p style="font-size: 0.9375rem; color: #716F6E; line-height: 1.65; margin: 0 0 1.5rem 0; max-width: 520px;">
-                        Discover the unique aroma, flavor, and characteristics that make Indonesian vanilla a valued ingredient for global food industries.
-                    </p>
-                    <div>
-                        <a href="<?php echo esc_url(home_url('/what-makes-indonesian-vanilla-exceptional/')); ?>"
-                            style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
-                            Continue Reading &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
+                    $post_thumb = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Buat Blog Example 1.png';
+                    $post_cats  = get_the_category();
+                    $cat_label  = ! empty( $post_cats ) ? $post_cats[0]->name : 'Vanilla Guide';
+                    $b_idx++;
+                    ?>
+                    <!-- Article <?php echo esc_attr( $b_idx ); ?>: <?php echo esc_html( $badge_str ); ?> -->
+                    <div class="gv-blog-article-row" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: center;">
+                        <!-- Left Column: Big Number & Photo -->
+                        <div style="position: relative; width: 100%;">
+                            <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(3.75rem, 5.5vw, 4.75rem); font-weight: 700; color: #BAC4B5; line-height: 0.9; margin-bottom: -1rem; position: relative; z-index: 1; letter-spacing: -0.02em; user-select: none;">
+                                <?php echo esc_html( $badge_str ); ?>
+                            </div>
+                            <div style="position: relative; z-index: 2; border-radius: 0; overflow: hidden; aspect-ratio: 16 / 10; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+                                <img src="<?php echo esc_url( $post_thumb ); ?>"
+                                    alt="<?php echo esc_attr( get_the_title() ); ?>"
+                                    style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
+                            </div>
+                        </div>
 
-            <!-- Article 2: 11/12 -->
-            <div class="gv-blog-article-row" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: center;">
-                <!-- Left Column: Big Number & Photo -->
-                <div style="position: relative; width: 100%;">
-                    <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(3.75rem, 5.5vw, 4.75rem); font-weight: 700; color: #BAC4B5; line-height: 0.9; margin-bottom: -1rem; position: relative; z-index: 1; letter-spacing: -0.02em; user-select: none;">
-                        11/12
+                        <!-- Right Column: Details & Underline Link -->
+                        <div style="display: flex; flex-direction: column; justify-content: center;">
+                            <div style="display: flex; align-items: center; gap: 0.65rem; color: #363E19; font-size: 0.8125rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
+                                <span style="display: inline-block; width: 22px; height: 1.5px; background: #363E19;"></span>
+                                <?php echo esc_html( $cat_label ); ?>
+                            </div>
+                            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 700; color: #363E19; margin: 0 0 0.85rem 0; line-height: 1.25;">
+                                <a href="<?php the_permalink(); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
+                                    <?php the_title(); ?>
+                                </a>
+                            </h3>
+                            <p style="font-size: 0.9375rem; color: #716F6E; line-height: 1.65; margin: 0 0 1.5rem 0; max-width: 520px;">
+                                <?php echo esc_html( get_the_excerpt() ); ?>
+                            </p>
+                            <div>
+                                <a href="<?php the_permalink(); ?>"
+                                    style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
+                                    Continue Reading &rarr;
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div style="position: relative; z-index: 2; border-radius: 0; overflow: hidden; aspect-ratio: 16 / 10; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
-                        <img src="<?php echo esc_url($img_dir . 'Buat blog example 2.png'); ?>"
-                            alt="From Vanilla Bean to Global Ingredient"
-                            style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
-                    </div>
-                </div>
-
-                <!-- Right Column: Details & Underline Link -->
-                <div style="display: flex; flex-direction: column; justify-content: center;">
-                    <div style="display: flex; align-items: center; gap: 0.65rem; color: #363E19; font-size: 0.8125rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
-                        <span style="display: inline-block; width: 22px; height: 1.5px; background: #363E19;"></span>
-                        Vanilla Insight
-                    </div>
-                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 700; color: #363E19; margin: 0 0 0.85rem 0; line-height: 1.25;">
-                        <a href="<?php echo esc_url(home_url('/from-vanilla-bean-to-global-ingredient/')); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
-                            From Vanilla Bean to Global Ingredient
-                        </a>
-                    </h3>
-                    <p style="font-size: 0.9375rem; color: #716F6E; line-height: 1.65; margin: 0 0 1.5rem 0; max-width: 520px;">
-                        Explore how quality vanilla is sourced, processed, and prepared to meet the needs of international B2B buyers.
-                    </p>
-                    <div>
-                        <a href="<?php echo esc_url(home_url('/from-vanilla-bean-to-global-ingredient/')); ?>"
-                            style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
-                            Continue Reading &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
         </div>
 
         <!-- View All Blog Button -->

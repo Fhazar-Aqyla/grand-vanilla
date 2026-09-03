@@ -49,6 +49,56 @@ function grand_vanilla_setup() {
 add_action( 'after_setup_theme', 'grand_vanilla_setup' );
 
 /**
+ * Custom Walkers for Primary & Mobile Navigation to preserve exact styling
+ */
+class Grand_Vanilla_Nav_Walker extends Walker_Nav_Menu {
+    public function start_lvl( &$output, $depth = 0, $args = null ) {}
+    public function end_lvl( &$output, $depth = 0, $args = null ) {}
+    public function start_el( &$output, $data_object, $depth = 0, $args = null, $current_object_id = 0 ) {
+        $item    = $data_object;
+        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+        $is_active = in_array( 'current-menu-item', $classes ) || in_array( 'current_page_item', $classes );
+
+        // Manual match for front page or blog archive
+        if ( is_front_page() && home_url( '/' ) === trailingslashit( $item->url ) ) {
+            $is_active = true;
+        }
+
+        $active_style = $is_active ? 'border-bottom: 2px solid #363E19;' : '';
+        $link_style   = "font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; {$active_style}";
+
+        $output .= '<a href="' . esc_url( $item->url ) . '" style="' . esc_attr( $link_style ) . '">';
+        $output .= esc_html( $item->title );
+        $output .= '</a>';
+    }
+    public function end_el( &$output, $data_object, $depth = 0, $args = null ) {}
+}
+
+class Grand_Vanilla_Mobile_Walker extends Walker_Nav_Menu {
+    public function start_lvl( &$output, $depth = 0, $args = null ) {}
+    public function end_lvl( &$output, $depth = 0, $args = null ) {}
+    public function start_el( &$output, $data_object, $depth = 0, $args = null, $current_object_id = 0 ) {
+        $item = $data_object;
+        $link_style = "font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 600; color: #363E19; text-decoration: none;";
+
+        $output .= '<a href="' . esc_url( $item->url ) . '" style="' . esc_attr( $link_style ) . '">';
+        $output .= esc_html( $item->title );
+        $output .= '</a>';
+    }
+    public function end_el( &$output, $data_object, $depth = 0, $args = null ) {}
+}
+
+class Grand_Vanilla_Footer_Walker extends Walker_Nav_Menu {
+    public function start_lvl( &$output, $depth = 0, $args = null ) {}
+    public function end_lvl( &$output, $depth = 0, $args = null ) {}
+    public function start_el( &$output, $data_object, $depth = 0, $args = null, $current_object_id = 0 ) {
+        $item = $data_object;
+        $output .= '<a href="' . esc_url( $item->url ) . '">' . esc_html( $item->title ) . '</a>';
+    }
+    public function end_el( &$output, $data_object, $depth = 0, $args = null ) {}
+}
+
+/**
  * 2. Enqueue Styles and Scripts
  */
 function grand_vanilla_scripts() {
@@ -165,6 +215,29 @@ function grand_vanilla_register_gallery_cpt() {
     );
 
     register_post_type( 'vanilla_gallery', $args );
+
+    // Taxonomy: Gallery Categories (e.g. Vanilla, Company)
+    $gallery_cat_labels = array(
+        'name'              => _x( 'Gallery Categories', 'taxonomy general name', 'grand-vanilla' ),
+        'singular_name'     => _x( 'Gallery Category', 'taxonomy singular name', 'grand-vanilla' ),
+        'search_items'      => __( 'Search Categories', 'grand-vanilla' ),
+        'all_items'         => __( 'All Categories', 'grand-vanilla' ),
+        'edit_item'         => __( 'Edit Category', 'grand-vanilla' ),
+        'update_item'       => __( 'Update Category', 'grand-vanilla' ),
+        'add_new_item'      => __( 'Add New Category', 'grand-vanilla' ),
+        'new_item_name'     => __( 'New Category Name', 'grand-vanilla' ),
+        'menu_name'         => __( 'Categories', 'grand-vanilla' ),
+    );
+
+    register_taxonomy( 'gallery_category', array( 'vanilla_gallery' ), array(
+        'hierarchical'      => true,
+        'labels'            => $gallery_cat_labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'gallery-category' ),
+        'show_in_rest'      => true,
+    ) );
 }
 add_action( 'init', 'grand_vanilla_register_gallery_cpt' );
 

@@ -10,38 +10,30 @@ get_header();
 $img_dir = get_template_directory_uri() . '/assets/images/';
 $contact = grand_vanilla_get_contact_info();
 
-$gallery_carousel_items = array(
-    array(
-        'img'      => 'Gallery Example Carroussel 1.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Pure Vanilla',
-    ),
-    array(
-        'img'      => 'Gallery Example Carroussel 2.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Handcrafted Vanilla',
-    ),
-    array(
-        'img'      => 'Gallery Example Carroussel 3.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Fresh Vanilla Pods',
-    ),
-    array(
-        'img'      => 'Gallery Example Carroussel 4.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Premium Vanilla Beans',
-    ),
-    array(
-        'img'      => 'Gallery Example Carroussel 5.png',
-        'tag'      => 'Vanilla',
-        'title'    => 'Vanilla Collection',
-        'subtitle' => 'Vanilla in Bloom',
-    ),
-);
+// Fetch dynamic gallery items for carousel
+$gallery_carousel_query = new WP_Query( array(
+    'post_type'      => 'vanilla_gallery',
+    'posts_per_page' => 8,
+    'post_status'    => 'publish',
+    'orderby'        => 'menu_order date',
+    'order'          => 'ASC',
+) );
+
+$gallery_carousel_items = array();
+if ( $gallery_carousel_query->have_posts() ) {
+    while ( $gallery_carousel_query->have_posts() ) {
+        $gallery_carousel_query->the_post();
+        $terms = get_the_terms( get_the_ID(), 'gallery_category' );
+        $tag   = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : 'Vanilla';
+        $gallery_carousel_items[] = array(
+            'img'      => has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Gallery Example Carroussel 1.png',
+            'tag'      => $tag,
+            'title'    => 'Vanilla Collection',
+            'subtitle' => get_the_title(),
+        );
+    }
+    wp_reset_postdata();
+}
 ?>
 
 <!-- 1. Hero Section -->
@@ -52,7 +44,7 @@ $gallery_carousel_items = array(
     </div>
 </section>
 
-<!-- 2. A Closer Look — Carousel (exact same as homepage) -->
+<!-- 2. A Closer Look — Carousel (Dynamic WP_Query) -->
 <section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; overflow: hidden;">
     <div class="gv-container">
 
@@ -87,7 +79,7 @@ $gallery_carousel_items = array(
                 <div class="gv-gallery-card" style="flex: 0 0 290px; width: 290px; background: #FAF8F5; border-radius: 0; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.03); display: flex; flex-direction: column;">
                     <!-- Card Image -->
                     <div style="height: 310px; width: 100%; overflow: hidden;">
-                        <img src="<?php echo esc_url( $img_dir . $item['img'] ); ?>"
+                        <img src="<?php echo esc_url( $item['img'] ); ?>"
                             alt="<?php echo esc_attr( $item['title'] . ' - ' . $item['subtitle'] ); ?>"
                             style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
@@ -114,56 +106,74 @@ $gallery_carousel_items = array(
 
 </section>
 
-<!-- 3. Explore More Gallery (Interactive Tabs & Grid) -->
+<!-- 3. Explore More Gallery (Interactive Tabs & Grid - Dynamic WP_Query) -->
 <section class="gv-section" style="background-color: #DDE2D9; padding: 4rem 0 6rem; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
 
         <div style="margin-bottom: 2rem;">
             <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; color: #363E19; margin-bottom: 1.5rem;">Explore More Gallery</h2>
 
-            <!-- Category Filter Tabs -->
+            <!-- Category Filter Tabs (Dynamic from gallery_category taxonomy) -->
             <div class="gv-gallery-filter-tabs" id="gv-gallery-tabs">
                 <button type="button" class="gv-gallery-tab active" data-filter="all">All Gallery</button>
-                <button type="button" class="gv-gallery-tab" data-filter="vanilla">Vanilla</button>
-                <button type="button" class="gv-gallery-tab" data-filter="company">Company</button>
+                <?php
+                $gallery_terms = get_terms( array(
+                    'taxonomy'   => 'gallery_category',
+                    'hide_empty' => false,
+                ) );
+                if ( ! empty( $gallery_terms ) && ! is_wp_error( $gallery_terms ) ) :
+                    foreach ( $gallery_terms as $gt ) :
+                ?>
+                    <button type="button" class="gv-gallery-tab" data-filter="<?php echo esc_attr( $gt->slug ); ?>">
+                        <?php echo esc_html( $gt->name ); ?>
+                    </button>
+                <?php
+                    endforeach;
+                endif;
+                ?>
             </div>
         </div>
 
-        <!-- Gallery Items Grid: 4 columns -->
+        <!-- Gallery Items Grid: 4 columns (Dynamic from vanilla_gallery CPT) -->
         <div class="gv-gallery-explore-grid" id="gv-gallery-grid">
             <?php
-            $gallery_samples = array(
-                array( 'img' => 'Gallery Example Carroussel 1.png', 'tag' => 'Vanilla', 'title' => 'Sun Drying Decks',         'desc' => 'Patient sun drying under equatorial sunshine in East Java. A traditional method that preserves the natural vanillin compounds.',           'cat' => 'vanilla' ),
-                array( 'img' => 'Gallery Example Carroussel 2.png', 'tag' => 'Vanilla', 'title' => 'Wooden Sweat Boxes',      'desc' => 'Nightly sweat box conditioning to maximize natural vanillin. Temperature-controlled for consistent curing quality.',                     'cat' => 'vanilla' ),
-                array( 'img' => 'Gallery Example Carroussel 3.png', 'tag' => 'Vanilla', 'title' => 'Orchid Hand Pollination', 'desc' => 'Delicate hand pollination during morning floral bloom. Each flower pollinated individually by skilled farmers.',                         'cat' => 'vanilla' ),
-                array( 'img' => 'Gallery Example Carroussel 4.png', 'tag' => 'Vanilla', 'title' => 'Pod Length Sorting',      'desc' => 'Precision manual sorting by length and moisture. Only pods meeting export standards proceed to packaging.',                              'cat' => 'vanilla' ),
-                array( 'img' => 'Gallery Example Carroussel 5.png', 'tag' => 'Vanilla', 'title' => 'Wax Paper Bundling',      'desc' => 'Aroma-sealed wax wrapping for export safety. Bundles are vacuum-sealed to preserve fragrance during transit.',                          'cat' => 'vanilla' ),
-                array( 'img' => 'Our Story.png',                    'tag' => 'Company', 'title' => 'Agroforestry Canopy',     'desc' => 'Shade-grown vanilla vines climbing live Gamal trees. Our agroforestry system supports biodiversity and soil health.',                   'cat' => 'company' ),
-                array( 'img' => 'Sourcing.png',                     'tag' => 'Vanilla', 'title' => 'Fresh Pod Harvest',       'desc' => 'Harvesting only when pods develop yellow blossom tips. Timing is critical to achieve peak vanillin concentration.',                      'cat' => 'vanilla' ),
-                array( 'img' => 'Processing.png',                   'tag' => 'Company', 'title' => 'Inspection Facility',     'desc' => 'Laboratory moisture testing and quality inspection. Every batch is tested before dispatch to ensure consistency.',                       'cat' => 'company' ),
-                array( 'img' => 'Warehouse.png',                    'tag' => 'Company', 'title' => 'Clean Room Storage',      'desc' => 'Climate-controlled warehouse and logistics staging. Optimal humidity and temperature maintained year-round.',                           'cat' => 'company' ),
-                array( 'img' => 'Bulk  Wholesale Vanilla 1.png',    'tag' => 'Company', 'title' => 'Export Shipping Staging', 'desc' => 'FOB / CIF export packaging for global buyers. Custom lot sizes available from 1 kg samples to bulk containers.',                       'cat' => 'company' ),
-                array( 'img' => 'Planifolia Carroussel 1.png',      'tag' => 'Vanilla', 'title' => 'Planifolia Grade A Pods', 'desc' => "Supple, glossy caviar-rich Gourmet vanilla beans. Indonesia's finest Planifolia grown in volcanic East Java soil.",                    'cat' => 'vanilla' ),
-                array( 'img' => 'Tahitensis Carroussel 1.png',      'tag' => 'Vanilla', 'title' => 'Tahitensis Floral Pods',  'desc' => 'Aromatic floral pods for boutique confectionery. Prized for their unique heliotropin and anise-like fragrance.',                       'cat' => 'vanilla' ),
-            );
+            $gallery_grid_query = new WP_Query( array(
+                'post_type'      => 'vanilla_gallery',
+                'posts_per_page' => -1,
+                'post_status'    => 'publish',
+                'orderby'        => 'menu_order date',
+                'order'          => 'ASC',
+            ) );
 
-            foreach ( $gallery_samples as $item ) :
+            if ( $gallery_grid_query->have_posts() ) :
+                while ( $gallery_grid_query->have_posts() ) :
+                    $gallery_grid_query->the_post();
+                    $terms     = get_the_terms( get_the_ID(), 'gallery_category' );
+                    $cat_slug  = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->slug : 'vanilla';
+                    $cat_name  = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : 'Vanilla';
+                    $card_img  = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Gallery Example Carroussel 1.png';
+                    $card_desc = get_the_content();
+                    if ( empty( $card_desc ) ) {
+                        $card_desc = get_the_excerpt();
+                    }
                 ?>
-                <div class="gv-gallery-explore-card gv-gallery-item" data-cat="<?php echo esc_attr( $item['cat'] ); ?>">
+                <div class="gv-gallery-explore-card gv-gallery-item" data-cat="<?php echo esc_attr( $cat_slug ); ?>">
                     <div class="gv-gallery-explore-img-wrap">
-                        <img src="<?php echo esc_url( $img_dir . $item['img'] ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>" class="gv-gallery-explore-img" loading="lazy">
+                        <img src="<?php echo esc_url( $card_img ); ?>" alt="<?php the_title_attribute(); ?>" class="gv-gallery-explore-img" loading="lazy">
                     </div>
                     <div class="gv-gallery-explore-body">
                         <div class="gv-gallery-explore-tag">
                             <span class="gv-gallery-explore-tag-line"></span>
-                            <?php echo esc_html( $item['tag'] ); ?>
+                            <?php echo esc_html( $cat_name ); ?>
                         </div>
-                        <h3 class="gv-gallery-explore-title"><?php echo esc_html( $item['title'] ); ?></h3>
-                        <p class="gv-gallery-explore-desc"><?php echo esc_html( $item['desc'] ); ?></p>
+                        <h3 class="gv-gallery-explore-title"><?php the_title(); ?></h3>
+                        <p class="gv-gallery-explore-desc"><?php echo esc_html( wp_strip_all_tags( $card_desc ) ); ?></p>
                     </div>
                 </div>
                 <?php
-            endforeach;
+                endwhile;
+                wp_reset_postdata();
+            endif;
             ?>
         </div>
 
