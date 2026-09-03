@@ -402,70 +402,64 @@ $contact = grand_vanilla_get_contact_info();
     </div>
 </section>
 
-<!-- 7. Section: Our Facilities (Zig-Zag Alternating 2-Column Layout) -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<!-- 7. Section: Our Facilities (Consistent with Products 'Explore More Products' Architecture) -->
+<section class="gv-section" style="background-color: #DDE2D9; padding: 6.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
-        <!-- Header Split (Title on Left, Description on Right) -->
-        <div class="gv-facilities-header-grid" style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 3rem; align-items: flex-end; margin-bottom: 4.5rem;">
+        <!-- Header Split (Consistent across theme) -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
                     <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                     Our Facilities
                 </div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #363E19; line-height: 1.18; margin: 0;">
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #363E19; line-height: 1.15; margin: 0;">
                     Built To Support Reliable<br>Operations.
                 </h2>
             </div>
-            <div>
-                <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin: 0;">
+            <div style="max-width: 440px;">
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: #4A5239; margin: 0;">
                     Our facilities support the handling, processing, storage, and preparation of Indonesian vanilla for international orders.
                 </p>
             </div>
         </div>
 
-        <!-- Facility Items (Equal 1:1 Grid Split - Exact Match to Figma UI/UX) -->
-        <div style="display: flex; flex-direction: column; gap: 4.5rem;">
+        <!-- Facilities Rows (Structured identically to Explore More Products) -->
+        <div class="gv-explore-rows">
             
-            <!-- Facility Row 1: Warehouse (Text Left 50%, Image Right 50%) -->
-            <div class="gv-facility-row-1" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
-                <div style="display: flex; flex-direction: column; justify-content: center;">
-                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
+            <!-- Row 1: Warehouse & Storage (Text Left, Image Right) -->
+            <div class="gv-explore-row">
+                <div class="gv-explore-text-col">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
                         <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                         Warehouse
                     </div>
-                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.75rem, 2.5vw, 2.25rem); font-weight: 700; color: #363E19; margin-bottom: 1rem; line-height: 1.25;">
-                        Warehouse & Storage
-                    </h3>
-                    <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.7; margin: 0; max-width: 440px;">
+                    <h3 class="gv-explore-item-title">Warehouse & Storage</h3>
+                    <p class="gv-explore-item-desc">
                         A dedicated space for storing and handling vanilla products while supporting wholesale and bulk order requirements.
                     </p>
                 </div>
-
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); aspect-ratio: 16 / 11; width: 100%;">
+                <div class="gv-explore-img-card gv-facility-card">
                     <img src="<?php echo esc_url( $img_dir . 'Warehouse.png' ); ?>" 
                          alt="Grand Vanilla Indonesia Warehouse & Storage Facility" 
-                         style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 12px;">
+                         class="gv-explore-img">
                 </div>
             </div>
 
-            <!-- Facility Row 2: Processing (Image Left 50%, Text Right 50%) -->
-            <div class="gv-facility-row-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
-                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); aspect-ratio: 16 / 11; width: 100%;">
+            <!-- Row 2: Processing Facility (Image Left, Text Right - Reverse) -->
+            <div class="gv-explore-row gv-explore-row-reverse">
+                <div class="gv-explore-img-card gv-facility-card">
                     <img src="<?php echo esc_url( $img_dir . 'Processing.png' ); ?>" 
                          alt="Grand Vanilla Indonesia Vanilla Processing Facility" 
-                         style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 12px;">
+                         class="gv-explore-img">
                 </div>
-
-                <div style="display: flex; flex-direction: column; justify-content: center;">
-                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
+                <div class="gv-explore-text-col">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
                         <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                         Processing
                     </div>
-                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.75rem, 2.5vw, 2.25rem); font-weight: 700; color: #363E19; margin-bottom: 1rem; line-height: 1.25;">
-                        Processing Facility
-                    </h3>
-                    <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.7; margin: 0; max-width: 440px;">
+                    <h3 class="gv-explore-item-title">Processing Facility</h3>
+                    <p class="gv-explore-item-desc">
                         A dedicated facility for handling and preparing vanilla products according to product and buyer requirements.
                     </p>
                 </div>
@@ -486,6 +480,103 @@ get_template_part( 'template-parts/cta-banner', null, array(
 ?>
 
 <style>
+/* Facilities Rows Architecture (Matching archive-vanilla_product.php) */
+.gv-explore-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+}
+
+.gv-explore-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .gv-explore-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .gv-explore-row.gv-explore-row-reverse {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .gv-explore-row:not(.gv-explore-row-reverse) .gv-explore-text-col {
+        padding-left: 0.5rem;
+        padding-right: 2rem;
+    }
+
+    .gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
+        padding-left: 2rem;
+        padding-right: 0.5rem;
+    }
+}
+
+.gv-explore-text-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.gv-explore-item-title {
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-size: clamp(1.85rem, 2.5vw, 2.35rem);
+    font-weight: 700;
+    color: #363E19;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+.gv-explore-item-desc {
+    color: #4A5239;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 440px;
+}
+
+.gv-explore-img-card.gv-facility-card {
+    background-color: transparent;
+    border-radius: 16px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.gv-explore-img-card.gv-facility-card .gv-explore-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 16px;
+    transition: transform 0.4s ease;
+}
+
+.gv-explore-img-card.gv-facility-card:hover .gv-explore-img {
+    transform: scale(1.03);
+}
+
+@media (max-width: 899px) {
+    .gv-explore-row.gv-explore-row-reverse .gv-explore-img-card {
+        order: 2;
+    }
+    .gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
+        order: 1;
+    }
+}
+
 @media (max-width: 991px) {
     .gv-about-overview-grid { grid-template-columns: 1fr !important; }
     .gv-journey-header-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
@@ -493,11 +584,6 @@ get_template_part( 'template-parts/cta-banner', null, array(
     .gv-sourcing-dark-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
     .gv-sourcing-left-col { justify-content: flex-start !important; gap: 1.5rem !important; }
     .gv-sourcing-left-bottom { padding-top: 0 !important; }
-    .gv-facilities-header-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
-    .gv-facility-row-1 { grid-template-columns: 1fr !important; }
-    .gv-facility-row-2 { grid-template-columns: 1fr !important; }
-    .gv-facility-row-2 > div:first-child { order: 2; }
-    .gv-facility-row-2 > div:last-child { order: 1; }
 }
 </style>
 
