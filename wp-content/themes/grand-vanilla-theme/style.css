@@ -332,40 +332,56 @@ ul {
     position: relative;
     background-color: var(--color-pitch-black);
     color: var(--color-white);
-    padding: var(--space-80) 0;
+    padding: 6.75rem 0;
+    min-height: 270px;
     text-align: center;
     background-size: cover;
     background-position: center;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gv-hero-page::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(10, 8, 4, 0.65);
+    background: rgba(10, 8, 4, 0.32);
     z-index: 1;
 }
 
 .gv-hero-page .gv-container {
     position: relative;
     z-index: 2;
+    width: 100%;
 }
 
 .gv-hero-tag {
     font-family: var(--font-heading);
-    font-size: 2.25rem;
+    font-size: clamp(2.25rem, 4vw, 2.85rem);
     font-weight: 800;
-    color: var(--color-white);
-    margin-bottom: var(--space-8);
+    color: #FFFFFF;
+    margin-bottom: 0.65rem;
     letter-spacing: -0.02em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .gv-hero-subtag {
-    font-size: 1.0625rem;
-    color: var(--color-nw-200);
-    max-width: 38rem;
+    font-size: clamp(1rem, 1.8vw, 1.125rem);
+    color: #FFFFFF;
+    max-width: 40rem;
     margin: 0 auto;
+    opacity: 0.95;
+    line-height: 1.5;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65);
+}
+
+@media (max-width: 768px) {
+    .gv-hero-page {
+        padding: 4.75rem 1.25rem;
+        min-height: 220px;
+    }
 }
 
 /* -------------------------------------------------------------
