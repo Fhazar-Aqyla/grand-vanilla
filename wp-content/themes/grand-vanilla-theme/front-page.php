@@ -250,13 +250,13 @@ $contact = grand_vanilla_get_contact_info();
                          style="max-height: 100%; max-width: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));">
                 </div>
 
-                <!-- Product Content & Actions -->
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;">
-                    <div>
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.35rem; font-weight: 700; color: #363E19; margin: 0 0 0.35rem 0; line-height: 1.2;">
+                <!-- Product Content & Actions (Side by Side) -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 0.75rem;">
+                    <div style="flex: 1 1 auto; min-width: 0;">
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.35rem; font-weight: 700; color: #363E19; margin: 0 0 0.35rem 0; line-height: 1.2; white-space: nowrap;">
                             Vanilla Powder
                         </h3>
-                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.45; max-width: 280px;">
+                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.45;">
                             Finely ground vanilla for versatile food and beverage applications.
                         </p>
                     </div>
@@ -289,13 +289,13 @@ $contact = grand_vanilla_get_contact_info();
                          style="max-height: 100%; max-width: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));">
                 </div>
 
-                <!-- Product Content & Actions -->
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;">
-                    <div>
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.35rem; font-weight: 700; color: #363E19; margin: 0 0 0.35rem 0; line-height: 1.2;">
+                <!-- Product Content & Actions (Side by Side) -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 0.75rem;">
+                    <div style="flex: 1 1 auto; min-width: 0;">
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.35rem; font-weight: 700; color: #363E19; margin: 0 0 0.35rem 0; line-height: 1.2; white-space: nowrap;">
                             Vanilla Extract
                         </h3>
-                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.45; max-width: 280px;">
+                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.45;">
                             Rich vanilla extract crafted for consistent flavor and aroma.
                         </p>
                     </div>
@@ -939,11 +939,19 @@ get_template_part( 'template-parts/cta-banner', null, array(
 .gv-card-actions-slot {
     position: relative;
     height: 38px;
-    min-width: 110px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     flex-shrink: 0;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), min-width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gv-product-card.is-collapsed .gv-card-actions-slot {
+    min-width: 38px;
+    width: 38px;
+}
+.gv-product-card.is-active .gv-card-actions-slot {
+    min-width: 105px;
+    width: 105px;
 }
 
 .gv-card-btn-detail {
