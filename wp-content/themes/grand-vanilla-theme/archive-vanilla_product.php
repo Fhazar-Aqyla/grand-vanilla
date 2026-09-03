@@ -250,7 +250,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
     /* Products Cards Grid (Flex Accordion Architecture) */
     .gv-products-cards-grid {
         display: flex;
-        gap: 1.5rem;
+        gap: 1rem;
         margin-bottom: 3.5rem;
         align-items: stretch;
         width: 100%;
@@ -259,14 +259,14 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
     .gv-product-card {
         background-color: #BDC4B8;
         border-radius: 12px;
-        padding: 1.25rem 1.25rem 1.25rem;
+        padding: 1.35rem 1.35rem 1.35rem;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         position: relative;
         overflow: hidden;
         min-width: 0;
-        height: 330px;
+        height: 400px;
         box-sizing: border-box;
         transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, padding 0.4s ease;
         will-change: flex;
@@ -274,15 +274,15 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 
     .gv-card-badge {
         position: absolute;
-        top: 1.15rem;
-        left: 1.15rem;
+        top: 1.25rem;
+        left: 1.25rem;
         background-color: #363E19;
         color: #FFFFFF;
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: 0.8125rem;
         font-weight: 700;
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
         border-radius: 4px;
         display: flex;
         align-items: center;
@@ -296,13 +296,13 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         .gv-product-card.is-active {
             flex: 1.95 1 0px !important;
             cursor: default;
-            padding: 1.35rem 1.6rem 1.25rem;
+            padding: 1.5rem 1.6rem 1.35rem;
         }
 
         .gv-product-card.is-collapsed {
             flex: 1 1 0px !important;
             cursor: pointer;
-            padding: 1.25rem 1.25rem 1.25rem;
+            padding: 1.4rem 1.25rem 1.35rem;
         }
 
         .gv-product-card.is-collapsed:hover {
@@ -318,7 +318,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         align-items: flex-end;
         justify-content: center;
         margin-top: auto;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         width: 100%;
         overflow: visible;
     }
@@ -327,18 +327,18 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         width: auto;
         height: auto;
         object-fit: contain;
-        filter: drop-shadow(0 6px 14px rgba(0,0,0,0.06));
+        filter: drop-shadow(0 8px 18px rgba(0,0,0,0.07));
         transition: transform 0.4s ease;
     }
 
     .gv-product-card.is-active .gv-card-img {
-        max-height: 175px;
+        max-height: 225px;
         max-width: 95%;
     }
 
     .gv-product-card.is-collapsed .gv-card-img {
-        max-height: 155px;
-        max-width: 98%;
+        max-height: 200px;
+        max-width: 96%;
     }
 
     /* Bottom Content Area (Title, Desc & Buttons) */
