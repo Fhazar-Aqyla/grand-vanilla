@@ -172,66 +172,80 @@ $contact = grand_vanilla_get_contact_info();
     </div>
 </section>
 
-<!-- 3. Premium Products Section -->
-<section class="gv-section" style="background-color: #DDE2D9; padding: 5rem 0 6rem; border-top: 1px solid rgba(0,0,0,0.04);">
+<!-- 3. Premium Products Section (Exact Figma UI/UX Alignment) -->
+<section class="gv-section" style="background-color: #DDE2D9; padding: 6rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
         
         <!-- Header Split -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.9375rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
                     <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                     Products
                 </div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.15;">
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #363E19; line-height: 1.15; margin: 0;">
                     Premium Indonesian<br>Vanilla Products
                 </h2>
             </div>
             <div style="max-width: 440px;">
-                <p style="font-size: 0.9375rem; line-height: 1.6; color: #4A5239; margin: 0;">
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: #716F6E; margin: 0;">
                     Explore our range of quality Indonesian vanilla products, carefully sourced and prepared to meet the needs of global B2B buyers.
                 </p>
             </div>
         </div>
 
-        <!-- 3 Product Cards Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.75rem; margin-bottom: 3.5rem;">
+        <!-- 3 Product Cards Grid (Card 1 is wider: 1.8fr 1fr 1fr) -->
+        <div class="gv-products-cards-grid" style="display: grid; grid-template-columns: 1.8fr 1fr 1fr; gap: 1.75rem; margin-bottom: 3.5rem; align-items: stretch;">
             
-            <!-- Card 1: Vanilla Beans -->
-            <div style="background-color: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
-                <div style="position: absolute; top: 1.25rem; left: 1.25rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
+            <!-- Card 1: Vanilla Beans (Wider Card) -->
+            <div style="background-color: #BDC4B8; border-radius: 12px; padding: 2rem 2rem 2.25rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+                <!-- Badge #1 -->
+                <div style="position: absolute; top: 1.5rem; left: 1.5rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 700; width: 34px; height: 34px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
                     #1
                 </div>
-                <div style="height: 220px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 1.png' ); ?>" alt="Vanilla Beans" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+
+                <!-- Product Image -->
+                <div style="height: 270px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 1.png' ); ?>" 
+                         alt="Vanilla Beans" 
+                         style="max-height: 100%; max-width: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));">
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;">
+
+                <!-- Product Content & Detail Button -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1.25rem;">
                     <div>
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.375rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.5rem; font-weight: 700; color: #363E19; margin: 0 0 0.4rem 0;">
                             Vanilla Beans
                         </h3>
-                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.5;">
+                        <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.5; max-width: 290px;">
                             Premium vanilla beans with a rich aroma and distinctive flavor.
                         </p>
                     </div>
                     <a href="<?php echo esc_url( home_url( '/products/indonesian-planifolia-vanilla-beans/' ) ); ?>" 
-                       style="display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; white-space: nowrap;">
+                       style="display: inline-flex; align-items: center; gap: 0.6rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.65rem 1.35rem; border-radius: 2px; text-decoration: none; white-space: nowrap; transition: all 0.2s ease;">
                         Detail &rarr;
                     </a>
                 </div>
             </div>
 
             <!-- Card 2: Vanilla Powder -->
-            <div style="background-color: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
-                <div style="position: absolute; top: 1.25rem; left: 1.25rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
+            <div style="background-color: #BDC4B8; border-radius: 12px; padding: 2rem 1.75rem 2.25rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+                <!-- Badge #2 -->
+                <div style="position: absolute; top: 1.5rem; left: 1.5rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 700; width: 34px; height: 34px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
                     #2
                 </div>
-                <div style="height: 220px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 2.png' ); ?>" alt="Vanilla Powder" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+
+                <!-- Product Image -->
+                <div style="height: 270px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 2.png' ); ?>" 
+                         alt="Vanilla Powder" 
+                         style="max-height: 100%; max-width: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));">
                 </div>
+
+                <!-- Product Content & Arrow Button -->
                 <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;">
                     <div>
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.375rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.375rem; font-weight: 700; color: #363E19; margin: 0 0 0.4rem 0;">
                             Vanilla Powder
                         </h3>
                         <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.5;">
@@ -239,23 +253,30 @@ $contact = grand_vanilla_get_contact_info();
                         </p>
                     </div>
                     <a href="<?php echo esc_url( home_url( '/products/indonesian-tahitensis-vanilla-beans/' ) ); ?>" 
-                       style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid #363E19; color: #363E19; background: transparent; border-radius: 4px; text-decoration: none; flex-shrink: 0;">
+                       style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid #363E19; color: #363E19; background: transparent; border-radius: 2px; text-decoration: none; flex-shrink: 0; transition: all 0.2s ease;">
                         &rarr;
                     </a>
                 </div>
             </div>
 
             <!-- Card 3: Vanilla Extract -->
-            <div style="background-color: #CCD2C7; border-radius: 12px; padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
-                <div style="position: absolute; top: 1.25rem; left: 1.25rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
+            <div style="background-color: #BDC4B8; border-radius: 12px; padding: 2rem 1.75rem 2.25rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+                <!-- Badge #3 -->
+                <div style="position: absolute; top: 1.5rem; left: 1.5rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 700; width: 34px; height: 34px; border-radius: 4px; display: flex; align-items: center; justify-content: center; z-index: 2;">
                     #3
                 </div>
-                <div style="height: 220px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 3.png' ); ?>" alt="Vanilla Extract" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+
+                <!-- Product Image -->
+                <div style="height: 270px; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+                    <img src="<?php echo esc_url( $img_dir . 'Product Unggulan 3.png' ); ?>" 
+                         alt="Vanilla Extract" 
+                         style="max-height: 100%; max-width: 100%; width: auto; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));">
                 </div>
+
+                <!-- Product Content & Arrow Button -->
                 <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;">
                     <div>
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.375rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.375rem; font-weight: 700; color: #363E19; margin: 0 0 0.4rem 0;">
                             Vanilla Extract
                         </h3>
                         <p style="font-size: 0.8125rem; color: #4A5239; margin: 0; line-height: 1.5;">
@@ -263,7 +284,7 @@ $contact = grand_vanilla_get_contact_info();
                         </p>
                     </div>
                     <a href="<?php echo esc_url( home_url( '/products/gourmet-vanilla-extract-paste/' ) ); ?>" 
-                       style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid #363E19; color: #363E19; background: transparent; border-radius: 4px; text-decoration: none; flex-shrink: 0;">
+                       style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid #363E19; color: #363E19; background: transparent; border-radius: 2px; text-decoration: none; flex-shrink: 0; transition: all 0.2s ease;">
                         &rarr;
                     </a>
                 </div>
@@ -274,7 +295,7 @@ $contact = grand_vanilla_get_contact_info();
         <!-- View All Products CTA Button -->
         <div style="text-align: center;">
             <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" 
-               style="display: inline-flex; align-items: center; gap: 0.5rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 4px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
+               style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Products &rarr;
             </a>
         </div>
@@ -715,6 +736,12 @@ get_template_part( 'template-parts/cta-banner', null, array(
     .gv-grid-split-about { grid-template-columns: 1fr 1.15fr !important; }
     .gv-grid-split-oem { grid-template-columns: 1fr 1.25fr !important; }
     .gv-blog-card-split { grid-template-columns: 320px 1fr !important; }
+}
+@media (max-width: 991px) {
+    .gv-products-cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
 }
 </style>
 
