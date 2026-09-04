@@ -1,14 +1,14 @@
 /*
  * =====================================================================
  * Grand Vanilla ID — Responsive UI Refinement
- * Mobile (≤ 767px) & Tablet (768px–1024px) breakpoints only.
+ * Mobile (≤ 767px) & Tablet (768px–1024px) Breakpoints.
  * Desktop/Laptop (≥ 1025px) is STRICTLY FROZEN.
- * Source of truth: Reference PDFs (Mobile/ and Tablet/ directories).
+ * Source of Truth: docs/design-assets/Mobile and docs/design-assets/Tablet PDFs.
  * =====================================================================
  */
 
 /* =====================================================================
-   1. GLOBAL CONTAINER & OVERFLOW PROTECTION
+   1. GLOBAL CONTAINER & OVERFLOW (Mobile & Tablet)
    ===================================================================== */
 @media (max-width: 1024px) {
     html, body {
@@ -32,7 +32,7 @@
         height: auto !important;
     }
 
-    /* Brand Logo Constraints for Mobile & Tablet */
+    /* Brand Logo */
     .gv-header-logo-img,
     .gv-brand-logo img {
         height: 30px !important;
@@ -52,8 +52,14 @@
         object-fit: contain !important;
         display: block !important;
     }
+
+    /* Hide Desktop-only Single Product Pill Filters */
+    .gv-product-pills-nav {
+        display: none !important;
+    }
 }
 
+/* Base Spacing for Mobile */
 @media (max-width: 767px) {
     .gv-container {
         padding-left: 1.25rem !important;
@@ -65,6 +71,7 @@
     }
 }
 
+/* Base Spacing for Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
     .gv-container {
         padding-left: 2rem !important;
@@ -78,7 +85,6 @@
 
 /* =====================================================================
    2. HEADER / NAVIGATION
-   PDF: Mobile + Tablet both show hamburger menu, no desktop nav bar.
    ===================================================================== */
 @media (max-width: 1024px) {
     #site-navigation { display: none !important; }
@@ -102,7 +108,7 @@
 }
 
 /* =====================================================================
-   3. HERO PAGES (Inner Pages: About, Products, Gallery, Blog, Contact)
+   3. INNER PAGES HERO SECTION (#knowUs, #ourProducts, etc.)
    ===================================================================== */
 @media (max-width: 767px) {
     .gv-hero-page {
@@ -133,21 +139,19 @@
 
 /* =====================================================================
    4. LANDING PAGE — HERO SECTION
-   PDF Mobile: Full-height dark overlay, headline uppercase, side-by-side buttons.
-   PDF Tablet: Left-aligned, side-by-side buttons.
    ===================================================================== */
 @media (max-width: 767px) {
     .gv-hero {
         min-height: 100svh !important;
         min-height: 100vh !important;
-        padding: 5rem 0 4rem !important;
+        padding: 5rem 0 3.5rem !important;
         background-position: center center !important;
     }
 
     .gv-hero > div:first-child {
         background: linear-gradient(
             to bottom,
-            rgba(0,0,0,0.5) 0%,
+            rgba(0,0,0,0.52) 0%,
             rgba(0,0,0,0.32) 50%,
             rgba(0,0,0,0.18) 100%
         ) !important;
@@ -207,7 +211,7 @@
     }
 
     .gv-hero h1 {
-        font-size: clamp(2rem, 3.8vw, 2.75rem) !important;
+        font-size: clamp(2.2rem, 4vw, 2.75rem) !important;
         text-transform: uppercase !important;
         letter-spacing: 0.02em !important;
         line-height: 1.2 !important;
@@ -221,14 +225,21 @@
 /* =====================================================================
    5. ABOUT US SECTION (Landing Page & About Page Overview)
    PDF Mobile & Tablet: Dark khaki container with white text and
-   bordered feature boxes.
+   1 single column of bordered feature boxes.
    ===================================================================== */
 @media (max-width: 1024px) {
+    /* Hide duplicate second paragraph on mobile and tablet */
+    .gv-about-p-secondary,
+    .gv-grid-split-about > div:last-child p:nth-of-type(2),
+    .gv-about-overview-grid > div:last-child p:nth-of-type(2) {
+        display: none !important;
+    }
+
     .gv-grid-split-about > div:last-child,
     .gv-about-overview-grid > div:last-child {
         background-color: #363E19 !important;
         border-radius: 12px !important;
-        padding: 2.25rem 1.5rem !important;
+        padding: 2.25rem 1.75rem !important;
         color: #FFFFFF !important;
         box-sizing: border-box !important;
     }
@@ -240,7 +251,8 @@
 
     .gv-grid-split-about > div:last-child p,
     .gv-about-overview-grid > div:last-child p {
-        color: rgba(255, 255, 255, 0.85) !important;
+        color: rgba(255, 255, 255, 0.88) !important;
+        margin-bottom: 1.75rem !important;
     }
 
     .gv-grid-split-about > div:last-child div[style*="color: #363E19; font-size: 0.9375rem"],
@@ -253,19 +265,32 @@
         background: #FFFFFF !important;
     }
 
+    /* 4 Feature Boxes: 1 Single Column in both Mobile and Tablet PDFs */
+    .gv-grid-split-about > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"],
+    .gv-about-overview-grid > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 0.65rem !important;
+        margin-bottom: 2rem !important;
+    }
+
     .gv-grid-split-about > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] > div,
     .gv-about-overview-grid > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] > div {
         background-color: transparent !important;
-        border: 1px solid rgba(255, 255, 255, 0.28) !important;
+        border: 1px solid rgba(255, 255, 255, 0.32) !important;
         color: #FFFFFF !important;
-        font-size: 0.75rem !important;
-        padding: 0.75rem 0.5rem !important;
+        font-size: 0.8125rem !important;
+        font-weight: 600 !important;
+        padding: 0.8rem 1rem !important;
+        border-radius: 4px !important;
+        text-align: center !important;
     }
 
     .gv-grid-split-about > div:last-child a,
     .gv-about-overview-grid > div:last-child a {
         border-color: rgba(255, 255, 255, 0.85) !important;
         color: #FFFFFF !important;
+        background: transparent !important;
     }
 
     .gv-grid-split-about img[aria-hidden="true"],
@@ -293,158 +318,312 @@
         height: 280px !important;
         object-fit: cover !important;
         border-radius: 12px !important;
+        width: 100% !important;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .gv-grid-split-about,
     .gv-about-overview-grid {
+        display: grid !important;
         grid-template-columns: 1fr 1.15fr !important;
         gap: 2rem !important;
         align-items: stretch !important;
+    }
+
+    .gv-grid-split-about img[style*="max-height: 540px"],
+    .gv-about-overview-grid img {
+        height: 100% !important;
+        max-height: 100% !important;
+        min-height: 480px !important;
+        object-fit: cover !important;
+        border-radius: 12px !important;
+        width: 100% !important;
     }
 }
 
 /* =====================================================================
    6. PRODUCT CARDS COMPONENT (Homepage & Products Page)
-   PDF Mobile: 3 cards stacked vertically, each expanded.
-   PDF Tablet: 3 cards horizontal side-by-side matching Tablet PDF.
+   PDF Mobile: Card 1 active (#363E19, white text, arrow button).
+               Cards 2 & 3 collapsed (image only on page, no gray box).
+   PDF Tablet: 3 cards horizontal side-by-side row.
+               Card 1 active (#363E19, white text, arrow button).
+               Cards 2 & 3 collapsed (light sage background #BDC4B8, no button).
    ===================================================================== */
 @media (max-width: 767px) {
-    .gv-products-cards-grid {
+    html body .gv-products-cards-grid {
+        display: flex !important;
         flex-direction: column !important;
         gap: 1.25rem !important;
     }
 
-    .gv-product-card {
+    /* Active Card Mobile: Dark olive green background with white text */
+    html body .gv-product-card.is-active {
+        background-color: #363E19 !important;
+        border-radius: 12px !important;
+        padding: 1.5rem !important;
+        min-height: 340px !important;
         height: auto !important;
-        min-height: 320px !important;
-        flex: none !important;
-        padding: 1.25rem !important;
-        cursor: default !important;
-        pointer-events: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
     }
 
-    .gv-product-card a {
-        pointer-events: auto !important;
+    html body .gv-product-card.is-active .gv-card-badge {
+        background-color: #BDC4B8 !important;
+        color: #1C230C !important;
+        position: static !important;
+        margin-bottom: 0.5rem !important;
     }
 
-    .gv-card-img-wrap {
-        height: 200px !important;
+    html body .gv-product-card.is-active .gv-card-title {
+        color: #FFFFFF !important;
+        font-size: 1.35rem !important;
+        margin-bottom: 0.4rem !important;
+        white-space: normal !important;
     }
 
-    .gv-card-img {
-        max-height: 180px !important;
+    html body .gv-product-card.is-active .gv-card-desc {
+        color: rgba(255, 255, 255, 0.85) !important;
+        font-size: 0.875rem !important;
+        display: block !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-img-wrap {
+        height: 180px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 1rem 0 !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-img {
+        max-height: 170px !important;
         max-width: 90% !important;
+        object-fit: contain !important;
     }
 
-    .gv-product-card .gv-card-btn-detail {
+    html body .gv-product-card.is-active .gv-card-bottom {
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        margin-top: auto !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-actions-slot {
+        min-width: 42px !important;
+        width: 42px !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-btn-detail {
+        display: none !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-btn-arrow {
+        display: flex !important;
         opacity: 1 !important;
         visibility: visible !important;
-        transform: translate3d(0,0,0) !important;
+        width: 40px !important;
+        height: 40px !important;
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        color: #FFFFFF !important;
+        border-radius: 4px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
         pointer-events: auto !important;
     }
 
-    .gv-product-card .gv-card-btn-arrow {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
+    /* Collapsed Cards Mobile: Clean image on page background */
+    html body .gv-product-card.is-collapsed {
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0.5rem 0 !important;
+        min-height: 0 !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
     }
 
-    .gv-product-card .gv-card-actions-slot {
-        min-width: 105px !important;
-        width: 105px !important;
+    html body .gv-product-card.is-collapsed .gv-card-badge,
+    html body .gv-product-card.is-collapsed .gv-card-bottom {
+        display: none !important;
     }
 
-    .gv-card-title {
-        font-size: 1.25rem !important;
-        white-space: normal !important;
+    html body .gv-product-card.is-collapsed .gv-card-img-wrap {
+        height: auto !important;
+        margin: 0 !important;
+    }
+
+    html body .gv-product-card.is-collapsed .gv-card-img {
+        max-height: 150px !important;
+        max-width: 85% !important;
+        object-fit: contain !important;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .gv-products-cards-grid {
+    html body .gv-products-cards-grid {
+        display: flex !important;
         flex-direction: row !important;
-        gap: 0.75rem !important;
+        gap: 0.85rem !important;
+        align-items: stretch !important;
+        width: 100% !important;
     }
 
-    .gv-product-card {
-        height: 380px !important;
-        min-height: 380px !important;
-        padding: 1.25rem 1rem !important;
+    html body .gv-product-card {
+        height: 390px !important;
+        min-height: 390px !important;
+        border-radius: 12px !important;
         box-sizing: border-box !important;
+        position: relative !important;
+        transition: flex 0.4s ease, background-color 0.3s ease !important;
     }
 
-    .gv-product-card.is-active {
-        flex: 1.75 1 0px !important;
+    /* Active Card Tablet: Dark olive green background (#363E19), white text */
+    html body .gv-product-card.is-active {
+        flex: 1.85 1 0px !important;
+        background-color: #363E19 !important;
+        padding: 1.5rem 1.35rem 1.35rem !important;
     }
 
-    .gv-product-card.is-collapsed {
-        flex: 1 1 0px !important;
+    html body .gv-product-card.is-active .gv-card-badge {
+        background-color: #BDC4B8 !important;
+        color: #1C230C !important;
     }
 
-    .gv-product-card.is-active .gv-card-img {
-        max-height: 190px !important;
+    html body .gv-product-card.is-active .gv-card-title {
+        color: #FFFFFF !important;
+        font-size: 1.25rem !important;
+        white-space: normal !important;
     }
 
-    .gv-product-card.is-collapsed .gv-card-img {
+    html body .gv-product-card.is-active .gv-card-desc {
+        color: rgba(255, 255, 255, 0.85) !important;
+        font-size: 0.8125rem !important;
+        display: block !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-img-wrap {
+        height: 180px !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-img {
         max-height: 170px !important;
     }
 
-    .gv-product-card.is-active .gv-card-btn-detail {
+    html body .gv-product-card.is-active .gv-card-actions-slot {
+        min-width: 38px !important;
+        width: 38px !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-btn-detail {
+        display: none !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-btn-arrow {
+        display: flex !important;
         opacity: 1 !important;
         visibility: visible !important;
+        width: 36px !important;
+        height: 36px !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        color: #FFFFFF !important;
+        border-radius: 4px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
         pointer-events: auto !important;
     }
 
-    .gv-product-card.is-active .gv-card-btn-arrow {
-        opacity: 0 !important;
-        visibility: hidden !important;
+    /* Collapsed Cards Tablet: Light sage background (#BDC4B8), dark text, no button */
+    html body .gv-product-card.is-collapsed {
+        flex: 1 1 0px !important;
+        background-color: #BDC4B8 !important;
+        padding: 1.35rem 1rem 1.35rem !important;
+        cursor: pointer !important;
     }
 
-    .gv-product-card.is-collapsed .gv-card-btn-detail {
-        opacity: 0 !important;
-        visibility: hidden !important;
+    html body .gv-product-card.is-collapsed .gv-card-badge {
+        background-color: #363E19 !important;
+        color: #FFFFFF !important;
     }
 
-    .gv-product-card.is-collapsed .gv-card-btn-arrow {
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
+    html body .gv-product-card.is-collapsed .gv-card-title {
+        color: #1C230C !important;
+        font-size: 1.125rem !important;
     }
 
-    .gv-product-card .gv-card-actions-slot {
-        min-width: 36px !important;
+    html body .gv-product-card.is-collapsed .gv-card-desc {
+        color: #4A5239 !important;
+        font-size: 0.75rem !important;
+        display: block !important;
     }
 
-    .gv-product-card.is-active .gv-card-actions-slot {
-        min-width: 95px !important;
-        width: 95px !important;
+    html body .gv-product-card.is-collapsed .gv-card-img-wrap {
+        height: 160px !important;
+    }
+
+    html body .gv-product-card.is-collapsed .gv-card-img {
+        max-height: 150px !important;
+    }
+
+    html body .gv-product-card.is-collapsed .gv-card-actions-slot {
+        display: none !important;
     }
 }
 
 /* =====================================================================
-   7. VALUE PROPOSITIONS SECTION
-   PDF Mobile: 1-col stacked. PDF Tablet: 2-col (2x2 grid).
+   7. VALUE PROPOSITIONS SECTION (Homepage)
+   PDF Mobile: 1 column, left aligned.
+   PDF Tablet: 2x2 grid, left aligned.
    ===================================================================== */
+@media (max-width: 1024px) {
+    /* Left-align card contents to match PDF */
+    div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] > div {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+    }
+
+    div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] > div > div[style*="width: 48px"] {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+    }
+}
+
 @media (max-width: 767px) {
     div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
+        display: grid !important;
         grid-template-columns: 1fr !important;
         gap: 1.25rem !important;
+    }
+
+    div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] > div {
+        padding: 2.25rem 1.75rem !important;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
     div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
+        display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 1.5rem !important;
+    }
+
+    div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] > div {
+        padding: 2.5rem 2rem !important;
     }
 }
 
 /* =====================================================================
    8. WHO WE SERVE SECTION (FROM INDONESIA TO GLOBAL MARKETS)
-   PDF Mobile: 1 column with black numbered box.
-   PDF Tablet: 2 columns with black numbered box.
    ===================================================================== */
 @media (max-width: 1024px) {
     .gv-who-we-serve-grid {
@@ -493,6 +672,7 @@
 @media (min-width: 768px) and (max-width: 1024px) {
     .gv-who-we-serve-grid {
         grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
     }
 }
 
@@ -552,10 +732,94 @@
 }
 
 /* =====================================================================
-   10. ABOUT US PAGE — FACILITIES SECTION
-   PDF Mobile: Stacked (photo top, text below).
-   PDF Tablet: Side-by-side (1fr 1fr).
+   10. ABOUT US PAGE LOWER SECTIONS
    ===================================================================== */
+/* Journey & Purpose */
+@media (max-width: 767px) {
+    .gv-journey-header-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    .gv-journey-body-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-journey-header-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2.5rem !important;
+        align-items: flex-end !important;
+    }
+    .gv-journey-body-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+        align-items: stretch !important;
+    }
+}
+
+/* Export Capability Section */
+@media (max-width: 767px) {
+    .gv-export-capability-container {
+        display: block !important;
+    }
+    .gv-export-header {
+        text-align: left !important;
+        margin-bottom: 2rem !important;
+    }
+    .gv-export-header > div {
+        justify-content: flex-start !important;
+    }
+    .gv-export-cards {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    .gv-export-card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        gap: 1.25rem !important;
+        padding: 1.5rem 1.25rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-export-capability-container {
+        display: grid !important;
+        grid-template-columns: 1fr 1.35fr !important;
+        gap: 2.5rem !important;
+        align-items: flex-start !important;
+    }
+    .gv-export-header {
+        text-align: left !important;
+        margin: 0 !important;
+    }
+    .gv-export-header > div {
+        justify-content: flex-start !important;
+    }
+    .gv-export-cards,
+    .gv-export-capability-container .gv-export-cards,
+    div.gv-export-cards {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    .gv-export-card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        gap: 1.25rem !important;
+        padding: 1.75rem 1.5rem !important;
+    }
+}
+
+/* Facilities Section */
 @media (max-width: 1024px) {
     .gv-facility-card {
         background-color: transparent !important;
@@ -574,7 +838,7 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
     section:has(.gv-facility-card) .gv-explore-row {
         display: flex !important;
         flex-direction: column !important;
@@ -589,25 +853,8 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    section:has(.gv-facility-card) .gv-explore-row {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 2.5rem !important;
-        align-items: center !important;
-    }
-    section:has(.gv-facility-card) .gv-explore-row.gv-explore-row-reverse .gv-facility-card {
-        order: 1 !important;
-    }
-    section:has(.gv-facility-card) .gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
-        order: 2 !important;
-    }
-}
-
 /* =====================================================================
    11. PRODUCT DETAIL PAGE (single-vanilla_product.php)
-   PDF Mobile: Applications stacked 1 col.
-   PDF Tablet: Left title column, right stacked application cards.
    ===================================================================== */
 @media (max-width: 1024px) {
     .gv-app-card {
@@ -641,6 +888,10 @@
         gap: 1.5rem !important;
     }
 
+    .gv-applications-section {
+        display: block !important;
+    }
+
     .gv-applications-grid {
         display: grid !important;
         grid-template-columns: 1fr !important;
@@ -649,14 +900,17 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+    /* Stacked 1-column specs on Tablet matching Tablet PDF */
     .gv-specs-split {
-        grid-template-columns: 1fr 1fr !important;
-        gap: 2rem !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
     }
     .gv-applications-section {
         display: grid !important;
         grid-template-columns: 1fr 1.5fr !important;
         gap: 2.5rem !important;
+        align-items: flex-start !important;
     }
     .gv-applications-grid {
         display: grid !important;
@@ -667,8 +921,6 @@
 
 /* =====================================================================
    12. GALLERY PAGE (page-gallery.php)
-   PDF Mobile: 1 column grid.
-   PDF Tablet: 2 columns grid.
    ===================================================================== */
 @media (max-width: 1024px) {
     .gv-gallery-tab {
@@ -701,9 +953,9 @@
 }
 
 /* =====================================================================
-   13. BLOG ARCHIVE PAGE (index.php)
-   PDF Mobile: Stacked (large date on top, image below, text below).
-   PDF Tablet: Large date on left, image left, text right (side-by-side).
+   13. BLOG ARCHIVE (index.php) & HOMEPAGE BLOG PREVIEWS
+   PDF Mobile: 1-column stacked with 1:1 square image.
+   PDF Tablet: 2-column side-by-side row with 1:1 image left and text right.
    ===================================================================== */
 @media (max-width: 767px) {
     .gv-blog-tabs {
@@ -716,7 +968,9 @@
         padding: 0.5rem 0.25rem !important;
         font-size: 0.75rem !important;
     }
-    .gv-blog-row {
+    .gv-blog-row,
+    .gv-blog-article-row {
+        display: grid !important;
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
         margin-bottom: 2.5rem !important;
@@ -726,14 +980,37 @@
         margin-bottom: -0.75rem !important;
     }
     .gv-blog-img-wrap {
-        aspect-ratio: 16/9 !important;
+        aspect-ratio: 1 / 1 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        width: 100% !important;
+    }
+    .gv-blog-img-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .gv-blog-row {
+    .gv-blog-row,
+    .gv-blog-article-row {
+        display: grid !important;
         grid-template-columns: 2fr 3fr !important;
         gap: 2rem !important;
+        align-items: center !important;
+        margin-bottom: 3.5rem !important;
+    }
+    .gv-blog-img-wrap {
+        aspect-ratio: 1 / 1 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        width: 100% !important;
+    }
+    .gv-blog-img-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
     }
 }
 
@@ -742,7 +1019,7 @@
    ===================================================================== */
 @media (max-width: 767px) {
     .gv-detail-title {
-        font-size: 1.75rem !important;
+        font-size: 1.65rem !important;
         line-height: 1.25 !important;
     }
     .gv-detail-featured-wrap {
@@ -770,7 +1047,6 @@
 
 /* =====================================================================
    15. CONTACT US PAGE (page-contact.php)
-   PDF Mobile & Tablet: 2x2 details grid, form card, map full width.
    ===================================================================== */
 @media (max-width: 767px) {
     .gv-contact-wrapper {
@@ -785,7 +1061,7 @@
         padding: 2rem 1.25rem !important;
     }
     .gv-map-wrapper iframe {
-        height: 300px !important;
+        height: 320px !important;
     }
 }
 
@@ -798,12 +1074,13 @@
         grid-template-columns: 1fr 1fr !important;
         gap: 1.5rem 2rem !important;
     }
+    .gv-map-wrapper iframe {
+        height: 380px !important;
+    }
 }
 
 /* =====================================================================
    16. FOOTER COMPONENT
-   PDF Mobile: 1 column centered.
-   PDF Tablet: 3 columns.
    ===================================================================== */
 @media (max-width: 767px) {
     .gv-footer-grid {

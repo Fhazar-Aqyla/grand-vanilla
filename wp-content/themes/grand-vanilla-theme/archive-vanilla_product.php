@@ -507,7 +507,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         align-items: center;
     }
 
-    @media (min-width: 900px) {
+    @media (min-width: 1025px) {
         .gv-explore-row {
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;

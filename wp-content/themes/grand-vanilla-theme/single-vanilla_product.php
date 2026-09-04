@@ -20,7 +20,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         </div>
 
         <!-- Product Sub-tabs (Dynamic from vanilla_product CPT) -->
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <div class="gv-product-pills-nav" style="display: flex; gap: 1rem; flex-wrap: wrap;">
             <?php
             $tab_products = get_posts( array(
                 'post_type'      => 'vanilla_product',

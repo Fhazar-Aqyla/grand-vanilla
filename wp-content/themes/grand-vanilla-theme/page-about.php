@@ -311,11 +311,11 @@ $contact = grand_vanilla_get_contact_info();
 </section>
 
 <!-- 6. Section: What Is Our Export Capability? (4 Clean White Cards with SVG Vector Icons) -->
-<section class="gv-section" style="background-color: #E1E2DD; padding: 6rem 0;">
-    <div class="gv-container">
+<section class="gv-section gv-export-capability-section" style="background-color: #E1E2DD; padding: 6rem 0;">
+    <div class="gv-container gv-export-capability-container">
         
         <!-- Header Centered -->
-        <div style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem;">
+        <div class="gv-export-header" style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
                 <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                 Export Capability
@@ -326,43 +326,47 @@ $contact = grand_vanilla_get_contact_info();
         </div>
 
         <!-- 4 White Cards Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+        <div class="gv-export-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
             
             <!-- Card 1: Wholesale Supply -->
-            <div style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
-                <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
+            <div class="gv-export-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+                <div class="gv-export-card-icon" style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem; flex-shrink: 0;">
                     <!-- Plane Icon -->
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
                     </svg>
                 </div>
-                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
-                    Wholesale Supply
-                </h3>
-                <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
-                    Vanilla products available for wholesale and recurring business requirements.
-                </p>
+                <div class="gv-export-card-body">
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                        Wholesale Supply
+                    </h3>
+                    <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
+                        Vanilla products available for wholesale and recurring business requirements.
+                    </p>
+                </div>
             </div>
 
             <!-- Card 2: Bulk Orders -->
-            <div style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
-                <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
+            <div class="gv-export-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+                <div class="gv-export-card-icon" style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem; flex-shrink: 0;">
                     <!-- Layered Stacks Icon -->
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>
                 </div>
-                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
-                    Bulk Orders
-                </h3>
-                <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
-                    Supporting larger-volume orders for distributors, manufacturers, and other B2B buyers.
-                </p>
+                <div class="gv-export-card-body">
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                        Bulk Orders
+                    </h3>
+                    <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
+                        Supporting larger-volume orders for distributors, manufacturers, and other B2B buyers.
+                    </p>
+                </div>
             </div>
 
             <!-- Card 3: International Buyers -->
-            <div style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
-                <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
+            <div class="gv-export-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+                <div class="gv-export-card-icon" style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem; flex-shrink: 0;">
                     <!-- Globe Icon -->
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -370,28 +374,32 @@ $contact = grand_vanilla_get_contact_info();
                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                     </svg>
                 </div>
-                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
-                    International Buyers
-                </h3>
-                <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
-                    Serving importers, distributors, manufacturers, and businesses across global markets.
-                </p>
+                <div class="gv-export-card-body">
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                        International Buyers
+                    </h3>
+                    <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
+                        Serving importers, distributors, manufacturers, and businesses across global markets.
+                    </p>
+                </div>
             </div>
 
             <!-- Card 4: Custom Requirement -->
-            <div style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
-                <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
+            <div class="gv-export-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+                <div class="gv-export-card-icon" style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem; flex-shrink: 0;">
                     <!-- Custom Bottle / Requirement Icon -->
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 3h12v2H6V3zm2 4h8v2H8V7zm-2 4h12c1.1 0 2 .9 2 2v7c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2v-7c0-1.1.9-2 2-2zm4 4v4h4v-4h-4z"/>
                     </svg>
                 </div>
-                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
-                    Custom Requirement
-                </h3>
-                <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
-                    Product options can be discussed based on specific buyer requirements and applications.
-                </p>
+                <div class="gv-export-card-body">
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                        Custom Requirement
+                    </h3>
+                    <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
+                        Product options can be discussed based on specific buyer requirements and applications.
+                    </p>
+                </div>
             </div>
 
         </div>
@@ -491,7 +499,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     align-items: center;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1025px) {
     .gv-explore-row {
         grid-template-columns: 1fr 1fr;
         gap: 4rem;
@@ -565,22 +573,22 @@ get_template_part( 'template-parts/cta-banner', null, array(
     transform: scale(1.03);
 }
 
-@media (max-width: 899px) {
+@media (max-width: 1024px) {
     .gv-explore-row.gv-explore-row-reverse .gv-explore-img-card {
         order: 2;
     }
     .gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
         order: 1;
     }
-}
-
-@media (max-width: 991px) {
-    .gv-about-overview-grid { grid-template-columns: 1fr !important; }
-    .gv-journey-header-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
     .gv-journey-body-grid { grid-template-columns: 1fr !important; }
     .gv-sourcing-dark-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
     .gv-sourcing-left-col { justify-content: flex-start !important; gap: 1.5rem !important; }
     .gv-sourcing-left-bottom { padding-top: 0 !important; }
+}
+
+@media (max-width: 767px) {
+    .gv-about-overview-grid { grid-template-columns: 1fr !important; }
+    .gv-journey-header-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
 }
 </style>
 

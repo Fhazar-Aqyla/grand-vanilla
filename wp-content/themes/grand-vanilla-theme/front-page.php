@@ -142,7 +142,7 @@ $contact = grand_vanilla_get_contact_info();
                     <p style="font-size: 0.9375rem; line-height: 1.7; color: #4A5239; margin-bottom: 1rem;">
                         Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
                     </p>
-                    <p style="font-size: 0.9375rem; line-height: 1.7; color: #4A5239; margin-bottom: 2rem;">
+                    <p class="gv-about-p-secondary" style="font-size: 0.9375rem; line-height: 1.7; color: #4A5239; margin-bottom: 2rem;">
                         Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
                     </p>
 
@@ -1120,7 +1120,7 @@ get_template_part('template-parts/cta-banner', null, array(
         }
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 767px) {
         .gv-products-cards-grid {
             flex-direction: column !important;
             gap: 2rem !important;
