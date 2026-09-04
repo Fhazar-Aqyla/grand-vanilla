@@ -29,7 +29,6 @@
     }
     img:not(.gv-header-logo-img):not(.gv-footer-logo-img) {
         max-width: 100% !important;
-        height: auto !important;
     }
 
     /* Brand Logo */
