@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//localhost/grand-vanilla-id/main-sitemap.xsl"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<sitemap>
+		<loc>http://localhost/grand-vanilla-id/post-sitemap.xml</loc>
+		<lastmod>2026-09-03T10:26:27+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>http://localhost/grand-vanilla-id/page-sitemap.xml</loc>
+		<lastmod>2026-09-01T13:52:25+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>http://localhost/grand-vanilla-id/vanilla_product-sitemap.xml</loc>
+		<lastmod>2026-09-03T10:26:25+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>http://localhost/grand-vanilla-id/category-sitemap.xml</loc>
+		<lastmod>2026-09-03T10:26:27+00:00</lastmod>
+	</sitemap>
+</sitemapindex>
