@@ -223,8 +223,9 @@
 
 /* =====================================================================
    5. ABOUT US SECTION (Landing Page & About Page Overview)
-   PDF Mobile & Tablet: Dark khaki container with white text and
-   1 single column of bordered feature boxes.
+   Design Alignment: Dark olive container (#363E19) with flower watermark,
+   section indicator 'ABOUT US', clean paragraph, 4 dark feature rows
+   with left accent bar, and 'LEARN MORE →' outline button.
    ===================================================================== */
 @media (max-width: 1024px) {
     /* Hide duplicate second paragraph on mobile and tablet */
@@ -234,67 +235,118 @@
         display: none !important;
     }
 
+    .gv-about-content-card,
     .gv-grid-split-about > div:last-child,
     .gv-about-overview-grid > div:last-child {
         background-color: #363E19 !important;
         border-radius: 12px !important;
-        padding: 2.25rem 1.75rem !important;
+        padding: 2.25rem 1.65rem !important;
         color: #FFFFFF !important;
         box-sizing: border-box !important;
+        position: relative !important;
+        overflow: hidden !important;
     }
 
-    .gv-grid-split-about > div:last-child h2,
-    .gv-about-overview-grid > div:last-child h2 {
-        color: #FFFFFF !important;
+    /* Orchid flower watermark in top right */
+    .gv-about-watermark,
+    .gv-grid-split-about img[aria-hidden="true"],
+    .gv-about-overview-grid img[aria-hidden="true"] {
+        display: block !important;
+        position: absolute !important;
+        top: -15px !important;
+        right: -15px !important;
+        width: 145px !important;
+        height: auto !important;
+        opacity: 0.18 !important;
+        pointer-events: none !important;
+        z-index: 0 !important;
+        transform: rotate(15deg) !important;
     }
 
+    /* Section Tag: Line + ABOUT US */
+    .gv-about-tagline,
+    .gv-grid-split-about > div:last-child div[style*="color: #363E19; font-size: 0.9375rem"],
+    .gv-about-overview-grid > div:last-child div[style*="color: #363E19; font-size: 0.875rem"] {
+        color: rgba(255, 255, 255, 0.85) !important;
+        font-size: 0.8125rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        margin-bottom: 1.25rem !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        font-weight: 600 !important;
+    }
+
+    .gv-about-tagline span,
+    .gv-grid-split-about > div:last-child div[style*="color: #363E19; font-size: 0.9375rem"] span,
+    .gv-about-overview-grid > div:last-child div[style*="color: #363E19; font-size: 0.875rem"] span {
+        background: rgba(255, 255, 255, 0.6) !important;
+        width: 32px !important;
+        height: 2px !important;
+        display: inline-block !important;
+    }
+
+    /* Main Paragraph */
     .gv-grid-split-about > div:last-child p,
     .gv-about-overview-grid > div:last-child p {
-        color: rgba(255, 255, 255, 0.88) !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-size: 0.875rem !important;
+        line-height: 1.65 !important;
         margin-bottom: 1.75rem !important;
     }
 
-    .gv-grid-split-about > div:last-child div[style*="color: #363E19; font-size: 0.9375rem"],
-    .gv-about-overview-grid > div:last-child div[style*="color: #363E19; font-size: 0.875rem"] {
-        color: #FFFFFF !important;
-    }
-
-    .gv-grid-split-about > div:last-child div[style*="color: #363E19; font-size: 0.9375rem"] span,
-    .gv-about-overview-grid > div:last-child div[style*="color: #363E19; font-size: 0.875rem"] span {
-        background: #FFFFFF !important;
-    }
-
-    /* 4 Feature Boxes: 1 Single Column in both Mobile and Tablet PDFs */
+    /* 4 Feature Boxes: 1 Single Column with dark fill and left accent line */
+    .gv-about-features-grid,
     .gv-grid-split-about > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"],
     .gv-about-overview-grid > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] {
         display: grid !important;
         grid-template-columns: 1fr !important;
-        gap: 0.65rem !important;
+        gap: 0.5rem !important;
         margin-bottom: 2rem !important;
+        width: 100% !important;
     }
 
+    .gv-about-feature-box,
     .gv-grid-split-about > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] > div,
     .gv-about-overview-grid > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] > div {
-        background-color: transparent !important;
-        border: 1px solid rgba(255, 255, 255, 0.32) !important;
-        color: #FFFFFF !important;
+        background-color: #272F12 !important;
+        border: none !important;
+        border-left: 2px solid rgba(255, 255, 255, 0.65) !important;
+        color: rgba(255, 255, 255, 0.92) !important;
         font-size: 0.8125rem !important;
-        font-weight: 600 !important;
-        padding: 0.8rem 1rem !important;
-        border-radius: 4px !important;
-        text-align: center !important;
+        font-weight: 500 !important;
+        padding: 0.7rem 1rem !important;
+        border-radius: 2px !important;
+        text-align: left !important;
+        box-sizing: border-box !important;
     }
 
+    /* Learn More CTA Button */
+    .gv-about-learn-btn,
     .gv-grid-split-about > div:last-child a,
     .gv-about-overview-grid > div:last-child a {
-        border-color: rgba(255, 255, 255, 0.85) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.45rem !important;
+        border: 1px solid rgba(255, 255, 255, 0.55) !important;
         color: #FFFFFF !important;
         background: transparent !important;
+        font-size: 0.75rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        padding: 0.65rem 1.4rem !important;
+        border-radius: 2px !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
     }
 
-    .gv-grid-split-about img[aria-hidden="true"],
-    .gv-about-overview-grid img[aria-hidden="true"] {
-        display: none !important;
+    .gv-about-learn-btn:hover,
+    .gv-grid-split-about > div:last-child a:hover,
+    .gv-about-overview-grid > div:last-child a:hover {
+        background: rgba(255, 255, 255, 0.12) !important;
+        border-color: #FFFFFF !important;
     }
 
     /* Hide OEM section on homepage (not present in Mobile/Tablet PDF) */
@@ -305,19 +357,27 @@
 }
 
 @media (max-width: 767px) {
+    /* Hide duplicate h2 heading on mobile since paragraph already begins with "Grand Vanilla Indonesia..." */
+    .gv-grid-split-about > div:last-child h2,
+    .gv-about-overview-grid > div:last-child h2 {
+        display: none !important;
+    }
+
     .gv-grid-split-about,
     .gv-about-overview-grid {
         grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
+        gap: 1.25rem !important;
     }
 
     .gv-grid-split-about img[style*="max-height: 540px"],
     .gv-about-overview-grid img {
-        max-height: 280px !important;
-        height: 280px !important;
+        height: 380px !important;
+        max-height: 420px !important;
         object-fit: cover !important;
         border-radius: 12px !important;
         width: 100% !important;
+        display: block !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06) !important;
     }
 }
 

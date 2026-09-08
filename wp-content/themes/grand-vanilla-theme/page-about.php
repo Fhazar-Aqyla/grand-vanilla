@@ -33,22 +33,23 @@ $contact = grand_vanilla_get_contact_info();
             </div>
 
             <!-- Right Column: Content + Orchid Watermark + 2x2 Feature Boxes + Learn More Button -->
-            <div style="position: relative; display: flex; flex-direction: column; justify-content: center;">
+            <div class="gv-about-content-card" style="position: relative; display: flex; flex-direction: column; justify-content: center;">
                 <!-- Subtle Orchid Flower Watermark -->
                 <img src="<?php echo esc_url( $img_dir . 'Logo.png' ); ?>" 
                      alt="" 
                      aria-hidden="true" 
+                     class="gv-about-watermark"
                      style="position: absolute; top: -20px; right: -10px; width: 170px; height: auto; opacity: 0.18; pointer-events: none; z-index: 0; transform: rotate(15deg);">
 
                 <div style="position: relative; z-index: 1;">
                     <!-- Tagline Indicator -->
-                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
+                    <div class="gv-about-tagline" style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
                         <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                         About Us
                     </div>
 
                     <!-- Heading -->
-                    <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.2vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 1.25rem;">
+                    <h2 class="gv-about-heading" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.2vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 1.25rem;">
                         Grand Vanilla Indonesia
                     </h2>
 
@@ -58,17 +59,17 @@ $contact = grand_vanilla_get_contact_info();
                     </p>
 
                     <!-- 4 Solid Dark Khaki Feature Boxes (2x2 Grid) -->
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 2rem;">
-                        <div style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                    <div class="gv-about-features-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 2rem;">
+                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
                             Premium Product Quality
                         </div>
-                        <div style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
                             Consistent Global Supply
                         </div>
-                        <div style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
                             Reliable Business Service
                         </div>
-                        <div style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
                             Flexible Custom Solutions
                         </div>
                     </div>
@@ -76,6 +77,7 @@ $contact = grand_vanilla_get_contact_info();
                     <!-- Learn More Button -->
                     <div>
                         <a href="#journey" 
+                           class="gv-about-learn-btn"
                            style="display: inline-flex; align-items: center; gap: 0.6rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.65rem 1.75rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
                             Learn More &rarr;
                         </a>
