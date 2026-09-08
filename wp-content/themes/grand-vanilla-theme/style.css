@@ -931,41 +931,7 @@ ul {
     color: #FFFFFF !important;
 }
 
-@media (max-width: 991px) {
-    .gv-products-cards-grid {
-        flex-direction: column !important;
-        gap: 2rem !important;
-    }
 
-    .gv-product-card {
-        height: auto !important;
-        min-height: 340px !important;
-        flex: 1 1 auto !important;
-        padding: 1.5rem 1.25rem 1.5rem !important;
-    }
-
-    .gv-card-img-wrap {
-        height: 180px !important;
-    }
-
-    .gv-product-card .gv-card-actions-slot {
-        min-width: 105px !important;
-        width: 105px !important;
-    }
-
-    .gv-product-card .gv-card-btn-detail {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translate3d(0, 0, 0) !important;
-        pointer-events: auto !important;
-    }
-
-    .gv-product-card .gv-card-btn-arrow {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-    }
-}
 
 /* ==========================================================================
    11. Explore More Products Component (Consistent 1:1 Squares)

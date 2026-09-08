@@ -343,8 +343,8 @@
 
 /* =====================================================================
    6. PRODUCT CARDS COMPONENT (Homepage & Products Page)
-   PDF Mobile: Card 1 active (#363E19, white text, arrow button).
-               Cards 2 & 3 collapsed (image only on page, no gray box).
+   PDF Mobile: Card 1 active (#363E19, white text, badge #1, arrow button).
+               Cards 2 & 3 collapsed (rounded light sage card #BDC4B8 with centered image).
    PDF Tablet: 3 cards horizontal side-by-side row.
                Card 1 active (#363E19, white text, arrow button).
                Cards 2 & 3 collapsed (light sage background #BDC4B8, no button).
@@ -353,116 +353,223 @@
     html body .gv-products-cards-grid {
         display: flex !important;
         flex-direction: column !important;
-        gap: 1.25rem !important;
+        gap: 0.85rem !important;
+        margin-bottom: 2.5rem !important;
     }
 
-    /* Active Card Mobile: Dark olive green background with white text */
-    html body .gv-product-card.is-active {
-        background-color: #363E19 !important;
+    /* Base Product Card Mobile: Fixed dimensions with silky smooth cubic-bezier transitions */
+    html body .gv-product-card {
+        height: 170px !important;
+        min-height: 170px !important;
+        max-height: 170px !important;
         border-radius: 12px !important;
-        padding: 1.5rem !important;
-        min-height: 340px !important;
-        height: auto !important;
+        position: relative !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+        cursor: pointer !important;
+        background-color: #BDC4B8 !important;
+        padding: 1rem 1.25rem !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
+        box-shadow: none !important;
+        transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    min-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    padding 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.4s ease !important;
+        will-change: height, max-height, background-color;
+    }
+
+    /* Active Card Mobile: Smooth expansion to 375px with deep green background */
+    html body .gv-product-card.is-active {
+        height: 375px !important;
+        min-height: 375px !important;
+        max-height: 375px !important;
+        background-color: #363E19 !important;
+        padding: 1.5rem 1.25rem 1.35rem !important;
         box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+        cursor: default !important;
     }
 
-    html body .gv-product-card.is-active .gv-card-badge {
+    /* Collapsed Cards Mobile: Hover micro-interaction */
+    html body .gv-product-card.is-collapsed {
+        height: 170px !important;
+        min-height: 170px !important;
+        max-height: 170px !important;
         background-color: #BDC4B8 !important;
-        color: #1C230C !important;
-        position: static !important;
-        margin-bottom: 0.5rem !important;
+        padding: 1rem 1.25rem !important;
+        box-shadow: none !important;
+        cursor: pointer !important;
     }
 
-    html body .gv-product-card.is-active .gv-card-title {
-        color: #FFFFFF !important;
-        font-size: 1.35rem !important;
-        margin-bottom: 0.4rem !important;
-        white-space: normal !important;
+    html body .gv-product-card.is-collapsed:hover {
+        background-color: #B5BCB0 !important;
     }
 
-    html body .gv-product-card.is-active .gv-card-desc {
-        color: rgba(255, 255, 255, 0.85) !important;
-        font-size: 0.875rem !important;
-        display: block !important;
-    }
-
-    html body .gv-product-card.is-active .gv-card-img-wrap {
-        height: 180px !important;
+    /* Card Badge (#1, #2, #3): Smooth fade & subtle slide in */
+    html body .gv-product-card .gv-card-badge {
+        position: absolute !important;
+        top: 1.25rem !important;
+        left: 1.25rem !important;
+        width: 34px !important;
+        height: 34px !important;
+        border-radius: 4px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        margin: 1rem 0 !important;
+        font-size: 0.8125rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 0 !important;
+        z-index: 2 !important;
+        background-color: rgba(255, 255, 255, 0.18) !important;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
+        color: #FFFFFF !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translate3d(-8px, 0, 0) scale(0.9) !important;
+        transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0.35s !important;
+        pointer-events: none !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-badge {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translate3d(0, 0, 0) scale(1) !important;
+        transition-delay: 0.08s !important;
+        pointer-events: auto !important;
+    }
+
+    /* Image Wrapper & Image: Hardware-accelerated scale & reposition */
+    html body .gv-product-card .gv-card-img-wrap {
+        flex: 1 1 auto !important;
+        min-height: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        margin: 0 !important;
+        transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    margin 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-img-wrap {
+        height: 185px !important;
+        margin: 1rem 0 0.75rem 0 !important;
+    }
+
+    html body .gv-product-card.is-collapsed .gv-card-img-wrap {
+        height: 100% !important;
+        margin: 0 !important;
+    }
+
+    html body .gv-product-card .gv-card-img {
+        width: auto !important;
+        height: auto !important;
+        max-height: 135px !important;
+        max-width: 88% !important;
+        object-fit: contain !important;
+        filter: drop-shadow(0 6px 14px rgba(0,0,0,0.06)) !important;
+        transform: translate3d(0, 0, 0) scale(0.96) !important;
+        transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    filter 0.4s ease !important;
     }
 
     html body .gv-product-card.is-active .gv-card-img {
-        max-height: 170px !important;
+        max-height: 175px !important;
         max-width: 90% !important;
-        object-fit: contain !important;
+        transform: translate3d(0, 0, 0) scale(1) !important;
+        filter: drop-shadow(0 8px 18px rgba(0,0,0,0.15)) !important;
     }
 
-    html body .gv-product-card.is-active .gv-card-bottom {
+    /* Bottom Content: Smooth slide-up & fade without layout jumps */
+    html body .gv-product-card .gv-card-bottom {
         display: flex !important;
         align-items: flex-end !important;
         justify-content: space-between !important;
         width: 100% !important;
+        margin-top: 0 !important;
+        gap: 0.75rem !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translate3d(0, 16px, 0) !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0.35s !important;
+        pointer-events: none !important;
+    }
+
+    html body .gv-product-card.is-active .gv-card-bottom {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translate3d(0, 0, 0) !important;
+        max-height: 120px !important;
         margin-top: auto !important;
+        transition-delay: 0.05s !important;
+        pointer-events: auto !important;
     }
 
-    html body .gv-product-card.is-active .gv-card-actions-slot {
-        min-width: 42px !important;
-        width: 42px !important;
+    html body .gv-product-card .gv-card-text {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
     }
 
-    html body .gv-product-card.is-active .gv-card-btn-detail {
+    html body .gv-product-card .gv-card-title {
+        color: #FFFFFF !important;
+        font-size: 1.35rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 0.35rem !important;
+        white-space: normal !important;
+        line-height: 1.2 !important;
+    }
+
+    html body .gv-product-card .gv-card-desc {
+        color: rgba(255, 255, 255, 0.82) !important;
+        font-size: 0.8125rem !important;
+        line-height: 1.45 !important;
+        display: block !important;
+        margin: 0 !important;
+    }
+
+    html body .gv-product-card .gv-card-actions-slot {
+        min-width: 38px !important;
+        width: 38px !important;
+        height: 38px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+    }
+
+    html body .gv-product-card .gv-card-btn-detail {
         display: none !important;
     }
 
-    html body .gv-product-card.is-active .gv-card-btn-arrow {
+    html body .gv-product-card .gv-card-btn-arrow {
         display: flex !important;
         opacity: 1 !important;
         visibility: visible !important;
-        width: 40px !important;
-        height: 40px !important;
-        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        position: static !important;
+        transform: none !important;
+        width: 38px !important;
+        height: 38px !important;
+        border: 1px solid rgba(255, 255, 255, 0.45) !important;
         color: #FFFFFF !important;
         border-radius: 4px !important;
         align-items: center !important;
         justify-content: center !important;
         background: transparent !important;
         pointer-events: auto !important;
-    }
-
-    /* Collapsed Cards Mobile: Clean image on page background */
-    html body .gv-product-card.is-collapsed {
-        background-color: transparent !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        padding: 0.5rem 0 !important;
-        min-height: 0 !important;
-        height: auto !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        cursor: pointer !important;
-    }
-
-    html body .gv-product-card.is-collapsed .gv-card-badge,
-    html body .gv-product-card.is-collapsed .gv-card-bottom {
-        display: none !important;
-    }
-
-    html body .gv-product-card.is-collapsed .gv-card-img-wrap {
-        height: auto !important;
-        margin: 0 !important;
-    }
-
-    html body .gv-product-card.is-collapsed .gv-card-img {
-        max-height: 150px !important;
-        max-width: 85% !important;
-        object-fit: contain !important;
+        font-size: 1.1rem !important;
+        line-height: 1 !important;
+        transition: background-color 0.2s ease, border-color 0.2s ease !important;
     }
 }
 
@@ -481,7 +588,7 @@
         border-radius: 12px !important;
         box-sizing: border-box !important;
         position: relative !important;
-        transition: flex 0.4s ease, background-color 0.3s ease !important;
+        transition: flex 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, padding 0.4s ease !important;
     }
 
     /* Active Card Tablet: Dark olive green background (#363E19), white text */

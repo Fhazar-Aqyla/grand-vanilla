@@ -130,9 +130,16 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 
                 cards.forEach(function(card) {
                     card.addEventListener('click', function(e) {
-                        // If clicking the active 'Detail →' link, allow normal navigation
-                        if (e.target.closest('.gv-card-btn-detail')) {
-                            return;
+                        // If card is already active and user clicks arrow button or detail button, go to detail page
+                        if (card.classList.contains('is-active')) {
+                            const detailLink = card.querySelector('.gv-card-btn-detail');
+                            if (e.target.closest('.gv-card-btn-arrow') && detailLink) {
+                                window.location.href = detailLink.getAttribute('href');
+                                return;
+                            }
+                            if (e.target.closest('.gv-card-btn-detail')) {
+                                return;
+                            }
                         }
 
                         activateCard(card);
@@ -445,41 +452,6 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         color: #FFFFFF !important;
     }
 
-    @media (max-width: 767px) {
-        .gv-products-cards-grid {
-            flex-direction: column !important;
-            gap: 2rem !important;
-        }
-
-        .gv-product-card {
-            height: auto !important;
-            min-height: 340px !important;
-            flex: 1 1 auto !important;
-            padding: 1.5rem 1.25rem 1.5rem !important;
-        }
-
-        .gv-card-img-wrap {
-            height: 180px !important;
-        }
-
-        .gv-product-card .gv-card-actions-slot {
-            min-width: 105px !important;
-            width: 105px !important;
-        }
-
-        .gv-product-card .gv-card-btn-detail {
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translate3d(0, 0, 0) !important;
-            pointer-events: auto !important;
-        }
-
-        .gv-product-card .gv-card-btn-arrow {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-    }
 
     /* Explore More Products Section */
     .gv-explore-more-section {

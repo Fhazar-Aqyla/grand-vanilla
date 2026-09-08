@@ -293,9 +293,16 @@ $contact = grand_vanilla_get_contact_info();
 
                 cards.forEach(function(card) {
                     card.addEventListener('click', function(e) {
-                        // If clicking the active 'Detail →' link, allow normal navigation
-                        if (e.target.closest('.gv-card-btn-detail')) {
-                            return;
+                        // If card is already active and user clicks arrow button or detail button, go to detail page
+                        if (card.classList.contains('is-active')) {
+                            const detailLink = card.querySelector('.gv-card-btn-detail');
+                            if (e.target.closest('.gv-card-btn-arrow') && detailLink) {
+                                window.location.href = detailLink.getAttribute('href');
+                                return;
+                            }
+                            if (e.target.closest('.gv-card-btn-detail')) {
+                                return;
+                            }
                         }
 
                         activateCard(card);
@@ -1121,40 +1128,6 @@ get_template_part('template-parts/cta-banner', null, array(
     }
 
     @media (max-width: 767px) {
-        .gv-products-cards-grid {
-            flex-direction: column !important;
-            gap: 2rem !important;
-        }
-
-        .gv-product-card {
-            height: auto !important;
-            min-height: 380px !important;
-            flex: 1 1 auto !important;
-            padding: 2rem 1.5rem 2.25rem !important;
-        }
-
-        .gv-card-img-wrap {
-            height: 200px !important;
-        }
-
-        .gv-product-card .gv-card-actions-slot {
-            min-width: 110px !important;
-            width: 110px !important;
-        }
-
-        .gv-product-card .gv-card-btn-detail {
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translate3d(0, 0, 0) !important;
-            pointer-events: auto !important;
-        }
-
-        .gv-product-card .gv-card-btn-arrow {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-
         .gv-blog-article-row {
             grid-template-columns: 1fr !important;
             gap: 2rem !important;
