@@ -115,6 +115,7 @@ $contact = grand_vanilla_get_contact_info();
             <div>
                 <img src="<?php echo esc_url($img_dir . 'About Us Image.png'); ?>"
                     alt="Grand Vanilla Indonesia Rustic Vanilla Curing"
+                    class="gv-about-rustic-img"
                     style="width: 100%; height: auto; max-height: 540px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); display: block;">
             </div>
 
