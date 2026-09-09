@@ -423,7 +423,7 @@ $contact = grand_vanilla_get_contact_info();
                 </h2>
                 <img src="<?php echo esc_url($img_dir . 'Bulk  Wholesale Vanilla 1.png'); ?>"
                     alt="Grand Vanilla Indonesia Bulk Export Packaging"
-                    style="width: 100%; height: auto; border-radius: 12px; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
+                    style="width: 100%; height: auto; display: block;">
             </div>
 
             <!-- Right Column: Subtitle + OEM Content Block -->
