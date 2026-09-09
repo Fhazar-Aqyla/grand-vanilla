@@ -25,7 +25,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;">
             <div>
                 <span class="gv-section-tag">Products</span>
-                <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; line-height: 1.15; margin: 0.5rem 0 0; color: #1C230C;">Premium Indonesian<br>Vanilla Products</h2>
+                <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 500; line-height: 1.15; margin: 0.5rem 0 0; color: #1C230C;">Premium Indonesian<br>Vanilla Products</h2>
             </div>
             <div style="max-width: 440px;">
                 <p style="color: var(--color-nw-500); font-size: 0.9375rem; line-height: 1.6; margin: 0;">
@@ -252,7 +252,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         color: #FFFFFF;
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: 0.8125rem;
-        font-weight: 700;
+        font-weight: 500;
         width: 32px;
         height: 32px;
         border-radius: 4px;
@@ -330,7 +330,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 
     .gv-card-title {
         font-family: var(--font-heading, 'Jost', sans-serif);
-        font-weight: 700;
+        font-weight: 500;
         color: #363E19;
         margin: 0 0 0.35rem 0;
         line-height: 1.2;
@@ -399,7 +399,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         background: transparent !important;
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: 0.8125rem;
-        font-weight: 600;
+        font-weight: 500;
         padding: 0.55rem 1.25rem;
         border-radius: 2px;
         text-decoration: none;
@@ -461,7 +461,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
     .gv-explore-title {
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: clamp(2rem, 3.5vw, 2.75rem);
-        font-weight: 700;
+        font-weight: 500;
         color: #1C230C;
         margin: 0 0 3.5rem 0;
     }
@@ -511,7 +511,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
     .gv-explore-item-title {
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: clamp(1.85rem, 2.5vw, 2.35rem);
-        font-weight: 700;
+        font-weight: 500;
         color: #363E19;
         margin: 0 0 1rem 0;
         line-height: 1.2;
@@ -534,7 +534,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
         background: transparent;
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: 0.875rem;
-        font-weight: 600;
+        font-weight: 500;
         padding: 0.65rem 1.6rem;
         border-radius: 2px;
         text-decoration: none;

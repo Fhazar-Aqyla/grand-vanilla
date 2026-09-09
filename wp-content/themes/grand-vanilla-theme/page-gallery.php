@@ -51,11 +51,11 @@ if ( $gallery_carousel_query->have_posts() ) {
         <!-- Header Split (Left Title, Right Description) — identical to homepage -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
                     <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                     Gallery
                 </div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #363E19; line-height: 1.15; margin: 0;">
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 500; color: #363E19; line-height: 1.15; margin: 0;">
                     A Closer Look At<br>Grand Vanilla
                 </h2>
             </div>
@@ -85,11 +85,11 @@ if ( $gallery_carousel_query->have_posts() ) {
                     </div>
                     <!-- Card Content -->
                     <div style="padding: 1.35rem 1.5rem 1.5rem; background: #FAF8F5; display: flex; flex-direction: column;">
-                        <div style="display: flex; align-items: center; gap: 0.6rem; color: #363E19; font-size: 0.75rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.35rem;">
+                        <div style="display: flex; align-items: center; gap: 0.6rem; color: #363E19; font-size: 0.75rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.35rem;">
                             <span style="display: inline-block; width: 18px; height: 1.5px; background: #363E19;"></span>
                             <?php echo esc_html( $item['tag'] ); ?>
                         </div>
-                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin: 0 0 0.25rem 0; line-height: 1.3;">
+                        <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin: 0 0 0.25rem 0; line-height: 1.3;">
                             <?php echo esc_html( $item['title'] ); ?>
                         </h3>
                         <p style="font-size: 0.8125rem; color: #716F6E; margin: 0; line-height: 1.4;">
@@ -111,7 +111,7 @@ if ( $gallery_carousel_query->have_posts() ) {
     <div class="gv-container">
 
         <div style="margin-bottom: 2rem;">
-            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; color: #363E19; margin-bottom: 1.5rem;">Explore More Gallery</h2>
+            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 500; color: #363E19; margin-bottom: 1.5rem;">Explore More Gallery</h2>
 
             <!-- Category Filter Tabs (Dynamic from gallery_category taxonomy) -->
             <div class="gv-gallery-filter-tabs" id="gv-gallery-tabs">
@@ -215,7 +215,7 @@ if ( $gallery_carousel_query->have_posts() ) {
     background: transparent;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #363E19;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
@@ -289,7 +289,7 @@ if ( $gallery_carousel_query->have_posts() ) {
     gap: 0.5rem;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #363E19;
 }
 
@@ -304,7 +304,7 @@ if ( $gallery_carousel_query->have_posts() ) {
 .gv-gallery-explore-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 1.0625rem;
-    font-weight: 700;
+    font-weight: 500;
     color: #363E19;
     margin: 0;
     line-height: 1.3;

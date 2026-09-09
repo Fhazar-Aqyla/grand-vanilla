@@ -284,7 +284,7 @@ if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
 .gv-blog-heading {
     font-family: var(--font-heading);
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-    font-weight: 800;
+    font-weight: 500;
     color: var(--color-dark-khaki);
     line-height: 1.2;
     margin: 0;
@@ -320,7 +320,7 @@ if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
     background: transparent;
     font-family: var(--font-heading);
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-dark-khaki);
     cursor: pointer;
     text-decoration: none;
@@ -361,7 +361,7 @@ if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
     display: block;
     font-family: var(--font-heading);
     font-size: clamp(3rem, 7vw, 5.5rem);
-    font-weight: 800;
+    font-weight: 500;
     color: rgba(54, 62, 25, 0.13);
     line-height: 1;
     margin-bottom: -1rem;
@@ -433,7 +433,7 @@ if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
 .gv-blog-title {
     font-family: var(--font-heading);
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    font-weight: 800;
+    font-weight: 500;
     color: var(--color-dark-khaki);
     line-height: 1.25;
     margin: 0;
@@ -460,7 +460,7 @@ if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
     display: inline-flex;
     align-items: center;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     font-family: var(--font-heading);
     color: var(--color-dark-khaki);
     text-decoration: underline;
@@ -496,7 +496,7 @@ if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
     background: transparent;
     font-family: var(--font-heading);
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-dark-khaki);
     cursor: pointer;
     text-decoration: none;

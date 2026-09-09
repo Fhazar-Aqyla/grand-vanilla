@@ -65,7 +65,7 @@ class Grand_Vanilla_Nav_Walker extends Walker_Nav_Menu {
         }
 
         $active_style = $is_active ? 'border-bottom: 2px solid #363E19;' : '';
-        $link_style   = "font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; {$active_style}";
+        $link_style   = "font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 500; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; {$active_style}";
 
         $output .= '<a href="' . esc_url( $item->url ) . '" style="' . esc_attr( $link_style ) . '">';
         $output .= esc_html( $item->title );
@@ -79,7 +79,7 @@ class Grand_Vanilla_Mobile_Walker extends Walker_Nav_Menu {
     public function end_lvl( &$output, $depth = 0, $args = null ) {}
     public function start_el( &$output, $data_object, $depth = 0, $args = null, $current_object_id = 0 ) {
         $item = $data_object;
-        $link_style = "font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 600; color: #363E19; text-decoration: none;";
+        $link_style = "font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 500; color: #363E19; text-decoration: none;";
 
         $output .= '<a href="' . esc_url( $item->url ) . '" style="' . esc_attr( $link_style ) . '">';
         $output .= esc_html( $item->title );
@@ -105,7 +105,7 @@ function grand_vanilla_scripts() {
     // Google Fonts: Jost (Headings) and Lato (Body)
     wp_enqueue_style(
         'grand-vanilla-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700;800&family=Lato:wght@300;400;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Lato:wght@300;400;500;700&display=swap',
         array(),
         null
     );

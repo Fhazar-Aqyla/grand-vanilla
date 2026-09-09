@@ -94,7 +94,7 @@ $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/conta
 .gv-cta-heading {
     font-family: var(--font-heading, 'Jost', sans-serif) !important;
     font-size: 2.5rem !important;
-    font-weight: 700 !important;
+    font-weight: 500 !important;
     color: #363E19 !important;
     line-height: 1.25 !important;
     margin: 0 0 2rem 0 !important;
@@ -113,7 +113,7 @@ $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/conta
     color: #FFFFFF !important;
     font-family: var(--font-heading, 'Jost', sans-serif) !important;
     font-size: 0.875rem !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     letter-spacing: 0.02em !important;
     text-transform: none !important;
     padding: 0.8rem 2.25rem !important;

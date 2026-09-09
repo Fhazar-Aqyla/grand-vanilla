@@ -161,7 +161,7 @@
         text-transform: uppercase !important;
         letter-spacing: 0.02em !important;
         line-height: 1.2 !important;
-        font-weight: 700 !important;
+        font-weight: 500 !important;
         margin-bottom: 1rem !important;
     }
 
@@ -275,7 +275,7 @@
         display: flex !important;
         align-items: center !important;
         gap: 0.75rem !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
     }
 
     .gv-about-tagline span,
@@ -333,7 +333,7 @@
         color: #FFFFFF !important;
         background: transparent !important;
         font-size: 0.75rem !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         text-transform: uppercase !important;
         letter-spacing: 0.5px !important;
         padding: 0.65rem 1.4rem !important;
@@ -483,7 +483,7 @@
         align-items: center !important;
         justify-content: center !important;
         font-size: 0.8125rem !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         margin-bottom: 0 !important;
         z-index: 2 !important;
         background-color: rgba(255, 255, 255, 0.18) !important;
@@ -587,7 +587,7 @@
     html body .gv-product-card .gv-card-title {
         color: #FFFFFF !important;
         font-size: 1.35rem !important;
-        font-weight: 700 !important;
+        font-weight: 500 !important;
         margin-bottom: 0.35rem !important;
         white-space: normal !important;
         line-height: 1.2 !important;
@@ -823,7 +823,7 @@
         content: counter(who-we-serve-count);
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: 0.875rem;
-        font-weight: 700;
+        font-weight: 500;
         color: #FFFFFF;
     }
     .gv-who-we-serve-label {
@@ -1042,7 +1042,7 @@
         background: #363E19 !important;
         color: #FFFFFF !important;
         font-family: var(--font-heading) !important;
-        font-weight: 700 !important;
+        font-weight: 500 !important;
         border-radius: 4px !important;
         display: flex !important;
         align-items: center !important;

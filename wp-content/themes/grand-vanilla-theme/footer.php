@@ -27,7 +27,7 @@ $contact = grand_vanilla_get_contact_info();
                     </div>
 
                     <!-- Tagline (Italic) -->
-                    <div class="gv-footer-tagline" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.0625rem; font-weight: 600; font-style: italic; color: #363E19; line-height: 1.35; margin-bottom: 1.25rem;">
+                    <div class="gv-footer-tagline" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.0625rem; font-weight: 500; font-style: italic; color: #363E19; line-height: 1.35; margin-bottom: 1.25rem;">
                         Pure Indonesian Vanilla.<br>Global Quality.
                     </div>
 
@@ -65,7 +65,7 @@ $contact = grand_vanilla_get_contact_info();
 
                 <!-- Col 2: Products Links (Dynamic from vanilla_product CPT) -->
                 <div class="gv-footer-products-col">
-                    <h4 class="gv-footer-col-header" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; color: #8C9286; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem;">
+                    <h4 class="gv-footer-col-header" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 500; color: #8C9286; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem;">
                         PRODUCTS
                     </h4>
                     <div class="gv-footer-nav-col" style="display: flex; flex-direction: column; gap: 0.65rem;">
@@ -90,7 +90,7 @@ $contact = grand_vanilla_get_contact_info();
                 <div class="gv-footer-secondary-group">
                     <!-- Col 3: Company / Navigation Links (Dynamic wp_nav_menu) -->
                     <div class="gv-footer-nav-section">
-                        <h4 class="gv-footer-col-header" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; color: #8C9286; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem;">
+                        <h4 class="gv-footer-col-header" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 500; color: #8C9286; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem;">
                             <span class="gv-header-desktop">COMPANY</span>
                             <span class="gv-header-mobile">NAVIGATION</span>
                         </h4>
@@ -118,7 +118,7 @@ $contact = grand_vanilla_get_contact_info();
 
                     <!-- Col 4: Help / About Us Links -->
                     <div class="gv-footer-help-section">
-                        <h4 class="gv-footer-col-header" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 700; color: #8C9286; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem;">
+                        <h4 class="gv-footer-col-header" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 500; color: #8C9286; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem;">
                             <span class="gv-header-desktop">HELP</span>
                             <span class="gv-header-mobile">ABOUT US</span>
                         </h4>
@@ -159,7 +159,7 @@ $contact = grand_vanilla_get_contact_info();
     .gv-footer-nav-col a {
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: 0.875rem;
-        font-weight: 600;
+        font-weight: 500;
         color: #363E19;
         text-decoration: none;
     }

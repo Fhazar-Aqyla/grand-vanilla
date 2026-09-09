@@ -269,7 +269,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
 
 .gv-detail-bc-current {
     color: #363E19;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .gv-detail-header-divider {
@@ -295,7 +295,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     display: inline-block;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.9375rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #363E19;
     margin-bottom: 1rem;
     letter-spacing: 0.02em;
@@ -304,7 +304,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
 .gv-detail-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: clamp(2.25rem, 4.5vw, 3.75rem);
-    font-weight: 800;
+    font-weight: 500;
     color: #363E19;
     line-height: 1.15;
     margin: 0 0 1.5rem 0;
@@ -333,7 +333,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     gap: 0.45rem;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #363E19;
 }
 
@@ -386,7 +386,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
 .gv-detail-article .wp-block-heading:not(h3) {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-    font-weight: 800;
+    font-weight: 500;
     color: #363E19;
     text-align: center;
     margin: 2rem 0 2.25rem;
@@ -440,7 +440,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
 .gv-detail-article h3 {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 500;
     color: #363E19;
     margin: 0 0 1.25rem 0;
     line-height: 1.3;
@@ -491,7 +491,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
 .gv-detail-more-heading {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: clamp(2rem, 3.5vw, 2.75rem);
-    font-weight: 800;
+    font-weight: 500;
     color: #363E19;
     margin: 0 0 3.5rem 0;
     letter-spacing: -0.01em;
@@ -513,7 +513,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     display: block;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: clamp(3.5rem, 7vw, 6rem);
-    font-weight: 800;
+    font-weight: 500;
     color: rgba(54, 62, 25, 0.14);
     line-height: 1;
     margin-bottom: -1.25rem;
@@ -568,7 +568,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     gap: 0.625rem;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #363E19;
 }
 
@@ -583,7 +583,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
 .gv-detail-more-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: clamp(1.35rem, 2.4vw, 1.875rem);
-    font-weight: 800;
+    font-weight: 500;
     color: #363E19;
     line-height: 1.25;
     margin: 0;
@@ -611,7 +611,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     align-items: center;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #363E19;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -638,7 +638,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     color: #FFFFFF !important;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.9375rem;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0.85rem 2.25rem;
     border-radius: 4px;
     text-decoration: none;

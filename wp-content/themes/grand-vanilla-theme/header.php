@@ -43,11 +43,11 @@
                     } else {
                         // Fallback
                         ?>
-                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo is_front_page() ? 'border-bottom: 2px solid #363E19;' : ''; ?>">Home</a>
-                        <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo is_page('about') ? 'border-bottom: 2px solid #363E19;' : ''; ?>">About Us</a>
-                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo (is_post_type_archive('vanilla_product') || is_singular('vanilla_product') || is_page('products')) ? 'border-bottom: 2px solid #363E19;' : ''; ?>">Products</a>
-                        <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo is_page('gallery') ? 'border-bottom: 2px solid #363E19;' : ''; ?>">Gallery</a>
-                        <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 600; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo (is_home() || is_singular('post')) ? 'border-bottom: 2px solid #363E19;' : ''; ?>">Blog</a>
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 500; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo is_front_page() ? 'border-bottom: 2px solid #363E19;' : ''; ?>">Home</a>
+                        <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 500; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo is_page('about') ? 'border-bottom: 2px solid #363E19;' : ''; ?>">About Us</a>
+                        <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 500; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo (is_post_type_archive('vanilla_product') || is_singular('vanilla_product') || is_page('products')) ? 'border-bottom: 2px solid #363E19;' : ''; ?>">Products</a>
+                        <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 500; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo is_page('gallery') ? 'border-bottom: 2px solid #363E19;' : ''; ?>">Gallery</a>
+                        <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.9375rem; font-weight: 500; color: #363E19; text-decoration: none; position: relative; padding-bottom: 4px; <?php echo (is_home() || is_singular('post')) ? 'border-bottom: 2px solid #363E19;' : ''; ?>">Blog</a>
                         <?php
                     }
                     ?>
@@ -56,7 +56,7 @@
                 <!-- Contact CTA Button -->
                 <div class="gv-nav-cta-wrap" style="display: flex; align-items: center;">
                     <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" 
-                       style="display: inline-block; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.65rem 1.65rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
+                       style="display: inline-block; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.65rem 1.65rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
                         Contact Us
                     </a>
                 </div>
@@ -86,16 +86,16 @@
                     ) );
                 } else {
                     ?>
-                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 600; color: #363E19; text-decoration: none;">Home</a>
-                    <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 600; color: #363E19; text-decoration: none;">About Us</a>
-                    <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 600; color: #363E19; text-decoration: none;">Products</a>
-                    <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 600; color: #363E19; text-decoration: none;">Gallery</a>
-                    <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 600; color: #363E19; text-decoration: none;">Blog</a>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 500; color: #363E19; text-decoration: none;">Home</a>
+                    <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 500; color: #363E19; text-decoration: none;">About Us</a>
+                    <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 500; color: #363E19; text-decoration: none;">Products</a>
+                    <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 500; color: #363E19; text-decoration: none;">Gallery</a>
+                    <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1rem; font-weight: 500; color: #363E19; text-decoration: none;">Blog</a>
                     <?php
                 }
                 ?>
                 <div style="padding-top: 0.5rem;">
-                    <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="display: block; text-align: center; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none;">
+                    <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="display: block; text-align: center; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none;">
                         Contact Us &rarr;
                     </a>
                 </div>

@@ -22,7 +22,7 @@ $contact = grand_vanilla_get_contact_info();
         <div style="max-width: 620px;">
 
             <!-- Main Hero Headline (Clean 3-Line Structure) -->
-            <h1 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.35rem, 4.6vw, 3.65rem); font-weight: 600; color: #FFFFFF; line-height: 1.18; margin-bottom: 1.25rem; letter-spacing: -0.01em; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+            <h1 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.35rem, 4.6vw, 3.65rem); font-weight: 500; color: #FFFFFF; line-height: 1.18; margin-bottom: 1.25rem; letter-spacing: -0.01em; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
                 <?php echo esc_html(get_theme_mod('gv_hero_title', 'Premium Indonesian vanilla, sourced for the global market.')); ?>
             </h1>
 
@@ -34,11 +34,11 @@ $contact = grand_vanilla_get_contact_info();
             <!-- Dual Action Buttons (Solid Olive + Clean Transparent Outline) -->
             <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 4rem;">
                 <a href="<?php echo esc_url(home_url('/products/')); ?>" class="gv-hero-btn-primary"
-                    style="display: inline-flex; align-items: center; justify-content: center; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.8rem 1.85rem; border-radius: 4px; text-decoration: none; border: 1px solid #363E19; box-shadow: 0 4px 14px rgba(0,0,0,0.18); transition: all 0.25s ease;">
+                    style="display: inline-flex; align-items: center; justify-content: center; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.8rem 1.85rem; border-radius: 4px; text-decoration: none; border: 1px solid #363E19; box-shadow: 0 4px 14px rgba(0,0,0,0.18); transition: all 0.25s ease;">
                     Explore Products
                 </a>
                 <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="gv-hero-btn-outline"
-                    style="display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 1px solid rgba(255,255,255,0.75); color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.8rem 1.85rem; border-radius: 4px; text-decoration: none; transition: all 0.25s ease;">
+                    style="display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 1px solid rgba(255,255,255,0.75); color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.8rem 1.85rem; border-radius: 4px; text-decoration: none; transition: all 0.25s ease;">
                     Request a Quote
                 </a>
             </div>
@@ -50,7 +50,7 @@ $contact = grand_vanilla_get_contact_info();
                     Trusted Customers Worldwide
                 </span>
                 <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 2.25rem; font-weight: 700; color: #FFFFFF; line-height: 1;">
+                    <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 2.25rem; font-weight: 500; color: #FFFFFF; line-height: 1;">
                         12+
                     </span>
                     <!-- Overlapping Flag Circles (US, FR, DE, NL, 18+) -->
@@ -95,7 +95,7 @@ $contact = grand_vanilla_get_contact_info();
                             </svg>
                         </div>
                         <!-- 18+ Pill -->
-                        <div style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid #0E110A; background: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.6875rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-left: -8px; z-index: 1;">
+                        <div style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid #0E110A; background: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.6875rem; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-left: -8px; z-index: 1;">
                             18+
                         </div>
                     </div>
@@ -109,67 +109,73 @@ $contact = grand_vanilla_get_contact_info();
 <!-- 2. About Us Section (Sage Green Canvas with Orchid Watermark) -->
 <section class="gv-section" style="background-color: #E1E2DD; padding: 6rem 0;">
     <div class="gv-container">
-        <div style="display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center;" class="gv-grid-split-about">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: stretch;" class="gv-grid-split-about">
 
             <!-- Left Column: High-Res Rustic Photo -->
-            <div>
+            <div style="display: flex;">
                 <img src="<?php echo esc_url($img_dir . 'About Us Image.png'); ?>"
                     alt="Grand Vanilla Indonesia Rustic Vanilla Curing"
                     class="gv-about-rustic-img"
-                    style="width: 100%; height: auto; max-height: 540px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); display: block;">
+                    style="width: 100%; height: 100%; min-height: 520px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: block;">
             </div>
 
             <!-- Right Column: Content + Watermark + 2x2 Feature Boxes -->
-            <div style="position: relative;" class="gv-about-content-card">
-                <!-- Subtle Orchid Flower Watermark -->
+            <div style="position: relative; display: flex; flex-direction: column; justify-content: center;" class="gv-about-content-card">
+                <!-- Subtle Orchid Flower Watermark (Crisp High-Fidelity Match) -->
                 <img src="<?php echo esc_url($img_dir . 'Logo.png'); ?>"
                     alt=""
                     aria-hidden="true"
                     class="gv-about-watermark"
-                    style="position: absolute; top: -30px; right: -15px; width: 190px; height: auto; opacity: 0.15; pointer-events: none; z-index: 0; transform: rotate(15deg);">
+                    style="position: absolute; top: -40px; right: -25px; width: 310px; max-width: none; height: auto; opacity: 0.32; pointer-events: none; z-index: 0; transform: rotate(10deg);">
 
                 <div style="position: relative; z-index: 1;">
                     <!-- Section Tag -->
-                    <div class="gv-about-tagline" style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.9375rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
-                        <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                    <div class="gv-about-tagline" style="display: flex; align-items: center; gap: 0.85rem; color: #363E19; font-size: 0.8125rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 1.25rem; letter-spacing: 0.01em;">
+                        <span style="display: inline-block; width: 44px; height: 1.5px; background: #363E19;"></span>
                         About Us
                     </div>
 
                     <!-- Heading -->
-                    <h2 class="gv-about-heading" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 1.5rem;">
+                    <h2 class="gv-about-heading" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.35rem, 3.4vw, 2.85rem); font-weight: 500; color: #363E19; line-height: 1.15; margin: 0 0 1.75rem 0; letter-spacing: -0.015em;">
                         Grand Vanilla Indonesia
                     </h2>
 
-                    <!-- Paragraphs -->
-                    <p style="font-size: 0.9375rem; line-height: 1.7; color: #4A5239; margin-bottom: 1rem;">
+                    <!-- Paragraphs (Jost Geometric Typography) -->
+                    <p style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 400; line-height: 1.62; color: #363E19; opacity: 0.9; margin: 0 0 1.35rem 0; max-width: 495px; letter-spacing: 0.005em;">
                         Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
                     </p>
-                    <p class="gv-about-p-secondary" style="font-size: 0.9375rem; line-height: 1.7; color: #4A5239; margin-bottom: 2rem;">
+                    <p class="gv-about-p-secondary" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 400; line-height: 1.62; color: #363E19; opacity: 0.9; margin: 0 0 2.25rem 0; max-width: 495px; letter-spacing: 0.005em;">
                         Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
                     </p>
 
                     <!-- 4 Solid Dark Khaki Feature Boxes (2x2 Grid) -->
-                    <div class="gv-about-features-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-bottom: 2.25rem;">
-                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                    <div class="gv-about-features-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem 1.15rem; margin-bottom: 2.5rem; max-width: 495px;">
+                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.78125rem; font-weight: 400; padding: 1.1rem 0.75rem; border-radius: 0; text-align: center; display: flex; align-items: center; justify-content: center; box-sizing: border-box; letter-spacing: 0.01em;">
                             Premium Product Quality
                         </div>
-                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.78125rem; font-weight: 400; padding: 1.1rem 0.75rem; border-radius: 0; text-align: center; display: flex; align-items: center; justify-content: center; box-sizing: border-box; letter-spacing: 0.01em;">
                             Consistent Global Supply
                         </div>
-                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.78125rem; font-weight: 400; padding: 1.1rem 0.75rem; border-radius: 0; text-align: center; display: flex; align-items: center; justify-content: center; box-sizing: border-box; letter-spacing: 0.01em;">
                             Reliable Business Service
                         </div>
-                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 600; padding: 0.85rem 1rem; border-radius: 4px; text-align: center;">
+                        <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.78125rem; font-weight: 400; padding: 1.1rem 0.75rem; border-radius: 0; text-align: center; display: flex; align-items: center; justify-content: center; box-sizing: border-box; letter-spacing: 0.01em;">
                             Flexible Custom Solutions
                         </div>
                     </div>
 
                     <!-- Learn More CTA -->
-                    <a href="<?php echo esc_url(home_url('/about/')); ?>"
-                        class="gv-about-learn-btn"
-                        style="display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.75rem 2rem; border-radius: 4px; text-decoration: none; transition: all 0.2s ease;">
-                        Learn More &rarr;
-                    </a>
+                    <div>
+                        <a href="<?php echo esc_url(home_url('/about/')); ?>"
+                            class="gv-about-learn-btn"
+                            style="display: inline-flex; align-items: center; gap: 1.75rem; border: 1.5px solid #363E19; color: #363E19; background: transparent; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.8125rem; font-weight: 500; padding: 0.7rem 1.6rem; border-radius: 0; text-decoration: none; transition: all 0.2s ease;">
+                            <span>Learn More</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#363E19" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="4" y1="12" x2="20" y2="12"></line>
+                                <polyline points="14 6 20 12 14 18"></polyline>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -184,11 +190,11 @@ $contact = grand_vanilla_get_contact_info();
         <!-- Header Split -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
                     <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                     Products
                 </div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #363E19; line-height: 1.15; margin: 0;">
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 500; color: #363E19; line-height: 1.15; margin: 0;">
                     Premium Indonesian<br>Vanilla Products
                 </h2>
             </div>
@@ -202,34 +208,34 @@ $contact = grand_vanilla_get_contact_info();
         <!-- 3 Product Cards Grid (Dynamic WP_Query) -->
         <div class="gv-products-cards-grid active-1" id="gvProductsCardsGrid">
             <?php
-            $featured_products_query = new WP_Query( array(
+            $featured_products_query = new WP_Query(array(
                 'post_type'      => 'vanilla_product',
                 'posts_per_page' => 3,
                 'post_status'    => 'publish',
                 'orderby'        => 'menu_order date',
                 'order'          => 'ASC',
-            ) );
+            ));
 
-            if ( $featured_products_query->have_posts() ) :
+            if ($featured_products_query->have_posts()) :
                 $prod_idx = 0;
-                while ( $featured_products_query->have_posts() ) :
+                while ($featured_products_query->have_posts()) :
                     $featured_products_query->the_post();
                     $prod_idx++;
-                    $is_active  = ( $prod_idx === 1 );
+                    $is_active  = ($prod_idx === 1);
                     $card_class = $is_active ? 'is-active' : 'is-collapsed';
-                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Product Unggulan ' . $prod_idx . '.png';
-                    ?>
-                    <!-- Card <?php echo esc_attr( $prod_idx ); ?>: <?php the_title(); ?> -->
-                    <div class="gv-product-card <?php echo esc_attr( $card_class ); ?>" data-card-index="<?php echo esc_attr( $prod_idx ); ?>">
-                        <!-- Badge #<?php echo esc_attr( $prod_idx ); ?> -->
+                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : $img_dir . 'Product Unggulan ' . $prod_idx . '.png';
+            ?>
+                    <!-- Card <?php echo esc_attr($prod_idx); ?>: <?php the_title(); ?> -->
+                    <div class="gv-product-card <?php echo esc_attr($card_class); ?>" data-card-index="<?php echo esc_attr($prod_idx); ?>">
+                        <!-- Badge #<?php echo esc_attr($prod_idx); ?> -->
                         <div class="gv-card-badge">
-                            #<?php echo esc_html( $prod_idx ); ?>
+                            #<?php echo esc_html($prod_idx); ?>
                         </div>
 
                         <!-- Product Image -->
                         <div class="gv-card-img-wrap">
-                            <img src="<?php echo esc_url( $prod_img ); ?>"
-                                alt="<?php echo esc_attr( get_the_title() ); ?>"
+                            <img src="<?php echo esc_url($prod_img); ?>"
+                                alt="<?php echo esc_attr(get_the_title()); ?>"
                                 class="gv-card-img">
                         </div>
 
@@ -240,7 +246,7 @@ $contact = grand_vanilla_get_contact_info();
                                     <?php the_title(); ?>
                                 </h3>
                                 <p class="gv-card-desc">
-                                    <?php echo esc_html( get_the_excerpt() ); ?>
+                                    <?php echo esc_html(get_the_excerpt()); ?>
                                 </p>
                             </div>
                             <!-- Actions Slot (Cross-fade between Detail and Arrow) -->
@@ -251,13 +257,13 @@ $contact = grand_vanilla_get_contact_info();
                                 </a>
                                 <button type="button"
                                     class="gv-card-btn-arrow"
-                                    aria-label="Expand <?php echo esc_attr( get_the_title() ); ?>">
+                                    aria-label="Expand <?php echo esc_attr(get_the_title()); ?>">
                                     &rarr;
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <?php
+            <?php
                 endwhile;
                 wp_reset_postdata();
             endif;
@@ -317,7 +323,7 @@ $contact = grand_vanilla_get_contact_info();
         <!-- View All Products CTA Button -->
         <div style="text-align: center;">
             <a href="<?php echo esc_url(home_url('/products/')); ?>"
-                style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
+                style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Products &rarr;
             </a>
         </div>
@@ -330,7 +336,7 @@ $contact = grand_vanilla_get_contact_info();
     <div class="gv-container">
 
         <div style="text-align: center; max-width: 700px; margin: 0 auto 4rem;">
-            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 0.75rem;">
+            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 500; color: #363E19; line-height: 1.2; margin-bottom: 0.75rem;">
                 Your Trusted Partner For Quality<br>Indonesian Vanilla
             </h2>
             <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin: 0;">
@@ -349,7 +355,7 @@ $contact = grand_vanilla_get_contact_info();
                         <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z" />
                     </svg>
                 </div>
-                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
                     Quality Focused
                 </h3>
                 <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
@@ -365,7 +371,7 @@ $contact = grand_vanilla_get_contact_info();
                         <path d="M21 16.5l-9 5.2-9-5.2V7.5L12 2.3l9 5.2v9zM12 4.1L5.3 8 12 11.9 18.7 8 12 4.1zm-7 5.6v7.4l6.5 3.7v-7.4L5 9.7zm8 11.1l6.5-3.7V9.7L13 13.4v7.4z" />
                     </svg>
                 </div>
-                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
                     Consistent Supply
                 </h3>
                 <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
@@ -381,7 +387,7 @@ $contact = grand_vanilla_get_contact_info();
                         <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
                     </svg>
                 </div>
-                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
                     Indonesian Origin
                 </h3>
                 <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
@@ -397,7 +403,7 @@ $contact = grand_vanilla_get_contact_info();
                         <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z" />
                     </svg>
                 </div>
-                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
                     Reliable Service
                 </h3>
                 <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
@@ -418,7 +424,7 @@ $contact = grand_vanilla_get_contact_info();
 
             <!-- Left Column: Title + Bulk Packaging Photo -->
             <div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700; color: #363E19; line-height: 1.2; margin-bottom: 2rem;">
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 500; color: #363E19; line-height: 1.2; margin-bottom: 2rem;">
                     Flexible Vanilla Supply<br>For Your Business
                 </h2>
                 <img src="<?php echo esc_url($img_dir . 'Bulk  Wholesale Vanilla 1.png'); ?>"
@@ -433,7 +439,7 @@ $contact = grand_vanilla_get_contact_info();
                 </p>
 
                 <div>
-                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.75rem, 2.5vw, 2.25rem); font-weight: 700; color: #363E19; margin-bottom: 0.75rem;">
+                    <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.75rem, 2.5vw, 2.25rem); font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
                         Special OEM & Bulk Vanilla
                     </h3>
                     <p style="font-size: 0.9375rem; line-height: 1.6; color: #4A5239; margin-bottom: 2rem;">
@@ -443,7 +449,7 @@ $contact = grand_vanilla_get_contact_info();
                     <!-- 4 Feature Points (2x2 Grid) -->
                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem 1.5rem;">
                         <div>
-                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.35rem;">
                                 High-Volume Supply
                             </h4>
                             <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
@@ -451,7 +457,7 @@ $contact = grand_vanilla_get_contact_info();
                             </p>
                         </div>
                         <div>
-                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.35rem;">
                                 Consistent Quality
                             </h4>
                             <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
@@ -459,7 +465,7 @@ $contact = grand_vanilla_get_contact_info();
                             </p>
                         </div>
                         <div>
-                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.35rem;">
                                 Custom Packaging
                             </h4>
                             <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
@@ -467,7 +473,7 @@ $contact = grand_vanilla_get_contact_info();
                             </p>
                         </div>
                         <div>
-                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin-bottom: 0.35rem;">
+                            <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.35rem;">
                                 Flexible Quantities
                             </h4>
                             <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
@@ -490,7 +496,7 @@ $contact = grand_vanilla_get_contact_info();
         <!-- Header Split: Left Title, Right Subtitle -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 700; color: #FFFFFF; line-height: 1.15; margin: 0;">
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 500; color: #FFFFFF; line-height: 1.15; margin: 0;">
                     From Indonesia To<br>Global Markets
                 </h2>
             </div>
@@ -515,7 +521,7 @@ $contact = grand_vanilla_get_contact_info();
         </div>
         <!-- Who We Serve In Global B2B Markets (Exact Figma 3x2 Grid) -->
         <div style="margin-top: 2.5rem;">
-            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.6rem, 2.6vw, 1.95rem); font-weight: 600; font-style: italic; color: #FFFFFF; text-align: center; margin-bottom: 2.5rem; letter-spacing: 0.02em;">
+            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.6rem, 2.6vw, 1.95rem); font-weight: 500; font-style: italic; color: #FFFFFF; text-align: center; margin-bottom: 2.5rem; letter-spacing: 0.02em;">
                 Who We Serve In Global B2B Markets
             </h3>
 
@@ -616,62 +622,69 @@ $contact = grand_vanilla_get_contact_info();
         </div>
 
         <style>
-        .gv-who-we-serve-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.25rem;
-            max-width: 1040px;
-            margin: 0 auto;
-        }
-        .gv-who-we-serve-card {
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            border-radius: 8px;
-            padding: 1.2rem 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            background: rgba(255, 255, 255, 0.02);
-            transition: all 0.25s ease;
-        }
-        .gv-who-we-serve-card:hover {
-            border-color: rgba(255, 255, 255, 0.45);
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-2px);
-        }
-        .gv-who-we-serve-icon {
-            width: 44px;
-            height: 44px;
-            border: 1px solid rgba(255, 255, 255, 0.28);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: #FFFFFF;
-            transition: all 0.25s ease;
-        }
-        .gv-who-we-serve-card:hover .gv-who-we-serve-icon {
-            border-color: rgba(255, 255, 255, 0.6);
-            color: #E8D3A2;
-        }
-        .gv-who-we-serve-label {
-            font-family: var(--font-heading, 'Jost', sans-serif);
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: #FFFFFF;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-        @media (max-width: 991px) {
             .gv-who-we-serve-grid {
-                grid-template-columns: repeat(2, 1fr);
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.25rem;
+                max-width: 1040px;
+                margin: 0 auto;
             }
-        }
-        @media (max-width: 600px) {
-            .gv-who-we-serve-grid {
-                grid-template-columns: 1fr;
+
+            .gv-who-we-serve-card {
+                border: 1px solid rgba(255, 255, 255, 0.22);
+                border-radius: 8px;
+                padding: 1.2rem 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 1.25rem;
+                background: rgba(255, 255, 255, 0.02);
+                transition: all 0.25s ease;
             }
-        }
+
+            .gv-who-we-serve-card:hover {
+                border-color: rgba(255, 255, 255, 0.45);
+                background: rgba(255, 255, 255, 0.05);
+                transform: translateY(-2px);
+            }
+
+            .gv-who-we-serve-icon {
+                width: 44px;
+                height: 44px;
+                border: 1px solid rgba(255, 255, 255, 0.28);
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                color: #FFFFFF;
+                transition: all 0.25s ease;
+            }
+
+            .gv-who-we-serve-card:hover .gv-who-we-serve-icon {
+                border-color: rgba(255, 255, 255, 0.6);
+                color: #E8D3A2;
+            }
+
+            .gv-who-we-serve-label {
+                font-family: var(--font-heading, 'Jost', sans-serif);
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: #FFFFFF;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+            }
+
+            @media (max-width: 991px) {
+                .gv-who-we-serve-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 600px) {
+                .gv-who-we-serve-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
         </style>
 
     </div>
@@ -684,11 +697,11 @@ $contact = grand_vanilla_get_contact_info();
         <!-- Header Split (Left Title, Right Description) -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap;">
             <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
                     <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                     Gallery
                 </div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #363E19; line-height: 1.15; margin: 0;">
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 500; color: #363E19; line-height: 1.15; margin: 0;">
                     A Closer Look At<br>Grand Vanilla
                 </h2>
             </div>
@@ -705,22 +718,22 @@ $contact = grand_vanilla_get_contact_info();
     <div class="gv-gallery-carousel-viewport" style="width: 100%; overflow: hidden; padding: 0.5rem 0 3.5rem; position: relative;">
         <div class="gv-gallery-carousel-track">
             <?php
-            $gallery_query = new WP_Query( array(
+            $gallery_query = new WP_Query(array(
                 'post_type'      => 'vanilla_gallery',
                 'posts_per_page' => 8,
                 'post_status'    => 'publish',
                 'orderby'        => 'menu_order date',
                 'order'          => 'ASC',
-            ) );
+            ));
 
             $gallery_carousel_dynamic = array();
-            if ( $gallery_query->have_posts() ) {
-                while ( $gallery_query->have_posts() ) {
+            if ($gallery_query->have_posts()) {
+                while ($gallery_query->have_posts()) {
                     $gallery_query->the_post();
-                    $terms = get_the_terms( get_the_ID(), 'gallery_category' );
-                    $tag   = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : 'Vanilla';
+                    $terms = get_the_terms(get_the_ID(), 'gallery_category');
+                    $tag   = (! empty($terms) && ! is_wp_error($terms)) ? $terms[0]->name : 'Vanilla';
                     $gallery_carousel_dynamic[] = array(
-                        'img'      => has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Gallery Example Carroussel 1.png',
+                        'img'      => has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : $img_dir . 'Gallery Example Carroussel 1.png',
                         'tag'      => $tag,
                         'title'    => 'Vanilla Collection',
                         'subtitle' => get_the_title(),
@@ -738,15 +751,15 @@ $contact = grand_vanilla_get_contact_info();
                         <div style="height: 310px; width: 100%; overflow: hidden;">
                             <img src="<?php echo esc_url($item['img']); ?>"
                                 alt="<?php echo esc_attr($item['title'] . ' - ' . $item['subtitle']); ?>"
-                                style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                                style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0;">
                         </div>
                         <!-- Card Content -->
                         <div style="padding: 1.35rem 1.5rem 1.5rem; background: #FAF8F5; display: flex; flex-direction: column;">
-                            <div style="display: flex; align-items: center; gap: 0.6rem; color: #363E19; font-size: 0.75rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.35rem;">
+                            <div style="display: flex; align-items: center; gap: 0.6rem; color: #363E19; font-size: 0.75rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.35rem;">
                                 <span style="display: inline-block; width: 18px; height: 1.5px; background: #363E19;"></span>
                                 <?php echo esc_html($item['tag']); ?>
                             </div>
-                            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 700; color: #363E19; margin: 0 0 0.25rem 0; line-height: 1.3;">
+                            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin: 0 0 0.25rem 0; line-height: 1.3;">
                                 <?php echo esc_html($item['title']); ?>
                             </h3>
                             <p style="font-size: 0.8125rem; color: #716F6E; margin: 0; line-height: 1.4;">
@@ -765,7 +778,7 @@ $contact = grand_vanilla_get_contact_info();
         <!-- View All Gallery Button -->
         <div style="text-align: center;">
             <a href="<?php echo esc_url(home_url('/gallery/')); ?>"
-                style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
+                style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Gallery &rarr;
             </a>
         </div>
@@ -779,11 +792,11 @@ $contact = grand_vanilla_get_contact_info();
         <!-- Header Split (Left Tag & Title, Right Description) -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; gap: 2rem; flex-wrap: wrap;">
             <div>
-                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.5rem;">
                     <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                     Blog
                 </div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 700; color: #363E19; line-height: 1.15; margin: 0;">
+                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 500; color: #363E19; line-height: 1.15; margin: 0;">
                     Insights From The World<br>Of Vanilla
                 </h2>
             </div>
@@ -797,65 +810,65 @@ $contact = grand_vanilla_get_contact_info();
         <!-- 2 Clean Articles Stack (Dynamic WP_Query) -->
         <div style="display: flex; flex-direction: column; gap: 4.5rem; margin-bottom: 4rem;">
             <?php
-            $hp_blog_query = new WP_Query( array(
+            $hp_blog_query = new WP_Query(array(
                 'post_type'      => 'post',
                 'posts_per_page' => 2,
                 'post_status'    => 'publish',
                 'orderby'        => 'date',
                 'order'          => 'DESC',
-            ) );
-            $hp_total_posts = wp_count_posts( 'post' )->publish;
+            ));
+            $hp_total_posts = wp_count_posts('post')->publish;
 
-            if ( $hp_blog_query->have_posts() ) :
+            if ($hp_blog_query->have_posts()) :
                 $b_idx = 0;
-                while ( $hp_blog_query->have_posts() ) :
+                while ($hp_blog_query->have_posts()) :
                     $hp_blog_query->the_post();
-                    $badge_num = str_pad( max( 1, $hp_total_posts - $b_idx ), 2, '0', STR_PAD_LEFT );
-                    $badge_tot = str_pad( $hp_total_posts, 2, '0', STR_PAD_LEFT );
+                    $badge_num = str_pad(max(1, $hp_total_posts - $b_idx), 2, '0', STR_PAD_LEFT);
+                    $badge_tot = str_pad($hp_total_posts, 2, '0', STR_PAD_LEFT);
                     $badge_str = $badge_num . '/' . $badge_tot;
 
-                    $post_thumb = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Buat Blog Example 1.png';
+                    $post_thumb = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : $img_dir . 'Buat Blog Example 1.png';
                     $post_cats  = get_the_category();
-                    $cat_label  = ! empty( $post_cats ) ? $post_cats[0]->name : 'Vanilla Guide';
+                    $cat_label  = ! empty($post_cats) ? $post_cats[0]->name : 'Vanilla Guide';
                     $b_idx++;
-                    ?>
-                    <!-- Article <?php echo esc_attr( $b_idx ); ?>: <?php echo esc_html( $badge_str ); ?> -->
+            ?>
+                    <!-- Article <?php echo esc_attr($b_idx); ?>: <?php echo esc_html($badge_str); ?> -->
                     <div class="gv-blog-article-row" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: center;">
                         <!-- Left Column: Big Number & Photo -->
                         <div style="position: relative; width: 100%;">
-                            <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(3.75rem, 5.5vw, 4.75rem); font-weight: 700; color: #BAC4B5; line-height: 0.9; margin-bottom: -1rem; position: relative; z-index: 1; letter-spacing: -0.02em; user-select: none;">
-                                <?php echo esc_html( $badge_str ); ?>
+                            <div style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(3.75rem, 5.5vw, 4.75rem); font-weight: 500; color: #BAC4B5; line-height: 0.9; margin-bottom: -1rem; position: relative; z-index: 1; letter-spacing: -0.02em; user-select: none;">
+                                <?php echo esc_html($badge_str); ?>
                             </div>
                             <div style="position: relative; z-index: 2; border-radius: 0; overflow: hidden; aspect-ratio: 16 / 10; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
-                                <img src="<?php echo esc_url( $post_thumb ); ?>"
-                                    alt="<?php echo esc_attr( get_the_title() ); ?>"
+                                <img src="<?php echo esc_url($post_thumb); ?>"
+                                    alt="<?php echo esc_attr(get_the_title()); ?>"
                                     style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 0;">
                             </div>
                         </div>
 
                         <!-- Right Column: Details & Underline Link -->
                         <div style="display: flex; flex-direction: column; justify-content: center;">
-                            <div style="display: flex; align-items: center; gap: 0.65rem; color: #363E19; font-size: 0.8125rem; font-weight: 600; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
+                            <div style="display: flex; align-items: center; gap: 0.65rem; color: #363E19; font-size: 0.8125rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.65rem;">
                                 <span style="display: inline-block; width: 22px; height: 1.5px; background: #363E19;"></span>
-                                <?php echo esc_html( $cat_label ); ?>
+                                <?php echo esc_html($cat_label); ?>
                             </div>
-                            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 700; color: #363E19; margin: 0 0 0.85rem 0; line-height: 1.25;">
+                            <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 500; color: #363E19; margin: 0 0 0.85rem 0; line-height: 1.25;">
                                 <a href="<?php the_permalink(); ?>" style="color: #363E19; text-decoration: none; transition: opacity 0.2s ease;">
                                     <?php the_title(); ?>
                                 </a>
                             </h3>
                             <p style="font-size: 0.9375rem; color: #716F6E; line-height: 1.65; margin: 0 0 1.5rem 0; max-width: 520px;">
-                                <?php echo esc_html( get_the_excerpt() ); ?>
+                                <?php echo esc_html(get_the_excerpt()); ?>
                             </p>
                             <div>
                                 <a href="<?php the_permalink(); ?>"
-                                    style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
+                                    style="display: inline-flex; align-items: center; gap: 0.4rem; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s ease;">
                                     Continue Reading &rarr;
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <?php
+            <?php
                 endwhile;
                 wp_reset_postdata();
             endif;
@@ -865,7 +878,7 @@ $contact = grand_vanilla_get_contact_info();
         <!-- View All Blog Button -->
         <div style="text-align: center;">
             <a href="<?php echo esc_url(home_url('/articles/')); ?>"
-                style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 600; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
+                style="display: inline-flex; align-items: center; gap: 0.65rem; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.85rem 2.25rem; border-radius: 2px; text-decoration: none; box-shadow: 0 4px 12px rgba(54,62,25,0.15); transition: all 0.2s ease;">
                 View All Blog &rarr;
             </a>
         </div>
@@ -916,7 +929,7 @@ get_template_part('template-parts/cta-banner', null, array(
         color: #FFFFFF;
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: 0.8125rem;
-        font-weight: 700;
+        font-weight: 500;
         width: 32px;
         height: 32px;
         border-radius: 4px;
@@ -963,7 +976,7 @@ get_template_part('template-parts/cta-banner', null, array(
         width: auto;
         height: auto;
         object-fit: contain;
-        filter: drop-shadow(0 8px 18px rgba(0,0,0,0.07));
+        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.07));
         transition: transform 0.4s ease;
     }
 
@@ -994,7 +1007,7 @@ get_template_part('template-parts/cta-banner', null, array(
 
     .gv-card-title {
         font-family: var(--font-heading, 'Jost', sans-serif);
-        font-weight: 700;
+        font-weight: 500;
         color: #363E19;
         margin: 0 0 0.35rem 0;
         line-height: 1.2;
@@ -1063,7 +1076,7 @@ get_template_part('template-parts/cta-banner', null, array(
         background: transparent !important;
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: 0.8125rem;
-        font-weight: 600;
+        font-weight: 500;
         padding: 0.55rem 1.25rem;
         border-radius: 2px;
         text-decoration: none;

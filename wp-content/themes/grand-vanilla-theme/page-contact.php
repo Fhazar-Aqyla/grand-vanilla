@@ -204,7 +204,7 @@ $contact = grand_vanilla_get_contact_info();
 .gv-contact-heading {
     font-family: var(--font-heading);
     font-size: clamp(1.75rem, 3vw, 2.375rem);
-    font-weight: 800;
+    font-weight: 500;
     color: var(--color-dark-khaki);
     line-height: 1.2;
     margin-bottom: 1.25rem;
@@ -229,14 +229,14 @@ $contact = grand_vanilla_get_contact_info();
     display: block;
     font-size: 0.8125rem;
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 500;
     color: var(--color-dark-khaki);
     margin-bottom: 0.35rem;
 }
 
 .gv-contact-detail-value {
     font-size: 0.875rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--color-pitch-black);
     line-height: 1.5;
 }
@@ -295,7 +295,7 @@ $contact = grand_vanilla_get_contact_info();
 .gv-contact-form-title {
     font-family: var(--font-heading);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--color-dark-khaki);
     margin-bottom: 2rem;
 }
@@ -408,7 +408,7 @@ $contact = grand_vanilla_get_contact_info();
     border-radius: var(--radius-4);
     font-family: var(--font-heading);
     font-size: 0.8125rem;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     cursor: pointer;

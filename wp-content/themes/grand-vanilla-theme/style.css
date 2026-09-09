@@ -118,7 +118,7 @@ h1, h2, h3, h4, h5, h6, .font-heading {
     font-family: var(--font-heading);
     color: var(--color-pitch-black);
     line-height: 1.25;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 a {
@@ -167,7 +167,7 @@ ul {
 .gv-section-tag {
     font-family: var(--font-heading);
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-nw-500);
     display: inline-flex;
     align-items: center;
@@ -228,7 +228,7 @@ ul {
 .gv-nav-link {
     font-family: var(--font-heading);
     font-size: 0.9375rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-pitch-black);
     position: relative;
     padding: var(--space-8) 0;
@@ -284,7 +284,7 @@ ul {
     padding: 0.75rem 1.75rem;
     border-radius: var(--radius-full);
     font-size: 0.875rem;
-    font-weight: 700;
+    font-weight: 500;
     font-family: var(--font-heading);
     cursor: pointer;
     border: 1px solid transparent;
@@ -328,7 +328,7 @@ ul {
     padding: 0.45rem 1.1rem;
     border-radius: var(--radius-full);
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     font-family: var(--font-heading);
     border: 1px solid var(--color-nb-200);
     background-color: var(--color-white);
@@ -376,7 +376,7 @@ ul {
 .gv-hero-tag {
     font-family: var(--font-heading);
     font-size: clamp(2.25rem, 4vw, 2.85rem);
-    font-weight: 800;
+    font-weight: 500;
     color: #FFFFFF;
     margin-bottom: 0.65rem;
     letter-spacing: -0.02em;
@@ -481,7 +481,7 @@ ul {
 .gv-cta-heading {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--color-dark-khaki);
     line-height: 1.25;
     margin: 0 0 2rem 0;
@@ -500,7 +500,7 @@ ul {
     color: #FFFFFF;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.02em;
     text-transform: none; /* Title Case on Desktop */
     padding: 0.8rem 2.25rem;
@@ -623,7 +623,7 @@ ul {
 .gv-footer h4 {
     font-family: var(--font-heading);
     font-size: 0.8125rem;
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-nw-500);
@@ -731,7 +731,7 @@ ul {
     color: #FFFFFF;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.8125rem;
-    font-weight: 700;
+    font-weight: 500;
     width: 32px;
     height: 32px;
     border-radius: 4px;
@@ -809,7 +809,7 @@ ul {
 
 .gv-card-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-weight: 700;
+    font-weight: 500;
     color: #363E19;
     margin: 0 0 0.35rem 0;
     line-height: 1.2;
@@ -878,7 +878,7 @@ ul {
     background: transparent !important;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0.55rem 1.25rem;
     border-radius: 2px;
     text-decoration: none;
@@ -943,7 +943,7 @@ ul {
 .gv-explore-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: clamp(2rem, 3.5vw, 2.75rem);
-    font-weight: 700;
+    font-weight: 500;
     color: #1C230C;
     margin: 0 0 3.5rem 0;
 }
@@ -993,7 +993,7 @@ ul {
 .gv-explore-item-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: clamp(1.85rem, 2.5vw, 2.35rem);
-    font-weight: 700;
+    font-weight: 500;
     color: #363E19;
     margin: 0 0 1rem 0;
     line-height: 1.2;
@@ -1016,7 +1016,7 @@ ul {
     background: transparent;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0.65rem 1.6rem;
     border-radius: 2px;
     text-decoration: none;
