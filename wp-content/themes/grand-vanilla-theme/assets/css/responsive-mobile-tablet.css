@@ -149,10 +149,10 @@
 
     .gv-hero > div:first-child {
         background: linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.52) 0%,
-            rgba(0,0,0,0.32) 50%,
-            rgba(0,0,0,0.18) 100%
+            to right,
+            rgba(0,0,0,0.22) 0%,
+            rgba(0,0,0,0.06) 45%,
+            transparent 65%
         ) !important;
     }
 
