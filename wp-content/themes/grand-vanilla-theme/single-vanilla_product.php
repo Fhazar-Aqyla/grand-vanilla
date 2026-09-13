@@ -13,18 +13,16 @@ $current_id = get_the_ID();
 $current_slug = get_post_field( 'post_name', $current_id );
 $current_title = get_the_title();
 
-// Check if this product is Vanilla Beans or has varieties
+// Check if this product is specifically Vanilla Beans or has varieties configured
 $saved_varieties = get_post_meta( $current_id, '_gv_varieties', true );
 
 $is_beans = ( 
-    strpos( $current_slug, 'bean' ) !== false || 
-    strpos( strtolower( $current_title ), 'bean' ) !== false || 
     $current_slug === 'vanilla-beans' || 
-    $current_id === 11 ||
+    strtolower( trim( $current_title ) ) === 'vanilla beans' ||
     ! empty( $saved_varieties )
 );
 
-// Default variety definitions
+// Default variety definitions for Vanilla Beans
 $default_varieties = array(
     'planifolia' => array(
         'name'          => 'Vanilla Planifolia Beans',
@@ -80,16 +78,126 @@ if ( empty( $varieties ) && $is_beans ) {
 $first_variety_key = ! empty( $varieties ) ? array_key_first( $varieties ) : '';
 $active_variety    = ! empty( $first_variety_key ) ? $varieties[ $first_variety_key ] : null;
 
-// Fallback for Seeds, Paste, or dynamic CPT data
+// Product-specific non-bean carousel images
+$product_carousels = array(
+    'vanilla-powder' => array(
+        $img_dir . 'Powder Carroussel 1.jpg',
+        $img_dir . 'Powder Carroussel 2.jpg',
+        $img_dir . 'Powder Carroussel 3.jpg',
+    ),
+    'vanilla-extract' => array(
+        $img_dir . 'Extract Carroussel 1.jpg',
+        $img_dir . 'Extract Carroussel 2.jpg',
+        $img_dir . 'Extract Carroussel 3.jpg',
+    ),
+    'vanilla-paste' => array(
+        $img_dir . 'Paste Carroussel 1.jpg',
+        $img_dir . 'Paste Vanilla.png',
+    ),
+    'vanilla-seeds' => array(
+        $img_dir . 'Seeds Carroussel 1.jpg',
+        $img_dir . 'Seeds Vanilla.png',
+    ),
+);
+
+// Determine carousel slides for this product
+if ( $is_beans && ! empty( $active_variety['carousel'] ) ) {
+    $current_carousel = $active_variety['carousel'];
+} elseif ( isset( $product_carousels[ $current_slug ] ) ) {
+    $current_carousel = $product_carousels[ $current_slug ];
+} elseif ( has_post_thumbnail() ) {
+    $current_carousel = array( get_the_post_thumbnail_url( $current_id, 'full' ) );
+} else {
+    $current_carousel = array( $img_dir . 'Planifolia Carroussel 1.png' );
+}
+
+// Fallback for overview & description
 $fallback_overview = get_the_content();
 if ( empty( $fallback_overview ) ) {
     $fallback_overview = get_the_excerpt();
 }
 if ( empty( $fallback_overview ) ) {
-    $fallback_overview = 'Grown and harvested under strict quality controls, our vanilla products are ideal for culinary creation and industrial use.';
+    if ( $current_slug === 'vanilla-powder' ) {
+        $fallback_overview = 'Our Indonesian Vanilla Powder is made exclusively from 100% pure, premium cured vanilla beans. Milled to a fine texture without carriers, anti-caking agents, or added sugar, it delivers an authentic, deep vanilla aroma and robust flavor that stands up to high-heat baking and dry culinary mixes.';
+    } elseif ( $current_slug === 'vanilla-extract' ) {
+        $fallback_overview = 'Grand Vanilla Indonesia Pure Vanilla Extract is crafted through slow cold percolation of our finest cured vanilla beans. Providing a rich, well-rounded bouquet with sweet bourbon notes, it ensures maximum aromatic stability in dairy, beverages, and confectionery production.';
+    } elseif ( $current_slug === 'vanilla-paste' ) {
+        $fallback_overview = 'Grand Vanilla Indonesia Bean Paste combines pure vanilla extract with concentrated vanilla caviar seeds in a smooth, viscous base. It offers chefs and manufacturers the convenience of an extract with the visual allure and deep flavor of whole vanilla pods.';
+    } elseif ( $current_slug === 'vanilla-seeds' ) {
+        $fallback_overview = 'Our pure Vanilla Seeds (Vanilla Caviar) are meticulously separated from cured gourmet vanilla pods. Perfect for imparting the iconic natural vanilla speckles and delicate aroma to yogurts, gelato, custards, and artisan chocolates.';
+    } else {
+        $fallback_overview = 'Grown and harvested under strict quality controls, our vanilla products are ideal for culinary creation and industrial use.';
+    }
 }
 
-$main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'full' ) : $img_dir . 'Planifolia Carroussel 1.png';
+// Product Variety / Bullet text
+$variety_bullet_text = $active_variety ? $active_variety['short_name'] : $current_title;
+if ( ! $is_beans ) {
+    if ( $current_slug === 'vanilla-powder' ) {
+        $variety_bullet_text = '100% Pure Fine Ground Powder';
+    } elseif ( $current_slug === 'vanilla-extract' ) {
+        $variety_bullet_text = 'Single-Fold & Multi-Fold Pure Extract';
+    } elseif ( $current_slug === 'vanilla-paste' ) {
+        $variety_bullet_text = 'Concentrated Gourmet Bean Paste with Seeds';
+    } elseif ( $current_slug === 'vanilla-seeds' ) {
+        $variety_bullet_text = '100% Pure Vanilla Caviar / Seeds';
+    }
+}
+
+// Product Characteristics Specs Table
+$custom_specs = array();
+if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
+    $custom_specs = $active_variety['specs'];
+} elseif ( $current_slug === 'vanilla-powder' ) {
+    $custom_specs = array(
+        'Grade / Quality'    => get_post_meta( $current_id, '_gv_grade', true ) ?: '100% Pure Fine Ground Powder',
+        'Mesh Size'          => get_post_meta( $current_id, '_gv_length', true ) ?: '60 - 80 Mesh Size',
+        'Vanillin Content'   => get_post_meta( $current_id, '_gv_vanillin', true ) ?: '1.5% - 2.2%',
+        'Moisture Level'     => get_post_meta( $current_id, '_gv_moisture', true ) ?: '≤ 10% (Low Moisture)',
+        'Ingredients'        => '100% Pure Indonesian Vanilla Beans (No Additives)',
+        'Origin / Terroir'   => get_post_meta( $current_id, '_gv_origin', true ) ?: 'Indonesia (East Java & Papua)',
+        'Usage'              => get_post_meta( $current_id, '_gv_usage', true ) ?: 'Bakery, Dry Mixes, Dairy & Confectionery',
+    );
+} elseif ( $current_slug === 'vanilla-extract' ) {
+    $custom_specs = array(
+        'Concentration'      => get_post_meta( $current_id, '_gv_grade', true ) ?: 'Single-Fold (1x) & Multi-Fold (2x, 3x)',
+        'Alcohol Content'    => get_post_meta( $current_id, '_gv_vanillin', true ) ?: '35% Pure Grain Alcohol (or Glycerin base)',
+        'Appearance / Color' => get_post_meta( $current_id, '_gv_moisture', true ) ?: 'Clear Dark Amber Brown',
+        'Standard'           => 'Gourmet & Industrial Extraction Grade',
+        'Origin / Terroir'   => get_post_meta( $current_id, '_gv_origin', true ) ?: 'Indonesia (East Java & Papua)',
+        'Packaging'          => '1L Bottles, 5L Jugs, 25L Drums, IBC Totes',
+        'Usage'              => get_post_meta( $current_id, '_gv_usage', true ) ?: 'Beverages, Dairy, Pastry, Industrial Food Service',
+    );
+} elseif ( $current_slug === 'vanilla-paste' ) {
+    $custom_specs = array(
+        'Grade / Quality'    => get_post_meta( $current_id, '_gv_grade', true ) ?: 'Gourmet Concentrated Paste with Seeds',
+        'Consistency'        => get_post_meta( $current_id, '_gv_moisture', true ) ?: 'Smooth Viscous Texture',
+        'Seed Specks'        => 'Abundant Real Vanilla Seeds (Caviar)',
+        'Vanillin Content'   => get_post_meta( $current_id, '_gv_vanillin', true ) ?: 'High Concentration + Natural Caviar',
+        'Origin / Terroir'   => get_post_meta( $current_id, '_gv_origin', true ) ?: 'Indonesia',
+        'Packaging'          => '1kg Jars, 5kg Pails, 20kg Bulk',
+        'Usage'              => get_post_meta( $current_id, '_gv_usage', true ) ?: 'Gourmet Pastry, Gelato, Frostings, Specialty Baking',
+    );
+} elseif ( $current_slug === 'vanilla-seeds' ) {
+    $custom_specs = array(
+        'Product Type'       => get_post_meta( $current_id, '_gv_grade', true ) ?: '100% Pure Vanilla Caviar / Seeds',
+        'Appearance'         => get_post_meta( $current_id, '_gv_length', true ) ?: 'Tiny Glossy Black Seeds',
+        'Moisture Level'     => get_post_meta( $current_id, '_gv_moisture', true ) ?: '15% - 20%',
+        'Purity'             => '100% Extracted Pure Seeds (No carriers)',
+        'Origin / Terroir'   => get_post_meta( $current_id, '_gv_origin', true ) ?: 'Indonesia',
+        'Packaging'          => '500g / 1kg Vacuum Sealed',
+        'Usage'              => get_post_meta( $current_id, '_gv_usage', true ) ?: 'Gelato, Custard, Yogurt, Luxury Chocolates',
+    );
+} else {
+    $custom_specs = array(
+        'Grade / Quality'    => get_post_meta( $current_id, '_gv_grade', true ) ?: 'Gourmet Export Grade',
+        'Vanillin Content'   => get_post_meta( $current_id, '_gv_vanillin', true ) ?: '2.0% - 2.4%',
+        'Moisture Level'     => get_post_meta( $current_id, '_gv_moisture', true ) ?: '30% - 35%',
+        'Length / Size'      => get_post_meta( $current_id, '_gv_length', true ) ?: '16 - 20 cm',
+        'Origin / Terroir'   => get_post_meta( $current_id, '_gv_origin', true ) ?: 'East Java, Indonesia',
+        'Usage'              => get_post_meta( $current_id, '_gv_usage', true ) ?: 'Industrial, Gourmet Formulation',
+    );
+}
 ?>
 
 <!-- 1. Header Navigation: Breadcrumbs & Variety Sub-Tabs -->
@@ -99,14 +207,14 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
         <nav class="gv-breadcrumbs" aria-label="Breadcrumb">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> // 
             <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>">Products</a> // 
-            <span class="gv-crumb-current"><?php echo esc_html( $is_beans ? 'Vanilla Beans' : $current_title ); ?></span>
+            <span class="gv-crumb-current"><?php echo esc_html( $current_title ); ?></span>
         </nav>
 
         <!-- Divider Line -->
         <div class="gv-detail-divider"></div>
 
-        <!-- Variety Sub-tabs (Clean underline text tabs - fully dynamic) -->
-        <?php if ( ! empty( $varieties ) ) : ?>
+        <!-- Variety Sub-tabs -->
+        <?php if ( $is_beans && ! empty( $varieties ) ) : ?>
         <div class="gv-variety-tabs" role="tablist" aria-label="Vanilla Varieties">
             <?php 
             $tab_idx = 0;
@@ -126,7 +234,7 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
         </div>
         <?php else : ?>
         <div class="gv-variety-tabs">
-            <span class="gv-variety-tab is-active">
+            <span class="gv-variety-tab is-active" style="cursor: default;">
                 <?php echo esc_html( $current_title ); ?>
             </span>
         </div>
@@ -142,17 +250,11 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
         <div class="gv-showcase-container">
             <div class="gv-carousel-wrap" id="gvProductCarousel">
                 <div class="gv-carousel-track" id="gvCarouselTrack">
-                    <?php if ( ! empty( $active_variety['carousel'] ) ) : ?>
-                        <?php foreach ( $active_variety['carousel'] as $idx => $img_url ) : ?>
-                            <div class="gv-carousel-slide <?php echo $idx === 0 ? 'is-active' : ''; ?>">
-                                <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $active_variety['name'] ); ?> - Slide <?php echo $idx + 1; ?>">
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else : ?>
-                        <div class="gv-carousel-slide is-active">
-                            <img src="<?php echo esc_url( $main_img ); ?>" alt="<?php echo esc_attr( $current_title ); ?>">
+                    <?php foreach ( $current_carousel as $idx => $img_url ) : ?>
+                        <div class="gv-carousel-slide <?php echo $idx === 0 ? 'is-active' : ''; ?>">
+                            <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $current_title ); ?> - Image <?php echo $idx + 1; ?>">
                         </div>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
 
                 <!-- Left Navigation Arrow -->
@@ -179,15 +281,15 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
                 <div class="gv-overview-col">
                     <span class="gv-specs-eyebrow">PRODUCT OVERVIEW</span>
                     <h1 class="gv-overview-heading" id="gvOverviewHeading">
-                        <?php echo esc_html( $active_variety ? $active_variety['name'] : $current_title ); ?>
+                        <?php echo esc_html( $is_beans && $active_variety ? $active_variety['name'] : $current_title ); ?>
                     </h1>
                     <div class="gv-overview-body" id="gvOverviewBody">
-                        <p><?php echo esc_html( $active_variety ? $active_variety['overview'] : $fallback_overview ); ?></p>
+                        <p><?php echo esc_html( $is_beans && $active_variety ? $active_variety['overview'] : $fallback_overview ); ?></p>
                     </div>
                     <div class="gv-variety-block">
                         <strong class="gv-variety-heading">Product Variety:</strong>
                         <div class="gv-variety-bullet" id="gvVarietyBullet">
-                            &bull; <?php echo esc_html( $active_variety ? $active_variety['short_name'] : $current_title ); ?>
+                            &bull; <?php echo esc_html( $variety_bullet_text ); ?>
                         </div>
                     </div>
                 </div>
@@ -196,46 +298,12 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
                 <div class="gv-characteristics-col">
                     <span class="gv-specs-eyebrow">PRODUCT CHARACTERISTICS</span>
                     <div class="gv-specs-table" id="gvSpecsTable">
-                        <?php if ( ! empty( $active_variety['specs'] ) ) : ?>
-                            <?php foreach ( $active_variety['specs'] as $key => $val ) : ?>
-                                <div class="gv-specs-row">
-                                    <span class="gv-specs-key"><?php echo esc_html( $key ); ?> :</span>
-                                    <span class="gv-specs-val"><?php echo esc_html( $val ); ?></span>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else : ?>
-                            <?php
-                            $grade    = get_post_meta( $current_id, '_gv_grade', true ) ?: 'Gourmet Export Grade';
-                            $vanillin = get_post_meta( $current_id, '_gv_vanillin', true ) ?: '2.0% - 2.4%';
-                            $moisture = get_post_meta( $current_id, '_gv_moisture', true ) ?: '30% - 35%';
-                            $length   = get_post_meta( $current_id, '_gv_length', true ) ?: '16 - 20 cm';
-                            $origin   = get_post_meta( $current_id, '_gv_origin', true ) ?: 'East Java, Indonesia';
-                            ?>
+                        <?php foreach ( $custom_specs as $key => $val ) : ?>
                             <div class="gv-specs-row">
-                                <span class="gv-specs-key">Grade / Quality :</span>
-                                <span class="gv-specs-val"><?php echo esc_html( $grade ); ?></span>
+                                <span class="gv-specs-key"><?php echo esc_html( $key ); ?> :</span>
+                                <span class="gv-specs-val"><?php echo esc_html( $val ); ?></span>
                             </div>
-                            <div class="gv-specs-row">
-                                <span class="gv-specs-key">Vanillin Content :</span>
-                                <span class="gv-specs-val"><?php echo esc_html( $vanillin ); ?></span>
-                            </div>
-                            <div class="gv-specs-row">
-                                <span class="gv-specs-key">Moisture Level :</span>
-                                <span class="gv-specs-val"><?php echo esc_html( $moisture ); ?></span>
-                            </div>
-                            <div class="gv-specs-row">
-                                <span class="gv-specs-key">Length / Size :</span>
-                                <span class="gv-specs-val"><?php echo esc_html( $length ); ?></span>
-                            </div>
-                            <div class="gv-specs-row">
-                                <span class="gv-specs-key">Origin / Terroir :</span>
-                                <span class="gv-specs-val"><?php echo esc_html( $origin ); ?></span>
-                            </div>
-                            <div class="gv-specs-row">
-                                <span class="gv-specs-key">Usage :</span>
-                                <span class="gv-specs-val">Industrial, Gourmet Formulation</span>
-                            </div>
-                        <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
 
@@ -294,54 +362,79 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
             </div>
         </div>
 
-        <!-- D. Explore More Products Section -->
+        <!-- D. Explore More Products Section (Dynamic WP_Query excluding current product) -->
+        <?php
+        $explore_query = new WP_Query( array(
+            'post_type'      => 'vanilla_product',
+            'posts_per_page' => 2,
+            'post__not_in'   => array( $current_id ),
+            'post_status'    => 'publish',
+            'orderby'        => 'menu_order date',
+            'order'          => 'ASC',
+        ) );
+
+        if ( $explore_query->have_posts() ) :
+        ?>
         <div class="gv-explore-more-section">
             <h2 class="gv-explore-title">Explore More Products</h2>
 
             <div class="gv-explore-rows">
-                <!-- Row 1: Vanilla Seeds (Text Left, Image Right) -->
-                <div class="gv-explore-row">
-                    <div class="gv-explore-text-col">
-                        <h3 class="gv-explore-item-title">Vanilla Seeds</h3>
-                        <p class="gv-explore-item-desc">
-                            Our premium vanilla seeds offer concentrated natural flavor and visual appeal for products that require genuine bean specks, like ice creams and premium baked items.
-                        </p>
-                        <?php
-                        $seeds_post = get_page_by_path( 'vanilla-seeds', OBJECT, 'vanilla_product' );
-                        $seeds_url  = $seeds_post ? get_permalink( $seeds_post->ID ) : home_url( '/products/' );
-                        ?>
-                        <a href="<?php echo esc_url( $seeds_url ); ?>" class="gv-explore-btn">
-                            Detail &rarr;
-                        </a>
-                    </div>
-                    <div class="gv-explore-img-card">
-                        <img src="<?php echo esc_url( $img_dir . 'Seeds Vanilla.png' ); ?>" 
-                             alt="Vanilla Seeds" 
-                             class="gv-explore-img">
-                    </div>
+                <?php
+                $exp_idx = 0;
+                while ( $explore_query->have_posts() ) :
+                    $explore_query->the_post();
+                    $exp_idx++;
+                    $is_reverse = ( $exp_idx % 2 === 0 );
+                    $row_class  = $is_reverse ? 'gv-explore-row gv-explore-row-reverse' : 'gv-explore-row';
+                    
+                    $exp_slug = get_post_field( 'post_name', get_the_ID() );
+                    if ( has_post_thumbnail() ) {
+                        $exp_img = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+                    } elseif ( isset( $product_carousels[ $exp_slug ][0] ) ) {
+                        $exp_img = $product_carousels[ $exp_slug ][0];
+                    } elseif ( $exp_slug === 'vanilla-beans' ) {
+                        $exp_img = $img_dir . 'Product Unggulan 1.png';
+                    } else {
+                        $exp_img = $img_dir . 'Seeds Vanilla.png';
+                    }
+                ?>
+                <div class="<?php echo esc_attr( $row_class ); ?>">
+                    <?php if ( $is_reverse ) : ?>
+                        <div class="gv-explore-img-card">
+                            <img src="<?php echo esc_url( $exp_img ); ?>" 
+                                 alt="<?php echo esc_attr( get_the_title() ); ?>" 
+                                 class="gv-explore-img">
+                        </div>
+                        <div class="gv-explore-text-col">
+                            <h3 class="gv-explore-item-title"><?php the_title(); ?></h3>
+                            <p class="gv-explore-item-desc">
+                                <?php echo esc_html( get_the_excerpt() ); ?>
+                            </p>
+                            <a href="<?php the_permalink(); ?>" class="gv-explore-btn">
+                                Detail &rarr;
+                            </a>
+                        </div>
+                    <?php else : ?>
+                        <div class="gv-explore-text-col">
+                            <h3 class="gv-explore-item-title"><?php the_title(); ?></h3>
+                            <p class="gv-explore-item-desc">
+                                <?php echo esc_html( get_the_excerpt() ); ?>
+                            </p>
+                            <a href="<?php the_permalink(); ?>" class="gv-explore-btn">
+                                Detail &rarr;
+                            </a>
+                        </div>
+                        <div class="gv-explore-img-card">
+                            <img src="<?php echo esc_url( $exp_img ); ?>" 
+                                 alt="<?php echo esc_attr( get_the_title() ); ?>" 
+                                 class="gv-explore-img">
+                        </div>
+                    <?php endif; ?>
                 </div>
-
-                <!-- Row 2: Vanilla Paste (Image Left, Text Right) -->
-                <div class="gv-explore-row gv-explore-row-reverse">
-                    <div class="gv-explore-img-card">
-                        <img src="<?php echo esc_url( $img_dir . 'Paste Vanilla.png' ); ?>" 
-                             alt="Vanilla Paste" 
-                             class="gv-explore-img">
-                    </div>
-                    <div class="gv-explore-text-col">
-                        <h3 class="gv-explore-item-title">Vanilla Paste</h3>
-                        <p class="gv-explore-item-desc">
-                            A rich and convenient alternative to whole beans, crafting genuine vanilla flavor and authentic bean specks for easy everyday application.
-                        </p>
-                        <?php
-                        $paste_post = get_page_by_path( 'vanilla-paste', OBJECT, 'vanilla_product' );
-                        $paste_url  = $paste_post ? get_permalink( $paste_post->ID ) : home_url( '/products/' );
-                        ?>
-                        <a href="<?php echo esc_url( $paste_url ); ?>" class="gv-explore-btn">
-                            Detail &rarr;
-                        </a>
-                    </div>
-                </div>
+                <?php
+                endwhile;
+                wp_reset_postdata();
+                ?>
             </div>
 
             <div class="gv-explore-all-wrap">
@@ -350,6 +443,7 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
                 </a>
             </div>
         </div>
+        <?php endif; ?>
 
     </div>
 </div>
@@ -357,7 +451,7 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
 <!-- Variety Switcher & Interactive Carousel JavaScript -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Data definition for Vanilla varieties (dynamic from WP postmeta or defaults)
+    const isBeans = <?php echo $is_beans ? 'true' : 'false'; ?>;
     const varietiesData = <?php echo json_encode( $varieties ); ?>;
     let currentVariety = '<?php echo esc_js( $first_variety_key ); ?>';
     let currentSlideIdx = 0;
@@ -372,8 +466,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.getElementById('gvCarouselPrev');
     const nextBtn = document.getElementById('gvCarouselNext');
 
+    function initSlides() {
+        if (!track) return;
+        carouselSlides = track.querySelectorAll('.gv-carousel-slide');
+    }
+    initSlides();
+
     function updateCarouselSlides() {
-        if (!varietiesData[currentVariety] || !track) return;
+        if (!isBeans || !varietiesData[currentVariety] || !track) return;
         const images = varietiesData[currentVariety].carousel;
         track.innerHTML = '';
         images.forEach((imgUrl, idx) => {
@@ -388,7 +488,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function goToSlide(newIdx) {
         if (!carouselSlides || carouselSlides.length === 0) {
-            carouselSlides = track ? track.querySelectorAll('.gv-carousel-slide') : [];
+            initSlides();
         }
         if (carouselSlides.length === 0) return;
 
@@ -417,175 +517,172 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Variety tab switching
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function(e) {
-            e.preventDefault();
-            const varietyKey = this.getAttribute('data-variety');
-            if (!varietyKey || !varietiesData[varietyKey] || varietyKey === currentVariety) return;
+    // Variety tab switching (only active when tabs with data-variety exist)
+    if (tabs.length > 0) {
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const varietyKey = this.getAttribute('data-variety');
+                if (!varietyKey || !varietiesData[varietyKey] || varietyKey === currentVariety) return;
 
-            currentVariety = varietyKey;
+                currentVariety = varietyKey;
 
-            // Update Tab active states
-            tabs.forEach(t => {
-                const isActive = (t === tab);
-                t.classList.toggle('is-active', isActive);
-                t.setAttribute('aria-selected', isActive ? 'true' : 'false');
-            });
+                // Update Tab active states
+                tabs.forEach(t => {
+                    const isActive = (t === tab);
+                    t.classList.toggle('is-active', isActive);
+                    t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                });
 
-            const data = varietiesData[varietyKey];
+                const data = varietiesData[varietyKey];
 
-            // Update Text Content
-            if (heading) heading.textContent = data.name;
-            if (body) body.innerHTML = `<p>${data.overview}</p>`;
-            if (bullet) bullet.innerHTML = `&bull; ${data.short_name}`;
+                // Update Text Content
+                if (heading) heading.textContent = data.name;
+                if (body) body.innerHTML = `<p>${data.overview}</p>`;
+                if (bullet) bullet.innerHTML = `&bull; ${data.short_name}`;
 
-            // Update Characteristics Table
-            if (table) {
-                let tableHtml = '';
-                for (const [k, v] of Object.entries(data.specs)) {
-                    tableHtml += `
-                        <div class="gv-specs-row">
-                            <span class="gv-specs-key">${k} :</span>
-                            <span class="gv-specs-val">${v}</span>
-                        </div>
-                    `;
+                // Update Characteristics Table
+                if (table) {
+                    let tableHtml = '';
+                    for (const [k, v] of Object.entries(data.specs)) {
+                        tableHtml += `
+                            <div class="gv-specs-row">
+                                <span class="gv-specs-key">${k} :</span>
+                                <span class="gv-specs-val">${v}</span>
+                            </div>
+                        `;
+                    }
+                    table.innerHTML = tableHtml;
                 }
-                table.innerHTML = tableHtml;
-            }
 
-            // Update Carousel Images
-            updateCarouselSlides();
+                // Update Carousel Images
+                updateCarouselSlides();
+            });
         });
-    });
-
-    // Initial setup for slides
-    if (track) {
-        carouselSlides = track.querySelectorAll('.gv-carousel-slide');
     }
 });
 </script>
 
-<!-- High-Fidelity Styles matching the reference image perfectly -->
 <style>
-/* -------------------------------------------------------------
- * Top Navigation & Breadcrumbs
- * ----------------------------------------------------------- */
+/* CSS Styles for High-Fidelity Product Detail & Carousel */
 .gv-detail-nav-section {
+    background-color: #E1E2DD;
     padding-top: 2rem;
     padding-bottom: 0;
-    background-color: var(--color-parchment, #E1E2DD);
 }
 
 .gv-breadcrumbs {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.8125rem;
-    color: #716F6E;
-    margin-bottom: 1.25rem;
+    color: #4A5239;
+    margin-bottom: 1.5rem;
 }
 
 .gv-breadcrumbs a {
-    color: #716F6E;
+    color: #4A5239;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .gv-breadcrumbs a:hover {
     color: #363E19;
+    text-decoration: underline;
 }
 
-.gv-breadcrumbs .gv-crumb-current {
-    color: #0A0804;
+.gv-crumb-current {
+    color: #1C230C;
     font-weight: 500;
 }
 
 .gv-detail-divider {
-    width: 100%;
     height: 1px;
-    background-color: #C9C6C3;
-    margin-bottom: 1.25rem;
+    background-color: rgba(54, 62, 25, 0.15);
+    width: 100%;
+    margin-bottom: 1.75rem;
 }
 
 .gv-variety-tabs {
     display: flex;
-    gap: 2.25rem;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
+    gap: 2.5rem;
+    margin-bottom: -1px;
 }
 
 .gv-variety-tab {
-    font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 0.9375rem;
-    font-weight: 400;
-    color: #716F6E;
-    background: transparent;
+    background: none;
     border: none;
-    padding: 0 0 0.35rem 0;
+    padding: 0 0 1rem 0;
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #727A67;
     cursor: pointer;
     position: relative;
     transition: color 0.2s ease;
-    border-bottom: 2px solid transparent;
+    text-decoration: none;
 }
 
 .gv-variety-tab:hover {
-    color: #0A0804;
+    color: #1C230C;
 }
 
 .gv-variety-tab.is-active {
-    color: #0A0804;
-    font-weight: 600;
-    border-bottom: 2px solid #0A0804;
+    color: #1C230C;
 }
 
-/* -------------------------------------------------------------
- * Main Section Layout
- * ----------------------------------------------------------- */
+.gv-variety-tab.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2.5px;
+    background-color: #1C230C;
+    border-radius: 2px;
+}
+
 .gv-detail-main-section {
-    background-color: var(--color-parchment, #E1E2DD);
-    padding-top: 0;
-    padding-bottom: 4rem;
+    background-color: #E1E2DD;
+    padding: 2.5rem 0 6rem;
 }
 
-/* -------------------------------------------------------------
- * Showcase & Interactive Carousel
- * ----------------------------------------------------------- */
+/* Interactive Carousel & Showcase */
 .gv-showcase-container {
-    margin-bottom: 3.5rem;
     width: 100%;
+    margin-bottom: 4.5rem;
 }
 
 .gv-carousel-wrap {
     position: relative;
-    width: 100%;
-    height: 440px;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    background-color: #1a1612;
-    box-shadow: 0 4px 16px rgba(10, 8, 4, 0.08);
+    background-color: #1A1D16;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    aspect-ratio: 16 / 8.5;
+    max-height: 540px;
+    width: 100%;
 }
 
 .gv-carousel-track {
-    position: relative;
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 .gv-carousel-slide {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
-    z-index: 1;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gv-carousel-slide.is-active {
     opacity: 1;
     visibility: visible;
-    z-index: 2;
+    z-index: 1;
 }
 
 .gv-carousel-slide img {
@@ -600,25 +697,24 @@ document.addEventListener('DOMContentLoaded', function() {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background-color: rgba(10, 8, 4, 0.65);
+    background-color: rgba(18, 22, 12, 0.65);
     color: #FFFFFF;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 10;
-    transition: all 0.2s ease;
     backdrop-filter: blur(4px);
+    transition: all 0.25s ease;
 }
 
 .gv-carousel-arrow:hover {
-    background-color: rgba(10, 8, 4, 0.9);
-    transform: translateY(-50%) scale(1.05);
-    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(18, 22, 12, 0.95);
+    transform: translateY(-50%) scale(1.08);
 }
 
 .gv-arrow-prev {
@@ -629,9 +725,7 @@ document.addEventListener('DOMContentLoaded', function() {
     right: 1.5rem;
 }
 
-/* -------------------------------------------------------------
- * Product Overview & Characteristics (Desktop 2-Column Grid)
- * ----------------------------------------------------------- */
+/* Product Specifications Split (2-Column Desktop) */
 .gv-specs-section {
     margin-bottom: 5.5rem;
 }
@@ -640,35 +734,34 @@ document.addEventListener('DOMContentLoaded', function() {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4.5rem;
-    align-items: start;
+    align-items: flex-start;
 }
 
 .gv-specs-eyebrow {
-    font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: #363E19;
-    text-transform: uppercase;
     display: block;
-    margin-bottom: 0.85rem;
+    font-family: var(--font-heading, 'Jost', sans-serif);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #8C9286;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
 }
 
 .gv-overview-heading {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: clamp(1.65rem, 2.2vw, 1.95rem);
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
     font-weight: 500;
-    color: #0A0804;
+    color: #1C230C;
     line-height: 1.2;
-    margin: 0 0 1.15rem 0;
+    margin: 0 0 1.5rem 0;
 }
 
 .gv-overview-body {
-    color: #595856;
     font-size: 0.9375rem;
-    line-height: 1.7;
-    margin-bottom: 1.75rem;
-    max-width: 520px;
+    line-height: 1.65;
+    color: #4A5239;
+    margin-bottom: 2rem;
 }
 
 .gv-overview-body p {
@@ -676,168 +769,143 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .gv-variety-block {
-    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
 }
 
 .gv-variety-heading {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #0A0804;
-    display: block;
-    margin-bottom: 0.35rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #1C230C;
 }
 
 .gv-variety-bullet {
-    font-size: 0.875rem;
-    color: #595856;
+    font-size: 0.9375rem;
+    color: #4A5239;
 }
 
+/* Characteristics Table */
 .gv-specs-table {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    border-top: 1px solid rgba(10, 8, 4, 0.15);
+    gap: 0.85rem;
 }
 
 .gv-specs-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    display: grid;
+    grid-template-columns: 170px 1fr;
     gap: 1rem;
-    padding: 0.85rem 0;
-    border-bottom: 1px solid rgba(10, 8, 4, 0.15);
     font-size: 0.875rem;
+    line-height: 1.5;
+    align-items: baseline;
 }
 
 .gv-specs-key {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-weight: 600;
-    color: #0A0804;
-    flex-shrink: 0;
-    min-width: 155px;
+    font-weight: 500;
+    color: #1C230C;
 }
 
 .gv-specs-val {
-    font-family: var(--font-body, 'Lato', sans-serif);
-    color: #595856;
-    text-align: left;
-    flex: 1;
+    color: #4A5239;
 }
 
-/* -------------------------------------------------------------
- * Applications Section (What Can It Be Used For?)
- * ----------------------------------------------------------- */
+/* Applications Section (6 Cards Grid) */
 .gv-applications-section {
     margin-bottom: 6rem;
 }
 
 .gv-applications-header {
-    text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .gv-applications-tag {
+    display: block;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.875rem;
-    font-weight: 500;
-    color: #716F6E;
-    display: inline-block;
-    margin-bottom: 0.5rem;
+    color: #363E19;
+    margin-bottom: 0.35rem;
 }
 
 .gv-applications-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: clamp(2rem, 3.2vw, 2.5rem);
+    font-size: clamp(1.85rem, 3vw, 2.5rem);
     font-weight: 500;
-    color: #0A0804;
+    color: #1C230C;
     margin: 0;
 }
 
 .gv-applications-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
 .gv-app-card {
-    background-color: #FFFFFF;
+    background-color: #363E19;
+    color: #FFFFFF;
     border-radius: 12px;
-    padding: 2.25rem 1.75rem 2rem;
-    text-align: center;
+    padding: 2rem 1.75rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    box-shadow: 0 4px 16px rgba(10, 8, 4, 0.03);
-    border: none;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.gv-app-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(10, 8, 4, 0.06);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 .gv-app-num {
-    background-color: #363E19;
-    color: #FFFFFF;
-    width: 34px;
-    height: 34px;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: #BAC4B2;
+    margin-bottom: 1.5rem;
+    line-height: 1;
 }
 
 .gv-app-card-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 500;
-    color: #0A0804;
+    color: #FFFFFF;
     margin: 0 0 0.65rem 0;
 }
 
 .gv-app-card-desc {
-    font-family: var(--font-body, 'Lato', sans-serif);
     font-size: 0.8125rem;
-    color: #716F6E;
     line-height: 1.6;
-    max-width: 280px;
-    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
 }
 
-/* -------------------------------------------------------------
- * Explore More Products Section
- * ----------------------------------------------------------- */
+/* Explore More Products Rows */
 .gv-explore-more-section {
-    margin-bottom: 4rem;
+    padding-top: 1rem;
 }
 
 .gv-explore-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: clamp(2rem, 3vw, 2.35rem);
+    font-size: clamp(1.85rem, 3vw, 2.5rem);
     font-weight: 500;
-    color: #0A0804;
+    color: #1C230C;
     margin: 0 0 3.5rem 0;
-    text-align: left;
 }
 
 .gv-explore-rows {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 4.5rem;
     margin-bottom: 3.5rem;
 }
 
 .gv-explore-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
+    gap: 4rem;
     align-items: center;
+}
+
+.gv-explore-row.gv-explore-row-reverse {
+    grid-template-columns: 1fr 1fr;
 }
 
 .gv-explore-text-col {
@@ -845,65 +913,67 @@ document.addEventListener('DOMContentLoaded', function() {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: 1rem 0;
 }
 
 .gv-explore-item-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: clamp(1.85rem, 2.5vw, 2.25rem);
+    font-size: clamp(1.85rem, 2.5vw, 2.35rem);
     font-weight: 500;
-    color: #0A0804;
+    color: #1C230C;
     margin: 0 0 1rem 0;
     line-height: 1.2;
 }
 
 .gv-explore-item-desc {
-    color: #595856;
+    color: #4A5239;
     font-size: 0.9375rem;
     line-height: 1.65;
     margin: 0 0 2rem 0;
-    max-width: 420px;
+    max-width: 440px;
 }
 
 .gv-explore-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    border: 1px solid #363E19;
-    color: #363E19;
-    background: transparent;
+    justify-content: center;
+    background-color: #363E19;
+    color: #FFFFFF;
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 500;
-    padding: 0.55rem 1.4rem;
-    border-radius: 2px;
+    padding: 0.75rem 2rem;
+    border-radius: 6px;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
 }
 
 .gv-explore-btn:hover {
-    background-color: #363E19;
+    background-color: #242A11;
     color: #FFFFFF;
+    transform: translateY(-2px);
 }
 
 .gv-explore-img-card {
-    background-color: #BDC4B8;
-    border-radius: 12px;
-    padding: 2.5rem;
+    background-color: transparent;
+    border-radius: 16px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    aspect-ratio: 1.15 / 1;
+    aspect-ratio: 16 / 11;
     box-sizing: border-box;
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .gv-explore-img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.07));
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 16px;
     transition: transform 0.4s ease;
 }
 
@@ -913,82 +983,69 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .gv-explore-all-wrap {
     text-align: center;
-    margin-top: 2rem;
+    padding-top: 1rem;
 }
 
 .gv-explore-all-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: #363E19;
-    color: #FFFFFF;
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 500;
-    padding: 0.75rem 2rem;
-    border-radius: 2px;
+    color: #363E19;
     text-decoration: none;
-    transition: all 0.2s ease;
+    border-bottom: 1.5px solid #363E19;
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .gv-explore-all-btn:hover {
-    background-color: #272F12;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(54, 62, 25, 0.2);
+    color: #1C230C;
+    border-color: #1C230C;
 }
 
-/* -------------------------------------------------------------
- * Responsive Refinements (< 1025px)
- * ----------------------------------------------------------- */
+/* Tablet & Mobile Responsiveness */
 @media (max-width: 1024px) {
-    .gv-carousel-wrap {
-        height: 360px;
-    }
     .gv-specs-split {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 3rem;
     }
-    .gv-applications-grid {
-        grid-template-columns: repeat(2, 1fr);
+    
+    .gv-explore-row {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .gv-explore-row.gv-explore-row-reverse .gv-explore-img-card {
+        order: 2;
+    }
+    
+    .gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
+        order: 1;
     }
 }
 
 @media (max-width: 767px) {
+    .gv-variety-tabs {
+        gap: 1.5rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+    
     .gv-carousel-wrap {
-        height: 260px;
+        aspect-ratio: 16 / 10;
     }
-    .gv-carousel-arrow {
-        width: 36px;
-        height: 36px;
+    
+    .gv-specs-row {
+        grid-template-columns: 130px 1fr;
     }
-    .gv-arrow-prev { left: 0.75rem; }
-    .gv-arrow-next { right: 0.75rem; }
     
     .gv-applications-grid {
         grid-template-columns: 1fr;
     }
-    
-    .gv-explore-row,
-    .gv-explore-row.gv-explore-row-reverse {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .gv-explore-img-card {
-        aspect-ratio: 1 / 1;
-        padding: 2rem;
-    }
 }
 </style>
-
-<!-- CTA Banner Component -->
-<?php
-get_template_part( 'template-parts/cta-banner', null, array(
-    'title'    => 'Ready To Source Premium<br>Indonesian Vanilla?',
-    'btn_text' => 'Request a Quote',
-    'btn_url'  => home_url( '/contact/' ),
-) );
-?>
 
 <?php
 get_footer();
