@@ -253,6 +253,85 @@ function grand_vanilla_register_gallery_cpt() {
 add_action( 'init', 'grand_vanilla_register_gallery_cpt' );
 
 /**
+ * 4b. Register Custom Post Type: Our Facilities (vanilla_facility)
+ */
+function grand_vanilla_register_facility_cpt() {
+    $labels = array(
+        'name'               => _x( 'Our Facilities', 'Post type general name', 'grand-vanilla' ),
+        'singular_name'      => _x( 'Facility', 'Post type singular name', 'grand-vanilla' ),
+        'menu_name'          => _x( 'Facilities', 'Admin Menu text', 'grand-vanilla' ),
+        'add_new'            => __( 'Add New Facility', 'grand-vanilla' ),
+        'add_new_item'       => __( 'Add New Facility', 'grand-vanilla' ),
+        'edit_item'          => __( 'Edit Facility', 'grand-vanilla' ),
+        'new_item'           => __( 'New Facility', 'grand-vanilla' ),
+        'all_items'          => __( 'All Facilities', 'grand-vanilla' ),
+        'search_items'       => __( 'Search Facilities', 'grand-vanilla' ),
+        'not_found'          => __( 'No facilities found.', 'grand-vanilla' ),
+        'not_found_in_trash' => __( 'No facilities found in Trash.', 'grand-vanilla' ),
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => false,
+        'publicly_queryable' => false,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => false,
+        'capability_type'    => 'post',
+        'has_archive'        => false,
+        'hierarchical'       => false,
+        'menu_position'      => 7,
+        'menu_icon'          => 'dashicons-building',
+        'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes' ),
+        'show_in_rest'       => true,
+    );
+
+    register_post_type( 'vanilla_facility', $args );
+}
+add_action( 'init', 'grand_vanilla_register_facility_cpt' );
+
+function grand_vanilla_add_facility_meta_box() {
+    add_meta_box(
+        'vanilla_facility_meta',
+        __( 'Facility Tag & Category', 'grand-vanilla' ),
+        'grand_vanilla_facility_meta_callback',
+        'vanilla_facility',
+        'normal',
+        'high'
+    );
+}
+add_action( 'add_meta_boxes', 'grand_vanilla_add_facility_meta_box' );
+
+function grand_vanilla_facility_meta_callback( $post ) {
+    wp_nonce_field( 'grand_vanilla_save_facility_meta', 'grand_vanilla_facility_nonce' );
+    $tag = get_post_meta( $post->ID, '_gv_facility_tag', true );
+    ?>
+    <p>
+        <label for="gv_facility_tag"><strong><?php esc_html_e( 'Category / Tag Line (e.g. Warehouse & Storage):', 'grand-vanilla' ); ?></strong></label><br>
+        <input type="text" id="gv_facility_tag" name="gv_facility_tag" value="<?php echo esc_attr( $tag ); ?>" style="width:100%; max-width:500px; padding:8px; margin-top:4px;" placeholder="e.g. Warehouse & Storage">
+    </p>
+    <p class="description"><?php esc_html_e( 'Tip: Use the Featured Image box on the right sidebar to upload the facility photo.', 'grand-vanilla' ); ?></p>
+    <?php
+}
+
+function grand_vanilla_save_facility_meta( $post_id ) {
+    if ( ! isset( $_POST['grand_vanilla_facility_nonce'] ) || ! wp_verify_nonce( $_POST['grand_vanilla_facility_nonce'], 'grand_vanilla_save_facility_meta' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    if ( isset( $_POST['gv_facility_tag'] ) ) {
+        update_post_meta( $post_id, '_gv_facility_tag', sanitize_text_field( $_POST['gv_facility_tag'] ) );
+    }
+}
+add_action( 'save_post_vanilla_facility', 'grand_vanilla_save_facility_meta' );
+
+/**
  * 5. Meta Boxes for Vanilla Product Lab Specifications & Dynamic Varieties Repeater
  */
 function grand_vanilla_admin_scripts( $hook ) {

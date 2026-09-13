@@ -496,47 +496,116 @@ $fac2_desc  = get_post_meta( $post_id, '_gv_about_fac2_desc', true ) ?: 'Sorting
             </div>
         </div>
 
-        <!-- Facilities Rows (Structured identically to Explore More Products) -->
+        <!-- Facilities Rows (Structured dynamically identical to Explore More Products) -->
         <div class="gv-explore-rows">
+            <?php
+            $facilities_query = new WP_Query( array(
+                'post_type'      => 'vanilla_facility',
+                'posts_per_page' => -1, // Fully dynamic: automatically displays all facilities added in WP Admin!
+                'post_status'    => 'publish',
+                'orderby'        => 'menu_order date',
+                'order'          => 'ASC',
+            ) );
 
-            <!-- Row 1: Warehouse & Storage (Text Left, Image Right) -->
-            <div class="gv-explore-row">
-                <div class="gv-explore-text-col">
-                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
-                        <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
-                        <?php echo esc_html( $fac1_tag ); ?>
+            if ( $facilities_query->have_posts() ) :
+                $fac_idx = 0;
+                while ( $facilities_query->have_posts() ) :
+                    $facilities_query->the_post();
+                    $fac_idx++;
+                    // Alternating layout: Odd (1,3,5...) = Text Left, Image Right; Even (2,4,6...) = Image Left, Text Right
+                    $is_reverse = ( $fac_idx % 2 === 0 );
+                    $row_class  = $is_reverse ? 'gv-explore-row gv-explore-row-reverse' : 'gv-explore-row';
+                    
+                    $f_tag  = get_post_meta( get_the_ID(), '_gv_facility_tag', true ) ?: 'Facility';
+                    $f_img  = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . ( $fac_idx % 2 === 1 ? 'Warehouse.png' : 'Processing.png' );
+                    $f_desc = get_the_content();
+                    if ( empty( $f_desc ) ) {
+                        $f_desc = get_the_excerpt();
+                    }
+                ?>
+                <div class="<?php echo esc_attr( $row_class ); ?>">
+                    <?php if ( $is_reverse ) : ?>
+                        <!-- Even: Image Left, Text Right -->
+                        <div class="gv-explore-img-card gv-facility-card">
+                            <img src="<?php echo esc_url( $f_img ); ?>"
+                                alt="<?php echo esc_attr( get_the_title() ); ?>"
+                                class="gv-explore-img">
+                        </div>
+                        <div class="gv-explore-text-col">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
+                                <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                                <?php echo esc_html( $f_tag ); ?>
+                            </div>
+                            <h3 class="gv-explore-item-title"><?php the_title(); ?></h3>
+                            <p class="gv-explore-item-desc">
+                                <?php echo esc_html( wp_strip_all_tags( $f_desc ) ); ?>
+                            </p>
+                        </div>
+                    <?php else : ?>
+                        <!-- Odd: Text Left, Image Right -->
+                        <div class="gv-explore-text-col">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
+                                <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                                <?php echo esc_html( $f_tag ); ?>
+                            </div>
+                            <h3 class="gv-explore-item-title"><?php the_title(); ?></h3>
+                            <p class="gv-explore-item-desc">
+                                <?php echo esc_html( wp_strip_all_tags( $f_desc ) ); ?>
+                            </p>
+                        </div>
+                        <div class="gv-explore-img-card gv-facility-card">
+                            <img src="<?php echo esc_url( $f_img ); ?>"
+                                alt="<?php echo esc_attr( get_the_title() ); ?>"
+                                class="gv-explore-img">
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <?php
+                endwhile;
+                wp_reset_postdata();
+            else :
+                // Default fallback if no posts in CPT yet
+                ?>
+                <!-- Row 1: Warehouse & Storage (Text Left, Image Right) -->
+                <div class="gv-explore-row">
+                    <div class="gv-explore-text-col">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
+                            <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                            <?php echo esc_html( $fac1_tag ); ?>
+                        </div>
+                        <h3 class="gv-explore-item-title"><?php echo esc_html( $fac1_title ); ?></h3>
+                        <p class="gv-explore-item-desc">
+                            <?php echo esc_html( $fac1_desc ); ?>
+                        </p>
                     </div>
-                    <h3 class="gv-explore-item-title"><?php echo esc_html( $fac1_title ); ?></h3>
-                    <p class="gv-explore-item-desc">
-                        <?php echo esc_html( $fac1_desc ); ?>
-                    </p>
-                </div>
-                <div class="gv-explore-img-card gv-facility-card">
-                    <img src="<?php echo esc_url($img_dir . 'Warehouse.png'); ?>"
-                        alt="Grand Vanilla Indonesia Warehouse & Storage Facility"
-                        class="gv-explore-img">
-                </div>
-            </div>
-
-            <!-- Row 2: Processing Facility (Image Left, Text Right - Reverse) -->
-            <div class="gv-explore-row gv-explore-row-reverse">
-                <div class="gv-explore-img-card gv-facility-card">
-                    <img src="<?php echo esc_url($img_dir . 'Processing.png'); ?>"
-                        alt="Grand Vanilla Indonesia Vanilla Processing Facility"
-                        class="gv-explore-img">
-                </div>
-                <div class="gv-explore-text-col">
-                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
-                        <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
-                        <?php echo esc_html( $fac2_tag ); ?>
+                    <div class="gv-explore-img-card gv-facility-card">
+                        <img src="<?php echo esc_url($img_dir . 'Warehouse.png'); ?>"
+                            alt="Grand Vanilla Indonesia Warehouse & Storage Facility"
+                            class="gv-explore-img">
                     </div>
-                    <h3 class="gv-explore-item-title"><?php echo esc_html( $fac2_title ); ?></h3>
-                    <p class="gv-explore-item-desc">
-                        <?php echo esc_html( $fac2_desc ); ?>
-                    </p>
                 </div>
-            </div>
 
+                <!-- Row 2: Processing Facility (Image Left, Text Right - Reverse) -->
+                <div class="gv-explore-row gv-explore-row-reverse">
+                    <div class="gv-explore-img-card gv-facility-card">
+                        <img src="<?php echo esc_url($img_dir . 'Processing.png'); ?>"
+                            alt="Grand Vanilla Indonesia Vanilla Processing Facility"
+                            class="gv-explore-img">
+                    </div>
+                    <div class="gv-explore-text-col">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; color: #363E19; font-size: 0.875rem; font-weight: 500; font-family: var(--font-heading, 'Jost', sans-serif); margin-bottom: 0.75rem;">
+                            <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
+                            <?php echo esc_html( $fac2_tag ); ?>
+                        </div>
+                        <h3 class="gv-explore-item-title"><?php echo esc_html( $fac2_title ); ?></h3>
+                        <p class="gv-explore-item-desc">
+                            <?php echo esc_html( $fac2_desc ); ?>
+                        </p>
+                    </div>
+                </div>
+                <?php
+            endif;
+            ?>
         </div>
 
     </div>
