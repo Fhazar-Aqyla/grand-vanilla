@@ -11,6 +11,51 @@ get_header();
 
 $img_dir = get_template_directory_uri() . '/assets/images/';
 $contact = grand_vanilla_get_contact_info();
+$post_id = get_queried_object_id() ?: get_the_ID();
+
+// 1. Hero Stats
+$hero_stat_num   = get_post_meta( $post_id, '_gv_hero_stat_num', true ) ?: '12+';
+$hero_stat_label = get_post_meta( $post_id, '_gv_hero_stat_label', true ) ?: 'Trusted Customers Worldwide';
+
+// 2. About Preview
+$about_heading = get_post_meta( $post_id, '_gv_home_about_heading', true ) ?: 'Grand Vanilla Indonesia';
+$about_p1      = get_post_meta( $post_id, '_gv_home_about_p1', true ) ?: "Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.";
+$about_p2      = get_post_meta( $post_id, '_gv_home_about_p2', true ) ?: "Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.";
+$about_f1      = get_post_meta( $post_id, '_gv_home_about_f1', true ) ?: 'Premium Product Quality';
+$about_f2      = get_post_meta( $post_id, '_gv_home_about_f2', true ) ?: 'Consistent Global Supply';
+$about_f3      = get_post_meta( $post_id, '_gv_home_about_f3', true ) ?: 'Reliable Business Service';
+$about_f4      = get_post_meta( $post_id, '_gv_home_about_f4', true ) ?: 'Flexible Custom Solutions';
+
+// 3. Value Propositions
+$vp1_title = get_post_meta( $post_id, '_gv_home_vp1_title', true ) ?: 'Quality Focused';
+$vp1_desc  = get_post_meta( $post_id, '_gv_home_vp1_desc', true ) ?: 'We maintain product quality to meet international standards and diverse industry requirements.';
+$vp2_title = get_post_meta( $post_id, '_gv_home_vp2_title', true ) ?: 'Consistent Supply';
+$vp2_desc  = get_post_meta( $post_id, '_gv_home_vp2_desc', true ) ?: 'We provide reliable vanilla supply for wholesale, bulk, and ongoing business needs.';
+$vp3_title = get_post_meta( $post_id, '_gv_home_vp3_title', true ) ?: 'Indonesian Origin';
+$vp3_desc  = get_post_meta( $post_id, '_gv_home_vp3_desc', true ) ?: 'We connect global buyers with quality Indonesian vanilla known for its rich aroma and flavor.';
+$vp4_title = get_post_meta( $post_id, '_gv_home_vp4_title', true ) ?: 'Reliable Service';
+$vp4_desc  = get_post_meta( $post_id, '_gv_home_vp4_desc', true ) ?: 'We provide responsive support for international buyers and their sourcing needs.';
+
+// 4. Flexible Vanilla Supply & OEM
+$oem_subtitle = get_post_meta( $post_id, '_gv_home_oem_subtitle', true ) ?: 'From high-volume wholesale supply to customized vanilla solutions, we provide flexible products and services designed to meet the needs of international buyers and business partners.';
+$oem_heading  = get_post_meta( $post_id, '_gv_home_oem_heading', true ) ?: 'Special OEM & Bulk Vanilla';
+$oem_desc     = get_post_meta( $post_id, '_gv_home_oem_desc', true ) ?: 'Vanilla products supplied in larger quantities to support wholesalers, distributors, manufacturers, and businesses with ongoing or high-volume requirements.';
+$oem_f1_title = get_post_meta( $post_id, '_gv_home_oem_f1_title', true ) ?: 'High-Volume Supply';
+$oem_f1_desc  = get_post_meta( $post_id, '_gv_home_oem_f1_desc', true ) ?: 'Supporting larger orders for wholesalers, distributors, and manufacturers.';
+$oem_f2_title = get_post_meta( $post_id, '_gv_home_oem_f2_title', true ) ?: 'Consistent Quality';
+$oem_f2_desc  = get_post_meta( $post_id, '_gv_home_oem_f2_desc', true ) ?: 'Carefully sourced vanilla with quality standards maintained across orders.';
+$oem_f3_title = get_post_meta( $post_id, '_gv_home_oem_f3_title', true ) ?: 'Custom Packaging';
+$oem_f3_desc  = get_post_meta( $post_id, '_gv_home_oem_f3_desc', true ) ?: 'Packaging options can be adapted to your product, branding, and requirements.';
+$oem_f4_title = get_post_meta( $post_id, '_gv_home_oem_f4_title', true ) ?: 'Flexible Quantities';
+$oem_f4_desc  = get_post_meta( $post_id, '_gv_home_oem_f4_desc', true ) ?: 'Order volumes can be adjusted based on your production and business needs.';
+
+// 5. Who We Serve
+$serve_1 = get_post_meta( $post_id, '_gv_home_serve_1', true ) ?: 'IMPORTERS';
+$serve_2 = get_post_meta( $post_id, '_gv_home_serve_2', true ) ?: 'DISTRIBUTORS';
+$serve_3 = get_post_meta( $post_id, '_gv_home_serve_3', true ) ?: 'FOOD MANUFACTURERS';
+$serve_4 = get_post_meta( $post_id, '_gv_home_serve_4', true ) ?: 'SPICE TRADERS';
+$serve_5 = get_post_meta( $post_id, '_gv_home_serve_5', true ) ?: 'BAKERIES';
+$serve_6 = get_post_meta( $post_id, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY COMPANIES';
 ?>
 
 <!-- 1. Hero Section (Exact Match to Figma Reference) -->
@@ -47,11 +92,11 @@ $contact = grand_vanilla_get_contact_info();
             <div class="gv-trusted-badge"
                 style="display: inline-flex; flex-direction: column; width: 395px; max-width: 100%; background: #0E110A; border-radius: 8px; padding: 1.15rem 1.85rem; box-shadow: 0 12px 32px rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s ease; box-sizing: border-box;">
                 <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.75rem; color: #D1D5DB; font-weight: 500; margin-bottom: 0.5rem; letter-spacing: 0.01em;">
-                    Trusted Customers Worldwide
+                    <?php echo esc_html( $hero_stat_label ); ?>
                 </span>
                 <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                     <span style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 2.25rem; font-weight: 500; color: #FFFFFF; line-height: 1;">
-                        12+
+                        <?php echo esc_html( $hero_stat_num ); ?>
                     </span>
                     <!-- Overlapping Flag Circles (US, FR, DE, NL, 18+) -->
                     <div style="display: flex; align-items: center;">
@@ -137,30 +182,30 @@ $contact = grand_vanilla_get_contact_info();
 
                     <!-- Heading -->
                     <h2 class="gv-about-heading" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.35rem, 3.4vw, 2.85rem); font-weight: 500; color: #363E19; line-height: 1.15; margin: 0 0 1.75rem 0; letter-spacing: -0.015em;">
-                        Grand Vanilla Indonesia
+                        <?php echo esc_html( $about_heading ); ?>
                     </h2>
 
                     <!-- Paragraphs (Jost Geometric Typography) -->
                     <p style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 400; line-height: 1.62; color: #363E19; opacity: 0.9; margin: 0 0 1.35rem 0; max-width: 495px; letter-spacing: 0.005em;">
-                        Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
+                        <?php echo esc_html( $about_p1 ); ?>
                     </p>
                     <p class="gv-about-p-secondary" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 400; line-height: 1.62; color: #363E19; opacity: 0.9; margin: 0 0 2.25rem 0; max-width: 495px; letter-spacing: 0.005em;">
-                        Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.
+                        <?php echo esc_html( $about_p2 ); ?>
                     </p>
 
                     <!-- 4 Solid Dark Khaki Feature Boxes (2x2 Grid) -->
                     <div class="gv-about-features-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem 1.15rem; margin-bottom: 2.5rem; max-width: 495px;">
                         <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.78125rem; font-weight: 400; padding: 1.1rem 0.75rem; border-radius: 0; text-align: center; display: flex; align-items: center; justify-content: center; box-sizing: border-box; letter-spacing: 0.01em;">
-                            Premium Product Quality
+                            <?php echo esc_html( $about_f1 ); ?>
                         </div>
                         <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.78125rem; font-weight: 400; padding: 1.1rem 0.75rem; border-radius: 0; text-align: center; display: flex; align-items: center; justify-content: center; box-sizing: border-box; letter-spacing: 0.01em;">
-                            Consistent Global Supply
+                            <?php echo esc_html( $about_f2 ); ?>
                         </div>
                         <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.78125rem; font-weight: 400; padding: 1.1rem 0.75rem; border-radius: 0; text-align: center; display: flex; align-items: center; justify-content: center; box-sizing: border-box; letter-spacing: 0.01em;">
-                            Reliable Business Service
+                            <?php echo esc_html( $about_f3 ); ?>
                         </div>
                         <div class="gv-about-feature-box" style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.78125rem; font-weight: 400; padding: 1.1rem 0.75rem; border-radius: 0; text-align: center; display: flex; align-items: center; justify-content: center; box-sizing: border-box; letter-spacing: 0.01em;">
-                            Flexible Custom Solutions
+                            <?php echo esc_html( $about_f4 ); ?>
                         </div>
                     </div>
 
@@ -356,10 +401,10 @@ $contact = grand_vanilla_get_contact_info();
                     </svg>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
-                    Quality Focused
+                    <?php echo esc_html( $vp1_title ); ?>
                 </h3>
                 <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
-                    We maintain product quality to meet international standards and diverse industry requirements.
+                    <?php echo esc_html( $vp1_desc ); ?>
                 </p>
             </div>
 
@@ -372,10 +417,10 @@ $contact = grand_vanilla_get_contact_info();
                     </svg>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
-                    Consistent Supply
+                    <?php echo esc_html( $vp2_title ); ?>
                 </h3>
                 <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
-                    We provide reliable vanilla supply for wholesale, bulk, and ongoing business needs.
+                    <?php echo esc_html( $vp2_desc ); ?>
                 </p>
             </div>
 
@@ -388,10 +433,10 @@ $contact = grand_vanilla_get_contact_info();
                     </svg>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
-                    Indonesian Origin
+                    <?php echo esc_html( $vp3_title ); ?>
                 </h3>
                 <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
-                    We connect global buyers with quality Indonesian vanilla known for its rich aroma and flavor.
+                    <?php echo esc_html( $vp3_desc ); ?>
                 </p>
             </div>
 
@@ -404,10 +449,10 @@ $contact = grand_vanilla_get_contact_info();
                     </svg>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
-                    Reliable Service
+                    <?php echo esc_html( $vp4_title ); ?>
                 </h3>
                 <p style="font-size: 0.8125rem; line-height: 1.6; color: #4A5239; margin: 0;">
-                    We provide responsive support for international buyers and their sourcing needs.
+                    <?php echo esc_html( $vp4_desc ); ?>
                 </p>
             </div>
 
@@ -435,49 +480,49 @@ $contact = grand_vanilla_get_contact_info();
             <!-- Right Column: Subtitle + OEM Content Block -->
             <div>
                 <p style="font-size: 0.9375rem; line-height: 1.6; color: #4A5239; margin-bottom: 2.5rem;">
-                    From high-volume wholesale supply to customized vanilla solutions, we provide flexible products and services designed to meet the needs of international buyers and business partners.
+                    <?php echo esc_html( $oem_subtitle ); ?>
                 </p>
 
                 <div>
                     <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(1.75rem, 2.5vw, 2.25rem); font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
-                        Special OEM & Bulk Vanilla
+                        <?php echo esc_html( $oem_heading ); ?>
                     </h3>
                     <p style="font-size: 0.9375rem; line-height: 1.6; color: #4A5239; margin-bottom: 2rem;">
-                        Vanilla products supplied in larger quantities to support wholesalers, distributors, manufacturers, and businesses with ongoing or high-volume requirements.
+                        <?php echo esc_html( $oem_desc ); ?>
                     </p>
 
                     <!-- 4 Feature Points (2x2 Grid) -->
                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem 1.5rem;">
                         <div>
                             <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.35rem;">
-                                High-Volume Supply
+                                <?php echo esc_html( $oem_f1_title ); ?>
                             </h4>
                             <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
-                                Supporting larger orders for wholesalers, distributors, and manufacturers.
+                                <?php echo esc_html( $oem_f1_desc ); ?>
                             </p>
                         </div>
                         <div>
                             <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.35rem;">
-                                Consistent Quality
+                                <?php echo esc_html( $oem_f2_title ); ?>
                             </h4>
                             <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
-                                Carefully sourced vanilla with quality standards maintained across orders.
+                                <?php echo esc_html( $oem_f2_desc ); ?>
                             </p>
                         </div>
                         <div>
                             <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.35rem;">
-                                Custom Packaging
+                                <?php echo esc_html( $oem_f3_title ); ?>
                             </h4>
                             <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
-                                Packaging options can be adapted to your product, branding, and requirements.
+                                <?php echo esc_html( $oem_f3_desc ); ?>
                             </p>
                         </div>
                         <div>
                             <h4 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.35rem;">
-                                Flexible Quantities
+                                <?php echo esc_html( $oem_f4_title ); ?>
                             </h4>
                             <p style="font-size: 0.8125rem; line-height: 1.5; color: #555; margin: 0;">
-                                Order volumes can be adjusted based on your production and business needs.
+                                <?php echo esc_html( $oem_f4_desc ); ?>
                             </p>
                         </div>
                     </div>
@@ -539,7 +584,7 @@ $contact = grand_vanilla_get_contact_info();
                         </svg>
                     </div>
                     <span class="gv-who-we-serve-label">
-                        IMPORTERS
+                        <?php echo esc_html( $serve_1 ); ?>
                     </span>
                 </div>
 
@@ -555,7 +600,7 @@ $contact = grand_vanilla_get_contact_info();
                         </svg>
                     </div>
                     <span class="gv-who-we-serve-label">
-                        DISTRIBUTORS
+                        <?php echo esc_html( $serve_2 ); ?>
                     </span>
                 </div>
 
@@ -569,7 +614,7 @@ $contact = grand_vanilla_get_contact_info();
                         </svg>
                     </div>
                     <span class="gv-who-we-serve-label">
-                        FOOD MANUFACTURERS
+                        <?php echo esc_html( $serve_3 ); ?>
                     </span>
                 </div>
 
@@ -583,7 +628,7 @@ $contact = grand_vanilla_get_contact_info();
                         </svg>
                     </div>
                     <span class="gv-who-we-serve-label">
-                        SPICE TRADERS
+                        <?php echo esc_html( $serve_4 ); ?>
                     </span>
                 </div>
 
@@ -597,7 +642,7 @@ $contact = grand_vanilla_get_contact_info();
                         </svg>
                     </div>
                     <span class="gv-who-we-serve-label">
-                        BAKERIES
+                        <?php echo esc_html( $serve_5 ); ?>
                     </span>
                 </div>
 
@@ -614,9 +659,12 @@ $contact = grand_vanilla_get_contact_info();
                         </svg>
                     </div>
                     <span class="gv-who-we-serve-label">
-                        CONFECTIONERY COMPANIES
+                        <?php echo esc_html( $serve_6 ); ?>
                     </span>
                 </div>
+
+            </div>
+        </div>
 
             </div>
         </div>

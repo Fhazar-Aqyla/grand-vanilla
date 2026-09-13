@@ -698,6 +698,9 @@ add_action( 'customize_register', 'grand_vanilla_customize_register' );
 /**
  * 7. Helper: Get Company Contact Info
  */
+/**
+ * 7. Helper: Get Company Contact Info
+ */
 function grand_vanilla_get_contact_info() {
     $whatsapp = get_theme_mod( 'gv_whatsapp', '087717752085' );
     $clean_wa = preg_replace( '/[^0-9]/', '', $whatsapp );
@@ -715,3 +718,525 @@ function grand_vanilla_get_contact_info() {
         'export_hubs'   => 'Jakarta (CGK) & Bali (DPS), Indonesia',
     );
 }
+
+/**
+ * 8. Custom Meta Boxes for Pages: Homepage & About Us Page
+ */
+function grand_vanilla_add_page_meta_boxes() {
+    global $post;
+    if ( ! $post || 'page' !== $post->post_type ) {
+        return;
+    }
+
+    $template = get_post_meta( $post->ID, '_wp_page_template', true );
+    $is_front = ( (int) get_option( 'page_on_front' ) === (int) $post->ID ) || 'front-page.php' === $template || 'home' === $post->post_name;
+
+    // Homepage Meta Box
+    if ( $is_front ) {
+        add_meta_box(
+            'gv_frontpage_meta',
+            __( 'Homepage: Sections & Value Propositions', 'grand-vanilla' ),
+            'grand_vanilla_frontpage_meta_callback',
+            'page',
+            'normal',
+            'high'
+        );
+    }
+
+    // About Us Page Meta Box
+    if ( 'page-about.php' === $template || 'about' === $post->post_name ) {
+        add_meta_box(
+            'gv_aboutpage_meta',
+            __( 'About Us Page: Narrative, Vision, Mission & Sourcing', 'grand-vanilla' ),
+            'grand_vanilla_aboutpage_meta_callback',
+            'page',
+            'normal',
+            'high'
+        );
+    }
+}
+add_action( 'add_meta_boxes', 'grand_vanilla_add_page_meta_boxes' );
+
+/**
+ * Callback for Homepage Meta Box
+ */
+function grand_vanilla_frontpage_meta_callback( $post ) {
+    wp_nonce_field( 'grand_vanilla_save_frontpage_meta', 'grand_vanilla_frontpage_nonce' );
+
+    $fields = array(
+        'gv_hero_stat_num'     => get_post_meta( $post->ID, '_gv_hero_stat_num', true ) ?: '12+',
+        'gv_hero_stat_label'   => get_post_meta( $post->ID, '_gv_hero_stat_label', true ) ?: 'Trusted Customers Worldwide',
+        'gv_home_about_heading'=> get_post_meta( $post->ID, '_gv_home_about_heading', true ) ?: 'Grand Vanilla Indonesia',
+        'gv_home_about_p1'     => get_post_meta( $post->ID, '_gv_home_about_p1', true ) ?: "Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.",
+        'gv_home_about_p2'     => get_post_meta( $post->ID, '_gv_home_about_p2', true ) ?: "Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.",
+        'gv_home_about_f1'     => get_post_meta( $post->ID, '_gv_home_about_f1', true ) ?: 'Premium Product Quality',
+        'gv_home_about_f2'     => get_post_meta( $post->ID, '_gv_home_about_f2', true ) ?: 'Consistent Global Supply',
+        'gv_home_about_f3'     => get_post_meta( $post->ID, '_gv_home_about_f3', true ) ?: 'Reliable Business Service',
+        'gv_home_about_f4'     => get_post_meta( $post->ID, '_gv_home_about_f4', true ) ?: 'Flexible Custom Solutions',
+
+        // 4 Value Props
+        'gv_home_vp1_title'    => get_post_meta( $post->ID, '_gv_home_vp1_title', true ) ?: 'Quality Focused',
+        'gv_home_vp1_desc'     => get_post_meta( $post->ID, '_gv_home_vp1_desc', true ) ?: 'We maintain product quality to meet international standards and diverse industry requirements.',
+        'gv_home_vp2_title'    => get_post_meta( $post->ID, '_gv_home_vp2_title', true ) ?: 'Consistent Supply',
+        'gv_home_vp2_desc'     => get_post_meta( $post->ID, '_gv_home_vp2_desc', true ) ?: 'We provide reliable vanilla supply for wholesale, bulk, and ongoing business needs.',
+        'gv_home_vp3_title'    => get_post_meta( $post->ID, '_gv_home_vp3_title', true ) ?: 'Indonesian Origin',
+        'gv_home_vp3_desc'     => get_post_meta( $post->ID, '_gv_home_vp3_desc', true ) ?: 'We connect global buyers with quality Indonesian vanilla known for its rich aroma and flavor.',
+        'gv_home_vp4_title'    => get_post_meta( $post->ID, '_gv_home_vp4_title', true ) ?: 'Reliable Service',
+        'gv_home_vp4_desc'     => get_post_meta( $post->ID, '_gv_home_vp4_desc', true ) ?: 'We provide responsive support for international buyers and their sourcing needs.',
+
+        // OEM & Flexible Supply
+        'gv_home_oem_subtitle' => get_post_meta( $post->ID, '_gv_home_oem_subtitle', true ) ?: 'From high-volume wholesale supply to customized vanilla solutions, we provide flexible products and services designed to meet the needs of international buyers and business partners.',
+        'gv_home_oem_heading'  => get_post_meta( $post->ID, '_gv_home_oem_heading', true ) ?: 'Special OEM & Bulk Vanilla',
+        'gv_home_oem_desc'     => get_post_meta( $post->ID, '_gv_home_oem_desc', true ) ?: 'Vanilla products supplied in larger quantities to support wholesalers, distributors, manufacturers, and businesses with ongoing or high-volume requirements.',
+        'gv_home_oem_f1_title' => get_post_meta( $post->ID, '_gv_home_oem_f1_title', true ) ?: 'High-Volume Supply',
+        'gv_home_oem_f1_desc'  => get_post_meta( $post->ID, '_gv_home_oem_f1_desc', true ) ?: 'Supporting larger orders for wholesalers, distributors, and manufacturers.',
+        'gv_home_oem_f2_title' => get_post_meta( $post->ID, '_gv_home_oem_f2_title', true ) ?: 'Consistent Quality',
+        'gv_home_oem_f2_desc'  => get_post_meta( $post->ID, '_gv_home_oem_f2_desc', true ) ?: 'Carefully sourced vanilla with quality standards maintained across orders.',
+        'gv_home_oem_f3_title' => get_post_meta( $post->ID, '_gv_home_oem_f3_title', true ) ?: 'Custom Packaging',
+        'gv_home_oem_f3_desc'  => get_post_meta( $post->ID, '_gv_home_oem_f3_desc', true ) ?: 'Packaging options can be adapted to your product, branding, and requirements.',
+        'gv_home_oem_f4_title' => get_post_meta( $post->ID, '_gv_home_oem_f4_title', true ) ?: 'Flexible Quantities',
+        'gv_home_oem_f4_desc'  => get_post_meta( $post->ID, '_gv_home_oem_f4_desc', true ) ?: 'Order volumes can be adjusted based on your production and business needs.',
+
+        // Who We Serve
+        'gv_home_serve_1'      => get_post_meta( $post->ID, '_gv_home_serve_1', true ) ?: 'IMPORTERS',
+        'gv_home_serve_2'      => get_post_meta( $post->ID, '_gv_home_serve_2', true ) ?: 'DISTRIBUTORS',
+        'gv_home_serve_3'      => get_post_meta( $post->ID, '_gv_home_serve_3', true ) ?: 'FOOD MANUFACTURERS',
+        'gv_home_serve_4'      => get_post_meta( $post->ID, '_gv_home_serve_4', true ) ?: 'SPICE TRADERS',
+        'gv_home_serve_5'      => get_post_meta( $post->ID, '_gv_home_serve_5', true ) ?: 'BAKERIES',
+        'gv_home_serve_6'      => get_post_meta( $post->ID, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY COMPANIES',
+    );
+    ?>
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 1000px;">
+        <!-- Section 1: Hero Statistics -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">1. Hero Statistics Floating Badge</h3>
+            <div style="display: grid; grid-template-columns: 140px 1fr; gap: 1rem;">
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Angka Statistik</label>
+                    <input type="text" name="gv_hero_stat_num" value="<?php echo esc_attr( $fields['gv_hero_stat_num'] ); ?>" style="width: 100%;">
+                </div>
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Label Statistik</label>
+                    <input type="text" name="gv_hero_stat_label" value="<?php echo esc_attr( $fields['gv_hero_stat_label'] ); ?>" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: About Us Preview -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">2. About Us Preview Section (Homepage)</h3>
+            <div style="margin-bottom: 1rem;">
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Heading</label>
+                <input type="text" name="gv_home_about_heading" value="<?php echo esc_attr( $fields['gv_home_about_heading'] ); ?>" style="width: 100%;">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Paragraf 1</label>
+                    <textarea name="gv_home_about_p1" rows="4" style="width: 100%;"><?php echo esc_textarea( $fields['gv_home_about_p1'] ); ?></textarea>
+                </div>
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Paragraf 2</label>
+                    <textarea name="gv_home_about_p2" rows="4" style="width: 100%;"><?php echo esc_textarea( $fields['gv_home_about_p2'] ); ?></textarea>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #eee; padding-top: 1rem;">
+                <label style="font-weight: 600; display: block; margin-bottom: 6px;">4 Kotak Fitur / Pillars:</label>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
+                    <input type="text" name="gv_home_about_f1" value="<?php echo esc_attr( $fields['gv_home_about_f1'] ); ?>" placeholder="Pillar 1">
+                    <input type="text" name="gv_home_about_f2" value="<?php echo esc_attr( $fields['gv_home_about_f2'] ); ?>" placeholder="Pillar 2">
+                    <input type="text" name="gv_home_about_f3" value="<?php echo esc_attr( $fields['gv_home_about_f3'] ); ?>" placeholder="Pillar 3">
+                    <input type="text" name="gv_home_about_f4" value="<?php echo esc_attr( $fields['gv_home_about_f4'] ); ?>" placeholder="Pillar 4">
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: 4 Value Proposition Cards -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">3. Value Propositions (4 Cards)</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                <!-- Card 1 -->
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 1: Judul</label>
+                    <input type="text" name="gv_home_vp1_title" value="<?php echo esc_attr( $fields['gv_home_vp1_title'] ); ?>" style="width: 100%; margin-bottom: 8px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 1: Deskripsi</label>
+                    <textarea name="gv_home_vp1_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_home_vp1_desc'] ); ?></textarea>
+                </div>
+                <!-- Card 2 -->
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 2: Judul</label>
+                    <input type="text" name="gv_home_vp2_title" value="<?php echo esc_attr( $fields['gv_home_vp2_title'] ); ?>" style="width: 100%; margin-bottom: 8px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 2: Deskripsi</label>
+                    <textarea name="gv_home_vp2_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_home_vp2_desc'] ); ?></textarea>
+                </div>
+                <!-- Card 3 -->
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 3: Judul</label>
+                    <input type="text" name="gv_home_vp3_title" value="<?php echo esc_attr( $fields['gv_home_vp3_title'] ); ?>" style="width: 100%; margin-bottom: 8px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 3: Deskripsi</label>
+                    <textarea name="gv_home_vp3_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_home_vp3_desc'] ); ?></textarea>
+                </div>
+                <!-- Card 4 -->
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 4: Judul</label>
+                    <input type="text" name="gv_home_vp4_title" value="<?php echo esc_attr( $fields['gv_home_vp4_title'] ); ?>" style="width: 100%; margin-bottom: 8px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 4: Deskripsi</label>
+                    <textarea name="gv_home_vp4_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_home_vp4_desc'] ); ?></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Flexible Supply & OEM -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">4. Flexible Vanilla Supply & Special OEM</h3>
+            <div style="margin-bottom: 1rem;">
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Subtitle Bagian Kanan</label>
+                <textarea name="gv_home_oem_subtitle" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_home_oem_subtitle'] ); ?></textarea>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Heading OEM</label>
+                    <input type="text" name="gv_home_oem_heading" value="<?php echo esc_attr( $fields['gv_home_oem_heading'] ); ?>" style="width: 100%;">
+                </div>
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Deskripsi OEM</label>
+                    <textarea name="gv_home_oem_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_home_oem_desc'] ); ?></textarea>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #eee; padding-top: 1rem;">
+                <label style="font-weight: 600; display: block; margin-bottom: 6px;">4 Poin Fitur OEM (Judul & Deskripsi Singkat):</label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                    <div>
+                        <input type="text" name="gv_home_oem_f1_title" value="<?php echo esc_attr( $fields['gv_home_oem_f1_title'] ); ?>" placeholder="Fitur 1 Judul" style="width: 100%; margin-bottom: 4px;">
+                        <input type="text" name="gv_home_oem_f1_desc" value="<?php echo esc_attr( $fields['gv_home_oem_f1_desc'] ); ?>" placeholder="Fitur 1 Deskripsi" style="width: 100%;">
+                    </div>
+                    <div>
+                        <input type="text" name="gv_home_oem_f2_title" value="<?php echo esc_attr( $fields['gv_home_oem_f2_title'] ); ?>" placeholder="Fitur 2 Judul" style="width: 100%; margin-bottom: 4px;">
+                        <input type="text" name="gv_home_oem_f2_desc" value="<?php echo esc_attr( $fields['gv_home_oem_f2_desc'] ); ?>" placeholder="Fitur 2 Deskripsi" style="width: 100%;">
+                    </div>
+                    <div>
+                        <input type="text" name="gv_home_oem_f3_title" value="<?php echo esc_attr( $fields['gv_home_oem_f3_title'] ); ?>" placeholder="Fitur 3 Judul" style="width: 100%; margin-bottom: 4px;">
+                        <input type="text" name="gv_home_oem_f3_desc" value="<?php echo esc_attr( $fields['gv_home_oem_f3_desc'] ); ?>" placeholder="Fitur 3 Deskripsi" style="width: 100%;">
+                    </div>
+                    <div>
+                        <input type="text" name="gv_home_oem_f4_title" value="<?php echo esc_attr( $fields['gv_home_oem_f4_title'] ); ?>" placeholder="Fitur 4 Judul" style="width: 100%; margin-bottom: 4px;">
+                        <input type="text" name="gv_home_oem_f4_desc" value="<?php echo esc_attr( $fields['gv_home_oem_f4_desc'] ); ?>" placeholder="Fitur 4 Deskripsi" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Who We Serve (6 B2B Targets) -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">5. Who We Serve In Global B2B Markets (6 Cards)</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;">
+                <input type="text" name="gv_home_serve_1" value="<?php echo esc_attr( $fields['gv_home_serve_1'] ); ?>" placeholder="Target 1">
+                <input type="text" name="gv_home_serve_2" value="<?php echo esc_attr( $fields['gv_home_serve_2'] ); ?>" placeholder="Target 2">
+                <input type="text" name="gv_home_serve_3" value="<?php echo esc_attr( $fields['gv_home_serve_3'] ); ?>" placeholder="Target 3">
+                <input type="text" name="gv_home_serve_4" value="<?php echo esc_attr( $fields['gv_home_serve_4'] ); ?>" placeholder="Target 4">
+                <input type="text" name="gv_home_serve_5" value="<?php echo esc_attr( $fields['gv_home_serve_5'] ); ?>" placeholder="Target 5">
+                <input type="text" name="gv_home_serve_6" value="<?php echo esc_attr( $fields['gv_home_serve_6'] ); ?>" placeholder="Target 6">
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+/**
+ * Callback for About Us Page Meta Box
+ */
+function grand_vanilla_aboutpage_meta_callback( $post ) {
+    wp_nonce_field( 'grand_vanilla_save_aboutpage_meta', 'grand_vanilla_aboutpage_nonce' );
+
+    $fields = array(
+        'gv_about_hero_subtag'     => get_post_meta( $post->ID, '_gv_about_hero_subtag', true ) ?: 'Connecting Indonesian vanilla with global markets.',
+        'gv_about_overview_heading'=> get_post_meta( $post->ID, '_gv_about_overview_heading', true ) ?: 'Grand Vanilla Indonesia',
+        'gv_about_overview_p1'     => get_post_meta( $post->ID, '_gv_about_overview_p1', true ) ?: "Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.",
+        'gv_about_overview_p2'     => get_post_meta( $post->ID, '_gv_about_overview_p2', true ) ?: "Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.",
+        'gv_about_overview_f1'     => get_post_meta( $post->ID, '_gv_about_overview_f1', true ) ?: 'Premium Product Quality',
+        'gv_about_overview_f2'     => get_post_meta( $post->ID, '_gv_about_overview_f2', true ) ?: 'Consistent Global Supply',
+        'gv_about_overview_f3'     => get_post_meta( $post->ID, '_gv_about_overview_f3', true ) ?: 'Reliable Business Service',
+        'gv_about_overview_f4'     => get_post_meta( $post->ID, '_gv_about_overview_f4', true ) ?: 'Flexible Custom Solutions',
+
+        // Journey, Story, Vision, Mission
+        'gv_about_journey_desc'    => get_post_meta( $post->ID, '_gv_about_journey_desc', true ) ?: 'Explore our range of quality Indonesian vanilla products, carefully sourced and prepared to meet the needs of global B2B buyers.',
+        'gv_about_story_title'     => get_post_meta( $post->ID, '_gv_about_story_title', true ) ?: 'Our Story',
+        'gv_about_story_text'      => get_post_meta( $post->ID, '_gv_about_story_text', true ) ?: "Grand Vanilla Indonesia was founded in 2019 in Jember, East Java, with a simple goal: to bring Indonesia's rich vanilla resources to a wider global market. Starting from local vanilla sourcing and small-scale supply, the company gradually expanded its network and began serving wholesale and international B2B buyers.",
+        'gv_about_vision_text'     => get_post_meta( $post->ID, '_gv_about_vision_text', true ) ?: "To grow as a trusted Indonesian vanilla supplier and export partner, connecting quality products with international buyers while creating long-term value across global markets.",
+        'gv_about_mission_text'    => get_post_meta( $post->ID, '_gv_about_mission_text', true ) ?: "To provide quality Indonesian vanilla with consistent supply and reliable service, while supporting international buyers with solutions that meet their product and business requirements.",
+
+        // 4 Value Props
+        'gv_about_vp1_title'       => get_post_meta( $post->ID, '_gv_about_vp1_title', true ) ?: 'Quality Focused',
+        'gv_about_vp1_desc'        => get_post_meta( $post->ID, '_gv_about_vp1_desc', true ) ?: 'We maintain product quality to meet international standards and diverse industry requirements.',
+        'gv_about_vp2_title'       => get_post_meta( $post->ID, '_gv_about_vp2_title', true ) ?: 'Consistent Supply',
+        'gv_about_vp2_desc'        => get_post_meta( $post->ID, '_gv_about_vp2_desc', true ) ?: 'We provide reliable vanilla supply for wholesale, bulk, and ongoing business needs.',
+        'gv_about_vp3_title'       => get_post_meta( $post->ID, '_gv_about_vp3_title', true ) ?: 'Quality Assurance',
+        'gv_about_vp3_desc'        => get_post_meta( $post->ID, '_gv_about_vp3_desc', true ) ?: 'We ensure consistent quality through careful inspection and control.',
+        'gv_about_vp4_title'       => get_post_meta( $post->ID, '_gv_about_vp4_title', true ) ?: 'Full Traceability',
+        'gv_about_vp4_desc'        => get_post_meta( $post->ID, '_gv_about_vp4_desc', true ) ?: 'We provide transparent sourcing with traceability from origin through the supply chain.',
+
+        // Sourcing 3 Steps
+        'gv_about_src1_title'      => get_post_meta( $post->ID, '_gv_about_src1_title', true ) ?: 'Local Product',
+        'gv_about_src1_desc'       => get_post_meta( $post->ID, '_gv_about_src1_desc', true ) ?: 'Vanilla sourced from Indonesia and connected to local growing regions.',
+        'gv_about_src2_title'      => get_post_meta( $post->ID, '_gv_about_src2_title', true ) ?: 'Trusted Sourcing',
+        'gv_about_src2_desc'       => get_post_meta( $post->ID, '_gv_about_src2_desc', true ) ?: 'Working with selected local sources to maintain product quality and consistency.',
+        'gv_about_src3_title'      => get_post_meta( $post->ID, '_gv_about_src3_title', true ) ?: 'Quality Selection',
+        'gv_about_src3_desc'       => get_post_meta( $post->ID, '_gv_about_src3_desc', true ) ?: 'Products are selected according to buyer requirements and intended applications, ensuring the right quality and specifications for every order.',
+
+        // Export Capability 4 Cards
+        'gv_about_exp1_title'      => get_post_meta( $post->ID, '_gv_about_exp1_title', true ) ?: 'Wholesale Supply',
+        'gv_about_exp1_desc'       => get_post_meta( $post->ID, '_gv_about_exp1_desc', true ) ?: 'Vanilla products available for wholesale and recurring business requirements.',
+        'gv_about_exp2_title'      => get_post_meta( $post->ID, '_gv_about_exp2_title', true ) ?: 'Bulk Orders',
+        'gv_about_exp2_desc'       => get_post_meta( $post->ID, '_gv_about_exp2_desc', true ) ?: 'Supporting larger-volume orders for distributors, manufacturers, and other B2B buyers.',
+        'gv_about_exp3_title'      => get_post_meta( $post->ID, '_gv_about_exp3_title', true ) ?: 'International Buyers',
+        'gv_about_exp3_desc'       => get_post_meta( $post->ID, '_gv_about_exp3_desc', true ) ?: 'Serving importers, distributors, manufacturers, and businesses across global markets.',
+        'gv_about_exp4_title'      => get_post_meta( $post->ID, '_gv_about_exp4_title', true ) ?: 'Custom Requirement',
+        'gv_about_exp4_desc'       => get_post_meta( $post->ID, '_gv_about_exp4_desc', true ) ?: 'Product options can be discussed based on specific buyer requirements and applications.',
+
+        // Facilities 2 Rows
+        'gv_about_fac1_tag'        => get_post_meta( $post->ID, '_gv_about_fac1_tag', true ) ?: 'Warehouse & Storage',
+        'gv_about_fac1_title'      => get_post_meta( $post->ID, '_gv_about_fac1_title', true ) ?: 'Controlled Storage Facilities',
+        'gv_about_fac1_desc'       => get_post_meta( $post->ID, '_gv_about_fac1_desc', true ) ?: 'Vanilla is stored in controlled conditions to preserve aroma, moisture, and quality.',
+        'gv_about_fac2_tag'        => get_post_meta( $post->ID, '_gv_about_fac2_tag', true ) ?: 'Processing & Preparation',
+        'gv_about_fac2_title'      => get_post_meta( $post->ID, '_gv_about_fac2_title', true ) ?: 'Careful Handling & Packing',
+        'gv_about_fac2_desc'       => get_post_meta( $post->ID, '_gv_about_fac2_desc', true ) ?: 'Sorting, vacuum-packing, and packaging preparation to meet export requirements.',
+    );
+    ?>
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 1000px;">
+        <!-- Section 1: Hero Subtag -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">1. Hero Header Subtag</h3>
+            <div>
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Subtag Slogan</label>
+                <input type="text" name="gv_about_hero_subtag" value="<?php echo esc_attr( $fields['gv_about_hero_subtag'] ); ?>" style="width: 100%;">
+            </div>
+        </div>
+
+        <!-- Section 2: Overview & 4 Feature Pills -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">2. Company Overview & 4 Feature Boxes</h3>
+            <div style="margin-bottom: 1rem;">
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Heading</label>
+                <input type="text" name="gv_about_overview_heading" value="<?php echo esc_attr( $fields['gv_about_overview_heading'] ); ?>" style="width: 100%;">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Paragraf 1</label>
+                    <textarea name="gv_about_overview_p1" rows="4" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_overview_p1'] ); ?></textarea>
+                </div>
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Paragraf 2</label>
+                    <textarea name="gv_about_overview_p2" rows="4" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_overview_p2'] ); ?></textarea>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #eee; padding-top: 1rem;">
+                <label style="font-weight: 600; display: block; margin-bottom: 6px;">4 Kotak Fitur / Pillars:</label>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
+                    <input type="text" name="gv_about_overview_f1" value="<?php echo esc_attr( $fields['gv_about_overview_f1'] ); ?>" placeholder="Pillar 1">
+                    <input type="text" name="gv_about_overview_f2" value="<?php echo esc_attr( $fields['gv_about_overview_f2'] ); ?>" placeholder="Pillar 2">
+                    <input type="text" name="gv_about_overview_f3" value="<?php echo esc_attr( $fields['gv_about_overview_f3'] ); ?>" placeholder="Pillar 3">
+                    <input type="text" name="gv_about_overview_f4" value="<?php echo esc_attr( $fields['gv_about_overview_f4'] ); ?>" placeholder="Pillar 4">
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Journey, Story, Vision, Mission -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">3. Our Journey, Story, Vision & Mission</h3>
+            <div style="margin-bottom: 1rem;">
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Subjudul Journey</label>
+                <textarea name="gv_about_journey_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_journey_desc'] ); ?></textarea>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Teks Cerita "Our Story" (Di atas foto fasilitas)</label>
+                <textarea name="gv_about_story_text" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_story_text'] ); ?></textarea>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Teks "Our Vision"</label>
+                    <textarea name="gv_about_vision_text" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_vision_text'] ); ?></textarea>
+                </div>
+                <div>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Teks "Our Mission"</label>
+                    <textarea name="gv_about_mission_text" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_mission_text'] ); ?></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: 4 Value Propositions -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">4. Trusted Partner Value Propositions (4 Cards)</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 1: Judul & Deskripsi</label>
+                    <input type="text" name="gv_about_vp1_title" value="<?php echo esc_attr( $fields['gv_about_vp1_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <textarea name="gv_about_vp1_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_vp1_desc'] ); ?></textarea>
+                </div>
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 2: Judul & Deskripsi</label>
+                    <input type="text" name="gv_about_vp2_title" value="<?php echo esc_attr( $fields['gv_about_vp2_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <textarea name="gv_about_vp2_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_vp2_desc'] ); ?></textarea>
+                </div>
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 3: Judul & Deskripsi</label>
+                    <input type="text" name="gv_about_vp3_title" value="<?php echo esc_attr( $fields['gv_about_vp3_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <textarea name="gv_about_vp3_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_vp3_desc'] ); ?></textarea>
+                </div>
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 4: Judul & Deskripsi</label>
+                    <input type="text" name="gv_about_vp4_title" value="<?php echo esc_attr( $fields['gv_about_vp4_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <textarea name="gv_about_vp4_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_vp4_desc'] ); ?></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Local Sourcing (3 Steps) -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">5. Our Sourcing Process (3 Steps)</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                <div style="background: #f4f6f3; padding: 0.85rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Step 1</label>
+                    <input type="text" name="gv_about_src1_title" value="<?php echo esc_attr( $fields['gv_about_src1_title'] ); ?>" style="width: 100%; margin-bottom: 4px;">
+                    <textarea name="gv_about_src1_desc" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_src1_desc'] ); ?></textarea>
+                </div>
+                <div style="background: #f4f6f3; padding: 0.85rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Step 2</label>
+                    <input type="text" name="gv_about_src2_title" value="<?php echo esc_attr( $fields['gv_about_src2_title'] ); ?>" style="width: 100%; margin-bottom: 4px;">
+                    <textarea name="gv_about_src2_desc" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_src2_desc'] ); ?></textarea>
+                </div>
+                <div style="background: #f4f6f3; padding: 0.85rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Step 3</label>
+                    <input type="text" name="gv_about_src3_title" value="<?php echo esc_attr( $fields['gv_about_src3_title'] ); ?>" style="width: 100%; margin-bottom: 4px;">
+                    <textarea name="gv_about_src3_desc" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_src3_desc'] ); ?></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Export Capability (4 Cards) -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">6. Export Capability (4 Cards)</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 1: Judul & Deskripsi</label>
+                    <input type="text" name="gv_about_exp1_title" value="<?php echo esc_attr( $fields['gv_about_exp1_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <textarea name="gv_about_exp1_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_exp1_desc'] ); ?></textarea>
+                </div>
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 2: Judul & Deskripsi</label>
+                    <input type="text" name="gv_about_exp2_title" value="<?php echo esc_attr( $fields['gv_about_exp2_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <textarea name="gv_about_exp2_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_exp2_desc'] ); ?></textarea>
+                </div>
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 3: Judul & Deskripsi</label>
+                    <input type="text" name="gv_about_exp3_title" value="<?php echo esc_attr( $fields['gv_about_exp3_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <textarea name="gv_about_exp3_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_exp3_desc'] ); ?></textarea>
+                </div>
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Card 4: Judul & Deskripsi</label>
+                    <input type="text" name="gv_about_exp4_title" value="<?php echo esc_attr( $fields['gv_about_exp4_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <textarea name="gv_about_exp4_desc" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_exp4_desc'] ); ?></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 7: Facilities (2 Rows) -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">7. Our Facilities (2 Rows)</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Fasilitas 1: Tagline</label>
+                    <input type="text" name="gv_about_fac1_tag" value="<?php echo esc_attr( $fields['gv_about_fac1_tag'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Fasilitas 1: Judul</label>
+                    <input type="text" name="gv_about_fac1_title" value="<?php echo esc_attr( $fields['gv_about_fac1_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Fasilitas 1: Deskripsi</label>
+                    <textarea name="gv_about_fac1_desc" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_fac1_desc'] ); ?></textarea>
+                </div>
+                <div style="background: #f4f6f3; padding: 1rem; border-radius: 4px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Fasilitas 2: Tagline</label>
+                    <input type="text" name="gv_about_fac2_tag" value="<?php echo esc_attr( $fields['gv_about_fac2_tag'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Fasilitas 2: Judul</label>
+                    <input type="text" name="gv_about_fac2_title" value="<?php echo esc_attr( $fields['gv_about_fac2_title'] ); ?>" style="width: 100%; margin-bottom: 6px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Fasilitas 2: Deskripsi</label>
+                    <textarea name="gv_about_fac2_desc" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_fac2_desc'] ); ?></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+/**
+ * Save Handler for Page Meta Boxes
+ */
+function grand_vanilla_save_page_meta( $post_id ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+
+    if ( ! current_user_can( 'edit_page', $post_id ) ) {
+        return;
+    }
+
+    // Save Homepage Meta
+    if ( isset( $_POST['grand_vanilla_frontpage_nonce'] ) && wp_verify_nonce( $_POST['grand_vanilla_frontpage_nonce'], 'grand_vanilla_save_frontpage_meta' ) ) {
+        $front_fields = array(
+            'gv_hero_stat_num', 'gv_hero_stat_label',
+            'gv_home_about_heading', 'gv_home_about_p1', 'gv_home_about_p2',
+            'gv_home_about_f1', 'gv_home_about_f2', 'gv_home_about_f3', 'gv_home_about_f4',
+            'gv_home_vp1_title', 'gv_home_vp1_desc',
+            'gv_home_vp2_title', 'gv_home_vp2_desc',
+            'gv_home_vp3_title', 'gv_home_vp3_desc',
+            'gv_home_vp4_title', 'gv_home_vp4_desc',
+            'gv_home_oem_subtitle', 'gv_home_oem_heading', 'gv_home_oem_desc',
+            'gv_home_oem_f1_title', 'gv_home_oem_f1_desc',
+            'gv_home_oem_f2_title', 'gv_home_oem_f2_desc',
+            'gv_home_oem_f3_title', 'gv_home_oem_f3_desc',
+            'gv_home_oem_f4_title', 'gv_home_oem_f4_desc',
+            'gv_home_serve_1', 'gv_home_serve_2', 'gv_home_serve_3',
+            'gv_home_serve_4', 'gv_home_serve_5', 'gv_home_serve_6',
+        );
+
+        foreach ( $front_fields as $f ) {
+            if ( isset( $_POST[ $f ] ) ) {
+                $val = ( strpos( $f, 'desc' ) !== false || strpos( $f, 'p1' ) !== false || strpos( $f, 'p2' ) !== false || strpos( $f, 'subtitle' ) !== false ) 
+                    ? sanitize_textarea_field( $_POST[ $f ] ) 
+                    : sanitize_text_field( $_POST[ $f ] );
+                update_post_meta( $post_id, '_' . $f, $val );
+            }
+        }
+    }
+
+    // Save About Us Meta
+    if ( isset( $_POST['grand_vanilla_aboutpage_nonce'] ) && wp_verify_nonce( $_POST['grand_vanilla_aboutpage_nonce'], 'grand_vanilla_save_aboutpage_meta' ) ) {
+        $about_fields = array(
+            'gv_about_hero_subtag',
+            'gv_about_overview_heading', 'gv_about_overview_p1', 'gv_about_overview_p2',
+            'gv_about_overview_f1', 'gv_about_overview_f2', 'gv_about_overview_f3', 'gv_about_overview_f4',
+            'gv_about_journey_desc', 'gv_about_story_title', 'gv_about_story_text',
+            'gv_about_vision_text', 'gv_about_mission_text',
+            'gv_about_vp1_title', 'gv_about_vp1_desc',
+            'gv_about_vp2_title', 'gv_about_vp2_desc',
+            'gv_about_vp3_title', 'gv_about_vp3_desc',
+            'gv_about_vp4_title', 'gv_about_vp4_desc',
+            'gv_about_src1_title', 'gv_about_src1_desc',
+            'gv_about_src2_title', 'gv_about_src2_desc',
+            'gv_about_src3_title', 'gv_about_src3_desc',
+            'gv_about_exp1_title', 'gv_about_exp1_desc',
+            'gv_about_exp2_title', 'gv_about_exp2_desc',
+            'gv_about_exp3_title', 'gv_about_exp3_desc',
+            'gv_about_exp4_title', 'gv_about_exp4_desc',
+            'gv_about_fac1_tag', 'gv_about_fac1_title', 'gv_about_fac1_desc',
+            'gv_about_fac2_tag', 'gv_about_fac2_title', 'gv_about_fac2_desc',
+        );
+
+        foreach ( $about_fields as $f ) {
+            if ( isset( $_POST[ $f ] ) ) {
+                $val = ( strpos( $f, 'desc' ) !== false || strpos( $f, 'p1' ) !== false || strpos( $f, 'p2' ) !== false || strpos( $f, 'text' ) !== false ) 
+                    ? sanitize_textarea_field( $_POST[ $f ] ) 
+                    : sanitize_text_field( $_POST[ $f ] );
+                update_post_meta( $post_id, '_' . $f, $val );
+            }
+        }
+    }
+}
+add_action( 'save_post_page', 'grand_vanilla_save_page_meta' );
+
