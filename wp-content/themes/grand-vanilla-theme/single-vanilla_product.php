@@ -14,15 +14,18 @@ $current_slug = get_post_field( 'post_name', $current_id );
 $current_title = get_the_title();
 
 // Check if this product is Vanilla Beans or has varieties
+$saved_varieties = get_post_meta( $current_id, '_gv_varieties', true );
+
 $is_beans = ( 
     strpos( $current_slug, 'bean' ) !== false || 
     strpos( strtolower( $current_title ), 'bean' ) !== false || 
     $current_slug === 'vanilla-beans' || 
-    $current_id === 11 
+    $current_id === 11 ||
+    ! empty( $saved_varieties )
 );
 
-// High-fidelity variety definitions for Vanilla Beans
-$varieties = array(
+// Default variety definitions
+$default_varieties = array(
     'planifolia' => array(
         'name'          => 'Vanilla Planifolia Beans',
         'short_name'    => 'Vanilla Planifolia',
@@ -61,6 +64,22 @@ $varieties = array(
     ),
 );
 
+// Merge with saved postmeta varieties if present
+$varieties = array();
+if ( ! empty( $saved_varieties ) && is_array( $saved_varieties ) ) {
+    foreach ( $saved_varieties as $k => $v ) {
+        $slug_key = ! empty( $v['short_name'] ) ? sanitize_title( $v['short_name'] ) : 'variety-' . $k;
+        $varieties[ $slug_key ] = $v;
+    }
+}
+
+if ( empty( $varieties ) && $is_beans ) {
+    $varieties = $default_varieties;
+}
+
+$first_variety_key = ! empty( $varieties ) ? array_key_first( $varieties ) : '';
+$active_variety    = ! empty( $first_variety_key ) ? $varieties[ $first_variety_key ] : null;
+
 // Fallback for Seeds, Paste, or dynamic CPT data
 $fallback_overview = get_the_content();
 if ( empty( $fallback_overview ) ) {
@@ -86,15 +105,24 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
         <!-- Divider Line -->
         <div class="gv-detail-divider"></div>
 
-        <!-- Variety Sub-tabs (Clean underline text tabs) -->
-        <?php if ( $is_beans ) : ?>
-        <div class="gv-variety-tabs" role="tablist" aria-label="Vanilla Bean Varieties">
-            <button type="button" class="gv-variety-tab is-active" data-variety="planifolia" role="tab" aria-selected="true" id="tabPlanifolia">
-                Vanilla Planifolia Beans
-            </button>
-            <button type="button" class="gv-variety-tab" data-variety="tahitensis" role="tab" aria-selected="false" id="tabTahitensis">
-                Vanilla Tahitensis Beans
-            </button>
+        <!-- Variety Sub-tabs (Clean underline text tabs - fully dynamic) -->
+        <?php if ( ! empty( $varieties ) ) : ?>
+        <div class="gv-variety-tabs" role="tablist" aria-label="Vanilla Varieties">
+            <?php 
+            $tab_idx = 0;
+            foreach ( $varieties as $v_key => $v_data ) : 
+                $is_active_tab = ( $tab_idx === 0 );
+                $tab_idx++;
+            ?>
+                <button type="button" 
+                        class="gv-variety-tab <?php echo $is_active_tab ? 'is-active' : ''; ?>" 
+                        data-variety="<?php echo esc_attr( $v_key ); ?>" 
+                        role="tab" 
+                        aria-selected="<?php echo $is_active_tab ? 'true' : 'false'; ?>" 
+                        id="tab-<?php echo esc_attr( $v_key ); ?>">
+                    <?php echo esc_html( $v_data['name'] ); ?>
+                </button>
+            <?php endforeach; ?>
         </div>
         <?php else : ?>
         <div class="gv-variety-tabs">
@@ -114,10 +142,10 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
         <div class="gv-showcase-container">
             <div class="gv-carousel-wrap" id="gvProductCarousel">
                 <div class="gv-carousel-track" id="gvCarouselTrack">
-                    <?php if ( $is_beans ) : ?>
-                        <?php foreach ( $varieties['planifolia']['carousel'] as $idx => $img_url ) : ?>
+                    <?php if ( ! empty( $active_variety['carousel'] ) ) : ?>
+                        <?php foreach ( $active_variety['carousel'] as $idx => $img_url ) : ?>
                             <div class="gv-carousel-slide <?php echo $idx === 0 ? 'is-active' : ''; ?>">
-                                <img src="<?php echo esc_url( $img_url ); ?>" alt="Vanilla Planifolia Beans - Slide <?php echo $idx + 1; ?>">
+                                <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $active_variety['name'] ); ?> - Slide <?php echo $idx + 1; ?>">
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -151,15 +179,15 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
                 <div class="gv-overview-col">
                     <span class="gv-specs-eyebrow">PRODUCT OVERVIEW</span>
                     <h1 class="gv-overview-heading" id="gvOverviewHeading">
-                        <?php echo esc_html( $is_beans ? $varieties['planifolia']['name'] : $current_title ); ?>
+                        <?php echo esc_html( $active_variety ? $active_variety['name'] : $current_title ); ?>
                     </h1>
                     <div class="gv-overview-body" id="gvOverviewBody">
-                        <p><?php echo esc_html( $is_beans ? $varieties['planifolia']['overview'] : $fallback_overview ); ?></p>
+                        <p><?php echo esc_html( $active_variety ? $active_variety['overview'] : $fallback_overview ); ?></p>
                     </div>
                     <div class="gv-variety-block">
                         <strong class="gv-variety-heading">Product Variety:</strong>
                         <div class="gv-variety-bullet" id="gvVarietyBullet">
-                            &bull; <?php echo esc_html( $is_beans ? $varieties['planifolia']['short_name'] : $current_title ); ?>
+                            &bull; <?php echo esc_html( $active_variety ? $active_variety['short_name'] : $current_title ); ?>
                         </div>
                     </div>
                 </div>
@@ -168,8 +196,8 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
                 <div class="gv-characteristics-col">
                     <span class="gv-specs-eyebrow">PRODUCT CHARACTERISTICS</span>
                     <div class="gv-specs-table" id="gvSpecsTable">
-                        <?php if ( $is_beans ) : ?>
-                            <?php foreach ( $varieties['planifolia']['specs'] as $key => $val ) : ?>
+                        <?php if ( ! empty( $active_variety['specs'] ) ) : ?>
+                            <?php foreach ( $active_variety['specs'] as $key => $val ) : ?>
                                 <div class="gv-specs-row">
                                     <span class="gv-specs-key"><?php echo esc_html( $key ); ?> :</span>
                                     <span class="gv-specs-val"><?php echo esc_html( $val ); ?></span>
@@ -329,9 +357,9 @@ $main_img = has_post_thumbnail() ? get_the_post_thumbnail_url( $current_id, 'ful
 <!-- Variety Switcher & Interactive Carousel JavaScript -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Data definition for Vanilla Beans varieties
+    // Data definition for Vanilla varieties (dynamic from WP postmeta or defaults)
     const varietiesData = <?php echo json_encode( $varieties ); ?>;
-    let currentVariety = 'planifolia';
+    let currentVariety = '<?php echo esc_js( $first_variety_key ); ?>';
     let currentSlideIdx = 0;
     let carouselSlides = [];
 

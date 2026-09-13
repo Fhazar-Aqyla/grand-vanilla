@@ -253,13 +253,32 @@ function grand_vanilla_register_gallery_cpt() {
 add_action( 'init', 'grand_vanilla_register_gallery_cpt' );
 
 /**
- * 5. Meta Boxes for Vanilla Product Lab Specifications
+ * 5. Meta Boxes for Vanilla Product Lab Specifications & Dynamic Varieties Repeater
  */
+function grand_vanilla_admin_scripts( $hook ) {
+    global $post_type;
+    if ( ( 'post.php' === $hook || 'post-new.php' === $hook ) && 'vanilla_product' === $post_type ) {
+        wp_enqueue_media();
+    }
+}
+add_action( 'admin_enqueue_scripts', 'grand_vanilla_admin_scripts' );
+
 function grand_vanilla_add_product_meta_box() {
+    // 1. Single product general export specs
     add_meta_box(
         'vanilla_product_specs',
-        __( 'Vanilla B2B Export Specifications', 'grand-vanilla' ),
+        __( 'Vanilla B2B Export Specifications (General)', 'grand-vanilla' ),
         'grand_vanilla_product_specs_callback',
+        'vanilla_product',
+        'normal',
+        'default'
+    );
+
+    // 2. Dynamic multi-varieties repeater (Planifolia, Tahitensis, Pompona, etc.)
+    add_meta_box(
+        'vanilla_product_varieties',
+        __( 'Product Varieties & Interactive Sections (Planifolia, Tahitensis, etc.)', 'grand-vanilla' ),
+        'grand_vanilla_product_varieties_callback',
         'vanilla_product',
         'normal',
         'high'
@@ -316,21 +335,282 @@ function grand_vanilla_product_specs_callback( $post ) {
     <?php
 }
 
+/**
+ * Repeater Callback for Product Varieties
+ */
+function grand_vanilla_product_varieties_callback( $post ) {
+    wp_nonce_field( 'grand_vanilla_save_varieties', 'grand_vanilla_varieties_nonce' );
+
+    $varieties = get_post_meta( $post->ID, '_gv_varieties', true );
+    if ( ! is_array( $varieties ) ) {
+        $varieties = array();
+    }
+    ?>
+    <div id="gv-varieties-wrapper" style="margin: 1rem 0;">
+        <p class="description" style="margin-bottom: 1.5rem; font-size: 13px;">
+            <?php esc_html_e( 'Tambahkan jenis varietas di bawah ini (misal: Vanilla Planifolia Beans, Vanilla Tahitensis Beans, Vanilla Pompona Beans, dll). Pengunjung dapat mengklik tab setiap varietas untuk melihat foto carousel, overview, dan spesifikasi yang otomatis berubah.', 'grand-vanilla' ); ?>
+        </p>
+
+        <div id="gv-varieties-list" style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <?php
+            $v_index = 0;
+            foreach ( $varieties as $v_key => $v_data ) :
+                $v_name       = isset( $v_data['name'] ) ? $v_data['name'] : '';
+                $v_short_name = isset( $v_data['short_name'] ) ? $v_data['short_name'] : '';
+                $v_overview   = isset( $v_data['overview'] ) ? $v_data['overview'] : '';
+                $v_carousel   = isset( $v_data['carousel'] ) && is_array( $v_data['carousel'] ) ? implode( "\n", $v_data['carousel'] ) : '';
+                $v_specs      = isset( $v_data['specs'] ) && is_array( $v_data['specs'] ) ? $v_data['specs'] : array();
+
+                $v_aroma      = isset( $v_specs['Aroma / Profile'] ) ? $v_specs['Aroma / Profile'] : '';
+                $v_moisture   = isset( $v_specs['Moisture Level'] ) ? $v_specs['Moisture Level'] : '';
+                $v_appearance = isset( $v_specs['Appearance / Color'] ) ? $v_specs['Appearance / Color'] : '';
+                $v_origin     = isset( $v_specs['Terroir / Origin'] ) ? $v_specs['Terroir / Origin'] : '';
+                $v_length     = isset( $v_specs['Length'] ) ? $v_specs['Length'] : '';
+                $v_usage      = isset( $v_specs['Usage'] ) ? $v_specs['Usage'] : '';
+            ?>
+                <div class="gv-variety-item-card" style="border: 1px solid #ccd0d4; background: #f9f9f9; border-radius: 8px; padding: 1.25rem; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 0.75rem; margin-bottom: 1rem;">
+                        <h4 style="margin: 0; font-size: 15px; color: #1d2327;">
+                            Varietas #<span class="gv-v-number"><?php echo $v_index + 1; ?></span>: <strong><?php echo esc_html( $v_name ? $v_name : 'Varietas Baru' ); ?></strong>
+                        </h4>
+                        <button type="button" class="button button-link-delete gv-remove-variety-btn" style="color: #b32d2e;">Hapus Varietas</button>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div>
+                            <label style="font-weight: 600; display: block; margin-bottom: 4px;">Nama Lengkap Varietas (Tab & Heading)</label>
+                            <input type="text" name="gv_varieties[<?php echo $v_index; ?>][name]" value="<?php echo esc_attr( $v_name ); ?>" placeholder="e.g. Vanilla Planifolia Beans" style="width: 100%;">
+                        </div>
+                        <div>
+                            <label style="font-weight: 600; display: block; margin-bottom: 4px;">Nama Singkat (Variety Bullet)</label>
+                            <input type="text" name="gv_varieties[<?php echo $v_index; ?>][short_name]" value="<?php echo esc_attr( $v_short_name ); ?>" placeholder="e.g. Vanilla Planifolia" style="width: 100%;">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Deskripsi / Product Overview</label>
+                        <textarea name="gv_varieties[<?php echo $v_index; ?>][overview]" rows="3" style="width: 100%;" placeholder="Deskripsi lengkap tentang varietas ini..."><?php echo esc_textarea( $v_overview ); ?></textarea>
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Foto Carousel (1 baris per URL gambar)</label>
+                        <textarea name="gv_varieties[<?php echo $v_index; ?>][carousel]" rows="3" style="width: 100%;" placeholder="https://domain.com/wp-content/.../image1.png"><?php echo esc_textarea( $v_carousel ); ?></textarea>
+                        <button type="button" class="button gv-add-media-btn" style="margin-top: 4px;">+ Pilih Gambar dari Media Library</button>
+                    </div>
+
+                    <div style="border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem;">
+                        <h5 style="margin: 0 0 0.75rem 0; font-size: 13px; text-transform: uppercase;">Spesifikasi / Product Characteristics:</h5>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;">
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; display: block;">Aroma / Profile</label>
+                                <input type="text" name="gv_varieties[<?php echo $v_index; ?>][specs][Aroma / Profile]" value="<?php echo esc_attr( $v_aroma ); ?>" style="width: 100%;" placeholder="Sweet, warm, distinctly vanilla">
+                            </div>
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; display: block;">Moisture Level</label>
+                                <input type="text" name="gv_varieties[<?php echo $v_index; ?>][specs][Moisture Level]" value="<?php echo esc_attr( $v_moisture ); ?>" style="width: 100%;" placeholder="30-35% (Plump, oily)">
+                            </div>
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; display: block;">Appearance / Color</label>
+                                <input type="text" name="gv_varieties[<?php echo $v_index; ?>][specs][Appearance / Color]" value="<?php echo esc_attr( $v_appearance ); ?>" style="width: 100%;" placeholder="Dark brown to black, lustrous">
+                            </div>
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; display: block;">Terroir / Origin</label>
+                                <input type="text" name="gv_varieties[<?php echo $v_index; ?>][specs][Terroir / Origin]" value="<?php echo esc_attr( $v_origin ); ?>" style="width: 100%;" placeholder="East Java, Indonesia">
+                            </div>
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; display: block;">Length</label>
+                                <input type="text" name="gv_varieties[<?php echo $v_index; ?>][specs][Length]" value="<?php echo esc_attr( $v_length ); ?>" style="width: 100%;" placeholder="16 - 20 cm (Gourmet / Grade A)">
+                            </div>
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; display: block;">Usage</label>
+                                <input type="text" name="gv_varieties[<?php echo $v_index; ?>][specs][Usage]" value="<?php echo esc_attr( $v_usage ); ?>" style="width: 100%;" placeholder="Industrial, Gourmet">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php
+                $v_index++;
+            endforeach;
+            ?>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+            <button type="button" id="gv-add-variety-btn" class="button button-primary button-large" style="background: #363E19; border-color: #363E19;">
+                + Tambah Varietas Baru (Add Variety)
+            </button>
+        </div>
+    </div>
+
+    <!-- Repeater & Media Library JavaScript -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const wrapper = document.getElementById('gv-varieties-list');
+        const addBtn = document.getElementById('gv-add-variety-btn');
+        if (!wrapper || !addBtn) return;
+
+        function reindexVarieties() {
+            const cards = wrapper.querySelectorAll('.gv-variety-item-card');
+            cards.forEach((card, idx) => {
+                const numSpan = card.querySelector('.gv-v-number');
+                if (numSpan) numSpan.textContent = idx + 1;
+
+                card.querySelectorAll('input, textarea').forEach(input => {
+                    const name = input.getAttribute('name');
+                    if (name) {
+                        input.setAttribute('name', name.replace(/gv_varieties\[\d+\]/, 'gv_varieties[' + idx + ']'));
+                    }
+                });
+            });
+        }
+
+        // Add variety
+        addBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const nextIdx = wrapper.querySelectorAll('.gv-variety-item-card').length;
+            const card = document.createElement('div');
+            card.className = 'gv-variety-item-card';
+            card.style.cssText = 'border: 1px solid #ccd0d4; background: #f9f9f9; border-radius: 8px; padding: 1.25rem; position: relative; margin-bottom: 1rem;';
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 0.75rem; margin-bottom: 1rem;">
+                    <h4 style="margin: 0; font-size: 15px; color: #1d2327;">
+                        Varietas #<span class="gv-v-number">${nextIdx + 1}</span>: <strong>Varietas Baru</strong>
+                    </h4>
+                    <button type="button" class="button button-link-delete gv-remove-variety-btn" style="color: #b32d2e;">Hapus Varietas</button>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Nama Lengkap Varietas (Tab & Heading)</label>
+                        <input type="text" name="gv_varieties[${nextIdx}][name]" value="" placeholder="e.g. Vanilla Pompona Beans" style="width: 100%;">
+                    </div>
+                    <div>
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Nama Singkat (Variety Bullet)</label>
+                        <input type="text" name="gv_varieties[${nextIdx}][short_name]" value="" placeholder="e.g. Vanilla Pompona" style="width: 100%;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Deskripsi / Product Overview</label>
+                    <textarea name="gv_varieties[${nextIdx}][overview]" rows="3" style="width: 100%;" placeholder="Deskripsi lengkap tentang varietas ini..."></textarea>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Foto Carousel (1 baris per URL gambar)</label>
+                    <textarea name="gv_varieties[${nextIdx}][carousel]" rows="3" style="width: 100%;" placeholder="https://domain.com/wp-content/.../image1.png"></textarea>
+                    <button type="button" class="button gv-add-media-btn" style="margin-top: 4px;">+ Pilih Gambar dari Media Library</button>
+                </div>
+                <div style="border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem;">
+                    <h5 style="margin: 0 0 0.75rem 0; font-size: 13px; text-transform: uppercase;">Spesifikasi / Product Characteristics:</h5>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;">
+                        <div>
+                            <label style="font-size: 12px; font-weight: 600; display: block;">Aroma / Profile</label>
+                            <input type="text" name="gv_varieties[${nextIdx}][specs][Aroma / Profile]" value="" style="width: 100%;" placeholder="Sweet, exotic aroma">
+                        </div>
+                        <div>
+                            <label style="font-size: 12px; font-weight: 600; display: block;">Moisture Level</label>
+                            <input type="text" name="gv_varieties[${nextIdx}][specs][Moisture Level]" value="" style="width: 100%;" placeholder="30-35%">
+                        </div>
+                        <div>
+                            <label style="font-size: 12px; font-weight: 600; display: block;">Appearance / Color</label>
+                            <input type="text" name="gv_varieties[${nextIdx}][specs][Appearance / Color]" value="" style="width: 100%;" placeholder="Plump, thick pods">
+                        </div>
+                        <div>
+                            <label style="font-size: 12px; font-weight: 600; display: block;">Terroir / Origin</label>
+                            <input type="text" name="gv_varieties[${nextIdx}][specs][Terroir / Origin]" value="" style="width: 100%;" placeholder="Papua, Indonesia">
+                        </div>
+                        <div>
+                            <label style="font-size: 12px; font-weight: 600; display: block;">Length</label>
+                            <input type="text" name="gv_varieties[${nextIdx}][specs][Length]" value="" style="width: 100%;" placeholder="18 - 22 cm">
+                        </div>
+                        <div>
+                            <label style="font-size: 12px; font-weight: 600; display: block;">Usage</label>
+                            <input type="text" name="gv_varieties[${nextIdx}][specs][Usage]" value="" style="width: 100%;" placeholder="Gourmet Extracts, Artisanal">
+                        </div>
+                    </div>
+                </div>
+            `;
+            wrapper.appendChild(card);
+            reindexVarieties();
+        });
+
+        // Delegate remove and media library buttons
+        wrapper.addEventListener('click', function(e) {
+            if (e.target.classList.contains('gv-remove-variety-btn')) {
+                e.preventDefault();
+                if (confirm('Hapus varietas ini?')) {
+                    e.target.closest('.gv-variety-item-card').remove();
+                    reindexVarieties();
+                }
+            }
+
+            if (e.target.classList.contains('gv-add-media-btn')) {
+                e.preventDefault();
+                const textarea = e.target.closest('div').querySelector('textarea');
+                const customUploader = wp.media({
+                    title: 'Pilih Foto Carousel Varietas',
+                    button: { text: 'Gunakan Foto Terpilih' },
+                    multiple: true
+                }).on('select', function() {
+                    const selection = customUploader.state().get('selection');
+                    const urls = [];
+                    selection.each(function(attachment) {
+                        urls.push(attachment.toJSON().url);
+                    });
+                    if (urls.length > 0) {
+                        const currentVal = textarea.value.trim();
+                        textarea.value = currentVal ? currentVal + '\n' + urls.join('\n') : urls.join('\n');
+                    }
+                }).open();
+            }
+        });
+    });
+    </script>
+    <?php
+}
+
 function grand_vanilla_save_product_specs( $post_id ) {
-    if ( ! isset( $_POST['grand_vanilla_specs_nonce'] ) || ! wp_verify_nonce( $_POST['grand_vanilla_specs_nonce'], 'grand_vanilla_save_specs' ) ) {
-        return;
-    }
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-        return;
-    }
-    if ( ! current_user_can( 'edit_post', $post_id ) ) {
-        return;
+    // Check nonce for specs
+    if ( isset( $_POST['grand_vanilla_specs_nonce'] ) && wp_verify_nonce( $_POST['grand_vanilla_specs_nonce'], 'grand_vanilla_save_specs' ) ) {
+        if ( current_user_can( 'edit_post', $post_id ) ) {
+            $fields = array( 'gv_grade', 'gv_vanillin', 'gv_moisture', 'gv_length', 'gv_origin' );
+            foreach ( $fields as $field ) {
+                if ( isset( $_POST[ $field ] ) ) {
+                    update_post_meta( $post_id, '_' . $field, sanitize_text_field( $_POST[ $field ] ) );
+                }
+            }
+        }
     }
 
-    $fields = array( 'gv_grade', 'gv_vanillin', 'gv_moisture', 'gv_length', 'gv_origin' );
-    foreach ( $fields as $field ) {
-        if ( isset( $_POST[ $field ] ) ) {
-            update_post_meta( $post_id, '_' . $field, sanitize_text_field( $_POST[ $field ] ) );
+    // Check nonce for varieties repeater
+    if ( isset( $_POST['grand_vanilla_varieties_nonce'] ) && wp_verify_nonce( $_POST['grand_vanilla_varieties_nonce'], 'grand_vanilla_save_varieties' ) ) {
+        if ( current_user_can( 'edit_post', $post_id ) ) {
+            if ( isset( $_POST['gv_varieties'] ) && is_array( $_POST['gv_varieties'] ) ) {
+                $sanitized_varieties = array();
+                foreach ( $_POST['gv_varieties'] as $v_raw ) {
+                    $name       = sanitize_text_field( $v_raw['name'] ?? '' );
+                    $short_name = sanitize_text_field( $v_raw['short_name'] ?? '' );
+                    $overview   = sanitize_textarea_field( $v_raw['overview'] ?? '' );
+                    $carousel_raw = sanitize_textarea_field( $v_raw['carousel'] ?? '' );
+                    $carousel_lines = array_filter( array_map( 'trim', explode( "\n", str_replace( "\r", "", $carousel_raw ) ) ) );
+
+                    $specs = array();
+                    if ( isset( $v_raw['specs'] ) && is_array( $v_raw['specs'] ) ) {
+                        foreach ( $v_raw['specs'] as $sk => $sv ) {
+                            $specs[ sanitize_text_field( $sk ) ] = sanitize_text_field( $sv );
+                        }
+                    }
+
+                    if ( ! empty( $name ) ) {
+                        $sanitized_varieties[] = array(
+                            'name'       => $name,
+                            'short_name' => $short_name ?: $name,
+                            'overview'   => $overview,
+                            'carousel'   => array_values( $carousel_lines ),
+                            'specs'      => $specs,
+                        );
+                    }
+                }
+                update_post_meta( $post_id, '_gv_varieties', $sanitized_varieties );
+            } else {
+                delete_post_meta( $post_id, '_gv_varieties' );
+            }
         }
     }
 }
@@ -371,7 +651,7 @@ function grand_vanilla_customize_register( $wp_customize ) {
 
     // WhatsApp Number
     $wp_customize->add_setting( 'gv_whatsapp', array(
-        'default'           => '+62 812-2697-4731',
+        'default'           => '087717752085',
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'gv_whatsapp', array(
@@ -419,7 +699,7 @@ add_action( 'customize_register', 'grand_vanilla_customize_register' );
  * 7. Helper: Get Company Contact Info
  */
 function grand_vanilla_get_contact_info() {
-    $whatsapp = get_theme_mod( 'gv_whatsapp', '+62 812-2697-4731' );
+    $whatsapp = get_theme_mod( 'gv_whatsapp', '087717752085' );
     $clean_wa = preg_replace( '/[^0-9]/', '', $whatsapp );
     if ( substr( $clean_wa, 0, 1 ) === '0' ) {
         $clean_wa = '62' . substr( $clean_wa, 1 );

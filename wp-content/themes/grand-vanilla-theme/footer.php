@@ -246,6 +246,141 @@ $contact = grand_vanilla_get_contact_info();
     }
     </style>
 
+    <!-- Global Floating WhatsApp Quick Contact Button -->
+    <aside class="gv-floating-wa-wrap" aria-label="WhatsApp Contact">
+        <a href="<?php echo esc_url( $contact['whatsapp_url'] ); ?>" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="gv-floating-wa-btn" 
+           aria-label="Chat via WhatsApp (+62 877-1775-2085)">
+            <span class="gv-wa-pulse" aria-hidden="true"></span>
+            <span class="gv-wa-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.8 7.37 7.5 3.67 12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15ZM16.57 14.41C16.32 14.29 15.1 13.69 14.88 13.61C14.65 13.53 14.48 13.49 14.32 13.74C14.15 13.98 13.67 14.55 13.52 14.72C13.38 14.88 13.23 14.91 12.98 14.78C12.74 14.66 11.95 14.4 11.01 13.57C10.28 12.92 9.78 12.11 9.64 11.87C9.5 11.62 9.63 11.49 9.75 11.37C9.86 11.26 10 11.08 10.12 10.94C10.24 10.8 10.28 10.7 10.36 10.53C10.44 10.37 10.4 10.23 10.34 10.11C10.28 9.99 9.79 8.78 9.58 8.29C9.38 7.8 9.18 7.87 9.03 7.86C8.89 7.85 8.72 7.85 8.56 7.85C8.4 7.85 8.13 7.91 7.91 8.15C7.68 8.4 7.05 8.99 7.05 10.2C7.05 11.41 7.93 12.57 8.05 12.74C8.17 12.9 9.78 15.39 12.25 16.45C12.84 16.7 13.3 16.85 13.66 16.97C14.25 17.16 14.79 17.13 15.22 17.07C15.7 17 16.69 16.47 16.89 15.89C17.1 15.32 17.1 14.83 17.04 14.72C16.97 14.62 16.82 14.54 16.57 14.41Z" fill="white"/>
+                </svg>
+            </span>
+            <span class="gv-wa-label">Chat with Us</span>
+        </a>
+    </aside>
+
+    <style>
+    /* Global Floating WhatsApp Button Styling */
+    .gv-floating-wa-wrap {
+        position: fixed !important;
+        bottom: 28px !important;
+        right: 28px !important;
+        z-index: 99999 !important;
+        display: flex !important;
+        align-items: center !important;
+        pointer-events: auto !important;
+    }
+
+    .gv-floating-wa-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        background: linear-gradient(135deg, #25D366 0%, #1EBE5D 100%) !important;
+        color: #FFFFFF !important;
+        text-decoration: none !important;
+        height: 52px !important;
+        min-width: 52px !important;
+        border-radius: 50px !important;
+        padding: 0 18px 0 14px !important;
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+        position: relative !important;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        box-sizing: border-box !important;
+    }
+
+    .gv-floating-wa-btn:hover {
+        transform: translateY(-4px) scale(1.04) !important;
+        box-shadow: 0 10px 28px rgba(37, 211, 102, 0.5), 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+        color: #FFFFFF !important;
+    }
+
+    .gv-wa-icon {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 28px !important;
+        height: 28px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .gv-wa-icon svg {
+        display: block !important;
+        width: 26px !important;
+        height: 26px !important;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15)) !important;
+    }
+
+    .gv-wa-label {
+        font-family: var(--font-heading, 'Jost', sans-serif) !important;
+        font-size: 0.875rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.02em !important;
+        color: #FFFFFF !important;
+        white-space: nowrap !important;
+        margin-left: 8px !important;
+        display: inline-block !important;
+    }
+
+    .gv-wa-pulse {
+        position: absolute !important;
+        inset: -4px !important;
+        border-radius: 50px !important;
+        background: rgba(37, 211, 102, 0.45) !important;
+        z-index: -1 !important;
+        animation: gv-wa-pulse-anim 2.5s infinite ease-out !important;
+        pointer-events: none !important;
+    }
+
+    @keyframes gv-wa-pulse-anim {
+        0% {
+            transform: scale(0.96);
+            opacity: 0.8;
+        }
+        70% {
+            transform: scale(1.22);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1.22);
+            opacity: 0;
+        }
+    }
+
+    /* Tablet & Mobile Responsive (< 768px) */
+    @media (max-width: 767px) {
+        .gv-floating-wa-wrap {
+            bottom: 18px !important;
+            right: 18px !important;
+        }
+
+        .gv-floating-wa-btn {
+            height: 48px !important;
+            min-width: 48px !important;
+            width: 48px !important;
+            padding: 0 !important;
+            justify-content: center !important;
+            border-radius: 50% !important;
+        }
+
+        .gv-wa-label {
+            display: none !important;
+        }
+
+        .gv-wa-pulse {
+            border-radius: 50% !important;
+            inset: -3px !important;
+        }
+
+        .gv-wa-icon svg {
+            width: 24px !important;
+            height: 24px !important;
+        }
+    }
+    </style>
+
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
