@@ -45,10 +45,13 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                 'order'          => 'ASC',
             ) );
 
+            $top_ids = array();
+
             if ( $catalog_products_query->have_posts() ) :
                 $prod_idx = 0;
                 while ( $catalog_products_query->have_posts() ) :
                     $catalog_products_query->the_post();
+                    $top_ids[] = get_the_ID();
                     $prod_idx++;
                     $is_active  = ( $prod_idx === 1 );
                     $card_class = $is_active ? 'is-active' : 'is-collapsed';
@@ -148,16 +151,20 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
             });
         </script>
 
-        <!-- 3. Explore More Products (Dynamic WP_Query) -->
+        <!-- 3. Explore More Products (Dynamic WP_Query with Alternating Left/Right Zigzag Layout) -->
         <?php
-        $explore_products_query = new WP_Query( array(
+        $explore_args = array(
             'post_type'      => 'vanilla_product',
-            'posts_per_page' => 2,
-            'offset'         => 3,
+            'posts_per_page' => -1, // Fully dynamic: displays all additional products added in WP Admin!
             'post_status'    => 'publish',
             'orderby'        => 'menu_order date',
             'order'          => 'ASC',
-        ) );
+        );
+        if ( ! empty( $top_ids ) ) {
+            $explore_args['post__not_in'] = $top_ids;
+        }
+
+        $explore_products_query = new WP_Query( $explore_args );
 
         if ( $explore_products_query->have_posts() ) :
         ?>
@@ -170,12 +177,30 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                 while ( $explore_products_query->have_posts() ) :
                     $explore_products_query->the_post();
                     $exp_idx++;
+                    // Alternating layout: Odd (1,3,5...) = Text Left, Image Right; Even (2,4,6...) = Image Left, Text Right
                     $is_reverse = ( $exp_idx % 2 === 0 );
                     $row_class  = $is_reverse ? 'gv-explore-row gv-explore-row-reverse' : 'gv-explore-row';
-                    $exp_img    = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Seeds Vanilla.png';
+                    
+                    $exp_slug = get_post_field( 'post_name', get_the_ID() );
+                    if ( has_post_thumbnail() ) {
+                        $exp_img = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+                    } elseif ( $exp_slug === 'vanilla-seeds' ) {
+                        $exp_img = $img_dir . 'Seeds Vanilla.png';
+                    } elseif ( $exp_slug === 'vanilla-paste' ) {
+                        $exp_img = $img_dir . 'Paste Vanilla.png';
+                    } elseif ( $exp_slug === 'vanilla-powder' ) {
+                        $exp_img = $img_dir . 'Product Unggulan 2.png';
+                    } elseif ( $exp_slug === 'vanilla-extract' ) {
+                        $exp_img = $img_dir . 'Product Unggulan 3.png';
+                    } elseif ( $exp_slug === 'vanilla-beans' ) {
+                        $exp_img = $img_dir . 'Product Unggulan 1.png';
+                    } else {
+                        $exp_img = $img_dir . 'Seeds Vanilla.png';
+                    }
                 ?>
                 <div class="<?php echo esc_attr( $row_class ); ?>">
                     <?php if ( $is_reverse ) : ?>
+                        <!-- Even: Image Left, Text Right -->
                         <div class="gv-explore-img-card">
                             <img src="<?php echo esc_url( $exp_img ); ?>" 
                                 alt="<?php echo esc_attr( get_the_title() ); ?>" 
@@ -191,6 +216,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                             </a>
                         </div>
                     <?php else : ?>
+                        <!-- Odd: Text Left, Image Right -->
                         <div class="gv-explore-text-col">
                             <h3 class="gv-explore-item-title"><?php the_title(); ?></h3>
                             <p class="gv-explore-item-desc">
