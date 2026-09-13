@@ -121,12 +121,12 @@ $contact = grand_vanilla_get_contact_info();
 
             <!-- Right Column: Content + Watermark + 2x2 Feature Boxes -->
             <div style="position: relative; display: flex; flex-direction: column; justify-content: center;" class="gv-about-content-card">
-                <!-- Subtle Orchid Flower Watermark (Crisp High-Fidelity Match) -->
-                <img src="<?php echo esc_url($img_dir . 'Logo.png'); ?>"
+                <!-- Subtle Orchid Flower Watermark (Mirrored Match - Scaled Down) -->
+                <img src="<?php echo esc_url( $img_dir . 'Logo.png' ); ?>"
                     alt=""
                     aria-hidden="true"
                     class="gv-about-watermark"
-                    style="position: absolute; top: -40px; right: -25px; width: 310px; max-width: none; height: auto; opacity: 0.32; pointer-events: none; z-index: 0; transform: rotate(10deg);">
+                    style="position: absolute; top: -10px; right: 0; width: 205px; max-width: none; height: auto; opacity: 0.3; pointer-events: none; z-index: 0; transform: scaleX(-1) rotate(145deg); transform-origin: center center;">
 
                 <div style="position: relative; z-index: 1;">
                     <!-- Section Tag -->
