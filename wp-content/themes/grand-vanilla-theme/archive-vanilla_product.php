@@ -55,7 +55,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
                     $prod_idx++;
                     $is_active  = ( $prod_idx === 1 );
                     $card_class = $is_active ? 'is-active' : 'is-collapsed';
-                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Product Unggulan ' . $prod_idx . '.png';
+                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : $img_dir . 'Product Unggulan ' . $prod_idx . '.png';
                     ?>
                     <!-- Card <?php echo esc_attr( $prod_idx ); ?>: <?php the_title(); ?> -->
                     <div class="gv-product-card <?php echo esc_attr( $card_class ); ?>" data-card-index="<?php echo esc_attr( $prod_idx ); ?>">
