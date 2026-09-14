@@ -944,10 +944,10 @@ get_template_part('template-parts/cta-banner', null, array(
 ?>
 
 <style>
-    /* Product Cards Layout (Exact UI/UX Reference Match: #1 Large, #2 & #3 Compact, 12px Radius, 480px Height) */
+    /* Products Cards Grid (Flex Accordion Architecture) */
     .gv-products-cards-grid {
         display: flex;
-        gap: 1rem;
+        gap: 1.25rem;
         margin-bottom: 3.5rem;
         align-items: stretch;
         width: 100%;
@@ -955,15 +955,15 @@ get_template_part('template-parts/cta-banner', null, array(
 
     .gv-product-card {
         background-color: #BDC4B8;
-        border-radius: 12px;
-        padding: 1.35rem 1.35rem 1.35rem;
+        border-radius: 14px;
+        padding: 1.5rem 1.35rem 1.4rem;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         position: relative;
         overflow: hidden;
         min-width: 0;
-        height: 400px;
+        height: 460px;
         box-sizing: border-box;
         transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, padding 0.4s ease;
         will-change: flex;
@@ -976,7 +976,7 @@ get_template_part('template-parts/cta-banner', null, array(
         background-color: #363E19;
         color: #FFFFFF;
         font-family: var(--font-heading, 'Jost', sans-serif);
-        font-size: 0.8125rem;
+        font-size: 0.85rem;
         font-weight: 500;
         width: 32px;
         height: 32px;
@@ -991,15 +991,15 @@ get_template_part('template-parts/cta-banner', null, array(
 
     @media (min-width: 992px) {
         .gv-product-card.is-active {
-            flex: 1.95 1 0px !important;
+            flex: 1.85 1 0px !important;
             cursor: default;
-            padding: 1.5rem 1.6rem 1.35rem;
+            padding: 1.5rem 1.6rem 1.4rem;
         }
 
         .gv-product-card.is-collapsed {
             flex: 1 1 0px !important;
             cursor: pointer;
-            padding: 1.4rem 1.25rem 1.35rem;
+            padding: 1.5rem 1.35rem 1.4rem;
         }
 
         .gv-product-card.is-collapsed:hover {
@@ -1012,30 +1012,31 @@ get_template_part('template-parts/cta-banner', null, array(
         flex: 1 1 auto;
         min-height: 0;
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         justify-content: center;
-        margin-top: auto;
-        margin-bottom: 0.75rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
         width: 100%;
         overflow: visible;
+        box-sizing: border-box;
     }
 
     .gv-card-img {
         width: auto;
         height: auto;
         object-fit: contain;
-        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.07));
-        transition: transform 0.4s ease;
+        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.06));
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .gv-product-card.is-active .gv-card-img {
-        max-height: 225px;
-        max-width: 95%;
+        max-height: 250px;
+        max-width: 94%;
     }
 
     .gv-product-card.is-collapsed .gv-card-img {
-        max-height: 200px;
-        max-width: 96%;
+        max-height: 215px;
+        max-width: 90%;
     }
 
     /* Bottom Content Area (Title, Desc & Buttons) */
@@ -1043,7 +1044,7 @@ get_template_part('template-parts/cta-banner', null, array(
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        gap: 0.85rem;
+        gap: 0.75rem;
         width: 100%;
         flex-shrink: 0;
     }
@@ -1066,7 +1067,7 @@ get_template_part('template-parts/cta-banner', null, array(
     }
 
     .gv-product-card.is-collapsed .gv-card-title {
-        font-size: 1.28rem;
+        font-size: 1.22rem;
         white-space: nowrap;
     }
 
@@ -1077,14 +1078,14 @@ get_template_part('template-parts/cta-banner', null, array(
 
     .gv-product-card.is-active .gv-card-desc {
         font-size: 0.8125rem;
-        line-height: 1.45;
-        max-width: 290px;
+        line-height: 1.42;
+        max-width: 320px;
     }
 
     .gv-product-card.is-collapsed .gv-card-desc {
         font-size: 0.775rem;
         line-height: 1.38;
-        max-width: 175px;
+        max-width: 185px;
     }
 
     /* Cross-fade Action Buttons (Zero Layout Jumps) */
@@ -1125,8 +1126,8 @@ get_template_part('template-parts/cta-banner', null, array(
         font-family: var(--font-heading, 'Jost', sans-serif);
         font-size: 0.8125rem;
         font-weight: 500;
-        padding: 0.55rem 1.25rem;
-        border-radius: 2px;
+        padding: 0.5rem 1.15rem;
+        border-radius: 4px;
         text-decoration: none;
         white-space: nowrap;
     }
@@ -1144,12 +1145,12 @@ get_template_part('template-parts/cta-banner', null, array(
         border: 1px solid #363E19;
         color: #363E19;
         background: transparent !important;
-        border-radius: 2px;
+        border-radius: 4px;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.05rem;
+        font-size: 1rem;
         line-height: 1;
     }
 
