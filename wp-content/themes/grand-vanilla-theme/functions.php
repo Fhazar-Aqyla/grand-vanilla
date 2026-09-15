@@ -1319,3 +1319,302 @@ function grand_vanilla_save_page_meta( $post_id ) {
 }
 add_action( 'save_post_page', 'grand_vanilla_save_page_meta' );
 
+/**
+ * ============================================================================
+ * 9. ADVANCED SEO & SCHEMA.ORG STRUCTURED DATA ENGINE
+ * ============================================================================
+ */
+
+/**
+ * Dynamic Document Titles for Maximum SEO & Click-Through-Rate
+ */
+function grand_vanilla_custom_document_title( $title ) {
+    $site_name = 'Grand Vanilla Indonesia';
+    $tagline   = 'Premium Indonesian Vanilla Supplier & Exporter';
+
+    if ( is_front_page() ) {
+        return "{$site_name} | {$tagline}";
+    } elseif ( is_post_type_archive( 'vanilla_product' ) || is_page( 'products' ) ) {
+        return "Indonesian Vanilla Products & Wholesale Catalog | {$site_name}";
+    } elseif ( is_singular( 'vanilla_product' ) ) {
+        $prod_title = get_the_title();
+        return "{$prod_title} — Wholesale & B2B Export | {$site_name}";
+    } elseif ( is_page( 'about' ) ) {
+        return "About Us — Sustainable Sourcing & Curing Facilities | {$site_name}";
+    } elseif ( is_page( 'gallery' ) ) {
+        return "Curing & Production Gallery | {$site_name}";
+    } elseif ( is_page( 'contact' ) ) {
+        return "Contact & B2B Export Inquiry | {$site_name}";
+    } elseif ( is_home() || is_archive() ) {
+        return "Vanilla Industry Insights & Articles | {$site_name}";
+    } elseif ( is_singular( 'post' ) ) {
+        $post_title = get_the_title();
+        return "{$post_title} | {$site_name}";
+    }
+
+    return $title;
+}
+add_filter( 'pre_get_document_title', 'grand_vanilla_custom_document_title', 20 );
+
+/**
+ * Output Essential SEO Meta Tags, Canonical Links, Open Graph & Twitter Cards
+ */
+function grand_vanilla_seo_meta_tags() {
+    $site_name    = 'Grand Vanilla Indonesia';
+    $site_url     = home_url( '/' );
+    $default_desc = 'Grand Vanilla Indonesia is a trusted Indonesian vanilla supplier and exporter, supplying gourmet vanilla beans, powder, and extract for international wholesale and B2B buyers.';
+    $default_img  = get_template_directory_uri() . '/assets/images/Product Unggulan 1.png';
+    $og_type      = 'website';
+    $canonical    = home_url( add_query_arg( array(), $GLOBALS['wp']->request ) );
+    
+    // Determine page-specific meta
+    if ( is_front_page() ) {
+        $title = "{$site_name} | Premium Indonesian Vanilla Supplier & Exporter";
+        $desc  = $default_desc;
+        $img   = $default_img;
+        $canonical = $site_url;
+    } elseif ( is_post_type_archive( 'vanilla_product' ) || is_page( 'products' ) ) {
+        $title = "Indonesian Vanilla Products Catalog | {$site_name}";
+        $desc  = "Explore our premium Indonesian vanilla products: Gourmet Vanilla Beans (Planifolia & Tahitensis), Vanilla Powder, and Pure Vanilla Extract for global export.";
+        $img   = get_template_directory_uri() . '/assets/images/Product Unggulan 1.png';
+        $canonical = home_url( '/products/' );
+    } elseif ( is_singular( 'vanilla_product' ) ) {
+        global $post;
+        $title = get_the_title() . " — Indonesian Vanilla Wholesale | {$site_name}";
+        $excerpt = get_the_excerpt( $post );
+        $desc  = ! empty( $excerpt ) ? esc_attr( wp_strip_all_tags( $excerpt ) ) : "Premium quality {$post->post_title} supplied by Grand Vanilla Indonesia for international B2B and wholesale export.";
+        $img   = has_post_thumbnail( $post->ID ) ? get_the_post_thumbnail_url( $post->ID, 'full' ) : $default_img;
+        $og_type = 'product';
+        $canonical = get_permalink( $post->ID );
+    } elseif ( is_page( 'about' ) ) {
+        $title = "About Us — Sustainable Sourcing & Modern Facilities | {$site_name}";
+        $desc  = "Discover Grand Vanilla Indonesia: direct ethical farmer sourcing, state-of-the-art curing facilities, and reliable supply chain for global vanilla buyers.";
+        $img   = get_template_directory_uri() . '/assets/images/Warehouse.png';
+        $canonical = home_url( '/about/' );
+    } elseif ( is_page( 'gallery' ) ) {
+        $title = "Curing & Production Gallery | {$site_name}";
+        $desc  = "Explore our visual journey of sustainable Indonesian vanilla harvesting, traditional sun-curing, sorting, and export-grade preparation.";
+        $img   = get_template_directory_uri() . '/assets/images/Harvest.png';
+        $canonical = home_url( '/gallery/' );
+    } elseif ( is_page( 'contact' ) ) {
+        $title = "Contact & Wholesale Inquiry | {$site_name}";
+        $desc  = "Connect with Grand Vanilla Indonesia for international vanilla export inquiries, custom OEM packaging, volume pricing, and sample requests.";
+        $img   = $default_img;
+        $canonical = home_url( '/contact/' );
+    } elseif ( is_singular( 'post' ) ) {
+        global $post;
+        $title = get_the_title() . " | {$site_name}";
+        $excerpt = get_the_excerpt( $post );
+        $desc  = ! empty( $excerpt ) ? esc_attr( wp_strip_all_tags( $excerpt ) ) : wp_trim_words( wp_strip_all_tags( $post->post_content ), 25 );
+        $img   = has_post_thumbnail( $post->ID ) ? get_the_post_thumbnail_url( $post->ID, 'full' ) : $default_img;
+        $og_type = 'article';
+        $canonical = get_permalink( $post->ID );
+    } elseif ( is_home() || is_archive() ) {
+        $title = "Vanilla Industry Insights & News | {$site_name}";
+        $desc  = "Read the latest news, market trends, and vanilla harvesting insights from Grand Vanilla Indonesia.";
+        $img   = $default_img;
+        $canonical = home_url( '/articles/' );
+    } else {
+        $title = wp_get_document_title();
+        $desc  = $default_desc;
+        $img   = $default_img;
+    }
+    ?>
+    <!-- SEO Primary Meta Tags -->
+    <meta name="description" content="<?php echo esc_attr( $desc ); ?>">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="<?php echo esc_url( $canonical ); ?>">
+    <meta name="author" content="Grand Vanilla Indonesia">
+    <meta name="publisher" content="Grand Vanilla Indonesia">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="<?php echo esc_attr( $og_type ); ?>">
+    <meta property="og:url" content="<?php echo esc_url( $canonical ); ?>">
+    <meta property="og:title" content="<?php echo esc_attr( $title ); ?>">
+    <meta property="og:description" content="<?php echo esc_attr( $desc ); ?>">
+    <meta property="og:image" content="<?php echo esc_url( $img ); ?>">
+    <meta property="og:site_name" content="<?php echo esc_attr( $site_name ); ?>">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="<?php echo esc_url( $canonical ); ?>">
+    <meta name="twitter:title" content="<?php echo esc_attr( $title ); ?>">
+    <meta name="twitter:description" content="<?php echo esc_attr( $desc ); ?>">
+    <meta name="twitter:image" content="<?php echo esc_url( $img ); ?>">
+    <?php
+}
+add_action( 'wp_head', 'grand_vanilla_seo_meta_tags', 1 );
+
+/**
+ * Output Comprehensive Schema.org JSON-LD Structured Data
+ */
+function grand_vanilla_schema_jsonld() {
+    $site_url  = home_url( '/' );
+    $logo_url  = get_template_directory_uri() . '/assets/images/Logo with text.png';
+    $wa_number = '+6287717752085';
+
+    // 1. Corporation / Organization Schema
+    $org_schema = array(
+        '@context'    => 'https://schema.org',
+        '@type'       => 'Corporation',
+        'name'        => 'Grand Vanilla Indonesia',
+        'alternateName' => 'Grand Vanilla ID',
+        'url'         => $site_url,
+        'logo'        => $logo_url,
+        'description' => 'Indonesian vanilla supplier and exporter delivering gourmet vanilla beans, vanilla powder, and pure vanilla extract for international wholesale and B2B buyers.',
+        'address'     => array(
+            '@type'           => 'PostalAddress',
+            'streetAddress'   => 'Jl. Dr. Saharjo No. 123, Tebet',
+            'addressLocality' => 'Jakarta Selatan',
+            'addressRegion'   => 'DKI Jakarta',
+            'postalCode'      => '12810',
+            'addressCountry'  => 'ID',
+        ),
+        'contactPoint' => array(
+            '@type'             => 'ContactPoint',
+            'telephone'         => $wa_number,
+            'contactType'       => 'sales',
+            'areaServed'        => 'Worldwide',
+            'availableLanguage' => array( 'English', 'Indonesian' ),
+        ),
+        'sameAs' => array(
+            'https://www.instagram.com/grandvanilla.id',
+            'https://www.linkedin.com/company/grand-vanilla-indonesia',
+        ),
+    );
+
+    // 2. WebSite Schema with SearchAction
+    $website_schema = array(
+        '@context' => 'https://schema.org',
+        '@type'    => 'WebSite',
+        'name'     => 'Grand Vanilla Indonesia',
+        'url'      => $site_url,
+        'potentialAction' => array(
+            '@type'       => 'SearchAction',
+            'target'      => home_url( '/?s={search_term_string}' ),
+            'query-input' => 'required name=search_term_string',
+        ),
+    );
+
+    // Output Global Organization and WebSite schemas
+    echo "\n<!-- Schema.org Structured Data (JSON-LD) -->\n";
+    echo '<script type="application/ld+json">' . wp_json_encode( $org_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+    echo '<script type="application/ld+json">' . wp_json_encode( $website_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+
+    // 3. BreadcrumbList Schema
+    $breadcrumbs = array(
+        '@context'        => 'https://schema.org',
+        '@type'           => 'BreadcrumbList',
+        'itemListElement' => array(
+            array(
+                '@type'    => 'ListItem',
+                'position' => 1,
+                'name'     => 'Home',
+                'item'     => $site_url,
+            ),
+        ),
+    );
+
+    if ( is_post_type_archive( 'vanilla_product' ) || is_page( 'products' ) ) {
+        $breadcrumbs['itemListElement'][] = array(
+            '@type'    => 'ListItem',
+            'position' => 2,
+            'name'     => 'Products',
+            'item'     => home_url( '/products/' ),
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode( $breadcrumbs, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+    } elseif ( is_singular( 'vanilla_product' ) ) {
+        global $post;
+        $breadcrumbs['itemListElement'][] = array(
+            '@type'    => 'ListItem',
+            'position' => 2,
+            'name'     => 'Products',
+            'item'     => home_url( '/products/' ),
+        );
+        $breadcrumbs['itemListElement'][] = array(
+            '@type'    => 'ListItem',
+            'position' => 3,
+            'name'     => get_the_title( $post->ID ),
+            'item'     => get_permalink( $post->ID ),
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode( $breadcrumbs, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+
+        // 4. Product Schema on Single Product Detail Pages
+        $prod_image = has_post_thumbnail( $post->ID ) ? get_the_post_thumbnail_url( $post->ID, 'full' ) : get_template_directory_uri() . '/assets/images/Product Unggulan 1.png';
+        $moisture   = get_post_meta( $post->ID, '_gv_spec_moisture', true ) ?: '25% - 35%';
+        $vanillin   = get_post_meta( $post->ID, '_gv_spec_vanillin', true ) ?: '1.8% - 2.4%';
+
+        $product_schema = array(
+            '@context'    => 'https://schema.org/',
+            '@type'       => 'Product',
+            'name'        => get_the_title( $post->ID ),
+            'image'       => array( $prod_image ),
+            'description' => get_the_excerpt( $post->ID ) ?: "Indonesian gourmet {$post->post_title} with {$vanillin} vanillin content and {$moisture} moisture level.",
+            'brand'       => array(
+                '@type' => 'Brand',
+                'name'  => 'Grand Vanilla Indonesia',
+            ),
+            'countryOfOrigin' => array(
+                '@type' => 'Country',
+                'name'  => 'Indonesia',
+            ),
+            'offers' => array(
+                '@type'         => 'Offer',
+                'url'           => get_permalink( $post->ID ),
+                'priceCurrency' => 'USD',
+                'price'         => 'Contact for B2B Quotation',
+                'availability'  => 'https://schema.org/InStock',
+                'itemCondition' => 'https://schema.org/NewCondition',
+                'seller'        => array(
+                    '@type' => 'Organization',
+                    'name'  => 'Grand Vanilla Indonesia',
+                ),
+            ),
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode( $product_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+    } elseif ( is_page( 'about' ) ) {
+        $breadcrumbs['itemListElement'][] = array(
+            '@type'    => 'ListItem',
+            'position' => 2,
+            'name'     => 'About Us',
+            'item'     => home_url( '/about/' ),
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode( $breadcrumbs, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+    } elseif ( is_page( 'gallery' ) ) {
+        $breadcrumbs['itemListElement'][] = array(
+            '@type'    => 'ListItem',
+            'position' => 2,
+            'name'     => 'Gallery',
+            'item'     => home_url( '/gallery/' ),
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode( $breadcrumbs, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+    } elseif ( is_page( 'contact' ) ) {
+        $breadcrumbs['itemListElement'][] = array(
+            '@type'    => 'ListItem',
+            'position' => 2,
+            'name'     => 'Contact Us',
+            'item'     => home_url( '/contact/' ),
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode( $breadcrumbs, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+    }
+}
+add_action( 'wp_head', 'grand_vanilla_schema_jsonld', 2 );
+
+/**
+ * PageSpeed & Core Web Vitals Optimization: Auto-inject loading="lazy" & decoding="async"
+ */
+function grand_vanilla_optimize_image_attributes( $attr, $attachment, $size ) {
+    if ( ! is_admin() ) {
+        if ( empty( $attr['loading'] ) ) {
+            $attr['loading'] = 'lazy';
+        }
+        if ( empty( $attr['decoding'] ) ) {
+            $attr['decoding'] = 'async';
+        }
+    }
+    return $attr;
+}
+add_filter( 'wp_get_attachment_image_attributes', 'grand_vanilla_optimize_image_attributes', 10, 3 );
+
+
