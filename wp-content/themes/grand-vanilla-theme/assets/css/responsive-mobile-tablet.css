@@ -56,6 +56,11 @@
     .gv-product-pills-nav {
         display: none !important;
     }
+
+    /* Suppress desktop-only line breaks on tablet and mobile */
+    .gv-desktop-br {
+        display: none !important;
+    }
 }
 
 /* Base Spacing for Mobile */
@@ -235,6 +240,13 @@
         display: none !important;
     }
 
+    /* Hide duplicate h2 heading on mobile & tablet since paragraph already begins with "Grand Vanilla Indonesia..." */
+    .gv-about-heading,
+    .gv-grid-split-about > div:last-child h2,
+    .gv-about-overview-grid > div:last-child h2 {
+        display: none !important;
+    }
+
     .gv-about-content-card,
     .gv-grid-split-about > div:last-child,
     .gv-about-overview-grid > div:last-child {
@@ -397,10 +409,72 @@
     .gv-about-overview-grid img {
         height: 100% !important;
         max-height: 100% !important;
-        min-height: 480px !important;
+        min-height: 520px !important;
         object-fit: cover !important;
         border-radius: 12px !important;
         width: 100% !important;
+    }
+
+    .gv-about-content-card,
+    .gv-grid-split-about > div:last-child,
+    .gv-about-overview-grid > div:last-child {
+        background-color: #363E19 !important;
+        border-radius: 12px !important;
+        padding: 2.75rem 2.25rem !important;
+    }
+
+    .gv-about-content-card p,
+    .gv-grid-split-about > div:last-child p,
+    .gv-about-overview-grid > div:last-child p {
+        font-size: 0.9375rem !important;
+        line-height: 1.65 !important;
+        color: #FFFFFF !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .gv-about-features-grid,
+    .gv-grid-split-about > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"],
+    .gv-about-overview-grid > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 0.65rem !important;
+        margin-bottom: 2.25rem !important;
+    }
+
+    .gv-about-feature-box,
+    .gv-grid-split-about > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] > div,
+    .gv-about-overview-grid > div:last-child div[style*="display: grid; grid-template-columns: repeat(2, 1fr)"] > div {
+        background-color: #272F12 !important;
+        border: none !important;
+        border-left: 2.5px solid rgba(255, 255, 255, 0.75) !important;
+        color: #FFFFFF !important;
+        font-size: 0.875rem !important;
+        font-weight: 500 !important;
+        padding: 0.85rem 1.25rem !important;
+        text-align: left !important;
+        border-radius: 2px !important;
+    }
+
+    .gv-about-learn-btn,
+    .gv-grid-split-about > div:last-child a,
+    .gv-about-overview-grid > div:last-child a {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        border: 1.5px solid #FFFFFF !important;
+        color: #FFFFFF !important;
+        background: transparent !important;
+        font-size: 0.8125rem !important;
+        font-weight: 500 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        padding: 0.75rem 1.75rem !important;
+    }
+
+    .gv-about-learn-btn svg,
+    .gv-grid-split-about > div:last-child a svg,
+    .gv-about-overview-grid > div:last-child a svg {
+        stroke: #FFFFFF !important;
     }
 }
 
@@ -902,8 +976,10 @@
 
 /* =====================================================================
    10. ABOUT US PAGE LOWER SECTIONS
+   Source of Truth: docs/design-assets/Tablet/About Us.pdf (834px Frame)
    ===================================================================== */
-/* Journey & Purpose */
+
+/* 10.1 Journey & Purpose */
 @media (max-width: 767px) {
     .gv-journey-header-grid {
         grid-template-columns: 1fr !important;
@@ -913,24 +989,221 @@
         grid-template-columns: 1fr !important;
         gap: 1.5rem !important;
     }
+    .gv-journey-title {
+        text-transform: uppercase !important;
+        font-size: 2rem !important;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+    .gv-journey-section {
+        padding-top: 4.5rem !important;
+        padding-bottom: 4.5rem !important;
+    }
     .gv-journey-header-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 2.5rem !important;
-        align-items: flex-end !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.85rem !important;
+        align-items: flex-start !important;
+        margin-bottom: 2.75rem !important;
+    }
+    .gv-journey-title,
+    .gv-journey-header-grid h2 {
+        font-family: var(--font-heading, 'Jost', sans-serif) !important;
+        font-size: 2.25rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: -0.01em !important;
+        color: #363E19 !important;
+        line-height: 1.15 !important;
+        margin: 0 !important;
+    }
+    .gv-journey-header-grid p {
+        font-size: 0.9375rem !important;
+        color: #4A5239 !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
     }
     .gv-journey-body-grid {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.75rem !important;
         align-items: stretch !important;
+    }
+    .gv-journey-body-grid > div:first-child {
+        min-height: 400px !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+    .gv-journey-body-grid > div:first-child h3 {
+        text-transform: uppercase !important;
+        font-size: 1.35rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.01em !important;
+    }
+    .gv-journey-body-grid > div:last-child {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.75rem !important;
+    }
+    .gv-journey-body-grid > div:last-child > div:first-child {
+        background-color: #B9C1B4 !important;
+        border-radius: 12px !important;
+        padding: 2.5rem 2.25rem !important;
+    }
+    .gv-journey-body-grid > div:last-child > div:first-child h3 {
+        text-transform: uppercase !important;
+        font-size: 1.35rem !important;
+        font-weight: 600 !important;
+        color: #363E19 !important;
+        margin-bottom: 0.75rem !important;
+    }
+    .gv-journey-body-grid > div:last-child > div:last-child {
+        background-color: #363E19 !important;
+        border-radius: 12px !important;
+        padding: 2.5rem 2.25rem !important;
+    }
+    .gv-journey-body-grid > div:last-child > div:last-child h3 {
+        text-transform: uppercase !important;
+        font-size: 1.35rem !important;
+        font-weight: 600 !important;
+        color: #FFFFFF !important;
+        margin-bottom: 0.75rem !important;
     }
 }
 
-/* Export Capability Section */
+/* 10.2 Value Propositions (Your Trusted Partner For Quality Indonesian Vanilla) */
+@media (max-width: 1024px) {
+    .gv-partner-title,
+    .gv-about-partner-section h2 {
+        text-transform: uppercase !important;
+        font-size: 2.2rem !important;
+        font-weight: 600 !important;
+        line-height: 1.22 !important;
+        text-align: center !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-about-partner-section {
+        padding-top: 4.5rem !important;
+        padding-bottom: 4.5rem !important;
+    }
+    .gv-partner-header,
+    .gv-about-partner-section > .gv-container > div:first-child {
+        text-align: center !important;
+        max-width: 700px !important;
+        margin: 0 auto 3rem !important;
+    }
+    .gv-partner-cards-grid,
+    .gv-about-partner-section div[style*="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+    }
+    .gv-partner-card,
+    .gv-about-partner-section div[style*="background: #FFFFFF"] {
+        background: #FFFFFF !important;
+        border-radius: 12px !important;
+        padding: 2.5rem 2rem !important;
+        text-align: left !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+    }
+    .gv-partner-card > div:first-child,
+    .gv-about-partner-section div[style*="width: 48px; height: 48px"] {
+        margin-bottom: 1.5rem !important;
+        margin-left: 0 !important;
+        margin-right: auto !important;
+        align-self: flex-start !important;
+    }
+    .gv-partner-card h3,
+    .gv-about-partner-section h3 {
+        font-size: 1.25rem !important;
+        font-weight: 600 !important;
+        color: #363E19 !important;
+        margin-bottom: 0.75rem !important;
+        text-align: left !important;
+    }
+    .gv-partner-card p,
+    .gv-about-partner-section p {
+        font-size: 0.875rem !important;
+        line-height: 1.65 !important;
+        color: #4A5239 !important;
+        text-align: left !important;
+    }
+}
+
+/* 10.3 Sourced From Local Indonesia Section */
+@media (max-width: 1024px) {
+    .gv-sourcing-title,
+    .gv-sourcing-left-bottom h2 {
+        text-transform: uppercase !important;
+        font-size: 2.25rem !important;
+        font-weight: 600 !important;
+        line-height: 1.18 !important;
+    }
+    .gv-sourcing-left-col div[style*="font-family: var(--font-heading"] {
+        text-transform: uppercase !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-sourcing-section {
+        padding-top: 4.5rem !important;
+        padding-bottom: 4.5rem !important;
+    }
+    .gv-sourcing-dark-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2.5rem !important;
+    }
+    .gv-sourcing-left-col {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        height: auto !important;
+    }
+    .gv-sourcing-left-bottom {
+        padding-top: 0 !important;
+    }
+    .gv-sourcing-left-bottom p {
+        font-size: 0.9375rem !important;
+        color: #BAC4B2 !important;
+        line-height: 1.65 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+    .gv-sourcing-right-col {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2.5rem !important;
+    }
+    .gv-sourcing-right-col > div:first-child > div:first-child {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+    }
+    .gv-sourcing-right-col h4 {
+        font-size: 1.15rem !important;
+        font-weight: 600 !important;
+    }
+    .gv-sourcing-right-col p {
+        font-size: 0.875rem !important;
+        line-height: 1.6 !important;
+    }
+    .gv-sourcing-right-col > div:last-child {
+        aspect-ratio: 16 / 9 !important;
+        width: 100% !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+}
+
+/* 10.4 Export Capability Section */
 @media (max-width: 767px) {
     .gv-export-capability-container {
         display: block !important;
@@ -941,6 +1214,10 @@
     }
     .gv-export-header > div {
         justify-content: flex-start !important;
+    }
+    .gv-export-header h2 {
+        text-transform: uppercase !important;
+        font-size: 2rem !important;
     }
     .gv-export-cards {
         display: grid !important;
@@ -958,6 +1235,10 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+    .gv-export-capability-section {
+        padding-top: 4.5rem !important;
+        padding-bottom: 4.5rem !important;
+    }
     .gv-export-capability-container {
         display: grid !important;
         grid-template-columns: 1fr 1.35fr !important;
@@ -965,31 +1246,73 @@
         align-items: flex-start !important;
     }
     .gv-export-header {
+        position: sticky !important;
+        top: 6rem !important;
         text-align: left !important;
         margin: 0 !important;
     }
     .gv-export-header > div {
         justify-content: flex-start !important;
+        text-transform: uppercase !important;
+        font-size: 0.875rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    .gv-export-header h2 {
+        font-family: var(--font-heading, 'Jost', sans-serif) !important;
+        text-transform: uppercase !important;
+        font-size: 2.25rem !important;
+        font-weight: 600 !important;
+        line-height: 1.18 !important;
+        color: #363E19 !important;
+        margin: 0 !important;
     }
     .gv-export-cards,
     .gv-export-capability-container .gv-export-cards,
     div.gv-export-cards {
         display: grid !important;
         grid-template-columns: 1fr !important;
-        gap: 1rem !important;
+        gap: 1.25rem !important;
     }
     .gv-export-card {
         display: flex !important;
-        flex-direction: row !important;
+        flex-direction: column !important;
         align-items: flex-start !important;
         text-align: left !important;
-        gap: 1.25rem !important;
-        padding: 1.75rem 1.5rem !important;
+        padding: 2.25rem 2rem !important;
+        border-radius: 12px !important;
+        background: #FFFFFF !important;
+    }
+    .gv-export-card-icon {
+        margin-bottom: 1.25rem !important;
+        margin-left: 0 !important;
+    }
+    .gv-export-card h3 {
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+        color: #363E19 !important;
+        margin-bottom: 0.5rem !important;
+        text-align: left !important;
+    }
+    .gv-export-card p {
+        font-size: 0.875rem !important;
+        line-height: 1.6 !important;
+        color: #4A5239 !important;
+        text-align: left !important;
     }
 }
 
-/* Facilities Section */
+/* 10.5 Facilities Section */
 @media (max-width: 1024px) {
+    .gv-facilities-title,
+    .gv-facilities-header-grid h2 {
+        text-transform: uppercase !important;
+        font-size: 2.25rem !important;
+        font-weight: 600 !important;
+        line-height: 1.18 !important;
+    }
+    .gv-facilities-header-grid div[style*="font-family: var(--font-heading"] {
+        text-transform: uppercase !important;
+    }
     .gv-facility-card {
         background-color: transparent !important;
         padding: 0 !important;
@@ -1001,24 +1324,51 @@
         height: auto !important;
         object-fit: cover !important;
     }
-    section:has(.gv-facility-card) .gv-explore-text-col {
+    section:has(.gv-facility-card) .gv-explore-text-col,
+    .gv-facilities-section .gv-explore-text-col {
         background-color: transparent !important;
         padding: 0 !important;
     }
-}
-
-@media (max-width: 1024px) {
-    section:has(.gv-facility-card) .gv-explore-row {
+    section:has(.gv-facility-card) .gv-explore-row,
+    .gv-facilities-section .gv-explore-row {
         display: flex !important;
         flex-direction: column !important;
         gap: 1.5rem !important;
-        margin-bottom: 2.5rem !important;
+        margin-bottom: 3.5rem !important;
     }
-    section:has(.gv-facility-card) .gv-facility-card {
+    section:has(.gv-facility-card) .gv-facility-card,
+    .gv-facilities-section .gv-facility-card {
         order: 1 !important;
     }
-    section:has(.gv-facility-card) .gv-explore-text-col {
+    section:has(.gv-facility-card) .gv-explore-text-col,
+    .gv-facilities-section .gv-explore-text-col {
         order: 2 !important;
+    }
+    .gv-explore-item-title {
+        font-family: var(--font-heading, 'Jost', sans-serif) !important;
+        font-size: 1.85rem !important;
+        font-weight: 600 !important;
+        color: #363E19 !important;
+        margin-bottom: 0.75rem !important;
+    }
+    .gv-explore-item-desc {
+        font-size: 0.9375rem !important;
+        line-height: 1.65 !important;
+        color: #606950 !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gv-facilities-header-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.85rem !important;
+        align-items: flex-start !important;
+        margin-bottom: 3rem !important;
+    }
+    .gv-facilities-header-desc-col p {
+        max-width: 100% !important;
+        margin: 0 !important;
     }
 }
 

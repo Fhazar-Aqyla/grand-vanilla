@@ -37,10 +37,10 @@ $vp1_title = get_post_meta($post_id, '_gv_about_vp1_title', true) ?: 'Quality Fo
 $vp1_desc  = get_post_meta($post_id, '_gv_about_vp1_desc', true) ?: 'We maintain product quality to meet international standards and diverse industry requirements.';
 $vp2_title = get_post_meta($post_id, '_gv_about_vp2_title', true) ?: 'Consistent Supply';
 $vp2_desc  = get_post_meta($post_id, '_gv_about_vp2_desc', true) ?: 'We provide reliable vanilla supply for wholesale, bulk, and ongoing business needs.';
-$vp3_title = get_post_meta($post_id, '_gv_about_vp3_title', true) ?: 'Quality Assurance';
-$vp3_desc  = get_post_meta($post_id, '_gv_about_vp3_desc', true) ?: 'We ensure consistent quality through careful inspection and control.';
-$vp4_title = get_post_meta($post_id, '_gv_about_vp4_title', true) ?: 'Full Traceability';
-$vp4_desc  = get_post_meta($post_id, '_gv_about_vp4_desc', true) ?: 'We provide transparent sourcing with traceability from origin through the supply chain.';
+$vp3_title = get_post_meta($post_id, '_gv_about_vp3_title', true) ?: 'Indonesian Origin';
+$vp3_desc  = get_post_meta($post_id, '_gv_about_vp3_desc', true) ?: 'We connect global buyers with quality Indonesian vanilla known for its rich aroma and flavor.';
+$vp4_title = get_post_meta($post_id, '_gv_about_vp4_title', true) ?: 'Reliable Service';
+$vp4_desc  = get_post_meta($post_id, '_gv_about_vp4_desc', true) ?: 'We provide responsive support for international buyers and their sourcing needs.';
 
 // 5. Local Sourcing (3 Steps)
 $src1_title = get_post_meta($post_id, '_gv_about_src1_title', true) ?: 'Local Product';
@@ -155,14 +155,14 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 </section>
 
 <!-- 3. Section: Our Journey And Purpose -->
-<section id="journey" class="gv-section" style="background-color: #E1E2DD; padding: 5.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<section id="journey" class="gv-section gv-journey-section" style="background-color: #E1E2DD; padding: 5.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
 
         <!-- Header Split (Title on Left, Description on Right) -->
         <div class="gv-journey-header-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: flex-end; margin-bottom: 3.5rem;">
             <div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 500; color: #363E19; line-height: 1.2; margin: 0;">
-                    Our Journey And<br>Purpose
+                <h2 class="gv-journey-title" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 500; color: #363E19; line-height: 1.2; margin: 0;">
+                    Our Journey And<br class="gv-desktop-br"> Purpose
                 </h2>
             </div>
             <div>
@@ -223,13 +223,13 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 </section>
 
 <!-- 4. Section: Your Trusted Partner For Quality Indonesian Vanilla (Value Propositions) -->
-<section class="gv-section" style="background-color: #E1E2DD; padding: 5.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
+<section class="gv-section gv-about-partner-section" style="background-color: #E1E2DD; padding: 5.5rem 0; border-top: 1px solid rgba(0,0,0,0.04);">
     <div class="gv-container">
 
         <!-- Header Centered -->
-        <div style="text-align: center; max-width: 750px; margin: 0 auto 3.5rem;">
-            <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 500; color: #363E19; line-height: 1.25; margin-bottom: 1rem;">
-                Your Trusted Partner For Quality<br>Indonesian Vanilla
+        <div class="gv-partner-header" style="text-align: center; max-width: 750px; margin: 0 auto 3.5rem;">
+            <h2 class="gv-partner-title" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 500; color: #363E19; line-height: 1.25; margin-bottom: 1rem;">
+                Your Trusted Partner For Quality<br class="gv-desktop-br"> Indonesian Vanilla
             </h2>
             <p style="font-size: 0.9375rem; color: #4A5239; line-height: 1.6; margin: 0;">
                 At Grand Vanilla Indonesia, we go beyond supplying vanilla. We connect international B2B buyers with quality Indonesian vanilla.
@@ -237,10 +237,10 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
         </div>
 
         <!-- 4 White Cards Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+        <div class="gv-partner-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
 
             <!-- Card 1: Quality Focused -->
-            <div style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+            <div class="gv-partner-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
                     <!-- Shield Icon -->
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -256,7 +256,7 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
             </div>
 
             <!-- Card 2: Consistent Supply -->
-            <div style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+            <div class="gv-partner-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
                     <!-- Box Icon -->
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -272,7 +272,7 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
             </div>
 
             <!-- Card 3: Quality Assurance -->
-            <div style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+            <div class="gv-partner-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
                     <!-- Map / Certificate Icon -->
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -288,7 +288,7 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
             </div>
 
             <!-- Card 4: Full Traceability -->
-            <div style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
+            <div class="gv-partner-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
                     <!-- Headset / Support Icon -->
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -309,7 +309,7 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 </section>
 
 <!-- 5. Section: Sourced From Local Indonesia, Built Around Quality (Deep Dark Background #14180C) -->
-<section class="gv-section" style="background-color: #14180C; color: #FFFFFF; padding: 6.5rem 0;">
+<section class="gv-section gv-sourcing-section" style="background-color: #14180C; color: #FFFFFF; padding: 6.5rem 0;">
     <div class="gv-container">
 
         <div class="gv-sourcing-dark-grid" style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 4.5rem; align-items: stretch;">
@@ -326,8 +326,8 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 
                 <!-- Bottom: Main Heading & Description -->
                 <div class="gv-sourcing-left-bottom" style="padding-top: 4rem;">
-                    <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 500; color: #FFFFFF; line-height: 1.18; margin: 0 0 1.5rem 0;">
-                        Sourced From Local<br>Indonesia, Built Around<br>Quality
+                    <h2 class="gv-sourcing-title" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 500; color: #FFFFFF; line-height: 1.18; margin: 0 0 1.5rem 0;">
+                        Sourced From Local<br class="gv-desktop-br"> Indonesia, Built Around<br class="gv-desktop-br"> Quality
                     </h2>
 
                     <p style="font-size: 0.9375rem; color: #BAC4B2; line-height: 1.65; margin: 0; max-width: 440px;">
@@ -485,8 +485,8 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
                     <span style="display: inline-block; width: 28px; height: 2px; background: #363E19;"></span>
                     Our Facilities
                 </div>
-                <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 500; color: #363E19; line-height: 1.15; margin: 0;">
-                    Built To Support Reliable<br>Operations.
+                <h2 class="gv-facilities-title" style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.25rem, 3.8vw, 3rem); font-weight: 500; color: #363E19; line-height: 1.15; margin: 0;">
+                    Built To Support Reliable<br class="gv-desktop-br"> Operations.
                 </h2>
             </div>
             <div class="gv-facilities-header-desc-col">
@@ -715,10 +715,15 @@ get_template_part('template-parts/cta-banner', null, array(
         align-items: center;
         justify-content: center;
         width: 100%;
-        aspect-ratio: 1 / 1 !important;
         box-sizing: border-box;
         overflow: hidden;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    @media (min-width: 1025px) {
+        .gv-explore-img-card.gv-facility-card {
+            aspect-ratio: 1 / 1;
+        }
     }
 
     .gv-explore-img-card.gv-facility-card .gv-explore-img {
@@ -736,12 +741,22 @@ get_template_part('template-parts/cta-banner', null, array(
     }
 
     @media (max-width: 1024px) {
-        .gv-explore-row.gv-explore-row-reverse .gv-explore-img-card {
-            order: 2;
+        .gv-explore-img-card.gv-facility-card {
+            aspect-ratio: 16 / 9 !important;
+            max-height: 440px !important;
+            border-radius: 12px !important;
         }
 
+        .gv-explore-row .gv-explore-img-card,
+        .gv-explore-row.gv-explore-row-reverse .gv-explore-img-card {
+            order: 1 !important;
+        }
+
+        .gv-explore-row .gv-explore-text-col,
         .gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
-            order: 1;
+            order: 2 !important;
+            padding: 0 !important;
+            width: 100% !important;
         }
 
         .gv-journey-body-grid {
