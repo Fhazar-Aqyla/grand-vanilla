@@ -27,19 +27,19 @@ $default_varieties = array(
     'planifolia' => array(
         'name'          => 'Vanilla Planifolia Beans',
         'short_name'    => 'Vanilla Planifolia',
-        'overview'      => 'Vanilla Planifolia is known for its rich, creamy, and traditional flavor profile. Grown and harvested under strict quality controls, our beans are ideal for both gourmet culinary creation and large-scale industrial use.',
+        'overview'      => 'Premium Indonesian vanilla Planifolia beans with a rich aroma, naturally sweet flavor, and distinctive characteristics, suitable for various food and beverage applications.',
         'carousel'      => array(
             $img_dir . 'Planifolia Carroussel 1.png',
             $img_dir . 'Planifolia Carroussel 2.png',
             $img_dir . 'Planifolia Carroussel 3.png',
         ),
         'specs'         => array(
-            'Aroma / Profile'    => 'Sweet, warm, and distinctly vanilla',
-            'Moisture Level'     => '30-35% (Plump, oily, and flexible for maximum flavor)',
-            'Appearance / Color' => 'Dark brown to black, lustrous, naturally glossy surface',
-            'Terroir / Origin'   => 'East Java, Indonesia',
-            'Length'             => '16 - 20 cm (Gourmet / Grade A)',
-            'Usage'              => 'Industrial, Gourmet',
+            'Aroma'                 => 'Rich, sweet, warm, and naturally aromatic',
+            'Flavor Profile'        => 'Smooth, sweet, creamy, with distinctive vanilla notes',
+            'Appearance / Color'    => 'Dark brown to deep black with a naturally glossy surface',
+            'Texture / Consistency' => 'Soft, pliable, moist, and slightly oily',
+            'Bean Form'             => 'Whole vanilla beans / pods',
+            'Origin'                => 'Jember, Indonesia',
         ),
     ),
     'tahitensis' => array(
@@ -52,12 +52,12 @@ $default_varieties = array(
             $img_dir . 'Tahitensis Carroussel 3.png',
         ),
         'specs'         => array(
-            'Aroma / Profile'    => 'Floral, fruity, with delicate anise and cherry undertones',
-            'Moisture Level'     => '32-38% (Thick, supple, and highly aromatic)',
-            'Appearance / Color' => 'Dark reddish-brown to black, plumper pod structure',
-            'Terroir / Origin'   => 'Bali & Papua, Indonesia',
-            'Length'             => '14 - 18 cm (Floral Gourmet Grade)',
-            'Usage'              => 'Artisanal Pastry, Perfume, Gourmet Cuisine',
+            'Aroma'                 => 'Floral, fruity, with delicate anise and cherry undertones',
+            'Flavor Profile'        => 'Delicate, sweet, floral with stone fruit notes',
+            'Appearance / Color'    => 'Dark reddish-brown to black, plumper pod structure',
+            'Texture / Consistency' => 'Thick, supple, highly aromatic and moist',
+            'Bean Form'             => 'Whole vanilla beans / pods',
+            'Origin'                => 'Bali & Papua, Indonesia',
         ),
     ),
 );
@@ -286,6 +286,7 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                     <div class="gv-overview-body" id="gvOverviewBody">
                         <p><?php echo esc_html( $is_beans && $active_variety ? $active_variety['overview'] : $fallback_overview ); ?></p>
                     </div>
+                    <div class="gv-overview-divider"></div>
                     <div class="gv-variety-block">
                         <strong class="gv-variety-heading">Product Variety:</strong>
                         <div class="gv-variety-bullet" id="gvVarietyBullet">
@@ -308,12 +309,14 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                 </div>
 
             </div>
+            <!-- Bottom Section Divider spanning full container as in Reference Design -->
+            <div class="gv-specs-bottom-divider"></div>
         </div>
 
         <!-- C. Applications Section (What Can It Be Used For?) -->
         <div class="gv-applications-section">
             <div class="gv-applications-header">
-                <span class="gv-applications-tag">— Applications</span>
+                <span class="gv-applications-tag">Applications</span>
                 <h2 class="gv-applications-title">What Can It Be Used For?</h2>
             </div>
 
@@ -322,14 +325,14 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                 <div class="gv-app-card">
                     <div class="gv-app-num">1</div>
                     <h3 class="gv-app-card-title">Bakery</h3>
-                    <p class="gv-app-card-desc">Adds rich vanilla flavor and aroma to cakes, pastries, and baked goods.</p>
+                    <p class="gv-app-card-desc">Adds rich vanilla aroma and flavor to cakes, pastries, and baked goods.</p>
                 </div>
 
                 <!-- Card 2: Beverage -->
                 <div class="gv-app-card">
                     <div class="gv-app-num">2</div>
                     <h3 class="gv-app-card-title">Beverage</h3>
-                    <p class="gv-app-card-desc">Enhances hot and cold beverages with authentic vanilla taste, from coffees to craft drinks.</p>
+                    <p class="gv-app-card-desc">Used to enhance the aroma and flavor of coffee, drinks, and specialty beverages.</p>
                 </div>
 
                 <!-- Card 3: Confectionery -->
@@ -350,27 +353,26 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                 <div class="gv-app-card">
                     <div class="gv-app-num">5</div>
                     <h3 class="gv-app-card-title">Food Manufacturing</h3>
-                    <p class="gv-app-card-desc">Ideal for bulk production of vanilla-infused items, sauces, syrups, and packaged goods.</p>
+                    <p class="gv-app-card-desc">Suitable as a natural vanilla ingredient for various processed food applications.</p>
                 </div>
 
                 <!-- Card 6: Perfume & Fragrance -->
                 <div class="gv-app-card">
                     <div class="gv-app-num">6</div>
                     <h3 class="gv-app-card-title">Perfume & Fragrance</h3>
-                    <p class="gv-app-card-desc">Used to add warm, sweet, and distinctive vanilla notes to perfumes and fragrances.</p>
+                    <p class="gv-app-card-desc">Used to add warm, sweet, and distinctive vanilla notes to perfumes and fragrance</p>
                 </div>
             </div>
         </div>
 
-        <!-- D. Explore More Products Section (Dynamic WP_Query excluding current product) -->
+        <!-- D. Explore More Products Section (Dynamic WP_Query with Alternating Layout & Randomized) -->
         <?php
         $explore_query = new WP_Query( array(
             'post_type'      => 'vanilla_product',
             'posts_per_page' => 2,
             'post__not_in'   => array( $current_id ),
             'post_status'    => 'publish',
-            'orderby'        => 'menu_order date',
-            'order'          => 'ASC',
+            'orderby'        => 'rand',
         ) );
 
         if ( $explore_query->have_posts() ) :
@@ -384,14 +386,21 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                 while ( $explore_query->have_posts() ) :
                     $explore_query->the_post();
                     $exp_idx++;
+                    // Alternating layout: Odd (1,3...) = Text Left, Image Right; Even (2,4...) = Image Left, Text Right
                     $is_reverse = ( $exp_idx % 2 === 0 );
                     $row_class  = $is_reverse ? 'gv-explore-row gv-explore-row-reverse' : 'gv-explore-row';
                     
                     $exp_slug = get_post_field( 'post_name', get_the_ID() );
                     if ( has_post_thumbnail() ) {
                         $exp_img = get_the_post_thumbnail_url( get_the_ID(), 'large' );
-                    } elseif ( isset( $product_carousels[ $exp_slug ][0] ) ) {
-                        $exp_img = $product_carousels[ $exp_slug ][0];
+                    } elseif ( $exp_slug === 'vanilla-seeds' ) {
+                        $exp_img = $img_dir . 'Seeds Vanilla.png';
+                    } elseif ( $exp_slug === 'vanilla-paste' ) {
+                        $exp_img = $img_dir . 'Paste Vanilla.png';
+                    } elseif ( $exp_slug === 'vanilla-powder' ) {
+                        $exp_img = $img_dir . 'Product Unggulan 2.png';
+                    } elseif ( $exp_slug === 'vanilla-extract' ) {
+                        $exp_img = $img_dir . 'Product Unggulan 3.png';
                     } elseif ( $exp_slug === 'vanilla-beans' ) {
                         $exp_img = $img_dir . 'Product Unggulan 1.png';
                     } else {
@@ -400,6 +409,7 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                 ?>
                 <div class="<?php echo esc_attr( $row_class ); ?>">
                     <?php if ( $is_reverse ) : ?>
+                        <!-- Even: Image Left, Text Right -->
                         <div class="gv-explore-img-card">
                             <img src="<?php echo esc_url( $exp_img ); ?>" 
                                  alt="<?php echo esc_attr( get_the_title() ); ?>" 
@@ -415,6 +425,7 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                             </a>
                         </div>
                     <?php else : ?>
+                        <!-- Odd: Text Left, Image Right -->
                         <div class="gv-explore-text-col">
                             <h3 class="gv-explore-item-title"><?php the_title(); ?></h3>
                             <p class="gv-explore-item-desc">
@@ -732,8 +743,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .gv-specs-split {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4.5rem;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 4rem;
     align-items: flex-start;
 }
 
@@ -741,150 +752,203 @@ document.addEventListener('DOMContentLoaded', function() {
     display: block;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.8125rem;
-    font-weight: 500;
-    color: #8C9286;
+    font-weight: 600;
+    color: #4A5638;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
 }
 
 .gv-overview-heading {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: clamp(2rem, 3.2vw, 2.75rem);
-    font-weight: 500;
-    color: #1C230C;
+    font-size: clamp(2rem, 3.2vw, 2.5rem);
+    font-weight: 700;
+    color: #2D3A1B;
     line-height: 1.2;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1.25rem 0;
 }
 
 .gv-overview-body {
     font-size: 0.9375rem;
     line-height: 1.65;
-    color: #4A5239;
-    margin-bottom: 2rem;
+    color: #5D664E;
+    margin-bottom: 1.75rem;
 }
 
 .gv-overview-body p {
     margin: 0;
 }
 
+.gv-overview-divider {
+    height: 1px;
+    background-color: rgba(54, 62, 25, 0.2);
+    width: 100%;
+    margin-bottom: 1.75rem;
+}
+
 .gv-variety-block {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.5rem;
 }
 
 .gv-variety-heading {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: #1C230C;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #2D3A1B;
 }
 
 .gv-variety-bullet {
     font-size: 0.9375rem;
-    color: #4A5239;
+    color: #2D3A1B;
+    font-weight: 500;
 }
 
 /* Characteristics Table */
 .gv-specs-table {
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
 }
 
 .gv-specs-row {
-    display: grid;
-    grid-template-columns: 170px 1fr;
-    gap: 1rem;
-    font-size: 0.875rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(54, 62, 25, 0.22);
+    font-size: 0.9375rem;
     line-height: 1.5;
-    align-items: baseline;
+    color: #5E6652;
+}
+
+.gv-specs-row:first-child {
+    padding-top: 0.25rem;
 }
 
 .gv-specs-key {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-weight: 500;
-    color: #1C230C;
+    color: #3F4734;
+    margin-right: 0.35rem;
 }
 
 .gv-specs-val {
-    color: #4A5239;
+    color: #5E6652;
 }
 
-/* Applications Section (6 Cards Grid) */
+.gv-specs-bottom-divider {
+    height: 1px;
+    background-color: rgba(54, 62, 25, 0.25);
+    width: 100%;
+    margin-top: 3.5rem;
+}
+
+/* Applications Section (6 White Cards Grid) */
 .gv-applications-section {
     margin-bottom: 6rem;
 }
 
 .gv-applications-header {
-    margin-bottom: 2.5rem;
+    text-align: center;
+    margin-bottom: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .gv-applications-tag {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 0.875rem;
-    color: #363E19;
-    margin-bottom: 0.35rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #2F3E1E;
+    margin-bottom: 0.65rem;
+}
+
+.gv-applications-tag::before {
+    content: '';
+    display: inline-block;
+    width: 38px;
+    height: 1.5px;
+    background-color: #2F3E1E;
 }
 
 .gv-applications-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: clamp(1.85rem, 3vw, 2.5rem);
-    font-weight: 500;
-    color: #1C230C;
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    font-weight: 600;
+    color: #232E14;
     margin: 0;
+    line-height: 1.2;
 }
 
 .gv-applications-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
 }
 
 .gv-app-card {
-    background-color: #363E19;
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #232E14;
     border-radius: 12px;
-    padding: 2rem 1.75rem;
+    padding: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(54, 62, 25, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gv-app-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
 }
 
 .gv-app-num {
+    width: 44px;
+    height: 44px;
+    background-color: #2F3E1E;
+    color: #FFFFFF;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 1.75rem;
-    font-weight: 500;
-    color: #BAC4B2;
-    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
     line-height: 1;
+    margin-bottom: 1.5rem;
 }
 
 .gv-app-card-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 1.25rem;
-    font-weight: 500;
-    color: #FFFFFF;
-    margin: 0 0 0.65rem 0;
+    font-weight: 600;
+    color: #232E14;
+    margin: 0 0 0.85rem 0;
+    line-height: 1.3;
 }
 
 .gv-app-card-desc {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
+    color: #6E7564;
     margin: 0;
+    max-width: 280px;
 }
 
-/* Explore More Products Rows */
+/* Explore More Products Rows (Matching Products Archive & Reference Design) */
 .gv-explore-more-section {
     padding-top: 1rem;
+    margin-bottom: 5rem;
 }
 
 .gv-explore-title {
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: clamp(1.85rem, 3vw, 2.5rem);
+    font-size: clamp(2rem, 3.2vw, 2.6rem);
     font-weight: 500;
     color: #1C230C;
     margin: 0 0 3.5rem 0;
@@ -893,19 +957,28 @@ document.addEventListener('DOMContentLoaded', function() {
 .gv-explore-rows {
     display: flex;
     flex-direction: column;
-    gap: 4.5rem;
-    margin-bottom: 3.5rem;
+    gap: 1.5rem;
 }
 
 .gv-explore-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 1.5rem;
     align-items: center;
 }
 
 .gv-explore-row.gv-explore-row-reverse {
     grid-template-columns: 1fr 1fr;
+}
+
+.gv-explore-row:not(.gv-explore-row-reverse) .gv-explore-text-col {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.gv-explore-row.gv-explore-row-reverse .gv-explore-text-col {
+    padding-left: 3rem;
+    padding-right: 1rem;
 }
 
 .gv-explore-text-col {
@@ -919,7 +992,7 @@ document.addEventListener('DOMContentLoaded', function() {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: clamp(1.85rem, 2.5vw, 2.35rem);
     font-weight: 500;
-    color: #1C230C;
+    color: #363E19;
     margin: 0 0 1rem 0;
     line-height: 1.2;
 }
@@ -929,51 +1002,48 @@ document.addEventListener('DOMContentLoaded', function() {
     font-size: 0.9375rem;
     line-height: 1.65;
     margin: 0 0 2rem 0;
-    max-width: 440px;
+    max-width: 380px;
 }
 
 .gv-explore-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    background-color: #363E19;
-    color: #FFFFFF;
+    gap: 0.5rem;
+    border: 1px solid #363E19;
+    color: #363E19;
+    background: transparent;
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 0.875rem;
     font-weight: 500;
-    padding: 0.75rem 2rem;
-    border-radius: 6px;
+    padding: 0.65rem 1.6rem;
+    border-radius: 2px;
     text-decoration: none;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
 }
 
 .gv-explore-btn:hover {
-    background-color: #242A11;
+    background-color: #363E19;
     color: #FFFFFF;
-    transform: translateY(-2px);
 }
 
 .gv-explore-img-card {
-    background-color: transparent;
-    border-radius: 16px;
-    padding: 0;
+    background-color: #BDC4B8;
+    border-radius: 12px;
+    padding: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 1 / 1 !important;
     box-sizing: border-box;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .gv-explore-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    border-radius: 16px;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.07));
     transition: transform 0.4s ease;
 }
 
@@ -983,26 +1053,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .gv-explore-all-wrap {
     text-align: center;
-    padding-top: 1rem;
+    margin-top: 3.5rem;
 }
 
 .gv-explore-all-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    background-color: #363E19;
+    color: #FFFFFF;
     font-family: var(--font-heading, 'Jost', sans-serif);
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 500;
-    color: #363E19;
+    padding: 0.75rem 2rem;
+    border-radius: 2px;
     text-decoration: none;
-    border-bottom: 1.5px solid #363E19;
-    padding-bottom: 2px;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .gv-explore-all-btn:hover {
-    color: #1C230C;
-    border-color: #1C230C;
+    background-color: #242A11;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
 /* Tablet & Mobile Responsiveness */
