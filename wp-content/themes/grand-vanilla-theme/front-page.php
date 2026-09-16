@@ -64,7 +64,7 @@ $serve_6 = get_post_meta( $post_id, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY
     <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.06) 45%, transparent 65%); pointer-events: none;"></div>
 
     <div class="gv-container" style="position: relative; z-index: 2; width: 100%;">
-        <div style="max-width: 620px;">
+        <div class="gv-hero-content-wrap" style="max-width: 620px;">
 
             <!-- Main Hero Headline (Clean 3-Line Structure) -->
             <h1 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2.35rem, 4.6vw, 3.65rem); font-weight: 500; color: #FFFFFF; line-height: 1.18; margin-bottom: 1.25rem; letter-spacing: -0.01em; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
@@ -77,7 +77,7 @@ $serve_6 = get_post_meta( $post_id, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY
             </p>
 
             <!-- Dual Action Buttons (Solid Olive + Clean Transparent Outline) -->
-            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 4rem;">
+            <div class="gv-hero-btn-group" style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 4rem;">
                 <a href="<?php echo esc_url(home_url('/products/')); ?>" class="gv-hero-btn-primary"
                     style="display: inline-flex; align-items: center; justify-content: center; background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.8rem 1.85rem; border-radius: 4px; text-decoration: none; border: 1px solid #363E19; box-shadow: 0 4px 14px rgba(0,0,0,0.18); transition: all 0.25s ease;">
                     Explore Products

@@ -78,8 +78,8 @@
 /* Base Spacing for Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
     .gv-container {
-        padding-left: 2rem !important;
-        padding-right: 2rem !important;
+        padding-left: clamp(2.5rem, 5.5vw, 4rem) !important;
+        padding-right: clamp(2rem, 4vw, 3rem) !important;
     }
     .gv-section {
         padding-top: 4.5rem !important;
@@ -210,19 +210,108 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .gv-hero {
-        min-height: 75vh !important;
-        padding: 6rem 0 5rem !important;
+        min-height: calc(100vh - 70px) !important;
+        min-height: calc(100dvh - 70px) !important;
+        height: calc(100vh - 70px) !important;
+        height: calc(100dvh - 70px) !important;
+        display: flex !important;
+        align-items: center !important;
+        padding: 3.5rem 0 2.5rem !important;
+        box-sizing: border-box !important;
+        background-position: 57% center !important;
+        background-size: cover !important;
+    }
+
+    .gv-hero-content-wrap {
+        max-width: 680px !important;
     }
 
     .gv-hero h1 {
-        font-size: clamp(2.2rem, 4vw, 2.75rem) !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.02em !important;
-        line-height: 1.2 !important;
+        font-size: clamp(3.35rem, 5.8vw, 3.75rem) !important;
+        font-weight: 500 !important;
+        text-transform: none !important;
+        letter-spacing: -0.01em !important;
+        line-height: 1.15 !important;
+        margin-bottom: 1.35rem !important;
+        max-width: 550px !important;
+    }
+
+    .gv-hero p {
+        font-size: 1.2rem !important;
+        line-height: 1.55 !important;
+        color: rgba(255, 255, 255, 0.92) !important;
+        margin-bottom: 2rem !important;
+        max-width: 680px !important;
+        text-transform: none !important;
+    }
+
+    .gv-hero-btn-group,
+    .gv-hero > .gv-container > div > div[style*="display: flex; gap: 1rem"] {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 1.25rem !important;
+        margin-bottom: clamp(4.5rem, 8vh, 6.5rem) !important;
+        width: auto !important;
+    }
+
+    .gv-hero-btn-primary,
+    .gv-hero-btn-outline {
+        display: inline-flex !important;
+        width: auto !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 1rem 2.25rem !important;
+        font-size: 1.0625rem !important;
+        font-weight: 500 !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+        box-sizing: border-box !important;
+        white-space: nowrap !important;
+        border-radius: 4px !important;
+    }
+
+    .gv-hero-btn-primary {
+        background-color: #363E19 !important;
+        border: 1px solid #363E19 !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.18) !important;
+    }
+
+    .gv-hero-btn-outline {
+        background: transparent !important;
+        border: 1px solid rgba(255, 255, 255, 0.75) !important;
+        color: #FFFFFF !important;
     }
 
     .gv-trusted-badge {
-        width: 360px !important;
+        width: 320px !important;
+        max-width: 100% !important;
+        padding: 1.15rem 1.65rem !important;
+        background: #0E110A !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.35) !important;
+        border: 1px solid rgba(255,255,255,0.06) !important;
+        margin-top: 0 !important;
+    }
+
+    .gv-trusted-badge span:first-child {
+        display: block !important;
+        max-width: 140px !important;
+        font-size: 0.75rem !important;
+        line-height: 1.35 !important;
+        text-transform: none !important;
+        letter-spacing: 0.01em !important;
+        margin-bottom: 0.5rem !important;
+        color: #D1D5DB !important;
+    }
+
+    .gv-trusted-badge span[style*="font-size: 2.25rem"] {
+        font-size: 2.25rem !important;
+        font-weight: 500 !important;
+        line-height: 1 !important;
     }
 }
 
