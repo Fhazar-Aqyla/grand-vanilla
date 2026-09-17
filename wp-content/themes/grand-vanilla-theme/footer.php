@@ -42,13 +42,13 @@ $contact = grand_vanilla_get_contact_info();
                             </svg>
                         </a>
                         <!-- Facebook Icon -->
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color: #363E19; display: flex; align-items: center; transition: opacity 0.2s ease;">
+                        <a href="<?php echo esc_url( $contact['facebook_url'] ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color: #363E19; display: flex; align-items: center; transition: opacity 0.2s ease;">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                             </svg>
                         </a>
                         <!-- YouTube Icon -->
-                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="color: #363E19; display: flex; align-items: center; transition: opacity 0.2s ease;">
+                        <a href="<?php echo esc_url( $contact['youtube_url'] ); ?>" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="color: #363E19; display: flex; align-items: center; transition: opacity 0.2s ease;">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
                                 <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"></polygon>

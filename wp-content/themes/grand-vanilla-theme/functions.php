@@ -734,31 +734,45 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'gv_whatsapp', array(
-        'label'    => __( 'Primary WhatsApp Number', 'grand-vanilla' ),
-        'section'  => 'grand_vanilla_options',
-        'type'     => 'text',
+        'label'       => __( 'Primary WhatsApp / Phone Number', 'grand-vanilla' ),
+        'description' => __( 'Main contact number displayed in header, contact page, and floating button.', 'grand-vanilla' ),
+        'section'     => 'grand_vanilla_options',
+        'type'        => 'text',
+    ) );
+
+    // Secondary Phone Number (Landline / Office)
+    $wp_customize->add_setting( 'gv_phone_secondary', array(
+        'default'           => '+621 234 567 82',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'gv_phone_secondary', array(
+        'label'       => __( 'Secondary Phone / Office Telp (Optional)', 'grand-vanilla' ),
+        'description' => __( 'Displayed under phone number in Contact Us page. Leave empty to hide.', 'grand-vanilla' ),
+        'section'     => 'grand_vanilla_options',
+        'type'        => 'text',
     ) );
 
     // Email Address
     $wp_customize->add_setting( 'gv_email', array(
-        'default'           => 'grandvanilla@gmail.com',
+        'default'           => 'nirwanatim@gmail.com',
         'sanitize_callback' => 'sanitize_email',
     ) );
     $wp_customize->add_control( 'gv_email', array(
-        'label'    => __( 'Primary Export Email', 'grand-vanilla' ),
-        'section'  => 'grand_vanilla_options',
-        'type'     => 'email',
+        'label'       => __( 'Primary Export & Inquiry Email', 'grand-vanilla' ),
+        'description' => __( 'Email address displayed on site and recipient for contact form inquiries.', 'grand-vanilla' ),
+        'section'     => 'grand_vanilla_options',
+        'type'        => 'email',
     ) );
 
     // Location Address
     $wp_customize->add_setting( 'gv_address', array(
         'default'           => 'Sumbersari 2 Street, Jember, East Java, Indonesia',
-        'sanitize_callback' => 'sanitize_text_field',
+        'sanitize_callback' => 'sanitize_textarea_field',
     ) );
     $wp_customize->add_control( 'gv_address', array(
         'label'    => __( 'Office / Warehouse Location', 'grand-vanilla' ),
         'section'  => 'grand_vanilla_options',
-        'type'     => 'text',
+        'type'     => 'textarea',
     ) );
 
     // Instagram URL
@@ -771,12 +785,43 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'section'  => 'grand_vanilla_options',
         'type'     => 'url',
     ) );
+
+    // Facebook URL
+    $wp_customize->add_setting( 'gv_facebook', array(
+        'default'           => 'https://facebook.com',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'gv_facebook', array(
+        'label'    => __( 'Facebook Page URL', 'grand-vanilla' ),
+        'section'  => 'grand_vanilla_options',
+        'type'     => 'url',
+    ) );
+
+    // YouTube URL
+    $wp_customize->add_setting( 'gv_youtube', array(
+        'default'           => 'https://youtube.com',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'gv_youtube', array(
+        'label'    => __( 'YouTube Channel URL', 'grand-vanilla' ),
+        'section'  => 'grand_vanilla_options',
+        'type'     => 'url',
+    ) );
+
+    // Google Maps Embed URL
+    $wp_customize->add_setting( 'gv_maps_embed_url', array(
+        'default'           => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36092.836208309294!2d107.28651792040289!3d-6.262369707513481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e697760017df9ad%3A0x74508c4a886051a4!2sHorizon%20University%20Indonesia!5e1!3m2!1sid!2sid!4v1788419127699!5m2!1sid!2sid',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'gv_maps_embed_url', array(
+        'label'       => __( 'Google Maps Embed iframe URL', 'grand-vanilla' ),
+        'description' => __( 'Copy the src URL from Google Maps Embed iframe (https://www.google.com/maps/embed?...)', 'grand-vanilla' ),
+        'section'     => 'grand_vanilla_options',
+        'type'        => 'url',
+    ) );
 }
 add_action( 'customize_register', 'grand_vanilla_customize_register' );
 
-/**
- * 7. Helper: Get Company Contact Info
- */
 /**
  * 7. Helper: Get Company Contact Info
  */
@@ -788,14 +833,232 @@ function grand_vanilla_get_contact_info() {
     }
 
     return array(
-        'whatsapp'      => $whatsapp,
-        'clean_wa'      => $clean_wa,
-        'whatsapp_url'  => 'https://wa.me/' . $clean_wa . '?text=' . rawurlencode('Hello Grand Vanilla Indonesia, I would like to inquire about sourcing your Indonesian vanilla beans for export.'),
-        'email'         => get_theme_mod( 'gv_email', 'grandvanilla@gmail.com' ),
-        'address'       => get_theme_mod( 'gv_address', 'Sumbersari 2 Street, Jember, East Java, Indonesia' ),
-        'instagram_url' => get_theme_mod( 'gv_instagram', 'https://instagram.com' ),
-        'export_hubs'   => 'Jakarta (CGK) & Bali (DPS), Indonesia',
+        'whatsapp'        => $whatsapp,
+        'clean_wa'        => $clean_wa,
+        'whatsapp_url'    => 'https://wa.me/' . $clean_wa . '?text=' . rawurlencode('Hello Grand Vanilla Indonesia, I would like to inquire about sourcing your Indonesian vanilla beans for export.'),
+        'phone_secondary' => get_theme_mod( 'gv_phone_secondary', '+621 234 567 82' ),
+        'email'           => get_theme_mod( 'gv_email', 'nirwanatim@gmail.com' ),
+        'address'         => get_theme_mod( 'gv_address', 'Sumbersari 2 Street, Jember, East Java, Indonesia' ),
+        'instagram_url'   => get_theme_mod( 'gv_instagram', 'https://instagram.com' ),
+        'facebook_url'    => get_theme_mod( 'gv_facebook', 'https://facebook.com' ),
+        'youtube_url'     => get_theme_mod( 'gv_youtube', 'https://youtube.com' ),
+        'maps_embed_url'  => get_theme_mod( 'gv_maps_embed_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36092.836208309294!2d107.28651792040289!3d-6.262369707513481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e697760017df9ad%3A0x74508c4a886051a4!2sHorizon%20University%20Indonesia!5e1!3m2!1sid!2sid!4v1788419127699!5m2!1sid!2sid' ),
+        'export_hubs'     => 'Jakarta (CGK) & Bali (DPS), Indonesia',
     );
+}
+
+/**
+ * 7b. Register Custom Post Type: Contact Form Inquiries (B2B Leads)
+ */
+function grand_vanilla_register_inquiry_cpt() {
+    $labels = array(
+        'name'               => _x( 'Inquiries', 'post type general name', 'grand-vanilla' ),
+        'singular_name'      => _x( 'Inquiry', 'post type singular name', 'grand-vanilla' ),
+        'menu_name'          => _x( 'Inquiries', 'admin menu', 'grand-vanilla' ),
+        'name_admin_bar'     => _x( 'Inquiry', 'add new on admin bar', 'grand-vanilla' ),
+        'add_new'            => __( 'Add New Inquiry', 'grand-vanilla' ),
+        'add_new_item'       => __( 'Add New Inquiry', 'grand-vanilla' ),
+        'new_item'           => __( 'New Inquiry', 'grand-vanilla' ),
+        'edit_item'          => __( 'View / Edit Inquiry', 'grand-vanilla' ),
+        'view_item'          => __( 'View Inquiry', 'grand-vanilla' ),
+        'all_items'          => __( 'All Inquiries', 'grand-vanilla' ),
+        'search_items'       => __( 'Search Inquiries', 'grand-vanilla' ),
+        'not_found'          => __( 'No inquiries found.', 'grand-vanilla' ),
+        'not_found_in_trash' => __( 'No inquiries found in Trash.', 'grand-vanilla' ),
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => false,
+        'publicly_queryable' => false,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => false,
+        'rewrite'            => false,
+        'capability_type'    => 'post',
+        'has_archive'        => false,
+        'hierarchical'       => false,
+        'menu_position'      => 26,
+        'menu_icon'          => 'dashicons-email-alt',
+        'supports'           => array( 'title' ),
+    );
+
+    register_post_type( 'gv_inquiry', $args );
+}
+add_action( 'init', 'grand_vanilla_register_inquiry_cpt' );
+
+function grand_vanilla_inquiry_columns( $columns ) {
+    return array(
+        'cb'              => isset( $columns['cb'] ) ? $columns['cb'] : '<input type="checkbox" />',
+        'title'           => __( 'Subject & Lead', 'grand-vanilla' ),
+        'sender_name'     => __( 'Sender Name', 'grand-vanilla' ),
+        'sender_email'    => __( 'Sender Email', 'grand-vanilla' ),
+        'inquiry_message' => __( 'Message Excerpt', 'grand-vanilla' ),
+        'date'            => __( 'Received Date', 'grand-vanilla' ),
+    );
+}
+add_filter( 'manage_gv_inquiry_posts_columns', 'grand_vanilla_inquiry_columns' );
+
+function grand_vanilla_inquiry_column_content( $column, $post_id ) {
+    switch ( $column ) {
+        case 'sender_name':
+            echo esc_html( get_post_meta( $post_id, '_inquiry_name', true ) ?: '-' );
+            break;
+        case 'sender_email':
+            $email = get_post_meta( $post_id, '_inquiry_email', true );
+            if ( $email ) {
+                echo '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>';
+            } else {
+                echo '-';
+            }
+            break;
+        case 'inquiry_message':
+            $msg = get_post_meta( $post_id, '_inquiry_message', true );
+            echo esc_html( wp_trim_words( $msg, 12, '...' ) );
+            break;
+    }
+}
+add_action( 'manage_gv_inquiry_posts_custom_column', 'grand_vanilla_inquiry_column_content', 10, 2 );
+
+function grand_vanilla_add_inquiry_meta_boxes() {
+    add_meta_box(
+        'gv_inquiry_details_box',
+        __( 'Inquiry Lead Details', 'grand-vanilla' ),
+        'grand_vanilla_inquiry_meta_callback',
+        'gv_inquiry',
+        'normal',
+        'high'
+    );
+}
+add_action( 'add_meta_boxes', 'grand_vanilla_add_inquiry_meta_boxes' );
+
+function grand_vanilla_inquiry_meta_callback( $post ) {
+    $name    = get_post_meta( $post->ID, '_inquiry_name', true );
+    $email   = get_post_meta( $post->ID, '_inquiry_email', true );
+    $subject = get_post_meta( $post->ID, '_inquiry_subject', true );
+    $message = get_post_meta( $post->ID, '_inquiry_message', true );
+    $date    = get_the_date( 'Y-m-d H:i:s', $post->ID );
+    ?>
+    <table class="form-table" style="max-width: 700px;">
+        <tr>
+            <th scope="row"><strong><?php esc_html_e( 'Full Name:', 'grand-vanilla' ); ?></strong></th>
+            <td><?php echo esc_html( $name ); ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><strong><?php esc_html_e( 'Contact Email:', 'grand-vanilla' ); ?></strong></th>
+            <td><a href="mailto:<?php echo esc_attr( $email ); ?>" class="button button-secondary"><?php echo esc_html( $email ); ?> &rarr; Reply via Email</a></td>
+        </tr>
+        <tr>
+            <th scope="row"><strong><?php esc_html_e( 'Inquiry Subject:', 'grand-vanilla' ); ?></strong></th>
+            <td><?php echo esc_html( $subject ); ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><strong><?php esc_html_e( 'Received Time:', 'grand-vanilla' ); ?></strong></th>
+            <td><?php echo esc_html( $date ); ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><strong><?php esc_html_e( 'Full Message:', 'grand-vanilla' ); ?></strong></th>
+            <td>
+                <div style="background: #f8f9fa; border: 1px solid #ccd0d4; padding: 12px; border-radius: 4px; white-space: pre-wrap; font-family: inherit; line-height: 1.6;">
+                    <?php echo esc_html( $message ); ?>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <?php
+}
+
+/**
+ * 7c. AJAX Handler: Contact Us Form Submission
+ */
+function grand_vanilla_submit_contact_form() {
+    // Check nonce
+    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'gv_contact_form_nonce' ) ) {
+        wp_send_json_error( array( 'message' => __( 'Security check failed. Please refresh the page and try again.', 'grand-vanilla' ) ) );
+    }
+
+    $name    = isset( $_POST['fullname'] ) ? sanitize_text_field( wp_unslash( $_POST['fullname'] ) ) : '';
+    $email   = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+    $subject = isset( $_POST['subject'] ) ? sanitize_text_field( wp_unslash( $_POST['subject'] ) ) : '';
+    $message = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
+
+    if ( empty( $name ) || empty( $email ) || ! is_email( $email ) || empty( $message ) ) {
+        wp_send_json_error( array( 'message' => __( 'Please fill in all required fields with a valid email address.', 'grand-vanilla' ) ) );
+    }
+
+    // 1. Save into WordPress Database as gv_inquiry
+    $post_title = sprintf( '[%s] %s', $subject ?: 'Inquiry', $name );
+    $inquiry_id = wp_insert_post( array(
+        'post_type'    => 'gv_inquiry',
+        'post_status'  => 'publish',
+        'post_title'   => $post_title,
+        'post_content' => $message,
+    ) );
+
+    if ( $inquiry_id && ! is_wp_error( $inquiry_id ) ) {
+        update_post_meta( $inquiry_id, '_inquiry_name', $name );
+        update_post_meta( $inquiry_id, '_inquiry_email', $email );
+        update_post_meta( $inquiry_id, '_inquiry_subject', $subject );
+        update_post_meta( $inquiry_id, '_inquiry_message', $message );
+    }
+
+    // 2. Determine recipient email from Customizer (default nirwanatim@gmail.com)
+    $contact = grand_vanilla_get_contact_info();
+    $to      = ! empty( $contact['email'] ) ? $contact['email'] : 'nirwanatim@gmail.com';
+
+    // 3. Prepare Email
+    $site_name    = get_bloginfo( 'name' );
+    $mail_subject = sprintf( '[%s Inquiry] %s - from %s', $site_name, $subject, $name );
+
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: ' . $site_name . ' <noreply@' . ( isset( $_SERVER['SERVER_NAME'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_NAME'] ) ) : 'grandvanilla.id' ) . '>',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+    );
+
+    $body  = '<html><body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">';
+    $body .= '<div style="background-color: #363E19; color: #fff; padding: 18px 24px; border-radius: 6px 6px 0 0;">';
+    $body .= '<h2 style="margin: 0; font-size: 20px; font-weight: 500;">New B2B Inquiry Received</h2>';
+    $body .= '<p style="margin: 4px 0 0 0; font-size: 13px; opacity: 0.85;">Grand Vanilla Indonesia Export Desk</p>';
+    $body .= '</div>';
+    $body .= '<div style="border: 1px solid #e2e2dd; border-top: none; padding: 24px; border-radius: 0 0 6px 6px; background: #FAF8F5;">';
+    $body .= '<p style="margin-top: 0;"><strong>Sender Name:</strong> ' . esc_html( $name ) . '</p>';
+    $body .= '<p><strong>Contact Email:</strong> <a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></p>';
+    $body .= '<p><strong>Subject:</strong> ' . esc_html( $subject ) . '</p>';
+    $body .= '<p><strong>Message:</strong></p>';
+    $body .= '<div style="background: #fff; border: 1px solid #ddd; padding: 14px; border-radius: 4px; white-space: pre-wrap;">' . esc_html( $message ) . '</div>';
+    $body .= '<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 24px 0 16px;">';
+    $body .= '<p style="font-size: 12px; color: #777; margin: 0;">This inquiry was submitted from the Grand Vanilla Indonesia website contact form.</p>';
+    $body .= '</div>';
+    $body .= '</body></html>';
+
+    // Hook timeout on phpmailer so local environments don't hang if SMTP is offline
+    add_action( 'phpmailer_init', 'grand_vanilla_phpmailer_timeout', 10, 1 );
+
+    // Attempt to send email via wp_mail
+    @wp_mail( $to, $mail_subject, $body, $headers );
+
+    remove_action( 'phpmailer_init', 'grand_vanilla_phpmailer_timeout', 10 );
+
+    // Build WhatsApp URL if client wants to follow up via WA
+    $wa_text = "Hello Grand Vanilla Indonesia,\n\n" .
+               "*New Export Quotation Request*\n" .
+               "• Name: "    . $name    . "\n" .
+               "• Email: "   . $email   . "\n" .
+               "• Subject: " . $subject . "\n" .
+               "• Details: " . $message;
+    $wa_url  = 'https://wa.me/' . $contact['clean_wa'] . '?text=' . rawurlencode( $wa_text );
+
+    wp_send_json_success( array(
+        'message'      => sprintf( __( 'Thank you, %s! Your inquiry has been sent to our export team (%s). We will review and respond promptly.', 'grand-vanilla' ), esc_html( $name ), esc_html( $to ) ),
+        'whatsapp_url' => $wa_url,
+    ) );
+}
+add_action( 'wp_ajax_gv_submit_contact_form', 'grand_vanilla_submit_contact_form' );
+add_action( 'wp_ajax_nopriv_gv_submit_contact_form', 'grand_vanilla_submit_contact_form' );
+
+function grand_vanilla_phpmailer_timeout( $phpmailer ) {
+    $phpmailer->Timeout = 3;
 }
 
 /**

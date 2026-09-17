@@ -40,8 +40,14 @@ $contact = grand_vanilla_get_contact_info();
                 <div class="gv-contact-details">
                     <div class="gv-contact-detail-item">
                         <strong class="gv-contact-detail-label">Phone Number</strong>
-                        <div class="gv-contact-detail-value"><?php echo esc_html( $contact['whatsapp'] ); ?></div>
-                        <div class="gv-contact-detail-sub">+621 234 567 82</div>
+                        <div class="gv-contact-detail-value">
+                            <a href="<?php echo esc_url( $contact['whatsapp_url'] ); ?>" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+                                <?php echo esc_html( $contact['whatsapp'] ); ?>
+                            </a>
+                        </div>
+                        <?php if ( ! empty( $contact['phone_secondary'] ) ) : ?>
+                            <div class="gv-contact-detail-sub"><?php echo esc_html( $contact['phone_secondary'] ); ?></div>
+                        <?php endif; ?>
                     </div>
 
                     <div class="gv-contact-detail-item">
@@ -61,15 +67,21 @@ $contact = grand_vanilla_get_contact_info();
                     <div class="gv-contact-detail-item">
                         <strong class="gv-contact-detail-label">Social Network</strong>
                         <div class="gv-contact-social-icons">
-                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="gv-contact-social-link" aria-label="YouTube">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                            </a>
-                            <a href="<?php echo esc_url( $contact['instagram_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="gv-contact-social-link" aria-label="Instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                            </a>
-                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="gv-contact-social-link" aria-label="Facebook">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                            </a>
+                            <?php if ( ! empty( $contact['youtube_url'] ) ) : ?>
+                                <a href="<?php echo esc_url( $contact['youtube_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="gv-contact-social-link" aria-label="YouTube">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                </a>
+                            <?php endif; ?>
+                            <?php if ( ! empty( $contact['instagram_url'] ) ) : ?>
+                                <a href="<?php echo esc_url( $contact['instagram_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="gv-contact-social-link" aria-label="Instagram">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                </a>
+                            <?php endif; ?>
+                            <?php if ( ! empty( $contact['facebook_url'] ) ) : ?>
+                                <a href="<?php echo esc_url( $contact['facebook_url'] ); ?>" target="_blank" rel="noopener noreferrer" class="gv-contact-social-link" aria-label="Facebook">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -80,11 +92,11 @@ $contact = grand_vanilla_get_contact_info();
                 <h3 class="gv-contact-form-title">Get in Touch</h3>
 
                 <!-- Status Notification Banner -->
-                <div id="gv-form-alert" class="gv-contact-alert" style="display: none;">
-                    <strong>✓ Inquiry Sent Successfully!</strong> Redirecting to our WhatsApp Export Desk...
-                </div>
+                <div id="gv-form-alert" class="gv-contact-alert" style="display: none;"></div>
 
-                <form id="gv-contact-form" class="gv-contact-form" data-wa="<?php echo esc_attr( $contact['clean_wa'] ); ?>">
+                <form id="gv-contact-form" class="gv-contact-form" data-ajaxurl="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
+                    <input type="hidden" name="nonce" id="gv_nonce" value="<?php echo esc_attr( wp_create_nonce( 'gv_contact_form_nonce' ) ); ?>">
+
                     <div class="gv-field">
                         <label for="gv_fullname">Full Name</label>
                         <input type="text" id="gv_fullname" name="fullname" required placeholder="Your full name">
@@ -123,34 +135,74 @@ $contact = grand_vanilla_get_contact_info();
                 <script>
                 document.getElementById('gv-contact-form').addEventListener('submit', function(e) {
                     e.preventDefault();
-                    var form    = this;
-                    var name    = document.getElementById('gv_fullname').value;
-                    var email   = document.getElementById('gv_email').value;
-                    var subject = document.getElementById('gv_subject').value;
-                    var message = document.getElementById('gv_message').value;
-
+                    var form     = this;
+                    var ajaxUrl  = form.getAttribute('data-ajaxurl');
                     var alertBox = document.getElementById('gv-form-alert');
                     var btn      = document.getElementById('gv_submit_btn');
 
-                    btn.textContent   = 'PREPARING INQUIRY...';
+                    var name    = document.getElementById('gv_fullname').value.trim();
+                    var email   = document.getElementById('gv_email').value.trim();
+                    var subject = document.getElementById('gv_subject').value;
+                    var message = document.getElementById('gv_message').value.trim();
+                    var nonce   = document.getElementById('gv_nonce').value;
+
+                    if (!name || !email || !message) {
+                        alertBox.className     = 'gv-contact-alert gv-contact-alert--error';
+                        alertBox.innerHTML     = '<strong>Error:</strong> Please fill in all required fields.';
+                        alertBox.style.display = 'block';
+                        return;
+                    }
+
+                    btn.disabled      = true;
+                    btn.textContent   = 'SENDING INQUIRY...';
                     btn.style.opacity = '0.7';
-                    alertBox.style.display = 'block';
+                    alertBox.style.display = 'none';
 
-                    var text = "Hello Grand Vanilla Indonesia,\n\n" +
-                               "*New Export Quotation Request*\n" +
-                               "• Name: "    + name    + "\n" +
-                               "• Email: "   + email   + "\n" +
-                               "• Subject: " + subject + "\n" +
-                               "• Details: " + message;
+                    var formData = new FormData();
+                    formData.append('action', 'gv_submit_contact_form');
+                    formData.append('nonce', nonce);
+                    formData.append('fullname', name);
+                    formData.append('email', email);
+                    formData.append('subject', subject);
+                    formData.append('message', message);
 
-                    var cleanWa = form.getAttribute('data-wa') || '6281226974731';
-                    var waUrl   = "https://wa.me/" + cleanWa + "?text=" + encodeURIComponent(text);
-
-                    setTimeout(function() {
-                        window.open(waUrl, '_blank');
+                    fetch(ajaxUrl, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(function(res) {
+                        return res.json();
+                    })
+                    .then(function(data) {
+                        btn.disabled      = false;
                         btn.textContent   = 'SEND MESSAGE';
                         btn.style.opacity = '1';
-                    }, 800);
+
+                        if (data && data.success) {
+                            alertBox.className = 'gv-contact-alert gv-contact-alert--success';
+                            var waLinkHtml = '';
+                            if (data.data && data.data.whatsapp_url) {
+                                waLinkHtml = '<div style="margin-top: 8px;"><a href="' + data.data.whatsapp_url + '" target="_blank" rel="noopener noreferrer" style="color: #0f5132; font-weight: 600; text-decoration: underline;">Or chat with our export desk via WhatsApp &rarr;</a></div>';
+                            }
+                            alertBox.innerHTML = '<strong>✓ Inquiry Sent Successfully!</strong> ' +
+                                                 (data.data && data.data.message ? data.data.message : 'Your message has been delivered.') +
+                                                 waLinkHtml;
+                            alertBox.style.display = 'block';
+                            form.reset();
+                        } else {
+                            alertBox.className = 'gv-contact-alert gv-contact-alert--error';
+                            alertBox.innerHTML = '<strong>Submission Failed:</strong> ' + (data && data.data && data.data.message ? data.data.message : 'Please try again or contact us directly via email.');
+                            alertBox.style.display = 'block';
+                        }
+                    })
+                    .catch(function(err) {
+                        btn.disabled      = false;
+                        btn.textContent   = 'SEND MESSAGE';
+                        btn.style.opacity = '1';
+                        alertBox.className = 'gv-contact-alert gv-contact-alert--error';
+                        alertBox.innerHTML = '<strong>Error:</strong> Network error occurred. Please try again.';
+                        alertBox.style.display = 'block';
+                    });
                 });
                 </script>
             </div>
@@ -307,6 +359,19 @@ $contact = grand_vanilla_get_contact_info();
     color: #0f5132;
     margin-bottom: 1.25rem;
     font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.gv-contact-alert--success {
+    background: #d1e7dd !important;
+    color: #0f5132 !important;
+    border: 1px solid #badbcc;
+}
+
+.gv-contact-alert--error {
+    background: #f8d7da !important;
+    color: #842029 !important;
+    border: 1px solid #f5c2c7;
 }
 
 /* Form fields with underline style */
@@ -428,14 +493,14 @@ $contact = grand_vanilla_get_contact_info();
                 <span class="gv-contact-tag-line"></span>
                 Our Location
             </span>
-            <p class="gv-map-address">Sumbersari 2 Street, Jember, East Java, Indonesia</p>
+            <p class="gv-map-address"><?php echo esc_html( $contact['address'] ); ?></p>
         </div>
     </div>
     <div class="gv-map-wrapper">
         <iframe
             id="gv-map-iframe"
             title="Grand Vanilla Indonesia Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36092.836208309294!2d107.28651792040289!3d-6.262369707513481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e697760017df9ad%3A0x74508c4a886051a4!2sHorizon%20University%20Indonesia!5e1!3m2!1sid!2sid!4v1788419127699!5m2!1sid!2sid"
+            src="<?php echo esc_url( $contact['maps_embed_url'] ); ?>"
             width="100%"
             height="450"
             style="border: 0;"
