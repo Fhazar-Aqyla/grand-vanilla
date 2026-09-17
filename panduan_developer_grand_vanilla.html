@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Buku Panduan Lengkap & Skrip Presentasi Klien — Grand Vanilla Indonesia</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    @page {
+        size: A4;
+        margin: 16mm 15mm 18mm 15mm;
+        @bottom-right {
+            content: counter(page);
+            font-size: 8.5pt;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            color: #8C9286;
+        }
+        @bottom-left {
+            content: "Grand Vanilla Indonesia • Master Developer & Zoom Pitch Handbook";
+            font-size: 8pt;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #8C9286;
+        }
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #2D3319;
+        background-color: #FFFFFF;
+        line-height: 1.5; /* Sesuai permintaan: Spasi 1.5 */
+        font-size: 9.5pt;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Page Breaks */
+    .page-break {
+        page-break-before: always;
+        break-before: page;
+    }
+
+    .no-break, table, .card, .alert, .dialogue-box {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* Cover Page */
+    .cover {
+        min-height: 255mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: linear-gradient(145deg, #FAF8F5 0%, #F4EFEA 100%);
+        border: 2px solid #DCDED7;
+        border-radius: 12px;
+        padding: 44px;
+        box-sizing: border-box;
+        page-break-after: always;
+    }
+
+    .cover-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #363E19;
+        padding-bottom: 18px;
+    }
+
+    .cover-badge {
+        background-color: #363E19;
+        color: #FFFFFF;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 8pt;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .cover-title-wrap {
+        margin-top: 36px;
+    }
+
+    .cover-subtitle {
+        color: #636A4F;
+        font-size: 11pt;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+    }
+
+    .cover-title {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 26pt;
+        line-height: 1.22;
+        color: #1F240E;
+        margin: 0 0 20px 0;
+        font-weight: 700;
+    }
+
+    .cover-desc {
+        font-size: 10.5pt;
+        color: #4A5239;
+        max-width: 580px;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .cover-features {
+        margin-top: 26px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .cover-feat-item {
+        background: #FFFFFF;
+        border: 1px solid #E1E2DD;
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-size: 8.5pt;
+        color: #363E19;
+    }
+
+    .cover-footer {
+        border-top: 1px solid #D5D7CF;
+        padding-top: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-size: 8.5pt;
+        color: #5C6246;
+        line-height: 1.45;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #363E19;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+
+    h1 {
+        font-size: 16pt;
+        border-bottom: 2px solid #363E19;
+        padding-bottom: 6px;
+        margin-top: 0;
+        margin-bottom: 14px;
+    }
+
+    h2 {
+        font-size: 12pt;
+        margin-top: 20px;
+        margin-bottom: 8px;
+        color: #2D3319;
+        border-left: 4px solid #363E19;
+        padding-left: 10px;
+    }
+
+    h3 {
+        font-size: 10.5pt;
+        margin-top: 14px;
+        margin-bottom: 6px;
+        color: #363E19;
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 9px;
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    /* Cards & Boxes */
+    .card {
+        background: #FAF8F5;
+        border: 1px solid #E1E2DD;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-bottom: 14px;
+    }
+
+    .alert {
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 12px 0;
+        font-size: 9pt;
+        line-height: 1.5;
+    }
+
+    .alert-tip    { background-color: #EBF3E8; border-left: 4px solid #2E7D32; color: #1E4620; }
+    .alert-info   { background-color: #EBF1F6; border-left: 4px solid #1976D2; color: #0D3C61; }
+    .alert-warning{ background-color: #FEF7E6; border-left: 4px solid #F57C00; color: #7A3E00; }
+    .alert-safe   { background-color: #F1F8E9; border-left: 4px solid #689F38; color: #33691E; }
+
+    /* Dialogue & Script Boxes */
+    .dialogue-box {
+        background-color: #FAF8F5;
+        border: 1px solid #D8DAD1;
+        border-radius: 8px;
+        padding: 14px 18px;
+        margin: 12px 0;
+        position: relative;
+    }
+
+    .dialogue-tag {
+        font-size: 7.5pt;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #363E19;
+        background: #E5E7DF;
+        padding: 2px 8px;
+        border-radius: 10px;
+        display: inline-block;
+        margin-bottom: 8px;
+    }
+
+    .dialogue-text {
+        font-style: italic;
+        color: #232810;
+        font-size: 9.5pt;
+        line-height: 1.55;
+    }
+
+    /* Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0;
+        font-size: 8.5pt;
+        line-height: 1.45;
+    }
+
+    table th {
+        background-color: #363E19;
+        color: #FFFFFF;
+        text-align: left;
+        padding: 7px 10px;
+        font-weight: 600;
+    }
+
+    table td {
+        padding: 7px 10px;
+        border-bottom: 1px solid #E6E8E2;
+        vertical-align: top;
+    }
+
+    table tr:nth-child(even) td {
+        background-color: #F9F9F7;
+    }
+
+    /* Code Snippets */
+    code {
+        font-family: 'JetBrains Mono', Consolas, monospace;
+        font-size: 8pt;
+        background-color: #EFEFEA;
+        padding: 2px 5px;
+        border-radius: 4px;
+        color: #B23B15;
+    }
+
+    pre {
+        font-family: 'JetBrains Mono', Consolas, monospace;
+        font-size: 8pt;
+        background-color: #212513;
+        color: #EDEFE6;
+        padding: 10px 14px;
+        border-radius: 6px;
+        overflow-x: auto;
+        line-height: 1.45;
+        margin: 10px 0;
+    }
+
+    /* Steps List */
+    .step-item {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .step-num {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        background-color: #363E19;
+        color: #FFFFFF;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8pt;
+        font-weight: 700;
+        margin-top: 2px;
+    }
+
+    .step-content {
+        flex: 1;
+        line-height: 1.5;
+    }
+
+    ul, ol {
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-left: 18px;
+        line-height: 1.5;
+    }
+
+    li {
+        margin-bottom: 4px;
+    }
+
+    .badge-pill {
+        display: inline-block;
+        padding: 2px 7px;
+        border-radius: 10px;
+        font-size: 7.5pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .badge-green { background-color: #D4EDDA; color: #155724; }
+    .badge-blue  { background-color: #CCE5FF; color: #004085; }
+    .badge-amber { background-color: #FFF3CD; color: #856404; }
+</style>
+</head>
+<body>
+
+<!-- ================= COVER PAGE ================= -->
+<div class="cover">
+    <div class="cover-top">
+        <strong style="font-size: 13pt; color: #363E19; letter-spacing: 0.06em;">GRAND VANILLA INDONESIA</strong>
+        <span class="cover-badge">DEVELOPER & CLIENT PRESENTATION HANDBOOK</span>
+    </div>
+
+    <div class="cover-title-wrap">
+        <div class="cover-subtitle">Buku Pegangan Pengembang & Panduan Rapat Zoom Klien</div>
+        <h1 class="cover-title">Master Guide: Dari Nol Hingga Siap Presentasi</h1>
+        <p class="cover-desc">
+            Panduan menyeluruh untuk memahami arsitektur, kode, pengelolaan CMS, skrip presentasi rapat Zoom, serta antisipasi tanya-jawab teknis bersama klien tanpa rasa ragu atau takut salah.
+        </p>
+
+        <div class="cover-features">
+            <div class="cover-feat-item"><strong>🎙️ Skrip Presentasi Zoom:</strong> Alur demo 15 menit & kata-demi-kata profesional.</div>
+            <div class="cover-feat-item"><strong>🛡️ Anti-Panik CMS:</strong> Cara tambah/hapus produk & media tanpa takut error.</div>
+            <div class="cover-feat-item"><strong>📦 Konsep B2B Ekspor:</strong> Planifolia vs Tahitensis, Lab Specs, & Incoterms.</div>
+            <div class="cover-feat-item"><strong>⚙️ Otomasi Sistem:</strong> Peta Google Maps, Form Leads, & Invisible Honeypot.</div>
+        </div>
+    </div>
+
+    <div class="cover-footer">
+        <div>
+            <strong>Penyusun:</strong> Tim Pengembang Web Grand Vanilla Indonesia<br>
+            <strong>Spesifikasi Sistem:</strong> Custom WP Theme • PHP 8.4 • Full English Admin • Production Ready
+        </div>
+        <div style="text-align: right;">
+            <strong>Edisi:</strong> Zoom Pitch & Handover Edition<br>
+            <strong>Pembaruan Terakhir:</strong> September 2026
+        </div>
+    </div>
+</div>
+
+<!-- ================= DAFTAR ISI & STRUKTUR BUKU ================= -->
+<div class="page-break"></div>
+<h1>Daftar Isi & Peta Pembelajaran</h1>
+
+<div class="alert alert-safe">
+    <strong>💡 Pesan Utama untuk Anda Sebelum Rapat Besok:</strong><br>
+    Anda tidak perlu menghafal baris-baris kode PHP. Yang perlu Anda kuasai adalah <strong>konsep cara kerja website</strong> dan <strong>bagaimana sistem ini mempermudah bisnis klien</strong>. Buku ini dibagi menjadi 5 bagian strategis yang dirancang khusus agar Anda bisa membacanya cepat malam ini dan langsung percaya diri berbicara di Zoom besok!
+</div>
+
+<h2>Daftar Isi Buku Panduan</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width: 15%;">Bagian</th>
+            <th style="width: 55%;">Bab & Topik Utama</th>
+            <th style="width: 30%;">Tujuan Pembelajaran</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BAGIAN I</strong></td>
+            <td><strong>Panduan Presentasi Zoom ke Klien</strong><br>• Bab 1: Alur Demo Share Screen (00:00 - 15:00)<br>• Bab 2: Skrip Bicara Kata-per-Kata (Word-for-Word)<br>• Bab 3: Menjawab 7 Pertanyaan Kritis Klien</td>
+            <td><span class="badge-pill badge-green">Siap Tampil di Zoom</span></td>
+        </tr>
+        <tr>
+            <td><strong>BAGIAN II</strong></td>
+            <td><strong>Pemahaman Produk & Ekspor B2B</strong><br>• Bab 4: Terminologi Ekspor (Planifolia vs Tahitensis, Lab Specs, Moisture, Incoterms FOB/CIF, COA)</td>
+            <td><span class="badge-pill badge-blue">Kuasai Konteks Bisnis</span></td>
+        </tr>
+        <tr>
+            <td><strong>BAGIAN III</strong></td>
+            <td><strong>Anatomi & Fitur Unggulan Website</strong><br>• Bab 5: Pemisahan Database vs Kode Tema<br>• Bab 6: Bedah 8 Halaman Website<br>• Bab 7: Sistem Lead Inquiries & Invisible Honeypot</td>
+            <td><span class="badge-pill badge-blue">Paham Cara Kerja Sistem</span></td>
+        </tr>
+        <tr>
+            <td><strong>BAGIAN IV</strong></td>
+            <td><strong>Master Operasional WP Admin (Tambah, Edit, Hapus)</strong><br>• Bab 8: Theme Settings (WA, Email, Maps)<br>• Bab 9: Katalog Produk & Spesifikasi Lab<br>• Bab 10: Sub-Varietas Repeater Dinamis<br>• Bab 11: Kotak Masuk Pesan Buyer (Inquiries)<br>• Bab 12: Media Library & Galeri Curing<br>• Bab 13: Artikel Blog Ekspor (Posts)<br>• Bab 14: Halaman Legal & Profil (Pages)<br>• Bab 15: Menu Navigasi Header & Footer</td>
+            <td><span class="badge-pill badge-green">Operasional Mandiri Lengkap</span></td>
+        </tr>
+        <tr>
+            <td><strong>BAGIAN V</strong></td>
+            <td><strong>Zona Aman & Langkah Darurat Developer</strong><br>• Bab 16: Zona Hijau vs Zona Merah File Tema<br>• Bab 17: Perintah Ajaib Pengecek Error (php -l)</td>
+            <td><span class="badge-pill badge-amber">Keamanan & Perbaikan</span></td>
+        </tr>
+        <tr>
+            <td><strong>BAGIAN VI</strong></td>
+            <td><strong>Panduan Hosting Hostinger & Serah Terima</strong><br>• Bab 18: Kepemilikan Akun Hostinger & Akses Klien<br>• Bab 19: Status Folder File & SOP Penyerahan Website<br>• Bab 20: Panduan Migrasi Laragon ke Hostinger 1-Klik</td>
+            <td><span class="badge-pill badge-green">Deployment & Serah Terima</span></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ================= BAGIAN I: ZOOM PITCH SCRIPT ================= -->
+<div class="page-break"></div>
+<h1>Bagian I: Panduan Presentasi Zoom ke Klien</h1>
+
+<p>
+    Tujuan presentasi Zoom besok bukan sekadar memperlihatkan desain, melainkan <strong>membuktikan kepada klien bahwa website ini siap menerima pembeli luar negeri dan sangat mudah mereka kelola sendiri tanpa ketergantungan developer</strong>.
+</p>
+
+<h2>Bab 1: Alur Demo Share Screen 15 Menit</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width: 15%;">Menit Ke-</th>
+            <th style="width: 35%;">Layar yang Ditampilkan</th>
+            <th style="width: 50%;">Fokus yang Ditunjukkan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>00:00 - 03:00</strong></td>
+            <td>Beranda Depan (<code>http://localhost/grand-vanilla-id/</code>)</td>
+            <td>Tampilan awal elegan berstandar ekspor, logo teks, tagline, dan peta rute ekspor dunia.</td>
+        </tr>
+        <tr>
+            <td><strong>03:00 - 06:00</strong></td>
+            <td>Halaman Produk (<code>/products/vanilla-beans/</code>)</td>
+            <td>Fitur interaktif switcher varietas (Planifolia vs Tahitensis), tabel lab, dan tombol <em>Inquire This Product</em>.</td>
+        </tr>
+        <tr>
+            <td><strong>06:00 - 09:00</strong></td>
+            <td>Halaman Kontak & Form (<code>/contact/</code>)</td>
+            <td>Peta Google Maps interaktif, form pre-fill otomatis, dan keamanan anti-spam invisible honeypot.</td>
+        </tr>
+        <tr>
+            <td><strong>09:00 - 12:00</strong></td>
+            <td>WP Admin Portal (<code>/wp-admin/</code>)</td>
+            <td>Kemudahan mengedit nomor WA/Email/Google Maps di <em>Theme Settings</em> tanpa menyentuh kode.</td>
+        </tr>
+        <tr>
+            <td><strong>12:00 - 15:00</strong></td>
+            <td>Menu Inquiries di WP Admin</td>
+            <td>Membuka pesan masuk calon pembeli, membaca detail pesanan tonase, dan simulasi membalas email.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Bab 2: Skrip Bicara Kata-per-Kata (Word-for-Word Script)</h2>
+<p>
+    Gunakan kalimat-kalimat terstruktur di bawah ini saat mempresentasikan setiap tahapan di Zoom:
+</p>
+
+<div class="dialogue-box">
+    <div class="dialogue-tag">1. PEMBUKAAN & BERANDA DEPAN</div>
+    <div class="dialogue-text">
+        "Selamat pagi/siang Bapak/Ibu. Hari ini saya ingin menunjukkan perkembangan terbaru website resmi Grand Vanilla Indonesia. Desain ini kami rancang dengan pendekatan premium B2B ekspor berpalet earthy tone yang menonjolkan keaslian vanili nusantara. Website ini bukan sekadar brosur digital, melainkan mesin penangkap lead pembeli internasional yang terhubung langsung ke email dan WhatsApp Bapak/Ibu."
+    </div>
+</div>
+
+<div class="dialogue-box">
+    <div class="dialogue-tag">2. HALAMAN PRODUK & FITUR INTERAKTIF</div>
+    <div class="dialogue-text">
+        "Mari kita lihat halaman produk Vanilla Beans. Calon buyer global seperti importir atau pabrik extract biasanya ingin melihat spesifikasi teknis. Di sini kami buatkan switcher varietas interaktif: ketika buyer klik 'Vanilla Planifolia' atau 'Vanilla Tahitensis', foto karosel dan data laboratoriumnya (kadar vanillin, moisture level, panjang pod) otomatis berganti secara mulus. Jika mereka berminat, mereka tinggal klik tombol 'Inquire This Product', dan formulir kontak di bawah akan langsung terisi draf pesan untuk produk tersebut secara otomatis."
+    </div>
+</div>
+
+<div class="dialogue-box">
+    <div class="dialogue-tag">3. KEMUDAHAN KELOLA MANDIRI (THEME SETTINGS & GOOGLE MAPS)</div>
+    <div class="dialogue-text">
+        "Salah satu prioritas kami adalah memastikan Bapak/Ibu bisa mengelola website ini secara 100% mandiri tanpa perlu bantuan programmer. Jika suatu saat ingin mengganti nomor WhatsApp, email, akun sosial media, atau titik lokasi Google Maps kantor/gudang, cukup buka menu 'Theme Settings'. Untuk Google Maps, Bapak/Ibu bahkan bisa langsung copy-paste kode embed dari Google Maps, dan sistem kami secara cerdas akan langsung mengekstrak petanya dengan rapi."
+    </div>
+</div>
+
+<div class="dialogue-box">
+    <div class="dialogue-tag">4. KOTAK MASUK INQUIRIES & KEAMANAN EMAIL</div>
+    <div class="dialogue-text">
+        "Seluruh pesan penawaran dari calon pembeli tidak hanya dikirimkan ke email nirwanatim@gmail.com, tetapi juga otomatis tersimpan aman di database WordPress pada menu 'Inquiries' ini. Jadi tidak ada risiko pesan hilang akibat salah hapus email. Selain itu, kami sudah melengkapi form kontak dengan 'Invisible Honeypot' yang menyaring bot spam secara otomatis tanpa merepotkan pembeli dengan captcha yang membingungkan."
+    </div>
+</div>
+
+<!-- ================= BAGIAN I (LANJUTAN): FAQ KLIEN ================= -->
+<div class="page-break"></div>
+<h1>Bab 3: Antisipasi 7 Pertanyaan Kritis Klien</h1>
+
+<p>
+    Klien B2B biasanya menanyakan hal-hal praktis terkait operasional harian. Berikut bocoran pertanyaan yang paling sering muncul beserta cara menjawabnya dengan elegan:
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th style="width: 35%;">Pertanyaan Klien di Zoom</th>
+            <th style="width: 65%;">Jawaban Cerdas & Menenangkan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>1. "Kalau kami pindah kantor atau ganti titik Maps di website, apakah sulit?"</strong></td>
+            <td><em>"Sangat mudah Pak/Bu. Cukup buka menu 'Theme Settings' di admin, lalu paste link atau kode embed dari Google Maps. Tidak perlu paham koding sama sekali, peta akan langsung terupdate."</em></td>
+        </tr>
+        <tr>
+            <td><strong>2. "Email calon pembeli yang masuk dari website larinya ke mana?"</strong></td>
+            <td><em>"Otomatis masuk ke inbox email Bapak/Ibu di <code>nirwanatim@gmail.com</code> lengkap dengan nama, email pengirim, subjek, dan detail pesanan. Selain itu cadangannya tersimpan di menu Inquiries admin."</em></td>
+        </tr>
+        <tr>
+            <td><strong>3. "Bisa gak kami menambah produk baru sendiri, misal Vanilla Caviar atau Pasta?"</strong></td>
+            <td><em>"Bisa 100%. Tinggal klik menu 'Vanilla Products' &rarr; 'Add New Product'. Isi nama, deskripsi, foto, dan spesifikasi labnya. Seketika produk baru langsung muncul di katalog."</em></td>
+        </tr>
+        <tr>
+            <td><strong>4. "Apakah nomor WhatsApp di website bisa diganti kalau admin kami berganti?"</strong></td>
+            <td><em>"Tentu bisa. Di menu 'Theme Settings', ganti nomor di kolom WhatsApp. Tombol melayang, nomor di header, kontak di halaman Contact Us, dan footer akan langsung berganti serentak."</em></td>
+        </tr>
+        <tr>
+            <td><strong>5. "Apakah website ini aman dari pesan spam penipuan atau robot internet?"</strong></td>
+            <td><em>"Sudah sangat aman. Formulir kita sudah dipersenjatai 'Invisible Honeypot'. Robot spam yang mencoba mengirim iklan otomatis diblokir di latar belakang tanpa mengganggu calon buyer manusia."</em></td>
+        </tr>
+        <tr>
+            <td><strong>6. "Bagaimana kalau ada buyer yang membuka website lewat HP atau tablet?"</strong></td>
+            <td><em>"Website ini 100% responsif. Di HP tampilannya mengadopsi menu drawer modern, tabel spesifikasi bergeser rapi, dan tombol chat WhatsApp langsung membuka aplikasi WhatsApp di HP mereka."</em></td>
+        </tr>
+        <tr>
+            <td><strong>7. "Apakah website ini siap didaftarkan ke Google agar dicari pembeli luar negeri?"</strong></td>
+            <td><em>"Sudah sangat siap. Website sudah terintegrasi plugin Rank Math SEO dan sitemap XML otomatis, serta struktur data produk yang ramah mesin pencari internasional."</em></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ================= BAGIAN II: B2B EXPORT KNOWLEDGE ================= -->
+<div class="page-break"></div>
+<h1>Bagian II: Pemahaman Produk & B2B Ekspor</h1>
+
+<p>
+    Agar Anda terlihat sangat kompeten dan menguasai materi saat berdiskusi dengan klien vanili, berikut adalah terminologi ekspor vanili yang sudah terintegrasi di dalam website:
+</p>
+
+<h2>Bab 4: Terminologi Ekspor Vanili yang Wajib Anda Kuasai</h2>
+
+<div class="card no-break">
+    <h3 style="margin-top: 0;">1. Dua Varietas Utama Vanili Indonesia</h3>
+    <ul>
+        <li><strong>Vanilla Planifolia (Madagascar-type):</strong> Varietas paling populer di dunia. Cirinya pod panjang, tebal, oily, dengan aroma vanillin murni yang kuat dan klasik. Sangat disukai industri makanan, perisa es krim, dan bakery kelas atas.</li>
+        <li><strong>Vanilla Tahitensis:</strong> Varietas dengan aroma floral, fruity, dan sentuhan wangi bunga seperti anis. Sangat dicari oleh produsen parfum kelas dunia, kosmetik, serta pastry artisanal premium.</li>
+    </ul>
+</div>
+
+<div class="card no-break">
+    <h3 style="margin-top: 0;">2. Parameter Laboratorium & Klasifikasi Kualitas (Specs)</h3>
+    <ul>
+        <li><strong>Vanillin Content (2.0% - 2.4%):</strong> Kadar vanilin alami hasil analisis laboratorium. Standar ekspor Grade A mensyaratkan vanillin di atas 1.8%. Vanili Jawa Timur dan Papua terkenal memiliki kadar vanillin tinggi karena proses sun-curing tradisional.</li>
+        <li><strong>Moisture Content (30% - 35% untuk Gourmet Grade A):</strong> Kadar kelembaban polong. Pod Grade A harus kenyal, lentur (*supple*), dan berkilau minyak alami. Sedangkan untuk *Extraction Grade* kelembaban berkisar 20%-25% (lebih kering dan cocok untuk diekstrak cairan).</li>
+        <li><strong>Pod Length (16 - 20 cm):</strong> Ukuran panjang polong vanili utuh. Panjang pod berbanding lurus dengan kematangan saat dipetik di pohon.</li>
+    </ul>
+</div>
+
+<div class="card no-break">
+    <h3 style="margin-top: 0;">3. Ketentuan Pengiriman Internasional (Incoterms & Dokumen Legal)</h3>
+    <ul>
+        <li><strong>FOB (Free on Board):</strong> Penjual bertanggung jawab hingga barang dimuat ke pesawat kargo di Bandara Soekarno-Hatta (CGK Jakarta) atau Ngurah Rai (DPS Bali). Ongkos angkut internasional ditanggung pembeli.</li>
+        <li><strong>CIF (Cost, Insurance, Freight):</strong> Penjual menanggung harga barang, asuransi kargo laut/udara, dan biaya pengiriman hingga ke pelabuhan tujuan buyer di luar negeri.</li>
+        <li><strong>Phytosanitary Certificate:</strong> Sertifikat jaminan kesehatan tumbuhan bebas hama dari Badan Karantina Pertanian Indonesia. Wajib ada untuk ekspor komoditas vanili.</li>
+        <li><strong>COA (Certificate of Analysis):</strong> Laporan hasil uji lab independen mengenai kadar vanillin, kelembaban, dan bebas mikroba patogen.</li>
+    </ul>
+</div>
+
+<!-- ================= BAGIAN III: ANATOMI WEBSITE ================= -->
+<div class="page-break"></div>
+<h1>Bagian III: Anatomi Website & Fitur Teknis Unggulan</h1>
+
+<p>
+    Website ini menggunakan arsitektur WordPress modern yang dirancang untuk ketahanan jangka panjang dan performa tinggi:
+</p>
+
+<h2>Bab 5: Pemisahan Database vs File Tema</h2>
+<div class="card no-break">
+    <p>
+        <strong>Mengapa Anda tidak perlu takut salah?</strong><br>
+        Seluruh teks, gambar, spesifikasi produk, dan data kontak disimpan di database MySQL. File-file tema PHP di folder <code>wp-content/themes/grand-vanilla-theme/</code> hanya bertindak sebagai "cetakan" tampilan. Jika Anda mengubah teks di admin WordPress, Anda tidak menyentuh kode tema. Cetakan tersebut akan membaca data baru dari database secara otomatis tanpa risiko error.
+    </p>
+</div>
+
+<h2>Bab 6: Bedah 8 Halaman Website</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width: 25%;">Halaman</th>
+            <th style="width: 35%;">File Template PHP</th>
+            <th style="width: 40%;">Fitur Utama & Interaktivitas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Homepage (Beranda)</strong></td>
+            <td><code>front-page.php</code></td>
+            <td>Hero section, About snippet, 5 keunggulan ekspor, Peta dunia rute ekspor, Produk unggulan, Infinite Karosel Galeri.</td>
+        </tr>
+        <tr>
+            <td><strong>About Us</strong></td>
+            <td><code>page-about.php</code></td>
+            <td>Sejarah tradisi perkebunan, terroir Jawa Timur, standar higienis, dan kapasitas gudang.</td>
+        </tr>
+        <tr>
+            <td><strong>Products Catalog</strong></td>
+            <td><code>archive-vanilla_product.php</code></td>
+            <td>Grid katalog 5 produk vanili ekspor dengan tag varietas dan link spesifikasi detail.</td>
+        </tr>
+        <tr>
+            <td><strong>Single Product</strong></td>
+            <td><code>single-vanilla_product.php</code></td>
+            <td>Interactive switcher varietas, karosel foto, tabel lab specs, 6 aplikasi industri, dan tombol B2B Request Quote.</td>
+        </tr>
+        <tr>
+            <td><strong>Gallery</strong></td>
+            <td><code>page-gallery.php</code></td>
+            <td>Infinite seamless loop karosel foto penjemuran dan sortasi vanili.</td>
+        </tr>
+        <tr>
+            <td><strong>Articles & Blog</strong></td>
+            <td><code>index.php</code> & <code>single.php</code></td>
+            <td>Artikel edukasi ekspor dengan auto-format blockquote emas dan bullet centang hijau.</td>
+        </tr>
+        <tr>
+            <td><strong>Contact Us</strong></td>
+            <td><code>page-contact.php</code></td>
+            <td>Formulir kontak AJAX prefilled, invisible honeypot, nomor kontak, dan iframe Google Maps interaktif.</td>
+        </tr>
+        <tr>
+            <td><strong>Error 404</strong></td>
+            <td><code>404.php</code></td>
+            <td>Halaman penanganan link salah ketik bertema Grand Vanilla yang mengarahkan buyer kembali ke katalog.</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ================= BAGIAN IV: OPERASIONAL CMS DETAIL ================= -->
+<div class="page-break"></div>
+<h1>Bagian IV: Panduan Operasional WP Admin Lengkap (Tambah, Edit, Hapus)</h1>
+
+<p>
+    Bagian ini adalah pedoman teknis operasional terlengkap untuk seluruh menu di WordPress Admin Grand Vanilla Indonesia. Setiap modul dijelaskan tuntas: <strong>di mana menunya, apa yang bisa ditambahkan, cara mengeditnya, cara menghapusnya, dan di mana hasilnya muncul pada website.</strong>
+</p>
+
+<!-- MODUL 1: THEME SETTINGS -->
+<h2>Bab 8: Kontak, Medsos & Google Maps (Theme Settings / Customizer)</h2>
+<div class="card no-break">
+    <p><strong>Lokasi Menu:</strong> WP Admin &rarr; menu <strong>Theme Settings</strong> di sidebar kiri (atau <strong>Tampilan</strong> &rarr; <strong>Sesuaikan</strong>).</p>
+    <p><strong>Muncul di Mana:</strong> Topbar atas, Header, Footer di semua halaman, Halaman Contact Us, dan tombol melayang WhatsApp.</p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 20%;">Aksi</th>
+                <th style="width: 50%;">Langkah-Langkah di Dashboard</th>
+                <th style="width: 30%;">Dampak pada Website</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge-pill badge-green">TAMBAH / EDIT</span></td>
+                <td>
+                    1. Buka <strong>Theme Settings</strong>.<br>
+                    2. Pada kolom <em>WhatsApp Number</em>, masukkan nomor (misal: <code>087717752085</code>).<br>
+                    3. Pada kolom <em>Email Address</em>, masukkan email (misal: <code>nirwanatim@gmail.com</code>).<br>
+                    4. Pada kolom <em>Google Maps Embed</em>, paste kode iframe atau URL embed dari Google Maps.<br>
+                    5. Klik tombol biru <strong>Publish</strong> di bagian atas.
+                </td>
+                <td>Nomor WhatsApp, email, dan peta Google Maps langsung terupdate seketika di seluruh halaman web tanpa perlu edit file kodingan satu pun.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-pill badge-amber">HAPUS</span></td>
+                <td>Kosongkan isi kolom input teks yang ingin dihilangkan &rarr; klik <strong>Publish</strong>.</td>
+                <td>Bagian kontak tersebut akan kembali ke nilai bawaan (default) yang aman dan rapi.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- MODUL 2: VANILLA PRODUCTS -->
+<div class="page-break"></div>
+<h2>Bab 9: Katalog Produk Vanili Utama (Vanilla Products)</h2>
+<div class="card no-break">
+    <p><strong>Lokasi Menu:</strong> WP Admin &rarr; menu <strong>Vanilla Products</strong>.</p>
+    <p><strong>Muncul di Mana:</strong> Halaman Beranda (Featured Products), Katalog Semua Produk (<code>/products/</code>), dan Halaman Detail Produk (<code>/products/[nama-produk]/</code>).</p>
+    
+    <div class="step-item">
+        <div class="step-num">➕</div>
+        <div class="step-content">
+            <strong>CARA MENAMBAH PRODUK BARU:</strong>
+            <ol>
+                <li>Klik menu <strong>Vanilla Products</strong> &rarr; <strong>Add New Product</strong>.</li>
+                <li><strong>Judul:</strong> Ketik nama produk vanili (contoh: <em>Gourmet Black Planifolia Beans</em>).</li>
+                <li><strong>Deskripsi:</strong> Ketik penjelasan produk, profil aroma, dan kegunaan kuliner di kotak editor utama.</li>
+                <li><strong>Featured Image:</strong> Pada kolom sebelah kanan bawah, klik <em>Set featured image</em> &rarr; pilih atau upload foto produk vanili terbaik.</li>
+                <li><strong>Vanilla B2B Export Specifications (Kotak Bawah):</strong> Isi parameter laboratorium:
+                    <ul>
+                        <li><em>Botanical Name:</em> misal <code>Vanilla planifolia Andrews</code></li>
+                        <li><em>Grade & Quality:</em> misal <code>Gourmet / Grade A Prime</code></li>
+                        <li><em>Moisture Content:</em> misal <code>30% - 35%</code></li>
+                        <li><em>Vanillin Content:</em> misal <code>2.0% - 2.4%</code></li>
+                        <li><em>Pod Length:</em> misal <code>16 - 22 cm</code></li>
+                        <li><em>Harvest & Origin:</em> misal <code>East Java & Papua, Indonesia</code></li>
+                    </ul>
+                </li>
+                <li>Klik tombol biru <strong>Publish</strong> di kanan atas. Produk langsung tayang di katalog ekspor!</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="step-item">
+        <div class="step-num">✏️</div>
+        <div class="step-content">
+            <strong>CARA MENGEDIT PRODUK LAMA:</strong>
+            <ol>
+                <li>Buka menu <strong>Vanilla Products</strong> &rarr; <strong>All Products</strong>.</li>
+                <li>Arahkan kursor ke nama produk &rarr; klik <strong>Edit</strong>.</li>
+                <li>Ubah teks deskripsi, foto, atau angka spesifikasi lab yang ingin diperbarui.</li>
+                <li>Klik tombol biru <strong>Update</strong> di kanan atas. Perubahan langsung aktif seketika.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="step-item">
+        <div class="step-num">🗑️</div>
+        <div class="step-content">
+            <strong>CARA MENGHAPUS PRODUK:</strong>
+            <ol>
+                <li>Buka menu <strong>Vanilla Products</strong> &rarr; <strong>All Products</strong>.</li>
+                <li>Arahkan kursor ke produk yang ingin dibuang &rarr; klik tulisan merah <strong>Trash</strong> (Tong Sampah).</li>
+                <li><em>Apakah aman?</em> <strong>100% AMAN.</strong> Produk hanya dipindahkan ke folder Trash database. Tampilan katalog website akan otomatis menyesuaikan diri (layout tetap rapi dan tidak akan bolong).</li>
+                <li><em>Cara memulihkan jika salah hapus:</em> Klik tab <strong>Trash</strong> di bagian atas &rarr; arahkan kursor ke produk &rarr; klik <strong>Restore</strong>. Produk akan kembali tayang!</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- MODUL 3: VARIETIES REPEATER -->
+<div class="page-break"></div>
+<h2>Bab 10: Sub-Varietas & Grade Produk (Varieties Repeater)</h2>
+<div class="card no-break">
+    <p><strong>Lokasi:</strong> Di dalam halaman edit produk (kotak meta <em>Product Varieties</em> di bawah deskripsi).</p>
+    <p><strong>Fungsi:</strong> Menampilkan sub-varian produk pada tab interaktif (misal: di dalam produk <em>Tahitensis</em> ada varian *Grade A*, *Extract Grade*, dan *Vanilla Powder*).</p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 20%;">Aksi</th>
+                <th style="width: 50%;">Langkah-Langkah di Dashboard</th>
+                <th style="width: 30%;">Dampak pada Website</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge-pill badge-green">TAMBAH</span></td>
+                <td>
+                    1. Scroll ke kotak <strong>Product Varieties</strong>.<br>
+                    2. Klik tombol <strong>+ Add Variety</strong>. Baris input baru akan muncul.<br>
+                    3. Isi <em>Variety Name</em> (Nama Varian) dan <em>Short Specs / Description</em> (Spek singkat).<br>
+                    4. Klik tombol <strong>Update</strong> di kanan atas.
+                </td>
+                <td>Tab varian baru langsung muncul pada switcher halaman detail produk secara dinamis.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-pill badge-blue">EDIT</span></td>
+                <td>Ubah langsung teks pada kotak nama atau spesifikasi varietas yang sudah ada &rarr; klik <strong>Update</strong>.</td>
+                <td>Spesifikasi sub-varian langsung terupdate.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-pill badge-amber">HAPUS</span></td>
+                <td>Klik tombol merah <strong>Remove</strong> di samping baris varietas yang ingin dibuang &rarr; klik <strong>Update</strong>.</td>
+                <td>Varian tersebut langsung hilang dari tab switcher tanpa merusak varian lainnya.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- MODUL 4: INQUIRIES LEADS -->
+<h2>Bab 11: Kotak Masuk Pesan Buyer B2B (Inquiries)</h2>
+<div class="card no-break">
+    <p><strong>Lokasi Menu:</strong> WP Admin &rarr; menu <strong>Inquiries</strong> di sidebar kiri.</p>
+    <p><strong>Fungsi:</strong> Menyimpan seluruh pesan penawaran harga (RFQ) dan order tonase dari importir luar negeri yang mengisi formulir di website.</p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 20%;">Aksi</th>
+                <th style="width: 50%;">Langkah-Langkah di Dashboard</th>
+                <th style="width: 30%;">Dampak pada Website</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge-pill badge-blue">LIHAT & BACA</span></td>
+                <td>
+                    1. Klik menu <strong>Inquiries</strong> (jika ada pesan baru, akan ada lingkaran angka merah).<br>
+                    2. Klik judul/nama pengirim untuk membuka detail lengkap:
+                    <ul>
+                        <li>Nama Pengirim & Perusahaan</li>
+                        <li>Negara Asal Buyer</li>
+                        <li>Alamat Email & Nomor WhatsApp</li>
+                        <li>Produk yang diminati (Planifolia / Tahitensis)</li>
+                        <li>Isi Pesan / Estimasi Tonase</li>
+                    </ul>
+                </td>
+                <td>Data tersimpan aman di database sebagai backup jika email klien penuh atau error.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-pill badge-green">STATUS</span></td>
+                <td>Tandai status pesan apakah sudah dibalas: <em>Unread</em> &rarr; <em>Read</em> &rarr; <em>Followed Up</em>.</td>
+                <td>Memudahkan tim sales klien melacak lead mana yang sudah di-follow up.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-pill badge-amber">HAPUS</span></td>
+                <td>Arahkan kursor ke baris pesan spam / pesan uji coba &rarr; klik <strong>Trash</strong>.</td>
+                <td>Pesan dibuang ke tong sampah dan tidak mengotori daftar leads.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- MODUL 5: MEDIA & BLOG -->
+<div class="page-break"></div>
+<h2>Bab 12: Galeri, Foto Dokumentasi & Media Library</h2>
+<div class="card no-break">
+    <p><strong>Lokasi Menu:</strong> WP Admin &rarr; menu <strong>Media</strong>.</p>
+    <p><strong>Fungsi:</strong> Menyimpan aset visual perkebunan, gudang curing, sertifikat laboratorium (COA / Phytosanitary), dan foto fasilitas.</p>
+    <ul>
+        <li><strong>Tambah Foto Baru:</strong> Klik <code>Media</code> &rarr; <code>Add New Media File</code> &rarr; drag-and-drop file gambar (JPG, PNG, atau WebP) dari komputer Anda.</li>
+        <li><strong>Edit Keterangan / SEO:</strong> Klik gambar yang sudah diunggah &rarr; isi kolom <em>Alternative Text</em> (Alt text) dengan kata kunci ekspor (misal: <em>Indonesian Planifolia Vanilla Pods Sun Curing</em>) &rarr; otomatis tersimpan.</li>
+        <li><strong>Hapus Foto:</strong> Klik gambar &rarr; klik tulisan merah <em>Delete permanently</em> di pojok kanan bawah.</li>
+    </ul>
+</div>
+
+<h2>Bab 13: Artikel Blog & Edukasi Pasar Ekspor (Posts)</h2>
+<div class="card no-break">
+    <p><strong>Lokasi Menu:</strong> WP Admin &rarr; menu <strong>Posts</strong>.</p>
+    <p><strong>Fungsi:</strong> Menulis berita industri rempah, tips penyimpanan vanili, dan edukasi bagi buyer mancanegara (sangat bagus untuk ranking Google SEO).</p>
+    <ul>
+        <li><strong>Tambah Artikel:</strong> Klik <code>Posts</code> &rarr; <code>Add New Post</code>. Tulis judul, isi tulisan, upload <em>Featured Image</em>, pilih Kategori &rarr; klik <strong>Publish</strong>. Sistem otomatis menambahkan estimasi waktu baca (reading time) dan tombol share ke media sosial.</li>
+        <li><strong>Fitur Khusus Artikel:</strong> Jika Anda membuat kutipan di editor (<em>Blockquote</em>), tampilan di website akan otomatis diberi bingkai emas elegan. Jika membuat daftar (<em>Bullet List</em>), iconnya otomatis menjadi centang hijau profesional.</li>
+        <li><strong>Edit & Hapus:</strong> Menu <code>Posts</code> &rarr; <code>All Posts</code>. Klik <em>Edit</em> untuk merevisi tulisan, atau klik <em>Trash</em> untuk menghapus artikel.</li>
+    </ul>
+</div>
+
+<!-- MODUL 6: HALAMAN LEGAL & MENU NAVIGASI -->
+<h2>Bab 14: Halaman Profil & Dokumen Legal (Pages)</h2>
+<div class="card no-break">
+    <p><strong>Lokasi Menu:</strong> WP Admin &rarr; menu <strong>Pages</strong>.</p>
+    <p><strong>Fungsi:</strong> Mengelola halaman statis profil dan legalitas ekspor: <em>About Us</em>, <em>Contact Us</em>, <em>Terms of Supply & Export Conditions</em>, dan <em>Privacy Policy</em>.</p>
+    <ul>
+        <li><strong>Cara Mengedit Isi Halaman:</strong> Buka menu <code>Pages</code> &rarr; <code>All Pages</code> &rarr; klik <em>Edit</em> pada halaman <em>Terms of Supply</em> atau <em>About Us</em> &rarr; ubah kalimat klausul pembayaran (Incoterms, LC, DP), garansi lab, atau alamat pabrik &rarr; klik <strong>Update</strong>.</li>
+        <li><strong>Aturan Keamanan:</strong> Jangan menghapus (Trash) halaman-halaman utama ini agar link di menu navigasi tidak menjadi broken link (error 404). Teks di dalamnya 100% bebas Anda edit kapan saja.</li>
+    </ul>
+</div>
+
+<h2>Bab 15: Menu Navigasi Header & Footer (Appearance &rarr; Menus)</h2>
+<div class="card no-break">
+    <p><strong>Lokasi Menu:</strong> WP Admin &rarr; menu <strong>Tampilan (Appearance)</strong> &rarr; <strong>Menu</strong>.</p>
+    <p><strong>Fungsi:</strong> Mengatur susunan link yang muncul di bar menu atas (Navbar) dan daftar link di bagian bawah (Footer).</p>
+    <ul>
+        <li><strong>Menambah Menu:</strong> Centang halaman di panel sebelah kiri (misal halaman baru) &rarr; klik tombol <em>Tambahkan ke Menu</em> &rarr; item akan masuk ke susunan sebelah kanan.</li>
+        <li><strong>Mengubah Urutan (Drag-and-Drop):</strong> Klik dan tahan salah satu item menu &rarr; geser ke atas atau ke bawah sesuai urutan yang diinginkan. Jika digeser agak menjorok ke kanan, item tersebut otomatis menjadi sub-menu (dropdown).</li>
+        <li><strong>Menghapus Item Menu:</strong> Klik tanda panah kecil di samping item menu &rarr; klik tulisan merah <em>Singkirkan (Remove)</em>.</li>
+        <li><strong>Simpan:</strong> Selalu klik tombol biru <strong>Simpan Menu (Save Menu)</strong> di kanan bawah setelah selesai merapikan.</li>
+    </ul>
+</div>
+
+<!-- ================= BAGIAN V: ZONA AMAN & DARURAT ================= -->
+<div class="page-break"></div>
+<h1>Bagian V: Zona Aman & Tindakan Darurat Developer</h1>
+
+<p>
+    Gunakan panduan ini sebagai batas aman (*safety boundaries*) saat Anda melakukan pemeliharaan website:
+</p>
+
+<h2>Bab 16: Zona Hijau (Aman Bebas) vs Zona Merah (Hati-Hati)</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width: 50%;">ZONA HIJAU (100% Bebas Tanpa Takut)</th>
+            <th style="width: 50%;">ZONA MERAH (Hati-Hati & Cek Syntax)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <ul>
+                    <li>Mengubah data kontak di <em>Theme Settings</em></li>
+                    <li>Menambah atau menghapus produk vanili</li>
+                    <li>Mengganti foto galeri penjemuran & curing</li>
+                    <li>Membaca dan membalas pesan di <em>Inquiries</em></li>
+                    <li>Menulis dan mempublikasikan artikel blog baru</li>
+                    <li>Mengganti foto featured image produk</li>
+                    <li>Menghapus pesan spam ke folder Trash</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li>Mengubah kode fungsi logika di <code>functions.php</code></li>
+                    <li>Menghapus tanda titik-koma (<code>;</code>) atau kurung di file PHP</li>
+                    <li>Menonaktifkan plugin tanpa memahami dependensinya</li>
+                    <li>Mengubah nama direktori tema <code>grand-vanilla-theme</code></li>
+                    <li>Mengutak-atik tabel database mentah di phpMyAdmin</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Bab 17: Langkah Darurat Jika Tak Sengaja Mengedit Kode & Layar Blank</h2>
+<div class="card no-break">
+    <h3 style="margin-top: 0; color: #B71C1C;">Langkah Penyelamatan 30 Detik</h3>
+    <p>Jika suatu saat Anda mengedit file PHP lalu website memunculkan layar putih atau pesan error:</p>
+    <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">Buka terminal <strong>PowerShell</strong> di laptop Anda.</div>
+    </div>
+    <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+            Ketik perintah ajaib pengecek syntax PHP berikut lalu tekan Enter:
+            <pre>php -l "C:\laragon\www\grand-vanilla-id\wp-content\themes\grand-vanilla-theme\functions.php"</pre>
+        </div>
+    </div>
+    <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+            Terminal akan langsung memberitahu di baris berapa yang salah ketik (misal: <em>syntax error, unexpected token on line 45</em>). Buka baris tersebut, perbaiki titik-koma atau kurungnya, lalu simpan.
+        </div>
+    </div>
+    <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+            Jika terminal menghasilkan output <code>No syntax errors detected</code>, website Anda sudah normal kembali 100%!
+        </div>
+    </div>
+</div>
+
+<!-- ================= BAGIAN VI: DEPLOYMENT HOSTINGER & HANDOVER ================= -->
+<div class="page-break"></div>
+<h1>Bagian VI: Panduan Hosting Hostinger & Serah Terima (Handover)</h1>
+
+<p>
+    Bagian ini menjawab seluruh keraguan teknis Anda terkait hosting di Hostinger, kepemilikan akun, penyerahan file folder, dan cara memindahkan website dari Laragon laptop ke server internet secara mulus tanpa pusing database:
+</p>
+
+<h2>Bab 18: Kepemilikan Akun Hostinger & Apa yang Perlu Diminta ke Klien</h2>
+<div class="card no-break">
+    <h3 style="margin-top: 0; color: #363E19;">Aturan Emas: Akun Hosting & Domain 100% Milik Klien</h3>
+    <p>
+        <strong>Pertanyaan Anda:</strong> <em>"Hosting ini harusnya atas nama gw atau klien?"</em><br>
+        <strong>Jawaban Standar Industri:</strong> Akun hosting dan domain <strong>HARUS selalu atas nama dan dibeli langsung oleh klien</strong> menggunakan email dan pembayaran mereka sendiri.
+    </p>
+    <ul>
+        <li><strong>Alasan Finansial:</strong> Biaya perpanjangan tahunan (renewal fee) domain dan hosting akan ditagihkan langsung ke kartu/rekening klien. Anda tidak perlu repot menagih uang perpanjangan tiap tahun.</li>
+        <li><strong>Alasan Legal & Keamanan:</strong> Aset digital (nama domain dan konten web) adalah hak milik sah perusahaan klien, sehingga mereka memiliki kontrol penuh atas properti bisnis mereka.</li>
+    </ul>
+</div>
+
+<div class="alert alert-tip no-break">
+    <strong>🔑 Apa yang Perlu Anda Minta ke Klien?</strong><br>
+    Jangan ragu, Anda cukup menyampaikan kalimat profesional ini:
+    <div style="font-style: italic; margin-top: 6px; padding-left: 8px; border-left: 2px solid #2E7D32;">
+        "Bapak/Ibu, berhubung paket hosting dan domain sudah siap di Hostinger, untuk keperluan deployment dan upload website, saya membutuhkan akses ke akun Hostinger Bapak/Ibu. Bapak/Ibu bisa membagikan akses via fitur <strong>Account Sharing</strong> di menu hPanel Hostinger ke email saya, atau memberikan detail login sementara. Setelah website live dan serah terima selesai, Bapak/Ibu bisa langsung mengganti passwordnya kembali demi keamanan."
+    </div>
+</div>
+
+<h2>Bab 19: Status Folder File Laragon & SOP Serah Terima</h2>
+<div class="card no-break">
+    <h3 style="margin-top: 0;">Pertanyaan: Apakah Folder di Laptop (Laragon) Harus Dikasih ke Klien Setelah Lunas?</h3>
+    <p>
+        <strong>Jawaban Profesional:</strong> <strong>TIDAK PERLU memberikan mentahan folder Laragon.</strong>
+    </p>
+    <p>
+        Dalam standar industri web development, produk akhir yang dibeli klien adalah <strong>website yang sudah AKTIF, LIVE, dan berfungsi sempurna di domain mereka</strong>, beserta <strong>akses akun Admin WordPress mereka</strong>. Klien non-teknis tidak mengerti cara membuka folder Laragon di laptop mereka.
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 35%;">Item yang Diserahkan ke Klien</th>
+                <th style="width: 65%;">Keterangan & Catatan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1. URL Website Live</strong></td>
+                <td>Domain utama klien (misal: <code>https://grandvanilla.id</code>) sudah berstatus HTTPS (SSL hijau aktif).</td>
+            </tr>
+            <tr>
+                <td><strong>2. Akun Administrator WordPress</strong></td>
+                <td>Username dan Password baru untuk klien login ke dashboard WP Admin mereka sendiri.</td>
+            </tr>
+            <tr>
+                <td><strong>3. Buku Panduan PDF Ini</strong></td>
+                <td>Dokumen panduan operasional agar staf atau admin klien bisa mengelola konten secara mandiri.</td>
+            </tr>
+            <tr>
+                <td><strong>4. Source Code (Jika Diminta Khusus)</strong></td>
+                <td>Jika dalam perjanjian kerja sama klien meminta source code, Anda cukup membuat file ZIP dari folder tema: <code>wp-content/themes/grand-vanilla-theme/</code>. Folder sistem Laragon tetap milik laptop Anda sebagai arsip developer.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="page-break"></div>
+<h2>Bab 20: SOP Migrasi Laragon ke Hostinger 1-Klik (All-in-One WP Migration)</h2>
+<p>
+    Sebagai developer yang baru pertama kali meng-onlinekan WordPress, hindari cara manual ekspor SQL phpMyAdmin dan ganti URL database yang rawan error. Gunakan <strong>All-in-One WP Migration</strong>—plugin standar industri yang otomatis mengurus database, gambar, URL, dan konfigurasi hanya dengan 2 tombol:
+</p>
+
+<div class="step-item no-break">
+    <div class="step-num">1</div>
+    <div class="step-content">
+        <strong>Export dari Laragon (Laptop Anda):</strong><br>
+        Buka WP Admin lokal &rarr; menu <strong>Plugins</strong> &rarr; <strong>Add New</strong> &rarr; cari dan install plugin <code>All-in-One WP Migration</code> &rarr; klik Aktifkan.
+    </div>
+</div>
+<div class="step-item no-break">
+    <div class="step-num">2</div>
+    <div class="step-content">
+        Di sidebar kiri, klik <strong>All-in-One WP Migration</strong> &rarr; klik <strong>Export</strong> &rarr; klik tombol dropdown <strong>Export To</strong> &rarr; pilih <strong>FILE</strong>.<br>
+        Tunggu proses scanning selesai hingga muncul tombol unduh berkedip (misal: <em>DOWNLOAD LOCALHOST-GRAND-VANILLA.WPRESS</em>). Simpan file <code>.wpress</code> ini di laptop Anda.
+    </div>
+</div>
+<div class="step-item no-break">
+    <div class="step-num">3</div>
+    <div class="step-content">
+        <strong>Setup WordPress Polos di Hostinger:</strong><br>
+        Login ke hPanel Hostinger klien &rarr; klik <strong>Websites</strong> &rarr; klik <strong>Auto Installer</strong> &rarr; pilih <strong>WordPress</strong>.<br>
+        Isi judul situs dan buat username & password administrator untuk login ke WordPress Hostinger.
+    </div>
+</div>
+<div class="step-item no-break">
+    <div class="step-num">4</div>
+    <div class="step-content">
+        <strong>Import ke Hostinger:</strong><br>
+        Login ke dashboard WordPress Hostinger baru tersebut &rarr; install dan aktifkan plugin yang sama: <code>All-in-One WP Migration</code>.
+    </div>
+</div>
+<div class="step-item no-break">
+    <div class="step-num">5</div>
+    <div class="step-content">
+        Di menu <strong>All-in-One WP Migration</strong> &rarr; klik <strong>Import</strong> &rarr; pilih <strong>Import From: FILE</strong> &rarr; pilih file <code>.wpress</code> yang sudah diunduh tadi.<br>
+        Jika muncul popup konfirmasi penimpaan database (*This will overwrite your database...*), klik <strong>Proceed</strong>.
+    </div>
+</div>
+<div class="step-item no-break">
+    <div class="step-num">6</div>
+    <div class="step-content">
+        <strong>Finishing & Simpan Permalinks:</strong><br>
+        Setelah import selesai 100%, login kembali ke WP Admin menggunakan kredensial akun lokal Anda. Buka menu <strong>Settings (Pengaturan)</strong> &rarr; <strong>Permalinks</strong> &rarr; langsung klik tombol <strong>Save Changes</strong> (Simpan Perubahan) sebanyak 2 kali untuk me-refresh struktur link.<br>
+        <span class="badge-pill badge-green">WEBSITE RESMI LIVE & 100% IDENTIK DENGAN LARAGON</span>
+    </div>
+</div>
+
+<div class="alert alert-safe no-break" style="margin-top: 24px; text-align: center; padding: 18px;">
+    <h3 style="margin: 0 0 6px 0; color: #2E7D32;">Anda Sudah Sangat Siap untuk Rapat Zoom Besok!</h3>
+    <p style="margin: 0; font-size: 9.5pt; text-align: center;">
+        Sistem ini dibangun dengan fondasi yang kokoh, rapi, dan modular. Kuasai alur demo di Bagian I, bicara dengan santai dan tenang. Sukses besar untuk presentasi Anda besok! 🚀
+    </p>
+</div>
+
+</body>
+</html>
