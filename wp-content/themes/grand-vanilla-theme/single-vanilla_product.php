@@ -9,6 +9,7 @@
 get_header();
 
 $img_dir = get_template_directory_uri() . '/assets/images/';
+$contact = grand_vanilla_get_contact_info();
 $current_id = get_the_ID();
 $current_slug = get_post_field( 'post_name', $current_id );
 $current_title = get_the_title();
@@ -306,6 +307,25 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                             </div>
                         <?php endforeach; ?>
                     </div>
+
+                    <!-- B2B Direct Inquiry & WhatsApp CTA -->
+                    <div class="gv-specs-cta-wrap" style="margin-top: 1.75rem; display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center;">
+                        <a href="<?php echo esc_url( add_query_arg( 'product', urlencode( $is_beans && $active_variety ? $active_variety['name'] : $current_title ), home_url( '/contact/' ) ) ); ?>" 
+                           id="gvInquireProductBtn"
+                           class="gv-product-inquire-btn"
+                           style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.75rem 1.6rem; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s ease;">
+                            <span>Inquire This Product</span>
+                            <span style="font-size: 1rem;">&rarr;</span>
+                        </a>
+                        <a href="<?php echo esc_url( 'https://wa.me/' . $contact['clean_wa'] . '?text=' . rawurlencode( 'Hello Grand Vanilla Indonesia, I would like to inquire about sourcing ' . ( $is_beans && $active_variety ? $active_variety['name'] : $current_title ) . ' for export.' ) ); ?>" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           id="gvInquireWaBtn"
+                           class="gv-product-wa-btn"
+                           style="background-color: #FFFFFF; border: 1px solid #363E19; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.75rem 1.25rem; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
+                            <span>WhatsApp Quote</span>
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -564,6 +584,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         `;
                     }
                     table.innerHTML = tableHtml;
+                }
+
+                // Update Inquire CTA Links dynamically
+                const inquireBtn = document.getElementById('gvInquireProductBtn');
+                const waBtn = document.getElementById('gvInquireWaBtn');
+                if (inquireBtn) {
+                    inquireBtn.href = '<?php echo esc_url( home_url( '/contact/' ) ); ?>?product=' + encodeURIComponent(data.name);
+                }
+                if (waBtn) {
+                    waBtn.href = 'https://wa.me/<?php echo esc_js( $contact['clean_wa'] ); ?>?text=' + encodeURIComponent('Hello Grand Vanilla Indonesia, I would like to inquire about sourcing ' + data.name + ' for export.');
                 }
 
                 // Update Carousel Images

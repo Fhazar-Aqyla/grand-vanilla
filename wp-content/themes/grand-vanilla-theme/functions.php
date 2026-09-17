@@ -427,7 +427,7 @@ function grand_vanilla_product_varieties_callback( $post ) {
     ?>
     <div id="gv-varieties-wrapper" style="margin: 1rem 0;">
         <p class="description" style="margin-bottom: 1.5rem; font-size: 13px;">
-            <?php esc_html_e( 'Tambahkan jenis varietas di bawah ini (misal: Vanilla Planifolia Beans, Vanilla Tahitensis Beans, Vanilla Pompona Beans, dll). Pengunjung dapat mengklik tab setiap varietas untuk melihat foto carousel, overview, dan spesifikasi yang otomatis berubah.', 'grand-vanilla' ); ?>
+            <?php esc_html_e( 'Configure product varieties below (e.g. Vanilla Planifolia Beans, Vanilla Tahitensis Beans, etc.). Buyers can toggle variety tabs to view specific photos, overview, and lab characteristics.', 'grand-vanilla' ); ?>
         </p>
 
         <div id="gv-varieties-list" style="display: flex; flex-direction: column; gap: 1.5rem;">
@@ -450,35 +450,35 @@ function grand_vanilla_product_varieties_callback( $post ) {
                 <div class="gv-variety-item-card" style="border: 1px solid #ccd0d4; background: #f9f9f9; border-radius: 8px; padding: 1.25rem; position: relative;">
                     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 0.75rem; margin-bottom: 1rem;">
                         <h4 style="margin: 0; font-size: 15px; color: #1d2327;">
-                            Varietas #<span class="gv-v-number"><?php echo $v_index + 1; ?></span>: <strong><?php echo esc_html( $v_name ? $v_name : 'Varietas Baru' ); ?></strong>
+                            Variety #<span class="gv-v-number"><?php echo $v_index + 1; ?></span>: <strong><?php echo esc_html( $v_name ? $v_name : 'New Variety' ); ?></strong>
                         </h4>
-                        <button type="button" class="button button-link-delete gv-remove-variety-btn" style="color: #b32d2e;">Hapus Varietas</button>
+                        <button type="button" class="button button-link-delete gv-remove-variety-btn" style="color: #b32d2e;">Delete Variety</button>
                     </div>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                         <div>
-                            <label style="font-weight: 600; display: block; margin-bottom: 4px;">Nama Lengkap Varietas (Tab & Heading)</label>
+                            <label style="font-weight: 600; display: block; margin-bottom: 4px;">Full Variety Name (Tab & Heading)</label>
                             <input type="text" name="gv_varieties[<?php echo $v_index; ?>][name]" value="<?php echo esc_attr( $v_name ); ?>" placeholder="e.g. Vanilla Planifolia Beans" style="width: 100%;">
                         </div>
                         <div>
-                            <label style="font-weight: 600; display: block; margin-bottom: 4px;">Nama Singkat (Variety Bullet)</label>
+                            <label style="font-weight: 600; display: block; margin-bottom: 4px;">Short Name (Variety Bullet)</label>
                             <input type="text" name="gv_varieties[<?php echo $v_index; ?>][short_name]" value="<?php echo esc_attr( $v_short_name ); ?>" placeholder="e.g. Vanilla Planifolia" style="width: 100%;">
                         </div>
                     </div>
 
                     <div style="margin-bottom: 1rem;">
-                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Deskripsi / Product Overview</label>
-                        <textarea name="gv_varieties[<?php echo $v_index; ?>][overview]" rows="3" style="width: 100%;" placeholder="Deskripsi lengkap tentang varietas ini..."><?php echo esc_textarea( $v_overview ); ?></textarea>
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Description / Product Overview</label>
+                        <textarea name="gv_varieties[<?php echo $v_index; ?>][overview]" rows="3" style="width: 100%;" placeholder="Detailed overview for this vanilla variety..."><?php echo esc_textarea( $v_overview ); ?></textarea>
                     </div>
 
                     <div style="margin-bottom: 1rem;">
-                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Foto Carousel (1 baris per URL gambar)</label>
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Carousel Photos (1 URL per line)</label>
                         <textarea name="gv_varieties[<?php echo $v_index; ?>][carousel]" rows="3" style="width: 100%;" placeholder="https://domain.com/wp-content/.../image1.png"><?php echo esc_textarea( $v_carousel ); ?></textarea>
-                        <button type="button" class="button gv-add-media-btn" style="margin-top: 4px;">+ Pilih Gambar dari Media Library</button>
+                        <button type="button" class="button gv-add-media-btn" style="margin-top: 4px;">+ Choose Photos from Media Library</button>
                     </div>
 
                     <div style="border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem;">
-                        <h5 style="margin: 0 0 0.75rem 0; font-size: 13px; text-transform: uppercase;">Spesifikasi / Product Characteristics:</h5>
+                        <h5 style="margin: 0 0 0.75rem 0; font-size: 13px; text-transform: uppercase;">Specifications / Product Characteristics:</h5>
                         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;">
                             <div>
                                 <label style="font-size: 12px; font-weight: 600; display: block;">Aroma / Profile</label>
@@ -515,7 +515,7 @@ function grand_vanilla_product_varieties_callback( $post ) {
 
         <div style="margin-top: 1.5rem;">
             <button type="button" id="gv-add-variety-btn" class="button button-primary button-large" style="background: #363E19; border-color: #363E19;">
-                + Tambah Varietas Baru (Add Variety)
+                + Add New Variety
             </button>
         </div>
     </div>
@@ -552,31 +552,31 @@ function grand_vanilla_product_varieties_callback( $post ) {
             card.innerHTML = `
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 0.75rem; margin-bottom: 1rem;">
                     <h4 style="margin: 0; font-size: 15px; color: #1d2327;">
-                        Varietas #<span class="gv-v-number">${nextIdx + 1}</span>: <strong>Varietas Baru</strong>
+                        Variety #<span class="gv-v-number">${nextIdx + 1}</span>: <strong>New Variety</strong>
                     </h4>
-                    <button type="button" class="button button-link-delete gv-remove-variety-btn" style="color: #b32d2e;">Hapus Varietas</button>
+                    <button type="button" class="button button-link-delete gv-remove-variety-btn" style="color: #b32d2e;">Delete Variety</button>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                     <div>
-                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Nama Lengkap Varietas (Tab & Heading)</label>
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Full Variety Name (Tab & Heading)</label>
                         <input type="text" name="gv_varieties[${nextIdx}][name]" value="" placeholder="e.g. Vanilla Pompona Beans" style="width: 100%;">
                     </div>
                     <div>
-                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Nama Singkat (Variety Bullet)</label>
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;">Short Name (Variety Bullet)</label>
                         <input type="text" name="gv_varieties[${nextIdx}][short_name]" value="" placeholder="e.g. Vanilla Pompona" style="width: 100%;">
                     </div>
                 </div>
                 <div style="margin-bottom: 1rem;">
-                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Deskripsi / Product Overview</label>
-                    <textarea name="gv_varieties[${nextIdx}][overview]" rows="3" style="width: 100%;" placeholder="Deskripsi lengkap tentang varietas ini..."></textarea>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Description / Product Overview</label>
+                    <textarea name="gv_varieties[${nextIdx}][overview]" rows="3" style="width: 100%;" placeholder="Detailed overview for this vanilla variety..."></textarea>
                 </div>
                 <div style="margin-bottom: 1rem;">
-                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Foto Carousel (1 baris per URL gambar)</label>
+                    <label style="font-weight: 600; display: block; margin-bottom: 4px;">Carousel Photos (1 URL per line)</label>
                     <textarea name="gv_varieties[${nextIdx}][carousel]" rows="3" style="width: 100%;" placeholder="https://domain.com/wp-content/.../image1.png"></textarea>
-                    <button type="button" class="button gv-add-media-btn" style="margin-top: 4px;">+ Pilih Gambar dari Media Library</button>
+                    <button type="button" class="button gv-add-media-btn" style="margin-top: 4px;">+ Choose Photos from Media Library</button>
                 </div>
                 <div style="border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem;">
-                    <h5 style="margin: 0 0 0.75rem 0; font-size: 13px; text-transform: uppercase;">Spesifikasi / Product Characteristics:</h5>
+                    <h5 style="margin: 0 0 0.75rem 0; font-size: 13px; text-transform: uppercase;">Specifications / Product Characteristics:</h5>
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;">
                         <div>
                             <label style="font-size: 12px; font-weight: 600; display: block;">Aroma / Profile</label>
@@ -613,7 +613,7 @@ function grand_vanilla_product_varieties_callback( $post ) {
         wrapper.addEventListener('click', function(e) {
             if (e.target.classList.contains('gv-remove-variety-btn')) {
                 e.preventDefault();
-                if (confirm('Hapus varietas ini?')) {
+                if (confirm('Are you sure you want to delete this variety?')) {
                     e.target.closest('.gv-variety-item-card').remove();
                     reindexVarieties();
                 }
@@ -623,8 +623,8 @@ function grand_vanilla_product_varieties_callback( $post ) {
                 e.preventDefault();
                 const textarea = e.target.closest('div').querySelector('textarea');
                 const customUploader = wp.media({
-                    title: 'Pilih Foto Carousel Varietas',
-                    button: { text: 'Gunakan Foto Terpilih' },
+                    title: 'Select Variety Carousel Photos',
+                    button: { text: 'Use Selected Photos' },
                     multiple: true
                 }).on('select', function() {
                     const selection = customUploader.state().get('selection');
@@ -994,6 +994,11 @@ function grand_vanilla_submit_contact_form() {
     // Check nonce
     if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'gv_contact_form_nonce' ) ) {
         wp_send_json_error( array( 'message' => __( 'Security check failed. Please refresh the page and try again.', 'grand-vanilla' ) ) );
+    }
+
+    // Anti-spam Honeypot Check (Silently drop spam bots)
+    if ( ! empty( $_POST['company_website_hp'] ) ) {
+        wp_send_json_success( array( 'message' => __( 'Your inquiry has been received.', 'grand-vanilla' ) ) );
     }
 
     $name    = isset( $_POST['fullname'] ) ? sanitize_text_field( wp_unslash( $_POST['fullname'] ) ) : '';

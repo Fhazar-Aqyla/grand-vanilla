@@ -97,6 +97,11 @@ $contact = grand_vanilla_get_contact_info();
                 <form id="gv-contact-form" class="gv-contact-form" data-ajaxurl="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
                     <input type="hidden" name="nonce" id="gv_nonce" value="<?php echo esc_attr( wp_create_nonce( 'gv_contact_form_nonce' ) ); ?>">
 
+                    <!-- Anti-Spam Invisible Honeypot -->
+                    <div style="position: absolute; left: -9999px; top: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                        <input type="text" name="company_website_hp" id="gv_company_website_hp" tabindex="-1" autocomplete="off">
+                    </div>
+
                     <div class="gv-field">
                         <label for="gv_fullname">Full Name</label>
                         <input type="text" id="gv_fullname" name="fullname" required placeholder="Your full name">
@@ -133,6 +138,25 @@ $contact = grand_vanilla_get_contact_info();
                 </form>
 
                 <script>
+                // Handle URL query parameter prefill (e.g. ?product=Vanilla+Beans)
+                document.addEventListener('DOMContentLoaded', function() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const prod = urlParams.get('product');
+                    if (prod) {
+                        const subjectSelect = document.getElementById('gv_subject');
+                        const customOption = document.createElement('option');
+                        customOption.value = 'Inquiry for ' + prod;
+                        customOption.textContent = 'Inquiry for ' + prod;
+                        customOption.selected = true;
+                        subjectSelect.prepend(customOption);
+
+                        const msgField = document.getElementById('gv_message');
+                        if (msgField && !msgField.value) {
+                            msgField.value = 'Hello Grand Vanilla team, I am interested in ordering or receiving a wholesale export quote for ' + prod + '.\n\nEstimated Volume / Requirements:\nDestination Country: ';
+                        }
+                    }
+                });
+
                 document.getElementById('gv-contact-form').addEventListener('submit', function(e) {
                     e.preventDefault();
                     var form     = this;
@@ -145,6 +169,7 @@ $contact = grand_vanilla_get_contact_info();
                     var subject = document.getElementById('gv_subject').value;
                     var message = document.getElementById('gv_message').value.trim();
                     var nonce   = document.getElementById('gv_nonce').value;
+                    var hp      = document.getElementById('gv_company_website_hp') ? document.getElementById('gv_company_website_hp').value : '';
 
                     if (!name || !email || !message) {
                         alertBox.className     = 'gv-contact-alert gv-contact-alert--error';
@@ -165,6 +190,7 @@ $contact = grand_vanilla_get_contact_info();
                     formData.append('email', email);
                     formData.append('subject', subject);
                     formData.append('message', message);
+                    formData.append('company_website_hp', hp);
 
                     fetch(ajaxUrl, {
                         method: 'POST',

@@ -124,8 +124,8 @@ $contact = grand_vanilla_get_contact_info();
                         </h4>
                         <div class="gv-footer-nav-col" style="display: flex; flex-direction: column; gap: 0.65rem;">
                             <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact Us</a>
-                            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Privacy</a>
-                            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Terms</a>
+                            <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>
+                            <a href="<?php echo esc_url( home_url( '/terms/' ) ); ?>">Terms of Supply</a>
                         </div>
                     </div>
                 </div>
