@@ -104,10 +104,17 @@ $blog_url = get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/artic
                     <?php
                     $raw_content = apply_filters( 'the_content', get_the_content() );
 
-                    // Automatically wrap Key Takeaways heading + list into styled container
-                    if ( preg_match( '/<h3[^>]*>.*?Key Takeaways.*?<\/h3>\s*<ul[^>]*>.*?<\/ul>/is', $raw_content ) ) {
+                    // 1. Auto-detect standalone quote paragraphs enclosed in quotation marks: <p>"..."</p> or <p>“...”</p>
+                    $raw_content = preg_replace(
+                        '/<p>\s*["“]([^"”]+?)["”]\s*<\/p>/is',
+                        '<blockquote class="wp-block-quote"><p>“$1”</p></blockquote>',
+                        $raw_content
+                    );
+
+                    // 2. Automatically wrap Key Takeaways heading (H2/H3/H4) + list into styled container box
+                    if ( preg_match( '/(<h[2-4][^>]*>\s*(?:Key Takeaways|Takeaways|Highlights|Summary|Poin Kunci)[^<]*<\/h[2-4]>\s*(?:<p[^>]*>.*?<\/p>\s*)?<ul[^>]*>.*?<\/ul>)/is', $raw_content ) ) {
                         $raw_content = preg_replace(
-                            '/(<h3[^>]*>.*?Key Takeaways.*?<\/h3>\s*<ul[^>]*>.*?<\/ul>)/is',
+                            '/(<h[2-4][^>]*>\s*(?:Key Takeaways|Takeaways|Highlights|Summary|Poin Kunci)[^<]*<\/h[2-4]>\s*(?:<p[^>]*>.*?<\/p>\s*)?<ul[^>]*>.*?<\/ul>)/is',
                             '<div class="gv-takeaways-box">$1</div>',
                             $raw_content
                         );
@@ -403,7 +410,8 @@ get_template_part( 'template-parts/cta-banner', null, array(
 
 /* Blockquote */
 .gv-detail-article blockquote,
-.gv-detail-article .wp-block-quote {
+.gv-detail-article .wp-block-quote,
+.gv-detail-article .wp-block-pullquote {
     background-color: #C1C3B8;
     border-left: 8px solid #363E19;
     border-radius: 0;
@@ -418,7 +426,8 @@ get_template_part( 'template-parts/cta-banner', null, array(
 }
 
 .gv-detail-article blockquote p,
-.gv-detail-article .wp-block-quote p {
+.gv-detail-article .wp-block-quote p,
+.gv-detail-article .wp-block-pullquote p {
     margin: 0;
     color: #363E19;
     font-style: italic;
@@ -436,7 +445,9 @@ get_template_part( 'template-parts/cta-banner', null, array(
     box-sizing: border-box;
 }
 
+.gv-takeaways-box h2,
 .gv-takeaways-box h3,
+.gv-takeaways-box h4,
 .gv-detail-article h3 {
     font-family: var(--font-heading, 'Jost', sans-serif);
     font-size: 1.5rem;
@@ -447,17 +458,19 @@ get_template_part( 'template-parts/cta-banner', null, array(
 }
 
 .gv-takeaways-box ul,
-.gv-detail-article .wp-block-list {
+.gv-detail-article .wp-block-list,
+.gv-detail-article ul:not(.gv-detail-more-list):not(.nav-menu) {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 1.25rem 0;
     display: flex;
     flex-direction: column;
     gap: 0.875rem;
 }
 
 .gv-takeaways-box ul li,
-.gv-detail-article .wp-block-list li {
+.gv-detail-article .wp-block-list li,
+.gv-detail-article ul:not(.gv-detail-more-list):not(.nav-menu) li {
     list-style: none;
     position: relative;
     padding-left: 2rem;
@@ -467,9 +480,10 @@ get_template_part( 'template-parts/cta-banner', null, array(
     margin: 0;
 }
 
-/* Circular checkmark icon */
+/* Circular checkmark icon for all lists */
 .gv-takeaways-box ul li::before,
-.gv-detail-article .wp-block-list li::before {
+.gv-detail-article .wp-block-list li::before,
+.gv-detail-article ul:not(.gv-detail-more-list):not(.nav-menu) li::before {
     content: '';
     position: absolute;
     left: 0;
@@ -719,7 +733,8 @@ get_template_part( 'template-parts/cta-banner', null, array(
         line-height: 1.7;
     }
     .gv-detail-article blockquote,
-    .gv-detail-article .wp-block-quote {
+    .gv-detail-article .wp-block-quote,
+    .gv-detail-article .wp-block-pullquote {
         padding: 1.25rem 1.25rem;
         margin: 2rem 0;
         font-size: 1.0625rem;
@@ -729,12 +744,15 @@ get_template_part( 'template-parts/cta-banner', null, array(
         padding: 1.5rem 1.25rem;
         margin: 2rem 0;
     }
+    .gv-takeaways-box h2,
     .gv-takeaways-box h3,
+    .gv-takeaways-box h4,
     .gv-detail-article h3 {
         font-size: 1.25rem;
     }
     .gv-takeaways-box ul li,
-    .gv-detail-article .wp-block-list li {
+    .gv-detail-article .wp-block-list li,
+    .gv-detail-article ul:not(.gv-detail-more-list):not(.nav-menu) li {
         font-size: 0.875rem;
         padding-left: 1.75rem;
     }

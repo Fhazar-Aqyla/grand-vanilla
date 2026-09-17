@@ -202,7 +202,7 @@ function grand_vanilla_register_gallery_cpt() {
     $labels = array(
         'name'               => _x( 'Curing Gallery', 'Post type general name', 'grand-vanilla' ),
         'singular_name'      => _x( 'Gallery Item', 'Post type singular name', 'grand-vanilla' ),
-        'menu_name'          => _x( 'Gallery CPT', 'Admin Menu text', 'grand-vanilla' ),
+        'menu_name'          => _x( 'Gallery', 'Admin Menu text', 'grand-vanilla' ),
         'add_new'            => __( 'Add New Photo', 'grand-vanilla' ),
         'add_new_item'       => __( 'Add New Gallery Photo', 'grand-vanilla' ),
         'all_items'          => __( 'All Gallery Items', 'grand-vanilla' ),
@@ -808,16 +808,25 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'type'     => 'url',
     ) );
 
+    // Google Maps Embed URL Sanitizer (Accepts raw URL or full <iframe src="..."> HTML)
+    function grand_vanilla_sanitize_maps_url( $input ) {
+        $input = trim( (string) $input );
+        if ( preg_match( '/src=["\']([^"\']+)["\']/i', $input, $matches ) ) {
+            return esc_url_raw( $matches[1] );
+        }
+        return esc_url_raw( $input );
+    }
+
     // Google Maps Embed URL
     $wp_customize->add_setting( 'gv_maps_embed_url', array(
         'default'           => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36092.836208309294!2d107.28651792040289!3d-6.262369707513481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e697760017df9ad%3A0x74508c4a886051a4!2sHorizon%20University%20Indonesia!5e1!3m2!1sid!2sid!4v1788419127699!5m2!1sid!2sid',
-        'sanitize_callback' => 'esc_url_raw',
+        'sanitize_callback' => 'grand_vanilla_sanitize_maps_url',
     ) );
     $wp_customize->add_control( 'gv_maps_embed_url', array(
-        'label'       => __( 'Google Maps Embed iframe URL', 'grand-vanilla' ),
-        'description' => __( 'Copy the src URL from Google Maps Embed iframe (https://www.google.com/maps/embed?...)', 'grand-vanilla' ),
+        'label'       => __( 'Google Maps Embed (URL or iframe Code)', 'grand-vanilla' ),
+        'description' => __( 'Paste either the Google Maps embed URL (https://www.google.com/maps/embed?...) or the entire iframe code from Google Maps. The system will automatically extract and display it.', 'grand-vanilla' ),
         'section'     => 'grand_vanilla_options',
-        'type'        => 'url',
+        'type'        => 'textarea',
     ) );
 }
 add_action( 'customize_register', 'grand_vanilla_customize_register' );
@@ -832,6 +841,11 @@ function grand_vanilla_get_contact_info() {
         $clean_wa = '62' . substr( $clean_wa, 1 );
     }
 
+    $raw_map = get_theme_mod( 'gv_maps_embed_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36092.836208309294!2d107.28651792040289!3d-6.262369707513481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e697760017df9ad%3A0x74508c4a886051a4!2sHorizon%20University%20Indonesia!5e1!3m2!1sid!2sid!4v1788419127699!5m2!1sid!2sid' );
+    if ( preg_match( '/src=["\']([^"\']+)["\']/i', $raw_map, $matches ) ) {
+        $raw_map = $matches[1];
+    }
+
     return array(
         'whatsapp'        => $whatsapp,
         'clean_wa'        => $clean_wa,
@@ -842,7 +856,7 @@ function grand_vanilla_get_contact_info() {
         'instagram_url'   => get_theme_mod( 'gv_instagram', 'https://instagram.com' ),
         'facebook_url'    => get_theme_mod( 'gv_facebook', 'https://facebook.com' ),
         'youtube_url'     => get_theme_mod( 'gv_youtube', 'https://youtube.com' ),
-        'maps_embed_url'  => get_theme_mod( 'gv_maps_embed_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36092.836208309294!2d107.28651792040289!3d-6.262369707513481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e697760017df9ad%3A0x74508c4a886051a4!2sHorizon%20University%20Indonesia!5e1!3m2!1sid!2sid!4v1788419127699!5m2!1sid!2sid' ),
+        'maps_embed_url'  => $raw_map,
         'export_hubs'     => 'Jakarta (CGK) & Bali (DPS), Indonesia',
     );
 }
@@ -856,14 +870,11 @@ function grand_vanilla_register_inquiry_cpt() {
         'singular_name'      => _x( 'Inquiry', 'post type singular name', 'grand-vanilla' ),
         'menu_name'          => _x( 'Inquiries', 'admin menu', 'grand-vanilla' ),
         'name_admin_bar'     => _x( 'Inquiry', 'add new on admin bar', 'grand-vanilla' ),
-        'add_new'            => __( 'Add New Inquiry', 'grand-vanilla' ),
-        'add_new_item'       => __( 'Add New Inquiry', 'grand-vanilla' ),
-        'new_item'           => __( 'New Inquiry', 'grand-vanilla' ),
-        'edit_item'          => __( 'View / Edit Inquiry', 'grand-vanilla' ),
+        'edit_item'          => __( 'Inquiry Details', 'grand-vanilla' ),
         'view_item'          => __( 'View Inquiry', 'grand-vanilla' ),
         'all_items'          => __( 'All Inquiries', 'grand-vanilla' ),
         'search_items'       => __( 'Search Inquiries', 'grand-vanilla' ),
-        'not_found'          => __( 'No inquiries found.', 'grand-vanilla' ),
+        'not_found'          => __( 'No inquiries received yet.', 'grand-vanilla' ),
         'not_found_in_trash' => __( 'No inquiries found in Trash.', 'grand-vanilla' ),
     );
 
@@ -876,6 +887,10 @@ function grand_vanilla_register_inquiry_cpt() {
         'query_var'          => false,
         'rewrite'            => false,
         'capability_type'    => 'post',
+        'capabilities'       => array(
+            'create_posts' => 'do_not_allow', // Disable manual creation of inquiries
+        ),
+        'map_meta_cap'       => true,
         'has_archive'        => false,
         'hierarchical'       => false,
         'menu_position'      => 26,
@@ -890,11 +905,11 @@ add_action( 'init', 'grand_vanilla_register_inquiry_cpt' );
 function grand_vanilla_inquiry_columns( $columns ) {
     return array(
         'cb'              => isset( $columns['cb'] ) ? $columns['cb'] : '<input type="checkbox" />',
-        'title'           => __( 'Subject & Lead', 'grand-vanilla' ),
+        'title'           => __( 'Sender & Subject', 'grand-vanilla' ),
         'sender_name'     => __( 'Sender Name', 'grand-vanilla' ),
         'sender_email'    => __( 'Sender Email', 'grand-vanilla' ),
         'inquiry_message' => __( 'Message Excerpt', 'grand-vanilla' ),
-        'date'            => __( 'Received Date', 'grand-vanilla' ),
+        'date'            => __( 'Date Received', 'grand-vanilla' ),
     );
 }
 add_filter( 'manage_gv_inquiry_posts_columns', 'grand_vanilla_inquiry_columns' );
@@ -923,7 +938,7 @@ add_action( 'manage_gv_inquiry_posts_custom_column', 'grand_vanilla_inquiry_colu
 function grand_vanilla_add_inquiry_meta_boxes() {
     add_meta_box(
         'gv_inquiry_details_box',
-        __( 'Inquiry Lead Details', 'grand-vanilla' ),
+        __( 'Inquiry Details (Website Lead)', 'grand-vanilla' ),
         'grand_vanilla_inquiry_meta_callback',
         'gv_inquiry',
         'normal',
@@ -937,29 +952,33 @@ function grand_vanilla_inquiry_meta_callback( $post ) {
     $email   = get_post_meta( $post->ID, '_inquiry_email', true );
     $subject = get_post_meta( $post->ID, '_inquiry_subject', true );
     $message = get_post_meta( $post->ID, '_inquiry_message', true );
-    $date    = get_the_date( 'Y-m-d H:i:s', $post->ID );
+    $date    = get_the_date( 'F j, Y, H:i', $post->ID );
     ?>
-    <table class="form-table" style="max-width: 700px;">
+    <table class="form-table" style="max-width: 750px;">
         <tr>
-            <th scope="row"><strong><?php esc_html_e( 'Full Name:', 'grand-vanilla' ); ?></strong></th>
-            <td><?php echo esc_html( $name ); ?></td>
+            <th scope="row" style="width: 160px;"><strong><?php esc_html_e( 'Sender Name:', 'grand-vanilla' ); ?></strong></th>
+            <td><strong style="font-size: 14px; color: #363E19;"><?php echo esc_html( $name ); ?></strong></td>
         </tr>
         <tr>
-            <th scope="row"><strong><?php esc_html_e( 'Contact Email:', 'grand-vanilla' ); ?></strong></th>
-            <td><a href="mailto:<?php echo esc_attr( $email ); ?>" class="button button-secondary"><?php echo esc_html( $email ); ?> &rarr; Reply via Email</a></td>
+            <th scope="row"><strong><?php esc_html_e( 'Sender Email:', 'grand-vanilla' ); ?></strong></th>
+            <td>
+                <a href="mailto:<?php echo esc_attr( $email ); ?>" class="button button-primary" style="background: #363E19 !important; border-color: #363E19 !important;">
+                    ✉️ <?php echo esc_html( $email ); ?> &mdash; Reply via Email
+                </a>
+            </td>
         </tr>
         <tr>
             <th scope="row"><strong><?php esc_html_e( 'Inquiry Subject:', 'grand-vanilla' ); ?></strong></th>
             <td><?php echo esc_html( $subject ); ?></td>
         </tr>
         <tr>
-            <th scope="row"><strong><?php esc_html_e( 'Received Time:', 'grand-vanilla' ); ?></strong></th>
+            <th scope="row"><strong><?php esc_html_e( 'Date Received:', 'grand-vanilla' ); ?></strong></th>
             <td><?php echo esc_html( $date ); ?></td>
         </tr>
         <tr>
-            <th scope="row"><strong><?php esc_html_e( 'Full Message:', 'grand-vanilla' ); ?></strong></th>
+            <th scope="row" style="vertical-align: top;"><strong><?php esc_html_e( 'Full Message:', 'grand-vanilla' ); ?></strong></th>
             <td>
-                <div style="background: #f8f9fa; border: 1px solid #ccd0d4; padding: 12px; border-radius: 4px; white-space: pre-wrap; font-family: inherit; line-height: 1.6;">
+                <div style="background: #fdfdfd; border: 1px solid #ccd0d4; padding: 14px 16px; border-radius: 6px; white-space: pre-wrap; font-family: inherit; font-size: 13px; line-height: 1.6; color: #23282d; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
                     <?php echo esc_html( $message ); ?>
                 </div>
             </td>
@@ -1879,5 +1898,359 @@ function grand_vanilla_optimize_image_attributes( $attr, $attachment, $size ) {
     return $attr;
 }
 add_filter( 'wp_get_attachment_image_attributes', 'grand_vanilla_optimize_image_attributes', 10, 3 );
+
+/**
+ * 10. White-Label & Custom Branding for Grand Vanilla WP Admin
+ */
+
+// A. Custom Login Page Branding
+function grand_vanilla_custom_login_style() {
+    $logo_url = get_template_directory_uri() . '/assets/images/Logo with text.png';
+    ?>
+    <style type="text/css">
+        body.login {
+            background-color: #FAF8F5;
+            background-image: radial-gradient(#E1E2DD 1px, transparent 1px);
+            background-size: 24px 24px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #363E19;
+        }
+        #login h1 a, .login h1 a {
+            background-image: url('<?php echo esc_url( $logo_url ); ?>') !important;
+            height: 64px !important;
+            width: 260px !important;
+            background-size: contain !important;
+            background-repeat: no-repeat !important;
+            background-position: center bottom !important;
+            margin-bottom: 24px !important;
+            padding-bottom: 0 !important;
+        }
+        .login form {
+            background: #FFFFFF !important;
+            border: 1px solid #E1E2DD !important;
+            border-radius: 8px !important;
+            box-shadow: 0 10px 30px rgba(54, 62, 25, 0.08) !important;
+            padding: 30px 26px !important;
+        }
+        .login label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #363E19;
+        }
+        .login input[type="text"],
+        .login input[type="password"] {
+            border: 1px solid #D5D7CE !important;
+            border-radius: 4px !important;
+            padding: 8px 12px !important;
+            font-size: 14px !important;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .login input[type="text"]:focus,
+        .login input[type="password"]:focus {
+            border-color: #363E19 !important;
+            box-shadow: 0 0 0 2px rgba(54, 62, 25, 0.15) !important;
+        }
+        .wp-core-ui .button-primary {
+            background: #363E19 !important;
+            border-color: #363E19 !important;
+            color: #FFFFFF !important;
+            border-radius: 4px !important;
+            font-weight: 600 !important;
+            padding: 6px 18px !important;
+            box-shadow: 0 2px 6px rgba(54, 62, 25, 0.2) !important;
+            transition: background 0.2s, transform 0.1s !important;
+        }
+        .wp-core-ui .button-primary:hover,
+        .wp-core-ui .button-primary:focus {
+            background: #1F240E !important;
+            border-color: #1F240E !important;
+        }
+        .login #nav a, .login #backtoblog a {
+            color: #5C6246 !important;
+            font-size: 13px;
+        }
+        .login #nav a:hover, .login #backtoblog a:hover {
+            color: #363E19 !important;
+        }
+    </style>
+    <?php
+}
+add_action( 'login_enqueue_scripts', 'grand_vanilla_custom_login_style' );
+
+function grand_vanilla_login_logo_url() {
+    return home_url( '/' );
+}
+add_filter( 'login_headerurl', 'grand_vanilla_login_logo_url' );
+
+function grand_vanilla_login_logo_title() {
+    return get_bloginfo( 'name' ) . ' — Portal Admin';
+}
+add_filter( 'login_headertext', 'grand_vanilla_login_logo_title' );
+
+// B. Custom Top-Level Sidebar Menu Shortcut: "Theme Settings"
+function grand_vanilla_add_settings_menu() {
+    add_menu_page(
+        __( 'Grand Vanilla Settings', 'grand-vanilla' ),
+        __( 'Theme Settings', 'grand-vanilla' ),
+        'manage_options',
+        'customize.php?autofocus[section]=grand_vanilla_options',
+        '',
+        'dashicons-admin-settings',
+        25
+    );
+}
+add_action( 'admin_menu', 'grand_vanilla_add_settings_menu' );
+
+// C. Custom Dashboard Welcome Banner (Prominent at the Very Top of Dashboard)
+function grand_vanilla_custom_dashboard_banner() {
+    $screen = get_current_screen();
+    if ( ! $screen || 'dashboard' !== $screen->id ) {
+        return;
+    }
+
+    $logo_url = get_template_directory_uri() . '/assets/images/Logo with text.png';
+    ?>
+    <div class="gv-admin-welcome-card" style="padding: 24px 28px; background: #FAF8F5; border: 1px solid #E1E2DD; border-radius: 8px; margin: 16px 0 24px 0; box-shadow: 0 4px 15px rgba(54,62,25,0.04);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #E1E2DD;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <img src="<?php echo esc_url( $logo_url ); ?>" alt="Grand Vanilla Indonesia" style="height: 40px; width: auto; object-fit: contain;">
+                <div>
+                    <h2 style="margin: 0; font-size: 19px; color: #363E19; font-weight: 600; line-height: 1.2;">Grand Vanilla Indonesia &mdash; Management Portal</h2>
+                    <p style="margin: 4px 0 0 0; font-size: 13px; color: #5C6246;">Centralized management for the official export catalog, curing gallery, facilities, and international buyer inquiries.</p>
+                </div>
+            </div>
+            <div>
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener noreferrer" class="button button-secondary" style="font-size: 12px; padding: 4px 14px; height: auto;">
+                    View Website &rarr;
+                </a>
+            </div>
+        </div>
+
+        <h4 style="margin: 0 0 12px 0; font-size: 11px; color: #363E19; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Quick Access Navigation:</h4>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=gv_inquiry' ) ); ?>" class="button button-primary" style="background: #363E19 !important; border-color: #363E19 !important; padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
+                ✉️ Buyer Inquiries
+            </a>
+            <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=vanilla_product' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
+                📦 Add Vanilla Product
+            </a>
+            <a href="<?php echo esc_url( admin_url( 'customize.php?autofocus[section]=grand_vanilla_options' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
+                ⚙️ Contact & Social Info
+            </a>
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=vanilla_gallery' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
+                📸 Harvest & Curing Gallery
+            </a>
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=vanilla_facility' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
+                🏢 Warehouse Facilities
+            </a>
+            <a href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
+                📝 Write New Article
+            </a>
+        </div>
+    </div>
+    <?php
+}
+add_action( 'admin_notices', 'grand_vanilla_custom_dashboard_banner' );
+
+// Clean up default clutter widgets
+function grand_vanilla_cleanup_dashboard() {
+    remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+    remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+    remove_meta_box( 'dashboard_site_health', 'dashboard', 'normal' );
+    remove_meta_box( 'rank_math_dashboard_widget', 'dashboard', 'side' );
+    remove_meta_box( 'rank_math_dashboard_widget', 'dashboard', 'normal' );
+}
+add_action( 'wp_dashboard_setup', 'grand_vanilla_cleanup_dashboard' );
+
+// Hide default black welcome panel box, third-party notice clutter on Dashboard, and add section titles in Sidebar
+function grand_vanilla_custom_admin_styles() {
+    ?>
+    <style type="text/css">
+        #welcome-panel { display: none !important; }
+
+        /* Hide third-party notice clutter across Admin */
+        .index-php .wrap > .notice:not(.gv-notice),
+        .index-php .wrap > div.updated:not(.gv-notice),
+        .index-php .wrap > div.error:not(.gv-notice),
+        div.notice[class*="rank-math"],
+        div.notice:has(a[href*="rank-math"]) {
+            display: none !important;
+        }
+
+        /* Prevent sidebar labels from breaking onto two lines */
+        #adminmenu .wp-menu-name {
+            white-space: nowrap;
+        }
+
+        /* Completely eliminate submenu flyout popup for Inquiries */
+        #adminmenu #menu-posts-gv_inquiry .wp-submenu,
+        #adminmenu #menu-posts-gv_inquiry.wp-has-current-submenu .wp-submenu {
+            display: none !important;
+        }
+
+        /* Hide "Add New" button on Inquiries list page */
+        .post-type-gv_inquiry .page-title-action {
+            display: none !important;
+        }
+
+        /* Sidebar Section Labels for clean visual categorization */
+        #adminmenu #menu-posts-gv_inquiry::before {
+            content: "WEBSITE CONTENT";
+            display: block;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #8c8f94;
+            padding: 14px 12px 6px 12px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin-top: 6px;
+        }
+
+        #adminmenu #menu-media::before {
+            content: "SYSTEM & SETTINGS";
+            display: block;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #8c8f94;
+            padding: 14px 12px 6px 12px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin-top: 6px;
+        }
+
+        /* Hide section labels if sidebar is collapsed/folded */
+        .folded #adminmenu #menu-posts-gv_inquiry::before,
+        .folded #adminmenu #menu-media::before {
+            display: none !important;
+        }
+    </style>
+    <?php
+}
+add_action( 'admin_head', 'grand_vanilla_custom_admin_styles' );
+
+// D. Custom Admin Footer Text
+function grand_vanilla_custom_admin_footer() {
+    echo '<span id="footer-thankyou"><strong>Grand Vanilla Indonesia</strong> &bull; B2B Export Management System</span>';
+}
+add_filter( 'admin_footer_text', 'grand_vanilla_custom_admin_footer' );
+
+// E. Organize & Streamline Admin Sidebar Menu for Client Clarity (Full English)
+function grand_vanilla_simplify_admin_menu() {
+    global $menu, $submenu;
+
+    // 1. Remove Comments menu (not needed for B2B export website)
+    remove_menu_page( 'edit-comments.php' );
+
+    // 2. Remove submenus for 'gv_inquiry' so NO flyout popup appears on hover
+    remove_submenu_page( 'edit.php?post_type=gv_inquiry', 'edit.php?post_type=gv_inquiry' );
+    remove_submenu_page( 'edit.php?post_type=gv_inquiry', 'post-new.php?post_type=gv_inquiry' );
+
+    // 3. Inquiry count badge
+    $inquiry_count = 0;
+    if ( post_type_exists( 'gv_inquiry' ) ) {
+        $counts = wp_count_posts( 'gv_inquiry' );
+        $inquiry_count = isset( $counts->publish ) ? (int) $counts->publish : 0;
+    }
+    $badge = $inquiry_count > 0 ? sprintf( ' <span class="update-plugins count-%1$d" style="background:#d63638;color:#fff;border-radius:10px;padding:2px 7px;font-size:10px;font-weight:700;float:right;margin-top:2px;margin-right:8px;"><span class="plugin-count">%1$d</span></span>', $inquiry_count ) : '';
+
+    // 4. Rename top-level menu items to clean, single-line professional English
+    foreach ( $menu as $key => $item ) {
+        if ( isset( $item[2] ) ) {
+            // Inquiries
+            if ( 'edit.php?post_type=gv_inquiry' === $item[2] ) {
+                $menu[$key][0] = __( 'Inquiries', 'grand-vanilla' ) . $badge;
+            }
+            // Products
+            if ( 'edit.php?post_type=vanilla_product' === $item[2] ) {
+                $menu[$key][0] = __( 'Vanilla Products', 'grand-vanilla' );
+            }
+            // Gallery
+            if ( 'edit.php?post_type=vanilla_gallery' === $item[2] ) {
+                $menu[$key][0] = __( 'Gallery', 'grand-vanilla' );
+            }
+            // Facilities
+            if ( 'edit.php?post_type=vanilla_facility' === $item[2] ) {
+                $menu[$key][0] = __( 'Facilities', 'grand-vanilla' );
+            }
+            // Pages
+            if ( 'edit.php?post_type=page' === $item[2] ) {
+                $menu[$key][0] = __( 'Pages', 'grand-vanilla' );
+            }
+            // Posts -> Articles & Blog
+            if ( 'edit.php' === $item[2] ) {
+                $menu[$key][0] = __( 'Articles & Blog', 'grand-vanilla' );
+                $menu[$key][6] = 'dashicons-welcome-write-blog';
+            }
+            // Theme Settings
+            if ( 'customize.php?autofocus[section]=grand_vanilla_options' === $item[2] ) {
+                $menu[$key][0] = __( 'Theme Settings', 'grand-vanilla' );
+            }
+        }
+    }
+
+    // 5. Polish Submenus into clean English
+    // Vanilla Products
+    if ( isset( $submenu['edit.php?post_type=vanilla_product'] ) ) {
+        $submenu['edit.php?post_type=vanilla_product'][5][0]  = __( 'All Products', 'grand-vanilla' );
+        $submenu['edit.php?post_type=vanilla_product'][10][0] = __( 'Add New Product', 'grand-vanilla' );
+        if ( isset( $submenu['edit.php?post_type=vanilla_product'][15] ) ) {
+            $submenu['edit.php?post_type=vanilla_product'][15][0] = __( 'Product Categories', 'grand-vanilla' );
+        }
+    }
+
+    // Gallery
+    if ( isset( $submenu['edit.php?post_type=vanilla_gallery'] ) ) {
+        $submenu['edit.php?post_type=vanilla_gallery'][5][0]  = __( 'All Gallery Items', 'grand-vanilla' );
+        $submenu['edit.php?post_type=vanilla_gallery'][10][0] = __( 'Add New Photo', 'grand-vanilla' );
+        if ( isset( $submenu['edit.php?post_type=vanilla_gallery'][15] ) ) {
+            $submenu['edit.php?post_type=vanilla_gallery'][15][0] = __( 'Categories', 'grand-vanilla' );
+        }
+    }
+
+    // Facilities
+    if ( isset( $submenu['edit.php?post_type=vanilla_facility'] ) ) {
+        $submenu['edit.php?post_type=vanilla_facility'][5][0]  = __( 'All Facilities', 'grand-vanilla' );
+        $submenu['edit.php?post_type=vanilla_facility'][10][0] = __( 'Add New Facility', 'grand-vanilla' );
+    }
+
+    // Pages
+    if ( isset( $submenu['edit.php?post_type=page'] ) ) {
+        $submenu['edit.php?post_type=page'][5][0]  = __( 'All Pages', 'grand-vanilla' );
+        $submenu['edit.php?post_type=page'][10][0] = __( 'Add New Page', 'grand-vanilla' );
+    }
+
+    // Articles & Blog
+    if ( isset( $submenu['edit.php'] ) ) {
+        $submenu['edit.php'][5][0]  = __( 'All Articles', 'grand-vanilla' );
+        $submenu['edit.php'][10][0] = __( 'Add New Article', 'grand-vanilla' );
+        if ( isset( $submenu['edit.php'][15] ) ) {
+            $submenu['edit.php'][15][0] = __( 'Categories', 'grand-vanilla' );
+        }
+    }
+}
+add_action( 'admin_menu', 'grand_vanilla_simplify_admin_menu', 999 );
+
+// 6. Custom Sidebar Menu Order: Group Client Content at the Top
+function grand_vanilla_admin_menu_order( $menu_order ) {
+    return array(
+        'index.php',                                              // 1. Dashboard
+        'separator1',                                             // --- Separator ---
+        'edit.php?post_type=gv_inquiry',                          // 2. Inquiries
+        'edit.php?post_type=vanilla_product',                     // 3. Vanilla Products
+        'edit.php?post_type=vanilla_gallery',                     // 4. Gallery
+        'edit.php?post_type=vanilla_facility',                    // 5. Facilities
+        'edit.php?post_type=page',                                // 6. Pages
+        'edit.php',                                               // 7. Articles & Blog
+        'customize.php?autofocus[section]=grand_vanilla_options', // 8. Theme Settings
+        'separator2',                                             // --- Separator ---
+        'upload.php',                                             // Media Library
+    );
+}
+add_filter( 'custom_menu_order', '__return_true' );
+add_filter( 'menu_order', 'grand_vanilla_admin_menu_order' );
+
 
 
