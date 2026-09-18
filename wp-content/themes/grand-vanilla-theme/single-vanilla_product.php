@@ -93,11 +93,9 @@ $product_carousels = array(
     ),
     'vanilla-paste' => array(
         $img_dir . 'Paste Carroussel 1.jpg',
-        $img_dir . 'Paste Vanilla.png',
     ),
     'vanilla-seeds' => array(
         $img_dir . 'Seeds Carroussel 1.jpg',
-        $img_dir . 'Seeds Vanilla.png',
     ),
 );
 
@@ -258,15 +256,15 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                     <?php endforeach; ?>
                 </div>
 
-                <!-- Left Navigation Arrow -->
-                <button type="button" class="gv-carousel-arrow gv-arrow-prev" id="gvCarouselPrev" aria-label="Previous image">
+                <!-- Left Navigation Arrow (Only displayed if multiple photos exist) -->
+                <button type="button" class="gv-carousel-arrow gv-arrow-prev" id="gvCarouselPrev" aria-label="Previous image" style="<?php echo count( $current_carousel ) > 1 ? '' : 'display: none;'; ?>">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
                 </button>
 
-                <!-- Right Navigation Arrow -->
-                <button type="button" class="gv-carousel-arrow gv-arrow-next" id="gvCarouselNext" aria-label="Next image">
+                <!-- Right Navigation Arrow (Only displayed if multiple photos exist) -->
+                <button type="button" class="gv-carousel-arrow gv-arrow-next" id="gvCarouselNext" aria-label="Next image" style="<?php echo count( $current_carousel ) > 1 ? '' : 'display: none;'; ?>">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
@@ -306,25 +304,6 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                                 <span class="gv-specs-val"><?php echo esc_html( $val ); ?></span>
                             </div>
                         <?php endforeach; ?>
-                    </div>
-
-                    <!-- B2B Direct Inquiry & WhatsApp CTA -->
-                    <div class="gv-specs-cta-wrap" style="margin-top: 1.75rem; display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center;">
-                        <a href="<?php echo esc_url( add_query_arg( 'product', urlencode( $is_beans && $active_variety ? $active_variety['name'] : $current_title ), home_url( '/contact/' ) ) ); ?>" 
-                           id="gvInquireProductBtn"
-                           class="gv-product-inquire-btn"
-                           style="background-color: #363E19; color: #FFFFFF; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.75rem 1.6rem; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s ease;">
-                            <span>Inquire This Product</span>
-                            <span style="font-size: 1rem;">&rarr;</span>
-                        </a>
-                        <a href="<?php echo esc_url( 'https://wa.me/' . $contact['clean_wa'] . '?text=' . rawurlencode( 'Hello Grand Vanilla Indonesia, I would like to inquire about sourcing ' . ( $is_beans && $active_variety ? $active_variety['name'] : $current_title ) . ' for export.' ) ); ?>" 
-                           target="_blank" 
-                           rel="noopener noreferrer"
-                           id="gvInquireWaBtn"
-                           class="gv-product-wa-btn"
-                           style="background-color: #FFFFFF; border: 1px solid #363E19; color: #363E19; font-family: var(--font-heading, 'Jost', sans-serif); font-size: 0.875rem; font-weight: 500; padding: 0.75rem 1.25rem; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
-                            <span>WhatsApp Quote</span>
-                        </a>
                     </div>
                 </div>
 
@@ -497,15 +476,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.getElementById('gvCarouselPrev');
     const nextBtn = document.getElementById('gvCarouselNext');
 
+    function updateArrowVisibility() {
+        const hasMultiple = carouselSlides && carouselSlides.length > 1;
+        if (prevBtn) prevBtn.style.display = hasMultiple ? 'flex' : 'none';
+        if (nextBtn) nextBtn.style.display = hasMultiple ? 'flex' : 'none';
+    }
+
     function initSlides() {
         if (!track) return;
         carouselSlides = track.querySelectorAll('.gv-carousel-slide');
+        updateArrowVisibility();
     }
     initSlides();
 
     function updateCarouselSlides() {
         if (!isBeans || !varietiesData[currentVariety] || !track) return;
-        const images = varietiesData[currentVariety].carousel;
+        const images = varietiesData[currentVariety].carousel || [];
         track.innerHTML = '';
         images.forEach((imgUrl, idx) => {
             const slide = document.createElement('div');
@@ -515,6 +501,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         currentSlideIdx = 0;
         carouselSlides = track.querySelectorAll('.gv-carousel-slide');
+        updateArrowVisibility();
     }
 
     function goToSlide(newIdx) {
@@ -584,16 +571,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         `;
                     }
                     table.innerHTML = tableHtml;
-                }
-
-                // Update Inquire CTA Links dynamically
-                const inquireBtn = document.getElementById('gvInquireProductBtn');
-                const waBtn = document.getElementById('gvInquireWaBtn');
-                if (inquireBtn) {
-                    inquireBtn.href = '<?php echo esc_url( home_url( '/contact/' ) ); ?>?product=' + encodeURIComponent(data.name);
-                }
-                if (waBtn) {
-                    waBtn.href = 'https://wa.me/<?php echo esc_js( $contact['clean_wa'] ); ?>?text=' + encodeURIComponent('Hello Grand Vanilla Indonesia, I would like to inquire about sourcing ' + data.name + ' for export.');
                 }
 
                 // Update Carousel Images

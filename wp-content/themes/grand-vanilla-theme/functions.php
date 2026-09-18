@@ -696,6 +696,51 @@ function grand_vanilla_save_product_specs( $post_id ) {
 add_action( 'save_post_vanilla_product', 'grand_vanilla_save_product_specs' );
 
 /**
+ * 5b. Auto-assign sequential menu_order for new vanilla products
+ * Ensures newly added products always append to "Explore More Products" without displacing Top 3 featured items.
+ */
+function grand_vanilla_auto_assign_product_order( $data, $postarr ) {
+    if ( ! isset( $data['post_type'] ) || 'vanilla_product' !== $data['post_type'] ) {
+        return $data;
+    }
+
+    // Skip auto-drafts and trashed items
+    if ( in_array( $data['post_status'], array( 'auto-draft', 'trash' ), true ) ) {
+        return $data;
+    }
+
+    $post_id = isset( $postarr['ID'] ) ? (int) $postarr['ID'] : 0;
+
+    // If an existing product already has a non-zero menu_order in the database, keep it
+    if ( $post_id > 0 ) {
+        $existing_order = (int) get_post_field( 'menu_order', $post_id );
+        if ( $existing_order > 0 ) {
+            if ( isset( $data['menu_order'] ) && (int) $data['menu_order'] > 0 ) {
+                return $data;
+            }
+            $data['menu_order'] = $existing_order;
+            return $data;
+        }
+    }
+
+    // If menu_order is not explicitly set (is 0 or empty), auto-assign to end of catalog
+    if ( empty( $data['menu_order'] ) || (int) $data['menu_order'] === 0 ) {
+        global $wpdb;
+        $max_order = (int) $wpdb->get_var( $wpdb->prepare(
+            "SELECT MAX(menu_order) FROM {$wpdb->posts} WHERE post_type = %s AND post_status NOT IN ('trash', 'auto-draft') AND ID != %d",
+            'vanilla_product',
+            $post_id
+        ) );
+
+        // Minimum order is 4, ensuring it never displaces the Top 3 (#1, #2, #3)
+        $data['menu_order'] = max( 3, $max_order ) + 1;
+    }
+
+    return $data;
+}
+add_filter( 'wp_insert_post_data', 'grand_vanilla_auto_assign_product_order', 10, 2 );
+
+/**
  * 6. WordPress Customizer Settings (Appearance -> Customize)
  */
 function grand_vanilla_customize_register( $wp_customize ) {
@@ -1988,7 +2033,7 @@ function grand_vanilla_login_logo_url() {
 add_filter( 'login_headerurl', 'grand_vanilla_login_logo_url' );
 
 function grand_vanilla_login_logo_title() {
-    return get_bloginfo( 'name' ) . ' — Portal Admin';
+    return get_bloginfo( 'name' ) . ' Portal Admin';
 }
 add_filter( 'login_headertext', 'grand_vanilla_login_logo_title' );
 
@@ -2020,7 +2065,7 @@ function grand_vanilla_custom_dashboard_banner() {
             <div style="display: flex; align-items: center; gap: 16px;">
                 <img src="<?php echo esc_url( $logo_url ); ?>" alt="Grand Vanilla Indonesia" style="height: 40px; width: auto; object-fit: contain;">
                 <div>
-                    <h2 style="margin: 0; font-size: 19px; color: #363E19; font-weight: 600; line-height: 1.2;">Grand Vanilla Indonesia &mdash; Management Portal</h2>
+                    <h2 style="margin: 0; font-size: 19px; color: #363E19; font-weight: 600; line-height: 1.2;">Grand Vanilla Indonesia Management Portal</h2>
                     <p style="margin: 4px 0 0 0; font-size: 13px; color: #5C6246;">Centralized management for the official export catalog, curing gallery, facilities, and international buyer inquiries.</p>
                 </div>
             </div>
@@ -2034,23 +2079,23 @@ function grand_vanilla_custom_dashboard_banner() {
         <h4 style="margin: 0 0 12px 0; font-size: 11px; color: #363E19; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Quick Access Navigation:</h4>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
-            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=gv_inquiry' ) ); ?>" class="button button-primary" style="background: #363E19 !important; border-color: #363E19 !important; padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
-                ✉️ Buyer Inquiries
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=gv_inquiry' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
+                Buyer Inquiries
             </a>
             <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=vanilla_product' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
-                📦 Add Vanilla Product
+                Add Vanilla Product
             </a>
             <a href="<?php echo esc_url( admin_url( 'customize.php?autofocus[section]=grand_vanilla_options' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
-                ⚙️ Contact & Social Info
+                Contact & Social Info
             </a>
             <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=vanilla_gallery' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
-                📸 Harvest & Curing Gallery
+                Harvest & Curing Gallery
             </a>
             <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=vanilla_facility' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
-                🏢 Warehouse Facilities
+                Warehouse Facilities
             </a>
             <a href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>" class="button button-secondary" style="padding: 8px 14px; text-align: center; height: auto; font-size: 13px; border-radius: 4px;">
-                📝 Write New Article
+                Write New Article
             </a>
         </div>
     </div>
