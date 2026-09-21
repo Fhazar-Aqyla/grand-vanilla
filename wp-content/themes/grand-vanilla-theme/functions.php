@@ -700,7 +700,7 @@ add_action( 'save_post_vanilla_product', 'grand_vanilla_save_product_specs' );
  * Ensures newly added products always append to "Explore More Products" without displacing Top 3 featured items.
  */
 function grand_vanilla_auto_assign_product_order( $data, $postarr ) {
-    if ( ! isset( $data['post_type'] ) || 'vanilla_product' !== $data['post_type'] ) {
+    if ( ! isset( $data['post_type'] ) || ! in_array( $data['post_type'], array( 'vanilla_product', 'vanilla_facility' ), true ) ) {
         return $data;
     }
 
@@ -711,7 +711,7 @@ function grand_vanilla_auto_assign_product_order( $data, $postarr ) {
 
     $post_id = isset( $postarr['ID'] ) ? (int) $postarr['ID'] : 0;
 
-    // If an existing product already has a non-zero menu_order in the database, keep it
+    // If an existing item already has a non-zero menu_order in the database, keep it
     if ( $post_id > 0 ) {
         $existing_order = (int) get_post_field( 'menu_order', $post_id );
         if ( $existing_order > 0 ) {
@@ -723,17 +723,21 @@ function grand_vanilla_auto_assign_product_order( $data, $postarr ) {
         }
     }
 
-    // If menu_order is not explicitly set (is 0 or empty), auto-assign to end of catalog
+    // If menu_order is not explicitly set (is 0 or empty), auto-assign to end of catalog / list
     if ( empty( $data['menu_order'] ) || (int) $data['menu_order'] === 0 ) {
         global $wpdb;
         $max_order = (int) $wpdb->get_var( $wpdb->prepare(
             "SELECT MAX(menu_order) FROM {$wpdb->posts} WHERE post_type = %s AND post_status NOT IN ('trash', 'auto-draft') AND ID != %d",
-            'vanilla_product',
+            $data['post_type'],
             $post_id
         ) );
 
-        // Minimum order is 4, ensuring it never displaces the Top 3 (#1, #2, #3)
-        $data['menu_order'] = max( 3, $max_order ) + 1;
+        if ( 'vanilla_product' === $data['post_type'] ) {
+            // Minimum order is 4, ensuring it never displaces the Top 3 (#1, #2, #3)
+            $data['menu_order'] = max( 3, $max_order ) + 1;
+        } else {
+            $data['menu_order'] = max( 0, $max_order ) + 1;
+        }
     }
 
     return $data;
@@ -885,6 +889,82 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'section'     => 'grand_vanilla_options',
         'type'        => 'textarea',
     ) );
+
+    // Comprehensive Image Controls for All Key Sections & Banners
+    $images_to_register = array(
+        'gv_hero_image'      => array(
+            'label' => __( 'Homepage: Hero Background Image', 'grand-vanilla' ),
+            'desc'  => __( 'Background photo for the main hero section on homepage.', 'grand-vanilla' ),
+        ),
+        'gv_about_image'     => array(
+            'label' => __( 'Homepage & About: About Us Photo (Vanilla Beans)', 'grand-vanilla' ),
+            'desc'  => __( 'Photo of vanilla beans on burlap in the About Us section.', 'grand-vanilla' ),
+        ),
+        'gv_oem_image'       => array(
+            'label' => __( 'Homepage: Special OEM & Bulk Packaging Photo', 'grand-vanilla' ),
+            'desc'  => __( 'Photo of bulk vanilla bundles and boxes in Flexible Vanilla Supply section.', 'grand-vanilla' ),
+        ),
+        'gv_maps_image'      => array(
+            'label' => __( 'Homepage: Worldwide Export Map Graphic', 'grand-vanilla' ),
+            'desc'  => __( 'Map illustration for Connecting Indonesia To The World.', 'grand-vanilla' ),
+        ),
+        'gv_story_image'     => array(
+            'label' => __( 'About Page: Our Story Facility Photo', 'grand-vanilla' ),
+            'desc'  => __( 'Facility photo with text overlay in Our Journey & Purpose section.', 'grand-vanilla' ),
+        ),
+        'gv_sourcing_image'  => array(
+            'label' => __( 'About Page: Sourcing Plantation Photo', 'grand-vanilla' ),
+            'desc'  => __( 'Plantation photo in Sourced From Local Indonesia section.', 'grand-vanilla' ),
+        ),
+        'gv_hero_about'      => array(
+            'label' => __( 'Banner: About Us Page Header', 'grand-vanilla' ),
+            'desc'  => __( 'Top banner background image on About Us page (#knowUs).', 'grand-vanilla' ),
+        ),
+        'gv_hero_products'   => array(
+            'label' => __( 'Banner: Products Page Header', 'grand-vanilla' ),
+            'desc'  => __( 'Top banner background image on Products page (#exploreProducts).', 'grand-vanilla' ),
+        ),
+        'gv_hero_gallery'    => array(
+            'label' => __( 'Banner: Gallery Page Header', 'grand-vanilla' ),
+            'desc'  => __( 'Top banner background image on Gallery page (#ourMoments).', 'grand-vanilla' ),
+        ),
+        'gv_hero_blog'       => array(
+            'label' => __( 'Banner: Blog Page Header', 'grand-vanilla' ),
+            'desc'  => __( 'Top banner background image on Blog / Articles page.', 'grand-vanilla' ),
+        ),
+        'gv_hero_contact'    => array(
+            'label' => __( 'Banner: Contact Us Page Header', 'grand-vanilla' ),
+            'desc'  => __( 'Top banner background image on Contact Us page (#keepInTouch).', 'grand-vanilla' ),
+        ),
+        'gv_vp1_icon_img'    => array(
+            'label' => __( 'Icon: Quality Focused (Card 1)', 'grand-vanilla' ),
+            'desc'  => __( 'Custom icon image/SVG for "Quality Focused" card on About Us page.', 'grand-vanilla' ),
+        ),
+        'gv_vp2_icon_img'    => array(
+            'label' => __( 'Icon: Consistent Supply (Card 2)', 'grand-vanilla' ),
+            'desc'  => __( 'Custom icon image/SVG for "Consistent Supply" card on About Us page.', 'grand-vanilla' ),
+        ),
+        'gv_vp3_icon_img'    => array(
+            'label' => __( 'Icon: Indonesian Origin (Card 3)', 'grand-vanilla' ),
+            'desc'  => __( 'Custom icon image/SVG for Card 3 on About Us page.', 'grand-vanilla' ),
+        ),
+        'gv_vp4_icon_img'    => array(
+            'label' => __( 'Icon: Reliable Service (Card 4)', 'grand-vanilla' ),
+            'desc'  => __( 'Custom icon image/SVG for Card 4 on About Us page.', 'grand-vanilla' ),
+        ),
+    );
+
+    foreach ( $images_to_register as $key => $conf ) {
+        $wp_customize->add_setting( $key, array(
+            'default'           => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ) );
+        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, array(
+            'label'       => $conf['label'],
+            'description' => $conf['desc'],
+            'section'     => 'grand_vanilla_options',
+        ) ) );
+    }
 }
 add_action( 'customize_register', 'grand_vanilla_customize_register' );
 

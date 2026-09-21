@@ -70,7 +70,11 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 ?>
 
 <!-- 1. Hero Section -->
-<section class="gv-hero-page" style="background-image: url('<?php echo esc_url($img_dir . 'About Us Hero Section.png'); ?>');">
+<?php
+$custom_about_hero = get_theme_mod( 'gv_hero_about', '' );
+$about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : ( $img_dir . 'About Us Hero Section.png' );
+?>
+<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $about_hero_bg ); ?>');">
     <div class="gv-container">
         <h1 class="gv-hero-tag">#knowUs</h1>
         <p class="gv-hero-subtag"><?php echo esc_html($hero_subtag); ?></p>
@@ -84,7 +88,11 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 
             <!-- Left Column: Rustic Vanilla Beans Photo -->
             <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex;">
-                <img src="<?php echo esc_url($img_dir . 'About Us Image.png'); ?>"
+                <?php
+                $custom_about_img = get_theme_mod( 'gv_about_image', '' );
+                $about_img_src    = ! empty( $custom_about_img ) ? $custom_about_img : ( $img_dir . 'About Us Image.png' );
+                ?>
+                <img src="<?php echo esc_url( $about_img_src ); ?>"
                     alt="Grand Vanilla Indonesia Premium Curing"
                     class="gv-about-rustic-img"
                     style="width: 100%; height: 100%; min-height: 520px; object-fit: cover; display: block; border-radius: 8px;">
@@ -177,7 +185,11 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 
             <!-- Left: Facility Photo with Overlay Box at Bottom -->
             <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); min-height: 460px; display: flex; flex-direction: column; justify-content: flex-end;">
-                <img src="<?php echo esc_url($img_dir . 'Our Story.png'); ?>"
+                <?php
+                $custom_story_img = get_theme_mod( 'gv_story_image', '' );
+                $story_img_src    = ! empty( $custom_story_img ) ? $custom_story_img : ( $img_dir . 'Our Story.png' );
+                ?>
+                <img src="<?php echo esc_url( $story_img_src ); ?>"
                     alt="Our Story Jember Facility"
                     style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
 
@@ -242,10 +254,16 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
             <!-- Card 1: Quality Focused -->
             <div class="gv-partner-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
-                    <!-- Shield Icon -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3z" />
-                    </svg>
+                    <?php
+                    $vp1_custom_icon = get_theme_mod( 'gv_vp1_icon_img', '' );
+                    if ( ! empty( $vp1_custom_icon ) ) : ?>
+                        <img src="<?php echo esc_url( $vp1_custom_icon ); ?>" alt="" style="width: 24px; height: 24px; object-fit: contain;">
+                    <?php else : ?>
+                        <!-- Shield Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3z" />
+                        </svg>
+                    <?php endif; ?>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
                     <?php echo esc_html($vp1_title); ?>
@@ -258,10 +276,16 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
             <!-- Card 2: Consistent Supply -->
             <div class="gv-partner-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
-                    <!-- Box Icon -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21 16.5l-9 5.2-9-5.2V7.5L12 2.3l9 5.2v9zM12 4.1L5.3 8 12 11.9 18.7 8 12 4.1zm-7 5.6v7.4l6.5 3.7v-7.4L5 9.7zm8 11.1l6.5-3.7V9.7L13 13.4v7.4z" />
-                    </svg>
+                    <?php
+                    $vp2_custom_icon = get_theme_mod( 'gv_vp2_icon_img', '' );
+                    if ( ! empty( $vp2_custom_icon ) ) : ?>
+                        <img src="<?php echo esc_url( $vp2_custom_icon ); ?>" alt="" style="width: 24px; height: 24px; object-fit: contain;">
+                    <?php else : ?>
+                        <!-- Box Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 16.5l-9 5.2-9-5.2V7.5L12 2.3l9 5.2v9zM12 4.1L5.3 8 12 11.9 18.7 8 12 4.1zm-7 5.6v7.4l6.5 3.7v-7.4L5 9.7zm8 11.1l6.5-3.7V9.7L13 13.4v7.4z" />
+                        </svg>
+                    <?php endif; ?>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
                     <?php echo esc_html($vp2_title); ?>
@@ -274,10 +298,16 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
             <!-- Card 3: Quality Assurance -->
             <div class="gv-partner-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
-                    <!-- Map / Certificate Icon -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
-                    </svg>
+                    <?php
+                    $vp3_custom_icon = get_theme_mod( 'gv_vp3_icon_img', '' );
+                    if ( ! empty( $vp3_custom_icon ) ) : ?>
+                        <img src="<?php echo esc_url( $vp3_custom_icon ); ?>" alt="" style="width: 24px; height: 24px; object-fit: contain;">
+                    <?php else : ?>
+                        <!-- Map / Certificate Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
+                        </svg>
+                    <?php endif; ?>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
                     <?php echo esc_html($vp3_title); ?>
@@ -290,10 +320,16 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
             <!-- Card 4: Full Traceability -->
             <div class="gv-partner-card" style="background: #FFFFFF; border-radius: 12px; padding: 2.75rem 1.75rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center;">
                 <div style="width: 48px; height: 48px; background-color: #363E19; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 1.5rem;">
-                    <!-- Headset / Support Icon -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2a7 7 0 0 1 14 0v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z" />
-                    </svg>
+                    <?php
+                    $vp4_custom_icon = get_theme_mod( 'gv_vp4_icon_img', '' );
+                    if ( ! empty( $vp4_custom_icon ) ) : ?>
+                        <img src="<?php echo esc_url( $vp4_custom_icon ); ?>" alt="" style="width: 24px; height: 24px; object-fit: contain;">
+                    <?php else : ?>
+                        <!-- Headset / Support Icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2a7 7 0 0 1 14 0v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z" />
+                        </svg>
+                    <?php endif; ?>
                 </div>
                 <h3 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: 1.125rem; font-weight: 500; color: #363E19; margin-bottom: 0.75rem;">
                     <?php echo esc_html($vp4_title); ?>
@@ -365,7 +401,11 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 
                 <!-- Farm Photo: Sourcing.png -->
                 <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); aspect-ratio: 16 / 9; width: 100%;">
-                    <img src="<?php echo esc_url($img_dir . 'Sourcing.png'); ?>"
+                    <?php
+                    $custom_sourcing_img = get_theme_mod( 'gv_sourcing_image', '' );
+                    $sourcing_img_src    = ! empty( $custom_sourcing_img ) ? $custom_sourcing_img : ( $img_dir . 'Sourcing.png' );
+                    ?>
+                    <img src="<?php echo esc_url( $sourcing_img_src ); ?>"
                         alt="Indonesian Local Vanilla Sourcing Plantation"
                         style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 12px;">
                 </div>

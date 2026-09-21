@@ -60,7 +60,11 @@ if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
 ?>
 
 <!-- 1. Hero Section -->
-<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $img_dir . 'Blog Hero Section.png' ); ?>');">
+<?php
+$custom_blog_hero = get_theme_mod( 'gv_hero_blog', '' );
+$blog_hero_bg     = ! empty( $custom_blog_hero ) ? $custom_blog_hero : ( $img_dir . 'Blog Hero Section.png' );
+?>
+<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $blog_hero_bg ); ?>');">
     <div class="gv-container">
         <h1 class="gv-hero-tag">#readmore</h1>
         <p class="gv-hero-subtag">Discover the latest trends on our blog!</p>

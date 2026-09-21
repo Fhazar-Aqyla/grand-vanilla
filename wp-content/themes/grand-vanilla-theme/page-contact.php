@@ -12,7 +12,11 @@ $contact = grand_vanilla_get_contact_info();
 ?>
 
 <!-- 1. Hero Section -->
-<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $img_dir . 'Contact Us  Hero Section.png' ); ?>');">
+<?php
+$custom_contact_hero = get_theme_mod( 'gv_hero_contact', '' );
+$contact_hero_bg     = ! empty( $custom_contact_hero ) ? $custom_contact_hero : ( $img_dir . 'Contact Us  Hero Section.png' );
+?>
+<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $contact_hero_bg ); ?>');">
     <div class="gv-container">
         <h1 class="gv-hero-tag">#getInTouch</h1>
         <p class="gv-hero-subtag">Discuss your vanilla requirements with us.</p>

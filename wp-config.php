@@ -51,7 +51,19 @@ $table_prefix = 'wp_';
 define( 'WP_DEBUG', false );
 define( 'FS_METHOD', 'direct' );
 
-/* Add any custom values between this line and the "stop editing" line. */
+/* Support dynamic host for remote tunnel (Cloudflare/Ngrok) and local access */
+if ( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) || isset( $_SERVER['HTTP_HOST'] ) ) {
+    $host = isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : $_SERVER['HTTP_HOST'];
+    $is_ssl = ( ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) || ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) );
+    $proto = $is_ssl ? 'https://' : 'http://';
+
+    if ( $is_ssl ) {
+        $_SERVER['HTTPS'] = 'on';
+    }
+
+    define( 'WP_HOME', $proto . $host . '/grand-vanilla-id' );
+    define( 'WP_SITEURL', $proto . $host . '/grand-vanilla-id' );
+}
 
 /* That's all, stop editing! Happy publishing. */
 

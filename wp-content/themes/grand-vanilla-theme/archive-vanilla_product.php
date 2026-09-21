@@ -11,7 +11,11 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 ?>
 
 <!-- 1. Hero Section -->
-<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $img_dir . 'Products Hero Section.png' ); ?>');">
+<?php
+$custom_prod_hero = get_theme_mod( 'gv_hero_products', '' );
+$prod_hero_bg     = ! empty( $custom_prod_hero ) ? $custom_prod_hero : ( $img_dir . 'Products Hero Section.png' );
+?>
+<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $prod_hero_bg ); ?>');">
     <div class="gv-container">
         <h1 class="gv-hero-tag">#ourProducts</h1>
         <p class="gv-hero-subtag">Quality vanilla products for diverse applications.</p>

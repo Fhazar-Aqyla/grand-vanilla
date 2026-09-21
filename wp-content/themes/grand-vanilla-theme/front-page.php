@@ -58,8 +58,12 @@ $serve_5 = get_post_meta( $post_id, '_gv_home_serve_5', true ) ?: 'BAKERIES';
 $serve_6 = get_post_meta( $post_id, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY COMPANIES';
 ?>
 
+<?php
+$custom_hero_img = get_theme_mod( 'gv_hero_image', '' );
+$hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : ( $img_dir . 'Hero Image.png' );
+?>
 <!-- 1. Hero Section (Exact Match to Figma Reference) -->
-<section class="gv-hero" style="position: relative; min-height: 88vh; background: url('<?php echo esc_url($img_dir . 'Hero Image.png'); ?>') center right / cover no-repeat; display: flex; align-items: center; padding: 6.5rem 0 5.5rem;">
+<section class="gv-hero" style="position: relative; min-height: 88vh; background: url('<?php echo esc_url( $hero_bg_url ); ?>') center right / cover no-repeat; display: flex; align-items: center; padding: 6.5rem 0 5.5rem;">
     <!-- Gentle Subtle Ambient Tint for optimal contrast without darkening the warm sunlight -->
     <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.06) 45%, transparent 65%); pointer-events: none;"></div>
 
@@ -158,7 +162,11 @@ $serve_6 = get_post_meta( $post_id, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY
 
             <!-- Left Column: High-Res Rustic Photo -->
             <div style="display: flex;">
-                <img src="<?php echo esc_url($img_dir . 'About Us Image.png'); ?>"
+                <?php
+                $custom_about_img = get_theme_mod( 'gv_about_image', '' );
+                $about_img_src    = ! empty( $custom_about_img ) ? $custom_about_img : ( $img_dir . 'About Us Image.png' );
+                ?>
+                <img src="<?php echo esc_url( $about_img_src ); ?>"
                     alt="Grand Vanilla Indonesia Rustic Vanilla Curing"
                     class="gv-about-rustic-img"
                     style="width: 100%; height: 100%; min-height: 520px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: block;">
@@ -472,7 +480,11 @@ $serve_6 = get_post_meta( $post_id, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY
                 <h2 style="font-family: var(--font-heading, 'Jost', sans-serif); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 500; color: #363E19; line-height: 1.2; margin-bottom: 2rem;">
                     Flexible Vanilla Supply<br>For Your Business
                 </h2>
-                <img src="<?php echo esc_url($img_dir . 'Bulk  Wholesale Vanilla 1.png'); ?>"
+                <?php
+                $custom_oem_img = get_theme_mod( 'gv_oem_image', '' );
+                $oem_img_url    = ! empty( $custom_oem_img ) ? $custom_oem_img : ( $img_dir . 'Bulk  Wholesale Vanilla 1.png' );
+                ?>
+                <img src="<?php echo esc_url( $oem_img_url ); ?>"
                     alt="Grand Vanilla Indonesia Bulk Export Packaging"
                     style="width: 100%; height: auto; display: block;">
             </div>
@@ -559,7 +571,11 @@ $serve_6 = get_post_meta( $post_id, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY
             </h3>
 
             <div style="max-width: 980px; margin: 0 auto;">
-                <img src="<?php echo esc_url($img_dir . 'Worldwide maps.png'); ?>"
+                <?php
+                $custom_maps_img = get_theme_mod( 'gv_maps_image', '' );
+                $maps_img_url    = ! empty( $custom_maps_img ) ? $custom_maps_img : ( $img_dir . 'Worldwide maps.png' );
+                ?>
+                <img src="<?php echo esc_url( $maps_img_url ); ?>"
                     alt="Grand Vanilla Indonesia Worldwide Export Routes Map"
                     style="width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));">
             </div>

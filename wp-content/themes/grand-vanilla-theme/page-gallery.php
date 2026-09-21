@@ -37,7 +37,11 @@ if ( $gallery_carousel_query->have_posts() ) {
 ?>
 
 <!-- 1. Hero Section -->
-<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $img_dir . 'Gallery Hero Section.png' ); ?>');">
+<?php
+$custom_gal_hero = get_theme_mod( 'gv_hero_gallery', '' );
+$gal_hero_bg     = ! empty( $custom_gal_hero ) ? $custom_gal_hero : ( $img_dir . 'Gallery Hero Section.png' );
+?>
+<section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $gal_hero_bg ); ?>');">
     <div class="gv-container">
         <h1 class="gv-hero-tag">#ourGallery</h1>
         <p class="gv-hero-subtag">See Our People, Products, And Operations</p>
