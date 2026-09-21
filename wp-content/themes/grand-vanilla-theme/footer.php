@@ -350,7 +350,7 @@ $contact = grand_vanilla_get_contact_info();
     }
 
     /* Tablet & Mobile Responsive */
-    @media (max-width: 767px) {
+    @media (max-width: 719px) {
         .gv-floating-wa-wrap {
             bottom: 24px !important;
             right: 22px !important;
@@ -386,7 +386,7 @@ $contact = grand_vanilla_get_contact_info();
         }
     }
 
-    @media (min-width: 768px) and (max-width: 1024px) {
+    @media (min-width: 720px) and (max-width: 1024px) {
         .gv-floating-wa-wrap {
             bottom: 32px !important;
             right: 32px !important;

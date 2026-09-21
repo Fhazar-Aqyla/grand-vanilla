@@ -1106,7 +1106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-variety-tabs {
         gap: 1.5rem;
         overflow-x: auto;

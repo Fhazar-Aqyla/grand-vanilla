@@ -543,7 +543,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     align-items: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 720px) {
     .gv-detail-more-row {
         grid-template-columns: 5fr 6fr;
         gap: 3rem;
@@ -690,7 +690,7 @@ get_template_part( 'template-parts/cta-banner', null, array(
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-detail-bc-wrapper {
         padding-top: 1.25rem;
     }

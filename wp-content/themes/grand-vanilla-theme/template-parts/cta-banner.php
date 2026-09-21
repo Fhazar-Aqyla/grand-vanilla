@@ -168,8 +168,8 @@ $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/conta
     }
 }
 
-/* Mobile View (< 768px) */
-@media (max-width: 767px) {
+/* Mobile View (< 720px) */
+@media (max-width: 719px) {
     .gv-cta-banner {
         padding: 4.5rem 1.25rem !important;
     }

@@ -254,7 +254,7 @@ if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
     margin-bottom: 2.5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 720px) {
     .gv-blog-header {
         grid-template-columns: 1fr 1fr;
         align-items: end;

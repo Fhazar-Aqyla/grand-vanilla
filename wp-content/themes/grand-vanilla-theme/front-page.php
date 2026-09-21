@@ -1192,7 +1192,7 @@ get_template_part('template-parts/cta-banner', null, array(
         }
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 719px) {
         .gv-blog-article-row {
             grid-template-columns: 1fr !important;
             gap: 2rem !important;

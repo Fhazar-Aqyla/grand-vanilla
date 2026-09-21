@@ -1,7 +1,7 @@
 /*
  * =====================================================================
  * Grand Vanilla ID — Responsive UI Refinement
- * Mobile (≤ 767px) & Tablet (768px–1024px) Breakpoints.
+ * Mobile (≤ 719px) & Tablet (720px–1024px) Breakpoints.
  * Desktop/Laptop (≥ 1025px) is STRICTLY FROZEN.
  * Source of Truth: docs/design-assets/Mobile and docs/design-assets/Tablet PDFs.
  * =====================================================================
@@ -64,7 +64,7 @@
 }
 
 /* Base Spacing for Mobile */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-container {
         padding-left: 1.25rem !important;
         padding-right: 1.25rem !important;
@@ -76,7 +76,7 @@
 }
 
 /* Base Spacing for Tablet */
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-container {
         padding-left: clamp(2.5rem, 5.5vw, 4rem) !important;
         padding-right: clamp(2rem, 4vw, 3rem) !important;
@@ -131,7 +131,7 @@
 /* =====================================================================
    3. INNER PAGES HERO SECTION (#knowUs, #ourProducts, etc.)
    ===================================================================== */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-hero-page {
         padding: 4.5rem 1.25rem !important;
         min-height: 220px !important;
@@ -145,7 +145,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-hero-page {
         padding: 5.5rem 2rem !important;
         min-height: 250px !important;
@@ -161,7 +161,7 @@
 /* =====================================================================
    4. LANDING PAGE — HERO SECTION
    ===================================================================== */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-hero {
         min-height: 100svh !important;
         min-height: 100vh !important;
@@ -263,7 +263,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-hero {
         min-height: calc(100vh - 70px) !important;
         min-height: calc(100dvh - 70px) !important;
@@ -512,7 +512,7 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     /* Hide duplicate h2 heading on mobile since paragraph already begins with "Grand Vanilla Indonesia..." */
     .gv-grid-split-about > div:last-child h2,
     .gv-about-overview-grid > div:last-child h2 {
@@ -540,7 +540,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-grid-split-about,
     .gv-about-overview-grid {
         display: grid !important;
@@ -630,7 +630,7 @@
                Card 1 active (#363E19, white text, arrow button).
                Cards 2 & 3 collapsed (light sage background #BDC4B8, no button).
    ===================================================================== */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     html body .gv-products-cards-grid {
         display: flex !important;
         flex-direction: column !important;
@@ -854,7 +854,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     html body .gv-products-cards-grid {
         display: flex !important;
         flex-direction: row !important;
@@ -985,7 +985,7 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
         display: grid !important;
         grid-template-columns: 1fr !important;
@@ -997,7 +997,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     div[style*="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
@@ -1050,13 +1050,13 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-who-we-serve-grid {
         grid-template-columns: 1fr !important;
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-who-we-serve-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 1rem !important;
@@ -1124,7 +1124,7 @@
    ===================================================================== */
 
 /* 10.1 Journey & Purpose */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-journey-header-grid {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
@@ -1139,7 +1139,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-journey-section {
         padding-top: 4.5rem !important;
         padding-bottom: 4.5rem !important;
@@ -1229,7 +1229,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-about-partner-section {
         padding-top: 4.5rem !important;
         padding-bottom: 4.5rem !important;
@@ -1295,7 +1295,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-sourcing-section {
         padding-top: 4.5rem !important;
         padding-bottom: 4.5rem !important;
@@ -1348,7 +1348,7 @@
 }
 
 /* 10.4 Export Capability Section */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-export-capability-container {
         display: block !important;
     }
@@ -1378,7 +1378,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-export-capability-section {
         padding-top: 4.5rem !important;
         padding-bottom: 4.5rem !important;
@@ -1502,7 +1502,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-facilities-header-grid {
         display: flex !important;
         flex-direction: column !important;
@@ -1545,7 +1545,7 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-specs-split {
         grid-template-columns: 1fr !important;
         gap: 1.5rem !important;
@@ -1562,7 +1562,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     /* Stacked 1-column specs on Tablet matching Tablet PDF */
     .gv-specs-split {
         display: grid !important;
@@ -1592,7 +1592,7 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-gallery-explore-grid {
         grid-template-columns: 1fr !important;
         gap: 1.5rem !important;
@@ -1608,7 +1608,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-gallery-explore-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 1.5rem !important;
@@ -1620,7 +1620,7 @@
    PDF Mobile: 1-column stacked with 1:1 square image.
    PDF Tablet: 2-column side-by-side row with 1:1 image left and text right.
    ===================================================================== */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-blog-tabs {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
@@ -1655,7 +1655,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-blog-row,
     .gv-blog-article-row {
         display: grid !important;
@@ -1680,7 +1680,7 @@
 /* =====================================================================
    14. BLOG DETAIL PAGE (single.php)
    ===================================================================== */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-detail-title {
         font-size: 1.65rem !important;
         line-height: 1.25 !important;
@@ -1698,7 +1698,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-detail-featured-wrap {
         max-height: 420px !important;
     }
@@ -1711,7 +1711,7 @@
 /* =====================================================================
    15. CONTACT US PAGE (page-contact.php)
    ===================================================================== */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-contact-wrapper {
         grid-template-columns: 1fr !important;
         gap: 2.5rem !important;
@@ -1728,7 +1728,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-contact-wrapper {
         grid-template-columns: 1fr !important;
         gap: 3rem !important;
@@ -1745,7 +1745,7 @@
 /* =====================================================================
    16. FOOTER COMPONENT
    ===================================================================== */
-@media (max-width: 767px) {
+@media (max-width: 719px) {
     .gv-footer-grid {
         grid-template-columns: 1fr !important;
         gap: 2.5rem !important;
@@ -1761,7 +1761,7 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 720px) and (max-width: 1024px) {
     .gv-footer-grid {
         grid-template-columns: 1.5fr 1fr 1fr 1fr !important;
         gap: 2rem !important;

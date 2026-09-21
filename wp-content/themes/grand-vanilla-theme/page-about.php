@@ -778,7 +778,7 @@ get_template_part('template-parts/cta-banner', null, array(
         }
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 719px) {
         .gv-about-overview-grid {
             grid-template-columns: 1fr !important;
         }
