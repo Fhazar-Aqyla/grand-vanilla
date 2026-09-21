@@ -526,7 +526,13 @@ $contact_hero_bg     = ! empty( $custom_contact_hero ) ? $custom_contact_hero : 
 }
 </style>
 
-<!-- 3. Google Maps Embed -->
+<!-- 3. Google Maps Embed (Can be hidden/toggled from WP-Admin) -->
+<?php
+$hide_page_map   = get_post_meta( get_the_ID(), '_gv_hide_map', true );
+$should_show_map = ( '1' !== $hide_page_map ) && ! empty( $contact['show_map'] ) && ! empty( $contact['maps_embed_url'] );
+
+if ( $should_show_map ) :
+?>
 <section class="gv-map-section">
     <div class="gv-map-header">
         <div class="gv-container">
@@ -551,6 +557,7 @@ $contact_hero_bg     = ! empty( $custom_contact_hero ) ? $custom_contact_hero : 
         </iframe>
     </div>
 </section>
+<?php endif; ?>
 
 <style>
 .gv-map-section {

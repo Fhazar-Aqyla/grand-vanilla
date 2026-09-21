@@ -866,6 +866,24 @@ function grand_vanilla_customize_register( $wp_customize ) {
         return esc_url_raw( $input );
     }
 
+    // Google Maps Visibility Toggle
+    if ( ! function_exists( 'grand_vanilla_sanitize_checkbox' ) ) {
+        function grand_vanilla_sanitize_checkbox( $checked ) {
+            return ( ( isset( $checked ) && true == $checked ) ? true : false );
+        }
+    }
+
+    $wp_customize->add_setting( 'gv_show_map', array(
+        'default'           => true,
+        'sanitize_callback' => 'grand_vanilla_sanitize_checkbox',
+    ) );
+    $wp_customize->add_control( 'gv_show_map', array(
+        'label'       => __( 'Tampilkan Google Maps di Halaman Kontak', 'grand-vanilla' ),
+        'description' => __( 'Centang untuk mengaktifkan/menampilkan bagian Google Maps di halaman Kontak. Hapus centang untuk menyembunyikannya (hide).', 'grand-vanilla' ),
+        'section'     => 'grand_vanilla_options',
+        'type'        => 'checkbox',
+    ) );
+
     // Google Maps Embed URL
     $wp_customize->add_setting( 'gv_maps_embed_url', array(
         'default'           => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36092.836208309294!2d107.28651792040289!3d-6.262369707513481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e697760017df9ad%3A0x74508c4a886051a4!2sHorizon%20University%20Indonesia!5e1!3m2!1sid!2sid!4v1788419127699!5m2!1sid!2sid',
@@ -994,9 +1012,61 @@ function grand_vanilla_get_contact_info() {
         'facebook_url'    => get_theme_mod( 'gv_facebook', 'https://facebook.com' ),
         'youtube_url'     => get_theme_mod( 'gv_youtube', 'https://youtube.com' ),
         'maps_embed_url'  => $raw_map,
+        'show_map'        => (bool) get_theme_mod( 'gv_show_map', true ),
         'export_hubs'     => 'Jakarta (CGK) & Bali (DPS), Indonesia',
     );
 }
+
+/**
+ * 7a-2. Register Meta Box for Contact Page: Toggle Google Maps Visibility in WP-Admin
+ */
+function grand_vanilla_add_contact_map_meta_box() {
+    add_meta_box(
+        'gv_contact_map_settings',
+        __( 'Pengaturan Google Maps', 'grand-vanilla' ),
+        'grand_vanilla_render_contact_map_meta_box',
+        'page',
+        'side',
+        'default'
+    );
+}
+add_action( 'add_meta_boxes', 'grand_vanilla_add_contact_map_meta_box' );
+
+function grand_vanilla_render_contact_map_meta_box( $post ) {
+    wp_nonce_field( 'gv_save_contact_map_nonce', 'gv_contact_map_nonce_field' );
+    $val = get_post_meta( $post->ID, '_gv_hide_map', true );
+    ?>
+    <p style="margin-bottom: 0.6rem; font-size: 13px; color: #444;">
+        <?php _e( 'Opsi visibilitas peta Google Maps di halaman Kontak:', 'grand-vanilla' ); ?>
+    </p>
+    <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
+        <input type="checkbox" name="gv_hide_map" value="1" <?php checked( $val, '1' ); ?>>
+        <span style="color: #b32d2e; font-weight: 600;"><?php _e( 'Sembunyikan Peta (Hide Map)', 'grand-vanilla' ); ?></span>
+    </label>
+    <p style="font-size: 11px; color: #777; margin-top: 6px; line-height: 1.4;">
+        <?php _e( 'Centang opsi ini jika ingin menyembunyikan/menonaktifkan bagian Google Maps. Jika tidak dicentang, peta akan mengikuti pengaturan tema.', 'grand-vanilla' ); ?>
+    </p>
+    <?php
+}
+
+function grand_vanilla_save_contact_map_meta_box( $post_id ) {
+    if ( ! isset( $_POST['gv_contact_map_nonce_field'] ) || ! wp_verify_nonce( $_POST['gv_contact_map_nonce_field'], 'gv_save_contact_map_nonce' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_page', $post_id ) ) {
+        return;
+    }
+
+    if ( isset( $_POST['gv_hide_map'] ) && '1' === $_POST['gv_hide_map'] ) {
+        update_post_meta( $post_id, '_gv_hide_map', '1' );
+    } else {
+        delete_post_meta( $post_id, '_gv_hide_map' );
+    }
+}
+add_action( 'save_post', 'grand_vanilla_save_contact_map_meta_box' );
 
 /**
  * 7b. Register Custom Post Type: Contact Form Inquiries (B2B Leads)
