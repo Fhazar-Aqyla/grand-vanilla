@@ -116,10 +116,21 @@ $contact = grand_vanilla_get_contact_info();
                         <label for="gv_subject">Subject</label>
                         <div class="gv-select-wrapper">
                             <select id="gv_subject" name="subject">
-                                <option value="Wholesale Vanilla Beans Inquiry">Wholesale Vanilla Beans Inquiry</option>
-                                <option value="Vanilla Powder / Extract Quote">Vanilla Powder / Extract Quote</option>
-                                <option value="Custom OEM Packaging Request">Custom OEM Packaging Request</option>
-                                <option value="Physical Sample Request">Physical Sample Request</option>
+                                <?php
+                                $raw_subjects = get_theme_mod( 'gv_contact_subjects', "Wholesale Vanilla Beans Inquiry\nVanilla Powder / Extract Quote\nCustom OEM Packaging Request\nPhysical Sample Request" );
+                                $subjects_list = array_filter( array_map( 'trim', explode( "\n", (string) $raw_subjects ) ) );
+                                if ( empty( $subjects_list ) ) {
+                                    $subjects_list = array(
+                                        'Wholesale Vanilla Beans Inquiry',
+                                        'Vanilla Powder / Extract Quote',
+                                        'Custom OEM Packaging Request',
+                                        'Physical Sample Request',
+                                    );
+                                }
+                                foreach ( $subjects_list as $subj_item ) :
+                                ?>
+                                    <option value="<?php echo esc_attr( $subj_item ); ?>"><?php echo esc_html( $subj_item ); ?></option>
+                                <?php endforeach; ?>
                             </select>
                             <span class="gv-select-arrow">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>

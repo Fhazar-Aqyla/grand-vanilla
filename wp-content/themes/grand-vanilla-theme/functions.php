@@ -873,6 +873,18 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'section'     => 'grand_vanilla_options',
         'type'        => 'textarea',
     ) );
+
+    // Contact Form Subjects (Dropdown Options)
+    $wp_customize->add_setting( 'gv_contact_subjects', array(
+        'default'           => "Wholesale Vanilla Beans Inquiry\nVanilla Powder / Extract Quote\nCustom OEM Packaging Request\nPhysical Sample Request",
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ) );
+    $wp_customize->add_control( 'gv_contact_subjects', array(
+        'label'       => __( 'Contact Form Subjects (Dropdown Options)', 'grand-vanilla' ),
+        'description' => __( 'List each dropdown subject option on a new line.', 'grand-vanilla' ),
+        'section'     => 'grand_vanilla_options',
+        'type'        => 'textarea',
+    ) );
 }
 add_action( 'customize_register', 'grand_vanilla_customize_register' );
 
