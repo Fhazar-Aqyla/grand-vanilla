@@ -165,40 +165,74 @@
     .gv-hero {
         min-height: 100svh !important;
         min-height: 100vh !important;
-        padding: 5rem 0 3.5rem !important;
+        padding: 4.5rem 0 2rem !important;
         background-position: center center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        box-sizing: border-box !important;
     }
 
     .gv-hero > div:first-child {
         background: linear-gradient(
-            to right,
-            rgba(0,0,0,0.22) 0%,
-            rgba(0,0,0,0.06) 45%,
-            transparent 65%
+            to bottom,
+            rgba(0,0,0,0.3) 0%,
+            rgba(0,0,0,0.15) 40%,
+            rgba(0,0,0,0.35) 100%
         ) !important;
     }
 
+    .gv-hero > .gv-container {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
+    .gv-hero-content-wrap {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        flex: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
     .gv-hero h1 {
+        text-align: center !important;
         font-size: 1.85rem !important;
         text-transform: uppercase !important;
         letter-spacing: 0.02em !important;
         line-height: 1.2 !important;
         font-weight: 500 !important;
         margin-bottom: 1rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
     .gv-hero p {
+        text-align: center !important;
         font-size: 0.9375rem !important;
         margin-bottom: 1.75rem !important;
         max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
+    .gv-hero-btn-group,
     .gv-hero > .gv-container > div > div[style*="display: flex; gap: 1rem"] {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
         gap: 0.65rem !important;
         margin-bottom: 2.25rem !important;
         width: 100% !important;
+        max-width: 360px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-content: center !important;
     }
 
     .gv-hero-btn-primary,
@@ -218,6 +252,10 @@
         width: 100% !important;
         max-width: 100% !important;
         padding: 0.85rem 1.15rem !important;
+        margin-top: auto !important;
+        margin-bottom: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
     .gv-trusted-badge span[style*="font-size: 2.25rem"] {

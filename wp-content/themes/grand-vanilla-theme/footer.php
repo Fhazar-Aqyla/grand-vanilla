@@ -349,20 +349,21 @@ $contact = grand_vanilla_get_contact_info();
         }
     }
 
-    /* Tablet & Mobile Responsive (< 768px) */
+    /* Tablet & Mobile Responsive */
     @media (max-width: 767px) {
         .gv-floating-wa-wrap {
-            bottom: 18px !important;
-            right: 18px !important;
+            bottom: 24px !important;
+            right: 22px !important;
         }
 
         .gv-floating-wa-btn {
-            height: 48px !important;
-            min-width: 48px !important;
-            width: 48px !important;
+            height: 68px !important;
+            min-width: 68px !important;
+            width: 68px !important;
             padding: 0 !important;
             justify-content: center !important;
             border-radius: 50% !important;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.48), 0 4px 12px rgba(0, 0, 0, 0.16) !important;
         }
 
         .gv-wa-label {
@@ -371,12 +372,50 @@ $contact = grand_vanilla_get_contact_info();
 
         .gv-wa-pulse {
             border-radius: 50% !important;
-            inset: -3px !important;
+            inset: -5px !important;
+        }
+
+        .gv-wa-icon {
+            width: 40px !important;
+            height: 40px !important;
         }
 
         .gv-wa-icon svg {
-            width: 24px !important;
-            height: 24px !important;
+            width: 38px !important;
+            height: 38px !important;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .gv-floating-wa-wrap {
+            bottom: 32px !important;
+            right: 32px !important;
+        }
+
+        .gv-floating-wa-btn {
+            height: 68px !important;
+            width: auto !important;
+            min-width: 68px !important;
+            border-radius: 50px !important;
+            padding: 0 28px 0 20px !important;
+            box-shadow: 0 10px 32px rgba(37, 211, 102, 0.48), 0 4px 12px rgba(0, 0, 0, 0.16) !important;
+        }
+
+        .gv-wa-icon {
+            width: 42px !important;
+            height: 42px !important;
+        }
+
+        .gv-wa-icon svg {
+            width: 38px !important;
+            height: 38px !important;
+        }
+
+        .gv-wa-label {
+            display: inline-block !important;
+            font-size: 1.15rem !important;
+            font-weight: 600 !important;
+            margin-left: 12px !important;
         }
     }
     </style>
