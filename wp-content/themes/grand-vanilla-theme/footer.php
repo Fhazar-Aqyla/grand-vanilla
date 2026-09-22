@@ -22,7 +22,12 @@ $contact = grand_vanilla_get_contact_info();
                     <!-- Logo -->
                     <div class="gv-footer-logo-wrap" style="margin-bottom: 1.25rem;">
                         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="display: inline-block; text-decoration: none;">
-                            <img src="<?php echo esc_url( gv_asset_img( 'Logo with text.png' ) ); ?>" alt="Grand Vanilla Indonesia" class="gv-footer-logo-img" style="height: 38px; width: auto; object-fit: contain;">
+                            <?php
+                            $footer_logo_url = has_custom_logo() 
+                                ? wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' ) 
+                                : gv_asset_img( 'Logo with text.png' );
+                            ?>
+                            <img src="<?php echo esc_url( $footer_logo_url ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" class="gv-footer-logo-img" style="height: 38px; width: auto; object-fit: contain;">
                         </a>
                     </div>
 

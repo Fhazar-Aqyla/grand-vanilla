@@ -10,7 +10,13 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-    <link rel="icon" type="image/png" href="<?php echo esc_url( gv_asset_img( 'Logo.png' ) ); ?>">
+    <?php
+    if ( has_site_icon() ) {
+        wp_site_icon();
+    } else {
+        echo '<link rel="icon" type="image/png" href="' . esc_url( gv_asset_img( 'Logo.png' ) ) . '">';
+    }
+    ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -27,10 +33,19 @@
         <div class="gv-container">
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 2rem;">
                 
-                <!-- Brand Logo -->
+                <!-- Brand Logo (Dynamic via WP Customizer -> Site Identity -> Logo) -->
                 <div class="gv-brand-logo">
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="<?php echo esc_url( gv_asset_img( 'Logo with text.png' ) ); ?>" alt="Grand Vanilla Indonesia" class="gv-header-logo-img" style="height: 38px; width: auto; object-fit: contain;">
+                        <?php
+                        if ( has_custom_logo() ) {
+                            $custom_logo_id = get_theme_mod( 'custom_logo' );
+                            $logo_data      = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+                            $logo_url       = ! empty( $logo_data[0] ) ? $logo_data[0] : gv_asset_img( 'Logo with text.png' );
+                        } else {
+                            $logo_url = gv_asset_img( 'Logo with text.png' );
+                        }
+                        ?>
+                        <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" class="gv-header-logo-img" style="height: 38px; width: auto; object-fit: contain;">
                     </a>
                 </div>
 

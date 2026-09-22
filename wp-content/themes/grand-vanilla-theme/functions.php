@@ -1823,8 +1823,8 @@ add_action( 'save_post_page', 'grand_vanilla_save_page_meta' );
  * Dynamic Document Titles for Maximum SEO & Click-Through-Rate
  */
 function grand_vanilla_custom_document_title( $title ) {
-    $site_name = 'Grand Vanilla Indonesia';
-    $tagline   = 'Premium Indonesian Vanilla Supplier & Exporter';
+    $site_name = get_bloginfo( 'name' ) ?: 'Grand Vanilla Indonesia';
+    $tagline   = get_bloginfo( 'description' ) ?: 'Premium Indonesian Vanilla Supplier & Exporter';
 
     if ( is_front_page() ) {
         return "{$site_name} | {$tagline}";
@@ -1854,9 +1854,9 @@ add_filter( 'pre_get_document_title', 'grand_vanilla_custom_document_title', 20 
  * Output Essential SEO Meta Tags, Canonical Links, Open Graph & Twitter Cards
  */
 function grand_vanilla_seo_meta_tags() {
-    $site_name    = 'Grand Vanilla Indonesia';
+    $site_name    = get_bloginfo( 'name' ) ?: 'Grand Vanilla Indonesia';
     $site_url     = home_url( '/' );
-    $default_desc = 'Grand Vanilla Indonesia is a trusted Indonesian vanilla supplier and exporter, supplying gourmet vanilla beans, powder, and extract for international wholesale and B2B buyers.';
+    $default_desc = get_bloginfo( 'description' ) ?: 'Grand Vanilla Indonesia is a trusted Indonesian vanilla supplier and exporter, supplying gourmet vanilla beans, powder, and extract for international wholesale and B2B buyers.';
     $default_img  = gv_asset_img( 'Product Unggulan 1.png' );
     $og_type      = 'website';
     $canonical    = home_url( add_query_arg( array(), $GLOBALS['wp']->request ) );
