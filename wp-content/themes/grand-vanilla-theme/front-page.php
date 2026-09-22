@@ -60,7 +60,7 @@ $serve_6 = get_post_meta( $post_id, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY
 
 <?php
 $custom_hero_img = get_theme_mod( 'gv_hero_image', '' );
-$hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : ( $img_dir . 'Hero Image.png' );
+$hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : gv_asset_img( 'Hero Image.png' );
 ?>
 <!-- 1. Hero Section (Exact Match to Figma Reference) -->
 <section class="gv-hero" style="position: relative; min-height: 88vh; background: url('<?php echo esc_url( $hero_bg_url ); ?>') center right / cover no-repeat; display: flex; align-items: center; padding: 6.5rem 0 5.5rem;">
@@ -164,7 +164,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : ( $img_dir .
             <div style="display: flex;">
                 <?php
                 $custom_about_img = get_theme_mod( 'gv_about_image', '' );
-                $about_img_src    = ! empty( $custom_about_img ) ? $custom_about_img : ( $img_dir . 'About Us Image.png' );
+                $about_img_src    = ! empty( $custom_about_img ) ? $custom_about_img : gv_asset_img( 'About Us Image.png' );
                 ?>
                 <img src="<?php echo esc_url( $about_img_src ); ?>"
                     alt="Grand Vanilla Indonesia Rustic Vanilla Curing"
@@ -175,7 +175,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : ( $img_dir .
             <!-- Right Column: Content + Watermark + 2x2 Feature Boxes -->
             <div style="position: relative; display: flex; flex-direction: column; justify-content: center;" class="gv-about-content-card">
                 <!-- Subtle Orchid Flower Watermark (Mirrored Match - Scaled Down) -->
-                <img src="<?php echo esc_url( $img_dir . 'Logo.png' ); ?>"
+                <img src="<?php echo esc_url( gv_asset_img( 'Logo.png' ) ); ?>"
                     alt=""
                     aria-hidden="true"
                     class="gv-about-watermark"
@@ -276,7 +276,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : ( $img_dir .
                     $prod_idx++;
                     $is_active  = ($prod_idx === 1);
                     $card_class = $is_active ? 'is-active' : 'is-collapsed';
-                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : $img_dir . 'Product Unggulan ' . $prod_idx . '.png';
+                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : gv_asset_img( 'Product Unggulan ' . $prod_idx . '.png' );
             ?>
                     <!-- Card <?php echo esc_attr($prod_idx); ?>: <?php the_title(); ?> -->
                     <div class="gv-product-card <?php echo esc_attr($card_class); ?>" data-card-index="<?php echo esc_attr($prod_idx); ?>">
@@ -482,7 +482,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : ( $img_dir .
                 </h2>
                 <?php
                 $custom_oem_img = get_theme_mod( 'gv_oem_image', '' );
-                $oem_img_url    = ! empty( $custom_oem_img ) ? $custom_oem_img : ( $img_dir . 'Bulk  Wholesale Vanilla 1.png' );
+                $oem_img_url    = ! empty( $custom_oem_img ) ? $custom_oem_img : gv_asset_img( 'Bulk  Wholesale Vanilla 1.png' );
                 ?>
                 <img src="<?php echo esc_url( $oem_img_url ); ?>"
                     alt="Grand Vanilla Indonesia Bulk Export Packaging"
@@ -573,7 +573,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : ( $img_dir .
             <div style="max-width: 980px; margin: 0 auto;">
                 <?php
                 $custom_maps_img = get_theme_mod( 'gv_maps_image', '' );
-                $maps_img_url    = ! empty( $custom_maps_img ) ? $custom_maps_img : ( $img_dir . 'Worldwide maps.png' );
+                $maps_img_url    = ! empty( $custom_maps_img ) ? $custom_maps_img : gv_asset_img( 'Worldwide maps.png' );
                 ?>
                 <img src="<?php echo esc_url( $maps_img_url ); ?>"
                     alt="Grand Vanilla Indonesia Worldwide Export Routes Map"
@@ -797,7 +797,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : ( $img_dir .
                     $terms = get_the_terms(get_the_ID(), 'gallery_category');
                     $tag   = (! empty($terms) && ! is_wp_error($terms)) ? $terms[0]->name : 'Vanilla';
                     $gallery_carousel_dynamic[] = array(
-                        'img'      => has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : $img_dir . 'Gallery Example Carroussel 1.png',
+                        'img'      => has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : gv_asset_img( 'Gallery Example Carroussel 1.png' ),
                         'tag'      => $tag,
                         'title'    => 'Vanilla Collection',
                         'subtitle' => get_the_title(),
@@ -891,7 +891,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : ( $img_dir .
                     $badge_tot = str_pad($hp_total_posts, 2, '0', STR_PAD_LEFT);
                     $badge_str = $badge_num . '/' . $badge_tot;
 
-                    $post_thumb = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : $img_dir . 'Buat Blog Example 1.png';
+                    $post_thumb = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : gv_asset_img( 'Buat Blog Example 1.png' );
                     $post_cats  = get_the_category();
                     $cat_label  = ! empty($post_cats) ? $post_cats[0]->name : 'Vanilla Guide';
                     $b_idx++;

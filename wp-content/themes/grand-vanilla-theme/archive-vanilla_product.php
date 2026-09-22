@@ -13,7 +13,7 @@ $img_dir = get_template_directory_uri() . '/assets/images/';
 <!-- 1. Hero Section -->
 <?php
 $custom_prod_hero = get_theme_mod( 'gv_hero_products', '' );
-$prod_hero_bg     = ! empty( $custom_prod_hero ) ? $custom_prod_hero : ( $img_dir . 'Products Hero Section.png' );
+$prod_hero_bg     = ! empty( $custom_prod_hero ) ? $custom_prod_hero : gv_asset_img( 'Products Hero Section.png' );
 ?>
 <section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $prod_hero_bg ); ?>');">
     <div class="gv-container">
@@ -59,7 +59,7 @@ $prod_hero_bg     = ! empty( $custom_prod_hero ) ? $custom_prod_hero : ( $img_di
                     $prod_idx++;
                     $is_active  = ( $prod_idx === 1 );
                     $card_class = $is_active ? 'is-active' : 'is-collapsed';
-                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : $img_dir . 'Product Unggulan ' . $prod_idx . '.png';
+                    $prod_img   = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : gv_asset_img( 'Product Unggulan ' . $prod_idx . '.png' );
                     ?>
                     <!-- Card <?php echo esc_attr( $prod_idx ); ?>: <?php the_title(); ?> -->
                     <div class="gv-product-card <?php echo esc_attr( $card_class ); ?>" data-card-index="<?php echo esc_attr( $prod_idx ); ?>">
@@ -189,17 +189,17 @@ $prod_hero_bg     = ! empty( $custom_prod_hero ) ? $custom_prod_hero : ( $img_di
                     if ( has_post_thumbnail() ) {
                         $exp_img = get_the_post_thumbnail_url( get_the_ID(), 'large' );
                     } elseif ( $exp_slug === 'vanilla-seeds' ) {
-                        $exp_img = $img_dir . 'Seeds Vanilla.png';
+                        $exp_img = gv_asset_img( 'Seeds Vanilla.png' );
                     } elseif ( $exp_slug === 'vanilla-paste' ) {
-                        $exp_img = $img_dir . 'Paste Vanilla.png';
+                        $exp_img = gv_asset_img( 'Paste Vanilla.png' );
                     } elseif ( $exp_slug === 'vanilla-powder' ) {
-                        $exp_img = $img_dir . 'Product Unggulan 2.png';
+                        $exp_img = gv_asset_img( 'Product Unggulan 2.png' );
                     } elseif ( $exp_slug === 'vanilla-extract' ) {
-                        $exp_img = $img_dir . 'Product Unggulan 3.png';
+                        $exp_img = gv_asset_img( 'Product Unggulan 3.png' );
                     } elseif ( $exp_slug === 'vanilla-beans' ) {
-                        $exp_img = $img_dir . 'Product Unggulan 1.png';
+                        $exp_img = gv_asset_img( 'Product Unggulan 1.png' );
                     } else {
-                        $exp_img = $img_dir . 'Seeds Vanilla.png';
+                        $exp_img = gv_asset_img( 'Seeds Vanilla.png' );
                     }
                 ?>
                 <div class="<?php echo esc_attr( $row_class ); ?>">

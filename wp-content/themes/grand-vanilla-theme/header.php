@@ -10,7 +10,7 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-    <link rel="icon" type="image/png" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo.png' ); ?>">
+    <link rel="icon" type="image/png" href="<?php echo esc_url( gv_asset_img( 'Logo.png' ) ); ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -30,7 +30,7 @@
                 <!-- Brand Logo -->
                 <div class="gv-brand-logo">
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" style="display: flex; align-items: center; text-decoration: none;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo with text.png' ); ?>" alt="Grand Vanilla Indonesia" class="gv-header-logo-img" style="height: 38px; width: auto; object-fit: contain;">
+                        <img src="<?php echo esc_url( gv_asset_img( 'Logo with text.png' ) ); ?>" alt="Grand Vanilla Indonesia" class="gv-header-logo-img" style="height: 38px; width: auto; object-fit: contain;">
                     </a>
                 </div>
 

@@ -26,7 +26,7 @@ if ( $gallery_carousel_query->have_posts() ) {
         $terms = get_the_terms( get_the_ID(), 'gallery_category' );
         $tag   = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : 'Vanilla';
         $gallery_carousel_items[] = array(
-            'img'      => has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Gallery Example Carroussel 1.png',
+            'img'      => has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : gv_asset_img( 'Gallery Example Carroussel 1.png' ),
             'tag'      => $tag,
             'title'    => 'Vanilla Collection',
             'subtitle' => get_the_title(),
@@ -39,7 +39,7 @@ if ( $gallery_carousel_query->have_posts() ) {
 <!-- 1. Hero Section -->
 <?php
 $custom_gal_hero = get_theme_mod( 'gv_hero_gallery', '' );
-$gal_hero_bg     = ! empty( $custom_gal_hero ) ? $custom_gal_hero : ( $img_dir . 'Gallery Hero Section.png' );
+$gal_hero_bg     = ! empty( $custom_gal_hero ) ? $custom_gal_hero : gv_asset_img( 'Gallery Hero Section.png' );
 ?>
 <section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $gal_hero_bg ); ?>');">
     <div class="gv-container">
@@ -155,7 +155,7 @@ $gal_hero_bg     = ! empty( $custom_gal_hero ) ? $custom_gal_hero : ( $img_dir .
                     $terms     = get_the_terms( get_the_ID(), 'gallery_category' );
                     $cat_slug  = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->slug : 'vanilla';
                     $cat_name  = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : 'Vanilla';
-                    $card_img  = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : $img_dir . 'Gallery Example Carroussel 1.png';
+                    $card_img  = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : gv_asset_img( 'Gallery Example Carroussel 1.png' );
                     $card_desc = get_the_content();
                     if ( empty( $card_desc ) ) {
                         $card_desc = get_the_excerpt();

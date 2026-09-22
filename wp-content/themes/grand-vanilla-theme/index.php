@@ -38,8 +38,8 @@ $base_url = get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/' );
 
 // Fallback images (alternates when no featured image set)
 $fallback_imgs = array(
-    $img_dir . 'Buat Blog Example 1.png',
-    $img_dir . 'Buat blog example 2.png',
+    gv_asset_img( 'Buat Blog Example 1.png' ),
+    gv_asset_img( 'Buat blog example 2.png' ),
 );
 
 // Categories for filter tabs (dynamic from native WordPress 'category')
@@ -62,7 +62,7 @@ if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
 <!-- 1. Hero Section -->
 <?php
 $custom_blog_hero = get_theme_mod( 'gv_hero_blog', '' );
-$blog_hero_bg     = ! empty( $custom_blog_hero ) ? $custom_blog_hero : ( $img_dir . 'Blog Hero Section.png' );
+$blog_hero_bg     = ! empty( $custom_blog_hero ) ? $custom_blog_hero : gv_asset_img( 'Blog Hero Section.png' );
 ?>
 <section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $blog_hero_bg ); ?>');">
     <div class="gv-container">

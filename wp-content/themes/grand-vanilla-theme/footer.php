@@ -22,7 +22,7 @@ $contact = grand_vanilla_get_contact_info();
                     <!-- Logo -->
                     <div class="gv-footer-logo-wrap" style="margin-bottom: 1.25rem;">
                         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="display: inline-block; text-decoration: none;">
-                            <img src="<?php echo esc_url( $img_dir . 'Logo with text.png' ); ?>" alt="Grand Vanilla Indonesia" class="gv-footer-logo-img" style="height: 38px; width: auto; object-fit: contain;">
+                            <img src="<?php echo esc_url( gv_asset_img( 'Logo with text.png' ) ); ?>" alt="Grand Vanilla Indonesia" class="gv-footer-logo-img" style="height: 38px; width: auto; object-fit: contain;">
                         </a>
                     </div>
 

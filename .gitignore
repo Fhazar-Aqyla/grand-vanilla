@@ -1,0 +1,25 @@
+# Archives & Database Dumps
+*.zip
+*.tar.gz
+*.sql
+
+# AI agent worktrees & temp directories
+.kilo/
+.gemini/
+
+# Binaries & executable tools
+cloudflared.exe
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# WordPress debug logs & cache & uploads & backups
+wp-content/uploads/
+wp-content/wpvividbackups/
+wp-content/wpvivid_staging/
+wp-content/debug.log
+wp-content/cache/

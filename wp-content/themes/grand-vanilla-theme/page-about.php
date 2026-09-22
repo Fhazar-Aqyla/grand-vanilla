@@ -72,7 +72,7 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 <!-- 1. Hero Section -->
 <?php
 $custom_about_hero = get_theme_mod( 'gv_hero_about', '' );
-$about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : ( $img_dir . 'About Us Hero Section.png' );
+$about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : gv_asset_img( 'About Us Hero Section.png' );
 ?>
 <section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $about_hero_bg ); ?>');">
     <div class="gv-container">
@@ -90,7 +90,7 @@ $about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : ( $img
             <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex;">
                 <?php
                 $custom_about_img = get_theme_mod( 'gv_about_image', '' );
-                $about_img_src    = ! empty( $custom_about_img ) ? $custom_about_img : ( $img_dir . 'About Us Image.png' );
+                $about_img_src    = ! empty( $custom_about_img ) ? $custom_about_img : gv_asset_img( 'About Us Image.png' );
                 ?>
                 <img src="<?php echo esc_url( $about_img_src ); ?>"
                     alt="Grand Vanilla Indonesia Premium Curing"
@@ -101,7 +101,7 @@ $about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : ( $img
             <!-- Right Column: Content + Orchid Watermark + 2x2 Feature Boxes + Learn More Button -->
             <div class="gv-about-content-card" style="position: relative; display: flex; flex-direction: column; justify-content: center;">
                 <!-- Subtle Orchid Flower Watermark (Mirrored Match - Scaled Down) -->
-                <img src="<?php echo esc_url($img_dir . 'Logo.png'); ?>"
+                <img src="<?php echo esc_url(gv_asset_img('Logo.png')); ?>"
                     alt=""
                     aria-hidden="true"
                     class="gv-about-watermark"
@@ -187,7 +187,7 @@ $about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : ( $img
             <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); min-height: 460px; display: flex; flex-direction: column; justify-content: flex-end;">
                 <?php
                 $custom_story_img = get_theme_mod( 'gv_story_image', '' );
-                $story_img_src    = ! empty( $custom_story_img ) ? $custom_story_img : ( $img_dir . 'Our Story.png' );
+                $story_img_src    = ! empty( $custom_story_img ) ? $custom_story_img : gv_asset_img( 'Our Story.png' );
                 ?>
                 <img src="<?php echo esc_url( $story_img_src ); ?>"
                     alt="Our Story Jember Facility"
@@ -403,7 +403,7 @@ $about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : ( $img
                 <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); aspect-ratio: 16 / 9; width: 100%;">
                     <?php
                     $custom_sourcing_img = get_theme_mod( 'gv_sourcing_image', '' );
-                    $sourcing_img_src    = ! empty( $custom_sourcing_img ) ? $custom_sourcing_img : ( $img_dir . 'Sourcing.png' );
+                    $sourcing_img_src    = ! empty( $custom_sourcing_img ) ? $custom_sourcing_img : gv_asset_img( 'Sourcing.png' );
                     ?>
                     <img src="<?php echo esc_url( $sourcing_img_src ); ?>"
                         alt="Indonesian Local Vanilla Sourcing Plantation"
@@ -557,7 +557,7 @@ $about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : ( $img
                     $row_class  = $is_reverse ? 'gv-explore-row gv-explore-row-reverse' : 'gv-explore-row';
 
                     $f_tag  = get_post_meta(get_the_ID(), '_gv_facility_tag', true) ?: 'Facility';
-                    $f_img  = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : $img_dir . ($fac_idx % 2 === 1 ? 'Warehouse.png' : 'Processing.png');
+                    $f_img  = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : gv_asset_img( $fac_idx % 2 === 1 ? 'Warehouse.png' : 'Processing.png' );
                     $f_desc = get_the_content();
                     if (empty($f_desc)) {
                         $f_desc = get_the_excerpt();
@@ -619,9 +619,9 @@ $about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : ( $img
                         </p>
                     </div>
                     <div class="gv-explore-img-card gv-facility-card">
-                        <img src="<?php echo esc_url($img_dir . 'Warehouse.png'); ?>"
-                            alt="Grand Vanilla Indonesia Warehouse & Storage Facility"
-                            class="gv-explore-img">
+                        <img src="<?php echo esc_url(gv_asset_img('Warehouse.png')); ?>"
+                            alt="Warehouse Facilities"
+                            style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 4px;">
                     </div>
                 </div>
 

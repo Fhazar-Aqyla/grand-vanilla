@@ -29,7 +29,7 @@ if ( has_post_thumbnail() ) {
 } elseif ( ! empty( $hero_custom_bg ) ) {
     $hero_bg_url = $hero_custom_bg;
 } else {
-    $hero_bg_url = $img_dir . 'About Us Hero Section.png';
+    $hero_bg_url = gv_asset_img( 'About Us Hero Section.png' );
 }
 ?>
 

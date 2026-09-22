@@ -39,7 +39,7 @@ $reading_time = max( 1, (int) ceil( $word_count / 200 ) );
 // Featured image (fallback to Detail Blog.png)
 $featured_img = has_post_thumbnail()
     ? get_the_post_thumbnail_url( null, 'full' )
-    : $img_dir . 'Detail Blog.png';
+    : gv_asset_img( 'Detail Blog.png' );
 
 // Blog archive URL
 $blog_url = get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/articles/' );
@@ -141,8 +141,8 @@ $blog_url = get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/artic
     $total_posts   = wp_count_posts( 'post' )->publish;
 
     $fallback_imgs = array(
-        $img_dir . 'Buat Blog Example 1.png',
-        $img_dir . 'Buat blog example 2.png',
+        gv_asset_img( 'Buat Blog Example 1.png' ),
+        gv_asset_img( 'Buat blog example 2.png' ),
     );
 
     if ( $related_query->have_posts() ) :

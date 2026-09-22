@@ -30,9 +30,9 @@ $default_varieties = array(
         'short_name'    => 'Vanilla Planifolia',
         'overview'      => 'Premium Indonesian vanilla Planifolia beans with a rich aroma, naturally sweet flavor, and distinctive characteristics, suitable for various food and beverage applications.',
         'carousel'      => array(
-            $img_dir . 'Planifolia Carroussel 1.png',
-            $img_dir . 'Planifolia Carroussel 2.png',
-            $img_dir . 'Planifolia Carroussel 3.png',
+            gv_asset_img( 'Planifolia Carroussel 1.png' ),
+            gv_asset_img( 'Planifolia Carroussel 2.png' ),
+            gv_asset_img( 'Planifolia Carroussel 3.png' ),
         ),
         'specs'         => array(
             'Aroma'                 => 'Rich, sweet, warm, and naturally aromatic',
@@ -48,9 +48,9 @@ $default_varieties = array(
         'short_name'    => 'Vanilla Tahitensis',
         'overview'      => 'Vanilla Tahitensis is celebrated for its delicate, floral, and fruity aroma with subtle cherry-like undertones. Highly prized by pastry chefs and fine fragrance creators worldwide.',
         'carousel'      => array(
-            $img_dir . 'Tahitensis Carroussel 1.png',
-            $img_dir . 'Tahitensis Carroussel 2.png',
-            $img_dir . 'Tahitensis Carroussel 3.png',
+            gv_asset_img( 'Tahitensis Carroussel 1.png' ),
+            gv_asset_img( 'Tahitensis Carroussel 2.png' ),
+            gv_asset_img( 'Tahitensis Carroussel 3.png' ),
         ),
         'specs'         => array(
             'Aroma'                 => 'Floral, fruity, with delicate anise and cherry undertones',
@@ -82,20 +82,20 @@ $active_variety    = ! empty( $first_variety_key ) ? $varieties[ $first_variety_
 // Product-specific non-bean carousel images
 $product_carousels = array(
     'vanilla-powder' => array(
-        $img_dir . 'Powder Carroussel 1.jpg',
-        $img_dir . 'Powder Carroussel 2.jpg',
-        $img_dir . 'Powder Carroussel 3.jpg',
+        gv_asset_img( 'Powder Carroussel 1.jpg' ),
+        gv_asset_img( 'Powder Carroussel 2.jpg' ),
+        gv_asset_img( 'Powder Carroussel 3.jpg' ),
     ),
     'vanilla-extract' => array(
-        $img_dir . 'Extract Carroussel 1.jpg',
-        $img_dir . 'Extract Carroussel 2.jpg',
-        $img_dir . 'Extract Carroussel 3.jpg',
+        gv_asset_img( 'Extract Carroussel 1.jpg' ),
+        gv_asset_img( 'Extract Carroussel 2.jpg' ),
+        gv_asset_img( 'Extract Carroussel 3.jpg' ),
     ),
     'vanilla-paste' => array(
-        $img_dir . 'Paste Carroussel 1.jpg',
+        gv_asset_img( 'Paste Carroussel 1.jpg' ),
     ),
     'vanilla-seeds' => array(
-        $img_dir . 'Seeds Carroussel 1.jpg',
+        gv_asset_img( 'Seeds Carroussel 1.jpg' ),
     ),
 );
 
@@ -107,7 +107,7 @@ if ( $is_beans && ! empty( $active_variety['carousel'] ) ) {
 } elseif ( has_post_thumbnail() ) {
     $current_carousel = array( get_the_post_thumbnail_url( $current_id, 'full' ) );
 } else {
-    $current_carousel = array( $img_dir . 'Planifolia Carroussel 1.png' );
+    $current_carousel = array( gv_asset_img( 'Planifolia Carroussel 1.png' ) );
 }
 
 // Fallback for overview & description
@@ -393,17 +393,17 @@ if ( $is_beans && ! empty( $active_variety['specs'] ) ) {
                     if ( has_post_thumbnail() ) {
                         $exp_img = get_the_post_thumbnail_url( get_the_ID(), 'large' );
                     } elseif ( $exp_slug === 'vanilla-seeds' ) {
-                        $exp_img = $img_dir . 'Seeds Vanilla.png';
+                        $exp_img = gv_asset_img( 'Seeds Vanilla.png' );
                     } elseif ( $exp_slug === 'vanilla-paste' ) {
-                        $exp_img = $img_dir . 'Paste Vanilla.png';
+                        $exp_img = gv_asset_img( 'Paste Vanilla.png' );
                     } elseif ( $exp_slug === 'vanilla-powder' ) {
-                        $exp_img = $img_dir . 'Product Unggulan 2.png';
+                        $exp_img = gv_asset_img( 'Product Unggulan 2.png' );
                     } elseif ( $exp_slug === 'vanilla-extract' ) {
-                        $exp_img = $img_dir . 'Product Unggulan 3.png';
+                        $exp_img = gv_asset_img( 'Product Unggulan 3.png' );
                     } elseif ( $exp_slug === 'vanilla-beans' ) {
-                        $exp_img = $img_dir . 'Product Unggulan 1.png';
+                        $exp_img = gv_asset_img( 'Product Unggulan 1.png' );
                     } else {
-                        $exp_img = $img_dir . 'Seeds Vanilla.png';
+                        $exp_img = gv_asset_img( 'Seeds Vanilla.png' );
                     }
                 ?>
                 <div class="<?php echo esc_attr( $row_class ); ?>">

@@ -16,13 +16,13 @@ $cta_btn_url  = isset( $args['btn_url'] ) ? $args['btn_url'] : home_url( '/conta
 
 <section class="gv-cta-banner">
     <!-- Top-Right Corner Orchid Flower -->
-    <img src="<?php echo esc_url( $img_dir . 'Logo.png' ); ?>" 
+    <img src="<?php echo esc_url( gv_asset_img( 'Logo.png' ) ); ?>" 
          class="gv-cta-flower gv-cta-flower-tr" 
          alt="" 
          aria-hidden="true">
     
     <!-- Bottom-Left Corner Orchid Flower -->
-    <img src="<?php echo esc_url( $img_dir . 'Logo.png' ); ?>" 
+    <img src="<?php echo esc_url( gv_asset_img( 'Logo.png' ) ); ?>" 
          class="gv-cta-flower gv-cta-flower-bl" 
          alt="" 
          aria-hidden="true">

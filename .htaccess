@@ -65,6 +65,16 @@
 </IfModule>
 # END PageSpeed Performance Optimizations
 
+# BEGIN WebP Rewrite
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_ACCEPT} image/webp
+    RewriteCond %{REQUEST_FILENAME} (.*)\.(jpe?g|png)$
+    RewriteCond %1.webp -f
+    RewriteRule (.+)\.(jpe?g|png)$ $1.webp [T=image/webp,L]
+</IfModule>
+# END WebP Rewrite
+
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On

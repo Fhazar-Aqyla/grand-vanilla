@@ -1857,7 +1857,7 @@ function grand_vanilla_seo_meta_tags() {
     $site_name    = 'Grand Vanilla Indonesia';
     $site_url     = home_url( '/' );
     $default_desc = 'Grand Vanilla Indonesia is a trusted Indonesian vanilla supplier and exporter, supplying gourmet vanilla beans, powder, and extract for international wholesale and B2B buyers.';
-    $default_img  = get_template_directory_uri() . '/assets/images/Product Unggulan 1.png';
+    $default_img  = gv_asset_img( 'Product Unggulan 1.png' );
     $og_type      = 'website';
     $canonical    = home_url( add_query_arg( array(), $GLOBALS['wp']->request ) );
     
@@ -1870,7 +1870,7 @@ function grand_vanilla_seo_meta_tags() {
     } elseif ( is_post_type_archive( 'vanilla_product' ) || is_page( 'products' ) ) {
         $title = "Indonesian Vanilla Products Catalog | {$site_name}";
         $desc  = "Explore our premium Indonesian vanilla products: Gourmet Vanilla Beans (Planifolia & Tahitensis), Vanilla Powder, and Pure Vanilla Extract for global export.";
-        $img   = get_template_directory_uri() . '/assets/images/Product Unggulan 1.png';
+        $img   = gv_asset_img( 'Product Unggulan 1.png' );
         $canonical = home_url( '/products/' );
     } elseif ( is_singular( 'vanilla_product' ) ) {
         global $post;
@@ -1883,12 +1883,12 @@ function grand_vanilla_seo_meta_tags() {
     } elseif ( is_page( 'about' ) ) {
         $title = "About Us — Sustainable Sourcing & Modern Facilities | {$site_name}";
         $desc  = "Discover Grand Vanilla Indonesia: direct ethical farmer sourcing, state-of-the-art curing facilities, and reliable supply chain for global vanilla buyers.";
-        $img   = get_template_directory_uri() . '/assets/images/Warehouse.png';
+        $img   = gv_asset_img( 'Warehouse.png' );
         $canonical = home_url( '/about/' );
     } elseif ( is_page( 'gallery' ) ) {
         $title = "Curing & Production Gallery | {$site_name}";
         $desc  = "Explore our visual journey of sustainable Indonesian vanilla harvesting, traditional sun-curing, sorting, and export-grade preparation.";
-        $img   = get_template_directory_uri() . '/assets/images/Harvest.png';
+        $img   = gv_asset_img( 'Harvest.png' );
         $canonical = home_url( '/gallery/' );
     } elseif ( is_page( 'contact' ) ) {
         $title = "Contact & Wholesale Inquiry | {$site_name}";
@@ -1945,7 +1945,7 @@ add_action( 'wp_head', 'grand_vanilla_seo_meta_tags', 1 );
  */
 function grand_vanilla_schema_jsonld() {
     $site_url  = home_url( '/' );
-    $logo_url  = get_template_directory_uri() . '/assets/images/Logo with text.png';
+    $logo_url  = gv_asset_img( 'Logo with text.png' );
     $wa_number = '+6287717752085';
 
     // 1. Corporation / Organization Schema
@@ -2035,7 +2035,7 @@ function grand_vanilla_schema_jsonld() {
         echo '<script type="application/ld+json">' . wp_json_encode( $breadcrumbs, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
 
         // 4. Product Schema on Single Product Detail Pages
-        $prod_image = has_post_thumbnail( $post->ID ) ? get_the_post_thumbnail_url( $post->ID, 'full' ) : get_template_directory_uri() . '/assets/images/Product Unggulan 1.png';
+        $prod_image = has_post_thumbnail( $post->ID ) ? get_the_post_thumbnail_url( $post->ID, 'full' ) : gv_asset_img( 'Product Unggulan 1.png' );
         $moisture   = get_post_meta( $post->ID, '_gv_spec_moisture', true ) ?: '25% - 35%';
         $vanillin   = get_post_meta( $post->ID, '_gv_spec_vanillin', true ) ?: '1.8% - 2.4%';
 
@@ -2117,7 +2117,7 @@ add_filter( 'wp_get_attachment_image_attributes', 'grand_vanilla_optimize_image_
 
 // A. Custom Login Page Branding
 function grand_vanilla_custom_login_style() {
-    $logo_url = get_template_directory_uri() . '/assets/images/Logo with text.png';
+    $logo_url = gv_asset_img( 'Logo with text.png' );
     ?>
     <style type="text/css">
         body.login {
@@ -2220,7 +2220,7 @@ function grand_vanilla_custom_dashboard_banner() {
         return;
     }
 
-    $logo_url = get_template_directory_uri() . '/assets/images/Logo with text.png';
+    $logo_url = gv_asset_img( 'Logo with text.png' );
     ?>
     <div class="gv-admin-welcome-card" style="padding: 24px 28px; background: #FAF8F5; border: 1px solid #E1E2DD; border-radius: 8px; margin: 16px 0 24px 0; box-shadow: 0 4px 15px rgba(54,62,25,0.04);">
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #E1E2DD;">
@@ -2464,5 +2464,45 @@ function grand_vanilla_admin_menu_order( $menu_order ) {
 add_filter( 'custom_menu_order', '__return_true' );
 add_filter( 'menu_order', 'grand_vanilla_admin_menu_order' );
 
+/**
+ * 7. Serve WebP versions of uploaded attachments and theme images automatically
+ */
+add_filter( 'wp_get_attachment_url', 'grand_vanilla_serve_webp_attachment_url', 10, 1 );
+function grand_vanilla_serve_webp_attachment_url( $url ) {
+    if ( empty( $url ) ) {
+        return $url;
+    }
+    $webp_url = preg_replace( '/\.(png|jpe?g)$/i', '.webp', $url );
+    $upload_dir = wp_upload_dir();
+    $webp_path = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $webp_url );
+    if ( file_exists( $webp_path ) ) {
+        return $webp_url;
+    }
+    return $url;
+}
 
+add_filter( 'wp_get_attachment_image_src', 'grand_vanilla_serve_webp_attachment_src', 10, 1 );
+function grand_vanilla_serve_webp_attachment_src( $image ) {
+    if ( is_array( $image ) && ! empty( $image[0] ) ) {
+        $webp_url = preg_replace( '/\.(png|jpe?g)$/i', '.webp', $image[0] );
+        $upload_dir = wp_upload_dir();
+        $webp_path = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $webp_url );
+        if ( file_exists( $webp_path ) ) {
+            $image[0] = $webp_url;
+        }
+    }
+    return $image;
+}
 
+/**
+ * Helper to get theme asset image with automatic WebP fallback
+ */
+function gv_asset_img( $filename ) {
+    $img_dir = get_template_directory_uri() . '/assets/images/';
+    $webp_filename = preg_replace( '/\.(png|jpe?g)$/i', '.webp', $filename );
+    $webp_file = get_template_directory() . '/assets/images/' . $webp_filename;
+    if ( file_exists( $webp_file ) ) {
+        return $img_dir . $webp_filename;
+    }
+    return $img_dir . $filename;
+}
