@@ -336,7 +336,7 @@ add_action( 'save_post_vanilla_facility', 'grand_vanilla_save_facility_meta' );
  */
 function grand_vanilla_admin_scripts( $hook ) {
     global $post_type;
-    if ( ( 'post.php' === $hook || 'post-new.php' === $hook ) && 'vanilla_product' === $post_type ) {
+    if ( 'toplevel_page_grand-vanilla-settings' === $hook || ( ( 'post.php' === $hook || 'post-new.php' === $hook ) && in_array( $post_type, array( 'vanilla_product', 'page' ), true ) ) ) {
         wp_enqueue_media();
     }
 }
@@ -748,11 +748,21 @@ add_filter( 'wp_insert_post_data', 'grand_vanilla_auto_assign_product_order', 10
  * 6. WordPress Customizer Settings (Appearance -> Customize)
  */
 function grand_vanilla_customize_register( $wp_customize ) {
-    // Section: Grand Vanilla Settings
-    $wp_customize->add_section( 'grand_vanilla_options', array(
+    // Panel: Grand Vanilla Settings (Terorganisir Per Halaman)
+    $wp_customize->add_panel( 'grand_vanilla_panel', array(
         'title'       => __( 'Grand Vanilla Settings', 'grand-vanilla' ),
         'priority'    => 30,
-        'description' => __( 'Customize Hero Text and Contact Info for Grand Vanilla ID', 'grand-vanilla' ),
+        'description' => __( 'Kelola teks, foto, banner, dan kontak Grand Vanilla Indonesia terorganisir per halaman.', 'grand-vanilla' ),
+    ) );
+
+    // ---------------------------------------------------------
+    // Section 1: Halaman Beranda (Home)
+    // ---------------------------------------------------------
+    $wp_customize->add_section( 'gv_section_home', array(
+        'title'       => __( 'Halaman Beranda', 'grand-vanilla' ),
+        'panel'       => 'grand_vanilla_panel',
+        'priority'    => 10,
+        'description' => __( 'Pengaturan teks headline dan foto khusus halaman Beranda.', 'grand-vanilla' ),
     ) );
 
     // Hero Title
@@ -762,7 +772,7 @@ function grand_vanilla_customize_register( $wp_customize ) {
     ) );
     $wp_customize->add_control( 'gv_hero_title', array(
         'label'    => __( 'Hero Title (Headline)', 'grand-vanilla' ),
-        'section'  => 'grand_vanilla_options',
+        'section'  => 'gv_section_home',
         'type'     => 'text',
     ) );
 
@@ -773,8 +783,147 @@ function grand_vanilla_customize_register( $wp_customize ) {
     ) );
     $wp_customize->add_control( 'gv_hero_subtitle', array(
         'label'    => __( 'Hero Subtitle', 'grand-vanilla' ),
-        'section'  => 'grand_vanilla_options',
+        'section'  => 'gv_section_home',
         'type'     => 'textarea',
+    ) );
+
+    // Home Images
+    $home_images = array(
+        'gv_hero_image'  => array(
+            'label' => __( 'Hero: Foto Latar Belakang Utama', 'grand-vanilla' ),
+            'desc'  => __( 'Foto latar belakang hero utama. Rekomendasi: 1920 x 1080 px (Landscape), format WebP/JPG, maksimal 500 KB.', 'grand-vanilla' ),
+        ),
+        'gv_about_image' => array(
+            'label' => __( 'Tentang Kami: Foto Biji Vanili (Burlap)', 'grand-vanilla' ),
+            'desc'  => __( 'Foto biji vanili di cuplikan About Us. Rekomendasi: 800 x 900 px (Portrait), format WebP/JPG, maksimal 400 KB.', 'grand-vanilla' ),
+        ),
+        'gv_oem_image'   => array(
+            'label' => __( 'OEM: Foto Suplai & Kemasan Bulk', 'grand-vanilla' ),
+            'desc'  => __( 'Foto ikatan vanili & kemasan OEM. Rekomendasi: 800 x 600 px (Landscape), format WebP/JPG, maksimal 400 KB.', 'grand-vanilla' ),
+        ),
+        'gv_maps_image'  => array(
+            'label' => __( 'Ekspor: Grafik Peta Distribusi Dunia', 'grand-vanilla' ),
+            'desc'  => __( 'Ilustrasi peta ekspor dunia. Rekomendasi: 1200 x 600 px (Landscape), format PNG transparan atau WebP, maksimal 300 KB.', 'grand-vanilla' ),
+        ),
+    );
+
+    foreach ( $home_images as $key => $conf ) {
+        $wp_customize->add_setting( $key, array(
+            'default'           => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ) );
+        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, array(
+            'label'       => $conf['label'],
+            'description' => $conf['desc'],
+            'section'     => 'gv_section_home',
+        ) ) );
+    }
+
+    // ---------------------------------------------------------
+    // Section 2: Halaman Tentang Kami (About Us)
+    // ---------------------------------------------------------
+    $wp_customize->add_section( 'gv_section_about', array(
+        'title'       => __( 'Halaman Tentang Kami', 'grand-vanilla' ),
+        'panel'       => 'grand_vanilla_panel',
+        'priority'    => 20,
+        'description' => __( 'Pengaturan banner header, foto fasilitas/perkebunan, dan 4 ikon keunggulan pada halaman Tentang Kami.', 'grand-vanilla' ),
+    ) );
+
+    $about_images = array(
+        'gv_hero_about'     => array(
+            'label' => __( 'Banner: Header Halaman Tentang Kami', 'grand-vanilla' ),
+            'desc'  => __( 'Foto banner background atas halaman Tentang Kami. Rekomendasi: 1920 x 600 px, format WebP/JPG, maksimal 400 KB.', 'grand-vanilla' ),
+        ),
+        'gv_story_image'    => array(
+            'label' => __( 'Our Story: Foto Fasilitas & Perjalanan', 'grand-vanilla' ),
+            'desc'  => __( 'Foto fasilitas pengeringan/proses pada bagian Our Journey & Purpose. Rekomendasi: 1200 x 700 px, format WebP/JPG, maksimal 500 KB.', 'grand-vanilla' ),
+        ),
+        'gv_sourcing_image' => array(
+            'label' => __( 'Sourcing: Foto Perkebunan Petani', 'grand-vanilla' ),
+            'desc'  => __( 'Foto perkebunan petani lokal pada bagian Sourced From Local Indonesia. Rekomendasi: 1200 x 700 px, format WebP/JPG, maksimal 500 KB.', 'grand-vanilla' ),
+        ),
+        'gv_vp1_icon_img'   => array(
+            'label' => __( 'Ikon Pilar 1: Quality Focused', 'grand-vanilla' ),
+            'desc'  => __( 'Ikon kartu keunggulan 1. Rekomendasi: 64 x 64 px atau 128 x 128 px, format PNG transparan atau SVG.', 'grand-vanilla' ),
+        ),
+        'gv_vp2_icon_img'   => array(
+            'label' => __( 'Ikon Pilar 2: Consistent Supply', 'grand-vanilla' ),
+            'desc'  => __( 'Ikon kartu keunggulan 2. Rekomendasi: 64 x 64 px atau 128 x 128 px, format PNG transparan atau SVG.', 'grand-vanilla' ),
+        ),
+        'gv_vp3_icon_img'   => array(
+            'label' => __( 'Ikon Pilar 3: Indonesian Origin', 'grand-vanilla' ),
+            'desc'  => __( 'Ikon kartu keunggulan 3. Rekomendasi: 64 x 64 px atau 128 x 128 px, format PNG transparan atau SVG.', 'grand-vanilla' ),
+        ),
+        'gv_vp4_icon_img'   => array(
+            'label' => __( 'Ikon Pilar 4: Reliable Service', 'grand-vanilla' ),
+            'desc'  => __( 'Ikon kartu keunggulan 4. Rekomendasi: 64 x 64 px atau 128 x 128 px, format PNG transparan atau SVG.', 'grand-vanilla' ),
+        ),
+    );
+
+    foreach ( $about_images as $key => $conf ) {
+        $wp_customize->add_setting( $key, array(
+            'default'           => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ) );
+        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, array(
+            'label'       => $conf['label'],
+            'description' => $conf['desc'],
+            'section'     => 'gv_section_about',
+        ) ) );
+    }
+
+    // ---------------------------------------------------------
+    // Section 3: Banner Header Halaman Lain
+    // ---------------------------------------------------------
+    $wp_customize->add_section( 'gv_section_banners', array(
+        'title'       => __( 'Banner Header Halaman Lain', 'grand-vanilla' ),
+        'panel'       => 'grand_vanilla_panel',
+        'priority'    => 30,
+        'description' => __( 'Pengaturan foto banner background atas untuk halaman Produk, Galeri, Berita, dan Kontak.', 'grand-vanilla' ),
+    ) );
+
+    $banner_images = array(
+        'gv_hero_products' => array(
+            'label' => __( 'Banner: Halaman Produk', 'grand-vanilla' ),
+            'desc'  => __( 'Foto latar banner atas halaman Produk. Rekomendasi: 1920 x 600 px, format WebP/JPG, maksimal 400 KB.', 'grand-vanilla' ),
+        ),
+        'gv_hero_gallery'  => array(
+            'label' => __( 'Banner: Halaman Galeri', 'grand-vanilla' ),
+            'desc'  => __( 'Foto latar banner atas halaman Galeri. Rekomendasi: 1920 x 600 px, format WebP/JPG, maksimal 400 KB.', 'grand-vanilla' ),
+        ),
+        'gv_hero_blog'     => array(
+            'label' => __( 'Banner: Halaman Berita & Artikel', 'grand-vanilla' ),
+            'desc'  => __( 'Foto latar banner atas halaman Berita / Artikel. Rekomendasi: 1920 x 600 px, format WebP/JPG, maksimal 400 KB.', 'grand-vanilla' ),
+        ),
+        'gv_hero_contact'  => array(
+            'label' => __( 'Banner: Halaman Kontak', 'grand-vanilla' ),
+            'desc'  => __( 'Foto latar banner atas halaman Kontak. Rekomendasi: 1920 x 600 px, format WebP/JPG, maksimal 400 KB.', 'grand-vanilla' ),
+        ),
+    );
+
+    foreach ( $banner_images as $key => $conf ) {
+        $wp_customize->add_setting( $key, array(
+            'default'           => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ) );
+        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, array(
+            'label'       => $conf['label'],
+            'description' => $conf['desc'],
+            'section'     => 'gv_section_banners',
+        ) ) );
+    }
+
+    // Hapus menu teknis yang tidak diperlukan klien agar tidak bingung
+    $wp_customize->remove_section( 'custom_css' );
+
+    // ---------------------------------------------------------
+    // Section 4: Informasi Kontak & Media Sosial
+    // ---------------------------------------------------------
+    $wp_customize->add_section( 'gv_section_contact', array(
+        'title'       => __( 'Informasi Kontak & Media Sosial', 'grand-vanilla' ),
+        'panel'       => 'grand_vanilla_panel',
+        'priority'    => 40,
+        'description' => __( 'Pengaturan kontak WhatsApp, telepon, email, alamat kantor/gudang, tautan medsos, dan peta yang berlaku untuk seluruh website.', 'grand-vanilla' ),
     ) );
 
     // WhatsApp Number
@@ -783,9 +932,9 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'gv_whatsapp', array(
-        'label'       => __( 'Primary WhatsApp / Phone Number', 'grand-vanilla' ),
-        'description' => __( 'Main contact number displayed in header, contact page, and floating button.', 'grand-vanilla' ),
-        'section'     => 'grand_vanilla_options',
+        'label'       => __( 'Nomor WhatsApp Utama', 'grand-vanilla' ),
+        'description' => __( 'Nomor utama yang ditampilkan di header, tombol mengambang (floating button), dan halaman kontak.', 'grand-vanilla' ),
+        'section'     => 'gv_section_contact',
         'type'        => 'text',
     ) );
 
@@ -795,9 +944,9 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'gv_phone_secondary', array(
-        'label'       => __( 'Secondary Phone / Office Telp (Optional)', 'grand-vanilla' ),
-        'description' => __( 'Displayed under phone number in Contact Us page. Leave empty to hide.', 'grand-vanilla' ),
-        'section'     => 'grand_vanilla_options',
+        'label'       => __( 'Nomor Telepon Kantor / Tambahan (Opsional)', 'grand-vanilla' ),
+        'description' => __( 'Ditampilkan di bawah nomor WhatsApp pada halaman Kontak. Kosongkan jika tidak digunakan.', 'grand-vanilla' ),
+        'section'     => 'gv_section_contact',
         'type'        => 'text',
     ) );
 
@@ -807,9 +956,9 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'sanitize_callback' => 'sanitize_email',
     ) );
     $wp_customize->add_control( 'gv_email', array(
-        'label'       => __( 'Primary Export & Inquiry Email', 'grand-vanilla' ),
-        'description' => __( 'Email address displayed on site and recipient for contact form inquiries.', 'grand-vanilla' ),
-        'section'     => 'grand_vanilla_options',
+        'label'       => __( 'Alamat Email Utama & Inquiry', 'grand-vanilla' ),
+        'description' => __( 'Alamat email yang ditampilkan di website dan penerima pesan dari formulir kontak.', 'grand-vanilla' ),
+        'section'     => 'gv_section_contact',
         'type'        => 'email',
     ) );
 
@@ -819,8 +968,8 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'sanitize_callback' => 'sanitize_textarea_field',
     ) );
     $wp_customize->add_control( 'gv_address', array(
-        'label'    => __( 'Office / Warehouse Location', 'grand-vanilla' ),
-        'section'  => 'grand_vanilla_options',
+        'label'    => __( 'Alamat Kantor / Gudang', 'grand-vanilla' ),
+        'section'  => 'gv_section_contact',
         'type'     => 'textarea',
     ) );
 
@@ -830,8 +979,8 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'gv_instagram', array(
-        'label'    => __( 'Instagram Profile URL', 'grand-vanilla' ),
-        'section'  => 'grand_vanilla_options',
+        'label'    => __( 'Tautan Profil Instagram', 'grand-vanilla' ),
+        'section'  => 'gv_section_contact',
         'type'     => 'url',
     ) );
 
@@ -841,8 +990,8 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'gv_facebook', array(
-        'label'    => __( 'Facebook Page URL', 'grand-vanilla' ),
-        'section'  => 'grand_vanilla_options',
+        'label'    => __( 'Tautan Halaman Facebook', 'grand-vanilla' ),
+        'section'  => 'gv_section_contact',
         'type'     => 'url',
     ) );
 
@@ -852,18 +1001,20 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'gv_youtube', array(
-        'label'    => __( 'YouTube Channel URL', 'grand-vanilla' ),
-        'section'  => 'grand_vanilla_options',
+        'label'    => __( 'Tautan Kanal YouTube', 'grand-vanilla' ),
+        'section'  => 'gv_section_contact',
         'type'     => 'url',
     ) );
 
-    // Google Maps Embed URL Sanitizer (Accepts raw URL or full <iframe src="..."> HTML)
-    function grand_vanilla_sanitize_maps_url( $input ) {
-        $input = trim( (string) $input );
-        if ( preg_match( '/src=["\']([^"\']+)["\']/i', $input, $matches ) ) {
-            return esc_url_raw( $matches[1] );
+    // Google Maps Embed URL Sanitizer
+    if ( ! function_exists( 'grand_vanilla_sanitize_maps_url' ) ) {
+        function grand_vanilla_sanitize_maps_url( $input ) {
+            $input = trim( (string) $input );
+            if ( preg_match( '/src=["\']([^"\']+)["\']/i', $input, $matches ) ) {
+                return esc_url_raw( $matches[1] );
+            }
+            return esc_url_raw( $input );
         }
-        return esc_url_raw( $input );
     }
 
     // Google Maps Visibility Toggle
@@ -879,8 +1030,8 @@ function grand_vanilla_customize_register( $wp_customize ) {
     ) );
     $wp_customize->add_control( 'gv_show_map', array(
         'label'       => __( 'Tampilkan Google Maps di Halaman Kontak', 'grand-vanilla' ),
-        'description' => __( 'Centang untuk mengaktifkan/menampilkan bagian Google Maps di halaman Kontak. Hapus centang untuk menyembunyikannya (hide).', 'grand-vanilla' ),
-        'section'     => 'grand_vanilla_options',
+        'description' => __( 'Centang untuk menampilkan peta Google Maps di halaman Kontak. Hapus centang untuk menyembunyikannya.', 'grand-vanilla' ),
+        'section'     => 'gv_section_contact',
         'type'        => 'checkbox',
     ) );
 
@@ -890,101 +1041,397 @@ function grand_vanilla_customize_register( $wp_customize ) {
         'sanitize_callback' => 'grand_vanilla_sanitize_maps_url',
     ) );
     $wp_customize->add_control( 'gv_maps_embed_url', array(
-        'label'       => __( 'Google Maps Embed (URL or iframe Code)', 'grand-vanilla' ),
-        'description' => __( 'Paste either the Google Maps embed URL (https://www.google.com/maps/embed?...) or the entire iframe code from Google Maps. The system will automatically extract and display it.', 'grand-vanilla' ),
-        'section'     => 'grand_vanilla_options',
+        'label'       => __( 'Google Maps Embed (URL atau Kode iframe)', 'grand-vanilla' ),
+        'description' => __( 'Tempel URL embed Google Maps atau seluruh kode iframe dari Google Maps.', 'grand-vanilla' ),
+        'section'     => 'gv_section_contact',
         'type'        => 'textarea',
     ) );
 
-    // Contact Form Subjects (Dropdown Options)
+    // Contact Form Subjects
     $wp_customize->add_setting( 'gv_contact_subjects', array(
         'default'           => "Wholesale Vanilla Beans Inquiry\nVanilla Powder / Extract Quote\nCustom OEM Packaging Request\nPhysical Sample Request",
         'sanitize_callback' => 'sanitize_textarea_field',
     ) );
     $wp_customize->add_control( 'gv_contact_subjects', array(
-        'label'       => __( 'Contact Form Subjects (Dropdown Options)', 'grand-vanilla' ),
-        'description' => __( 'List each dropdown subject option on a new line.', 'grand-vanilla' ),
-        'section'     => 'grand_vanilla_options',
+        'label'       => __( 'Pilihan Subjek Formulir Inquiry (Dropdown)', 'grand-vanilla' ),
+        'description' => __( 'Tuliskan tiap opsi subjek pada baris baru.', 'grand-vanilla' ),
+        'section'     => 'gv_section_contact',
         'type'        => 'textarea',
     ) );
-
-    // Comprehensive Image Controls for All Key Sections & Banners
-    $images_to_register = array(
-        'gv_hero_image'      => array(
-            'label' => __( 'Homepage: Hero Background Image', 'grand-vanilla' ),
-            'desc'  => __( 'Background photo for the main hero section on homepage.', 'grand-vanilla' ),
-        ),
-        'gv_about_image'     => array(
-            'label' => __( 'Homepage & About: About Us Photo (Vanilla Beans)', 'grand-vanilla' ),
-            'desc'  => __( 'Photo of vanilla beans on burlap in the About Us section.', 'grand-vanilla' ),
-        ),
-        'gv_oem_image'       => array(
-            'label' => __( 'Homepage: Special OEM & Bulk Packaging Photo', 'grand-vanilla' ),
-            'desc'  => __( 'Photo of bulk vanilla bundles and boxes in Flexible Vanilla Supply section.', 'grand-vanilla' ),
-        ),
-        'gv_maps_image'      => array(
-            'label' => __( 'Homepage: Worldwide Export Map Graphic', 'grand-vanilla' ),
-            'desc'  => __( 'Map illustration for Connecting Indonesia To The World.', 'grand-vanilla' ),
-        ),
-        'gv_story_image'     => array(
-            'label' => __( 'About Page: Our Story Facility Photo', 'grand-vanilla' ),
-            'desc'  => __( 'Facility photo with text overlay in Our Journey & Purpose section.', 'grand-vanilla' ),
-        ),
-        'gv_sourcing_image'  => array(
-            'label' => __( 'About Page: Sourcing Plantation Photo', 'grand-vanilla' ),
-            'desc'  => __( 'Plantation photo in Sourced From Local Indonesia section.', 'grand-vanilla' ),
-        ),
-        'gv_hero_about'      => array(
-            'label' => __( 'Banner: About Us Page Header', 'grand-vanilla' ),
-            'desc'  => __( 'Top banner background image on About Us page (#knowUs).', 'grand-vanilla' ),
-        ),
-        'gv_hero_products'   => array(
-            'label' => __( 'Banner: Products Page Header', 'grand-vanilla' ),
-            'desc'  => __( 'Top banner background image on Products page (#exploreProducts).', 'grand-vanilla' ),
-        ),
-        'gv_hero_gallery'    => array(
-            'label' => __( 'Banner: Gallery Page Header', 'grand-vanilla' ),
-            'desc'  => __( 'Top banner background image on Gallery page (#ourMoments).', 'grand-vanilla' ),
-        ),
-        'gv_hero_blog'       => array(
-            'label' => __( 'Banner: Blog Page Header', 'grand-vanilla' ),
-            'desc'  => __( 'Top banner background image on Blog / Articles page.', 'grand-vanilla' ),
-        ),
-        'gv_hero_contact'    => array(
-            'label' => __( 'Banner: Contact Us Page Header', 'grand-vanilla' ),
-            'desc'  => __( 'Top banner background image on Contact Us page (#keepInTouch).', 'grand-vanilla' ),
-        ),
-        'gv_vp1_icon_img'    => array(
-            'label' => __( 'Icon: Quality Focused (Card 1)', 'grand-vanilla' ),
-            'desc'  => __( 'Custom icon image/SVG for "Quality Focused" card on About Us page.', 'grand-vanilla' ),
-        ),
-        'gv_vp2_icon_img'    => array(
-            'label' => __( 'Icon: Consistent Supply (Card 2)', 'grand-vanilla' ),
-            'desc'  => __( 'Custom icon image/SVG for "Consistent Supply" card on About Us page.', 'grand-vanilla' ),
-        ),
-        'gv_vp3_icon_img'    => array(
-            'label' => __( 'Icon: Indonesian Origin (Card 3)', 'grand-vanilla' ),
-            'desc'  => __( 'Custom icon image/SVG for Card 3 on About Us page.', 'grand-vanilla' ),
-        ),
-        'gv_vp4_icon_img'    => array(
-            'label' => __( 'Icon: Reliable Service (Card 4)', 'grand-vanilla' ),
-            'desc'  => __( 'Custom icon image/SVG for Card 4 on About Us page.', 'grand-vanilla' ),
-        ),
-    );
-
-    foreach ( $images_to_register as $key => $conf ) {
-        $wp_customize->add_setting( $key, array(
-            'default'           => '',
-            'sanitize_callback' => 'esc_url_raw',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, $key, array(
-            'label'       => $conf['label'],
-            'description' => $conf['desc'],
-            'section'     => 'grand_vanilla_options',
-        ) ) );
-    }
 }
 add_action( 'customize_register', 'grand_vanilla_customize_register' );
+
+/**
+ * 6b. Dedicated Grand Vanilla Settings Page & Media Manager
+ */
+function grand_vanilla_add_theme_admin_menu() {
+    add_menu_page(
+        __( 'Grand Vanilla Settings', 'grand-vanilla' ),
+        __( 'Grand Vanilla', 'grand-vanilla' ),
+        'manage_options',
+        'grand-vanilla-settings',
+        'grand_vanilla_render_theme_settings_page',
+        'dashicons-admin-generic',
+        59
+    );
+}
+add_action( 'admin_menu', 'grand_vanilla_add_theme_admin_menu' );
+
+function grand_vanilla_render_theme_settings_page() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
+    $saved_notice = false;
+
+    // Handle Form Submit
+    if ( isset( $_POST['gv_save_settings_nonce'] ) && wp_verify_nonce( $_POST['gv_save_settings_nonce'], 'grand_vanilla_save_theme_settings' ) ) {
+        $text_fields = array(
+            'gv_hero_title', 'gv_hero_subtitle',
+            'gv_whatsapp', 'gv_phone_secondary', 'gv_email', 'gv_address',
+            'gv_instagram', 'gv_facebook', 'gv_youtube',
+            'gv_maps_url', 'gv_contact_subjects',
+        );
+        foreach ( $text_fields as $tf ) {
+            if ( isset( $_POST[ $tf ] ) ) {
+                if ( in_array( $tf, array( 'gv_contact_subjects', 'gv_address', 'gv_hero_subtitle' ), true ) ) {
+                    set_theme_mod( $tf, sanitize_textarea_field( $_POST[ $tf ] ) );
+                } else {
+                    set_theme_mod( $tf, sanitize_text_field( $_POST[ $tf ] ) );
+                }
+            }
+        }
+
+        if ( isset( $_POST['gv_maps_embed_url'] ) ) {
+            $raw_map = trim( $_POST['gv_maps_embed_url'] );
+            if ( preg_match( '/src=["\']([^"\']+)["\']/i', $raw_map, $matches ) ) {
+                $raw_map = $matches[1];
+            }
+            set_theme_mod( 'gv_maps_embed_url', esc_url_raw( $raw_map ) );
+        }
+
+        $media_fields = array(
+            'gv_hero_image', 'gv_about_image', 'gv_oem_image', 'gv_maps_image',
+            'gv_story_image', 'gv_sourcing_image',
+            'gv_hero_about', 'gv_hero_products', 'gv_hero_gallery', 'gv_hero_blog', 'gv_hero_contact',
+            'gv_vp1_icon_img', 'gv_vp2_icon_img', 'gv_vp3_icon_img', 'gv_vp4_icon_img',
+        );
+        foreach ( $media_fields as $mf ) {
+            if ( isset( $_POST[ $mf ] ) ) {
+                set_theme_mod( $mf, esc_url_raw( trim( $_POST[ $mf ] ) ) );
+            }
+        }
+
+        $saved_notice = true;
+    }
+
+    $media_groups = array(
+        'beranda' => array(
+            'title' => 'Halaman Beranda (Homepage)',
+            'desc'  => 'Foto utama dan banner untuk halaman depan website.',
+            'items' => array(
+                'gv_hero_image'  => array(
+                    'label'   => 'Hero Background Image',
+                    'desc'    => 'Foto latar hero utama. Rekomendasi: 1920 x 1080 px (Landscape), format WebP/JPG, maks 500 KB.',
+                    'default' => gv_asset_img( 'Hero Section.png' ),
+                ),
+                'gv_about_image' => array(
+                    'label'   => 'Foto Vanilla Beans (About Section)',
+                    'desc'    => 'Foto biji vanili cuplikan About Us. Rekomendasi: 800 x 900 px (Portrait), format WebP/JPG, maks 400 KB.',
+                    'default' => gv_asset_img( 'About Us Image.png' ),
+                ),
+                'gv_oem_image'   => array(
+                    'label'   => 'Foto Kemasan Bulk & OEM',
+                    'desc'    => 'Foto ikatan vanili & kemasan. Rekomendasi: 800 x 600 px (Landscape), format WebP/JPG, maks 400 KB.',
+                    'default' => gv_asset_img( 'Product Unggulan 1.png' ),
+                ),
+                'gv_maps_image'  => array(
+                    'label'   => 'Ilustrasi Peta Ekspor Global',
+                    'desc'    => 'Grafis peta ekspor dunia. Rekomendasi: 1200 x 600 px, format PNG transparan atau WebP, maks 300 KB.',
+                    'default' => gv_asset_img( 'Maps.png' ),
+                ),
+            ),
+        ),
+        'tentang_kami' => array(
+            'title' => 'Halaman Tentang Kami (About Us)',
+            'desc'  => 'Banner header dan dokumentasi fasilitas pada halaman Tentang Kami.',
+            'items' => array(
+                'gv_hero_about'     => array(
+                    'label'   => 'Banner Header About Us',
+                    'desc'    => 'Banner header atas. Rekomendasi: 1920 x 600 px, format WebP/JPG, maks 400 KB.',
+                    'default' => gv_asset_img( 'About Us Hero Section.png' ),
+                ),
+                'gv_story_image'    => array(
+                    'label'   => 'Foto Fasilitas Gudang (Our Story)',
+                    'desc'    => 'Foto fasilitas gudang Jember. Rekomendasi: 1200 x 700 px, format WebP/JPG, maks 500 KB.',
+                    'default' => gv_asset_img( 'Our Story.png' ),
+                ),
+                'gv_sourcing_image' => array(
+                    'label'   => 'Foto Perkebunan Petani (Sourcing)',
+                    'desc'    => 'Foto perkebunan petani. Rekomendasi: 1200 x 700 px, format WebP/JPG, maks 500 KB.',
+                    'default' => gv_asset_img( 'Sourcing.png' ),
+                ),
+            ),
+        ),
+        'banner_halaman' => array(
+            'title' => 'Banner Header Halaman Lain',
+            'desc'  => 'Foto latar belakang pada bagian atas setiap halaman publik.',
+            'items' => array(
+                'gv_hero_products' => array(
+                    'label'   => 'Banner Halaman Produk (#exploreProducts)',
+                    'desc'    => 'Banner header katalog produk. Rekomendasi: 1920 x 600 px, format WebP/JPG, maks 400 KB.',
+                    'default' => gv_asset_img( 'Products Hero Section.png' ),
+                ),
+                'gv_hero_gallery'  => array(
+                    'label'   => 'Banner Halaman Galeri (#ourMoments)',
+                    'desc'    => 'Banner header galeri. Rekomendasi: 1920 x 600 px, format WebP/JPG, maks 400 KB.',
+                    'default' => gv_asset_img( 'Gallery Hero Section.png' ),
+                ),
+                'gv_hero_contact'  => array(
+                    'label'   => 'Banner Halaman Kontak (#keepInTouch)',
+                    'desc'    => 'Banner header halaman kontak. Rekomendasi: 1920 x 600 px, format WebP/JPG, maks 400 KB.',
+                    'default' => gv_asset_img( 'Contact Us Hero Section.png' ),
+                ),
+                'gv_hero_blog'     => array(
+                    'label'   => 'Banner Halaman Artikel & Blog',
+                    'desc'    => 'Banner header artikel berita. Rekomendasi: 1920 x 600 px, format WebP/JPG, maks 400 KB.',
+                    'default' => gv_asset_img( 'Blog Hero Section.png' ),
+                ),
+            ),
+        ),
+        'ikon_keunggulan' => array(
+            'title' => 'Ikon Nilai Keunggulan (About Us)',
+            'desc'  => 'Ikon visual khusus untuk 4 kartu nilai keunggulan.',
+            'items' => array(
+                'gv_vp1_icon_img' => array(
+                    'label'   => 'Ikon Card 1: Quality Focused',
+                    'desc'    => 'Ikon custom kartu 1. Rekomendasi: 64 x 64 px atau 128 x 128 px, PNG transparan atau SVG.',
+                    'default' => '',
+                ),
+                'gv_vp2_icon_img' => array(
+                    'label'   => 'Ikon Card 2: Consistent Supply',
+                    'desc'    => 'Ikon custom kartu 2. Rekomendasi: 64 x 64 px atau 128 x 128 px, PNG transparan atau SVG.',
+                    'default' => '',
+                ),
+                'gv_vp3_icon_img' => array(
+                    'label'   => 'Ikon Card 3: Indonesian Origin',
+                    'desc'    => 'Ikon custom kartu 3. Rekomendasi: 64 x 64 px atau 128 x 128 px, PNG transparan atau SVG.',
+                    'default' => '',
+                ),
+                'gv_vp4_icon_img' => array(
+                    'label'   => 'Ikon Card 4: Reliable Service',
+                    'desc'    => 'Ikon custom kartu 4. Rekomendasi: 64 x 64 px atau 128 x 128 px, PNG transparan atau SVG.',
+                    'default' => '',
+                ),
+            ),
+        ),
+    );
+    ?>
+    <div class="wrap gv-admin-wrap" style="max-width: 1140px; margin-top: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <?php if ( $saved_notice ) : ?>
+            <div class="notice notice-success is-dismissible" style="border-left-color: #363E19; margin-bottom: 20px;">
+                <p style="font-size: 14px; font-weight: 500; color: #232810;">Pengaturan dan media berhasil disimpan.</p>
+            </div>
+        <?php endif; ?>
+
+        <!-- Top Header Card -->
+        <div style="display: flex; align-items: center; justify-content: space-between; background: #363E19; color: #FFFFFF; padding: 22px 28px; border-radius: 8px 8px 0 0;">
+            <div>
+                <h1 style="color: #FFFFFF; margin: 0; font-size: 20px; font-weight: 600; line-height: 1.2;">Grand Vanilla Settings</h1>
+                <p style="margin: 6px 0 0 0; font-size: 13px; color: #D7DEC9;">Kelola foto, banner halaman, dan informasi kontak resmi website.</p>
+            </div>
+            <div>
+                <button type="submit" form="gv-settings-form" class="button button-primary" style="background: #D9822B; border-color: #B86B1D; color: #FFFFFF; font-weight: 600; padding: 6px 20px; font-size: 14px; height: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">Simpan Perubahan</button>
+            </div>
+        </div>
+
+        <!-- Tab Navigation Bar -->
+        <nav style="display: flex; background: #FFFFFF; border-bottom: 2px solid #E2E2DE; border-left: 1px solid #E5E5E0; border-right: 1px solid #E5E5E0;">
+            <a href="#tab-media" class="gv-tab-link active" data-tab="tab-media" style="padding: 14px 22px; font-size: 13px; font-weight: 600; color: #363E19; text-decoration: none; border-bottom: 3px solid #363E19; margin-bottom: -2px;">Foto & Media</a>
+            <a href="#tab-contact" class="gv-tab-link" data-tab="tab-contact" style="padding: 14px 22px; font-size: 13px; font-weight: 600; color: #666660; text-decoration: none; border-bottom: 3px solid transparent; margin-bottom: -2px;">Informasi Kontak</a>
+            <a href="#tab-social" class="gv-tab-link" data-tab="tab-social" style="padding: 14px 22px; font-size: 13px; font-weight: 600; color: #666660; text-decoration: none; border-bottom: 3px solid transparent; margin-bottom: -2px;">Social Media & Peta</a>
+        </nav>
+
+        <form id="gv-settings-form" method="post" action="" style="background: #FFFFFF; border: 1px solid #E5E5E0; border-top: none; padding: 28px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
+            <?php wp_nonce_field( 'grand_vanilla_save_theme_settings', 'gv_save_settings_nonce' ); ?>
+
+            <!-- Tab 1: Media & Banner -->
+            <div id="tab-media" class="gv-tab-panel" style="display: block;">
+                <?php foreach ( $media_groups as $group_key => $group ) : ?>
+                    <div style="margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid #ECECE7;">
+                        <h3 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 600; color: #232810;"><?php echo esc_html( $group['title'] ); ?></h3>
+                        <p style="margin: 0 0 16px 0; font-size: 12px; color: #777;"><?php echo esc_html( $group['desc'] ); ?></p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;">
+                            <?php foreach ( $group['items'] as $item_key => $item ) : 
+                                $current_val = get_theme_mod( $item_key, '' );
+                                $preview_src = ! empty( $current_val ) ? $current_val : $item['default'];
+                                $is_custom   = ! empty( $current_val );
+                            ?>
+                                <div class="gv-media-card" style="background: #FAF9F5; border: 1px solid #E3E2DC; border-radius: 6px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between;">
+                                    <div>
+                                        <h4 style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #232810;"><?php echo esc_html( $item['label'] ); ?></h4>
+                                        <p style="margin: 0 0 10px 0; font-size: 11px; color: #666; line-height: 1.4; min-height: 30px;"><?php echo esc_html( $item['desc'] ); ?></p>
+                                        
+                                        <div style="position: relative; width: 100%; height: 130px; background: #EAEAE4; border-radius: 4px; overflow: hidden; border: 1px solid #D8D7D0; margin-bottom: 12px;">
+                                            <img src="<?php echo esc_url( $preview_src ); ?>" class="gv-preview-img" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                                            <span class="gv-badge" style="position: absolute; bottom: 6px; right: 6px; font-size: 10px; font-weight: 600; background: <?php echo $is_custom ? '#363E19' : 'rgba(0,0,0,0.6)'; ?>; color: #FFFFFF; padding: 2px 7px; border-radius: 3px;">
+                                                <?php echo $is_custom ? 'Kustom' : 'Bawaan'; ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 8px;">
+                                        <input type="hidden" name="<?php echo esc_attr( $item_key ); ?>" value="<?php echo esc_attr( $current_val ); ?>" class="gv-img-input" data-default="<?php echo esc_attr( $item['default'] ); ?>">
+                                        <button type="button" class="button button-secondary gv-upload-btn" style="flex: 1; font-size: 12px; height: 30px; line-height: 28px; text-align: center;">Pilih Gambar</button>
+                                        <button type="button" class="button gv-reset-btn" style="font-size: 12px; height: 30px; line-height: 28px; color: #777;">Reset</button>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Tab 2: Informasi Kontak -->
+            <div id="tab-contact" class="gv-tab-panel" style="display: none;">
+                <div style="max-width: 680px;">
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Nomor WhatsApp Utama</label>
+                        <input type="text" name="gv_whatsapp" value="<?php echo esc_attr( get_theme_mod( 'gv_whatsapp', '087717752085' ) ); ?>" style="width: 100%; max-width: 400px; padding: 6px 10px;">
+                        <p style="margin: 4px 0 0 0; font-size: 11px; color: #777;">Ditampilkan di header navigasi, tombol WhatsApp melayang, dan halaman kontak.</p>
+                    </div>
+
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Telepon Kantor / Tambahan (Opsional)</label>
+                        <input type="text" name="gv_phone_secondary" value="<?php echo esc_attr( get_theme_mod( 'gv_phone_secondary', '+621 234 567 82' ) ); ?>" style="width: 100%; max-width: 400px; padding: 6px 10px;">
+                    </div>
+
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Email Resmi Ekspor & Inquiry</label>
+                        <input type="email" name="gv_email" value="<?php echo esc_attr( get_theme_mod( 'gv_email', 'nirwanatim@gmail.com' ) ); ?>" style="width: 100%; max-width: 400px; padding: 6px 10px;">
+                        <p style="margin: 4px 0 0 0; font-size: 11px; color: #777;">Alamat email penerima data formulir kontak.</p>
+                    </div>
+
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Alamat Kantor / Gudang</label>
+                        <textarea name="gv_address" rows="3" style="width: 100%; padding: 6px 10px;"><?php echo esc_textarea( get_theme_mod( 'gv_address', 'Sumbersari 2 Street, Jember, East Java, Indonesia' ) ); ?></textarea>
+                    </div>
+
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Pilihan Subjek Formulir Kontak (1 per baris)</label>
+                        <textarea name="gv_contact_subjects" rows="4" style="width: 100%; padding: 6px 10px;"><?php echo esc_textarea( get_theme_mod( 'gv_contact_subjects', "Wholesale Vanilla Beans Inquiry\nVanilla Powder / Extract Quote\nCustom OEM Packaging Request\nPhysical Sample Request" ) ); ?></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Social Media & Peta -->
+            <div id="tab-social" class="gv-tab-panel" style="display: none;">
+                <div style="max-width: 680px;">
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Profil Instagram</label>
+                        <input type="url" name="gv_instagram" value="<?php echo esc_attr( get_theme_mod( 'gv_instagram', 'https://instagram.com' ) ); ?>" style="width: 100%; max-width: 480px; padding: 6px 10px;">
+                    </div>
+
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Halaman Facebook</label>
+                        <input type="url" name="gv_facebook" value="<?php echo esc_attr( get_theme_mod( 'gv_facebook', 'https://facebook.com' ) ); ?>" style="width: 100%; max-width: 480px; padding: 6px 10px;">
+                    </div>
+
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Kanal YouTube (Opsional)</label>
+                        <input type="url" name="gv_youtube" value="<?php echo esc_attr( get_theme_mod( 'gv_youtube', 'https://youtube.com' ) ); ?>" style="width: 100%; max-width: 480px; padding: 6px 10px;">
+                    </div>
+
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Link Google Maps (Tombol Navigasi)</label>
+                        <input type="url" name="gv_maps_url" value="<?php echo esc_attr( get_theme_mod( 'gv_maps_url', 'https://maps.google.com' ) ); ?>" style="width: 100%; max-width: 480px; padding: 6px 10px;">
+                    </div>
+
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #232810;">Google Maps Embed (URL atau Kode Iframe)</label>
+                        <textarea name="gv_maps_embed_url" rows="3" style="width: 100%; padding: 6px 10px;"><?php echo esc_textarea( get_theme_mod( 'gv_maps_embed_url', '' ) ); ?></textarea>
+                        <p style="margin: 4px 0 0 0; font-size: 11px; color: #777;">Tempelkan URL embed Google Maps atau seluruh kode iframe. Sistem akan mengekstraknya secara otomatis.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Sticky Save Row -->
+            <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid #EBEBE6; display: flex; justify-content: flex-end;">
+                <button type="submit" class="button button-primary" style="background: #363E19; border-color: #262C12; color: #FFFFFF; font-weight: 600; padding: 6px 24px; font-size: 14px; height: auto;">Simpan Semua Perubahan</button>
+            </div>
+        </form>
+    </div>
+    <?php
+}
+
+function grand_vanilla_admin_footer_scripts() {
+    $screen = get_current_screen();
+    if ( ! $screen || ( 'toplevel_page_grand-vanilla-settings' !== $screen->id && 'page' !== $screen->post_type ) ) {
+        return;
+    }
+    ?>
+    <script>
+    jQuery(document).ready(function($) {
+        // Tab Navigation
+        $('.gv-tab-link').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this).data('tab');
+            $('.gv-tab-link').removeClass('active').css({ 'border-bottom-color': 'transparent', 'color': '#666660' });
+            $(this).addClass('active').css({ 'border-bottom-color': '#363E19', 'color': '#363E19' });
+            $('.gv-tab-panel').hide();
+            $('#' + target).show();
+        });
+
+        // Media Frame Upload
+        $(document).on('click', '.gv-upload-btn', function(e) {
+            e.preventDefault();
+            var $btn = $(this);
+            var $card = $btn.closest('.gv-media-card, .gv-media-field');
+            var $input = $card.find('.gv-img-input');
+            var $preview = $card.find('.gv-preview-img');
+            var $badge = $card.find('.gv-badge');
+
+            var frame = wp.media({
+                title: 'Pilih atau Unggah Gambar',
+                button: { text: 'Gunakan Gambar Ini' },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                var attachment = frame.state().get('selection').first().toJSON();
+                $input.val(attachment.url);
+                $preview.attr('src', attachment.url);
+                if ($badge.length) {
+                    $badge.text('Kustom').css({ 'background': '#363E19', 'color': '#FFFFFF' });
+                }
+            });
+
+            frame.open();
+        });
+
+        // Media Frame Reset
+        $(document).on('click', '.gv-reset-btn', function(e) {
+            e.preventDefault();
+            var $btn = $(this);
+            var $card = $btn.closest('.gv-media-card, .gv-media-field');
+            var $input = $card.find('.gv-img-input');
+            var $preview = $card.find('.gv-preview-img');
+            var $badge = $card.find('.gv-badge');
+            var defaultUrl = $input.data('default') || '';
+
+            $input.val('');
+            if (defaultUrl) {
+                $preview.attr('src', defaultUrl);
+            }
+            if ($badge.length) {
+                $badge.text('Bawaan').css({ 'background': 'rgba(0,0,0,0.65)', 'color': '#FFFFFF' });
+            }
+        });
+    });
+    </script>
+    <?php
+}
+add_action( 'admin_footer', 'grand_vanilla_admin_footer_scripts' );
 
 /**
  * 7. Helper: Get Company Contact Info
@@ -1337,6 +1784,10 @@ function grand_vanilla_frontpage_meta_callback( $post ) {
     wp_nonce_field( 'grand_vanilla_save_frontpage_meta', 'grand_vanilla_frontpage_nonce' );
 
     $fields = array(
+        'gv_home_hero_img'     => get_post_meta( $post->ID, '_gv_home_hero_img', true ) ?: '',
+        'gv_home_about_img'    => get_post_meta( $post->ID, '_gv_home_about_img', true ) ?: '',
+        'gv_home_oem_img'      => get_post_meta( $post->ID, '_gv_home_oem_img', true ) ?: '',
+        'gv_home_map_img'      => get_post_meta( $post->ID, '_gv_home_map_img', true ) ?: '',
         'gv_hero_stat_num'     => get_post_meta( $post->ID, '_gv_hero_stat_num', true ) ?: '12+',
         'gv_hero_stat_label'   => get_post_meta( $post->ID, '_gv_hero_stat_label', true ) ?: 'Trusted Customers Worldwide',
         'gv_home_about_heading'=> get_post_meta( $post->ID, '_gv_home_about_heading', true ) ?: 'Grand Vanilla Indonesia',
@@ -1380,9 +1831,30 @@ function grand_vanilla_frontpage_meta_callback( $post ) {
     );
     ?>
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 1000px;">
-        <!-- Section 1: Hero Statistics -->
+        <!-- Section 1: Hero Section (Foto Background & Statistik) -->
         <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
-            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">1. Hero Statistics Floating Badge</h3>
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">1. Hero Section (Foto Background & Floating Stats)</h3>
+            
+            <div style="margin-bottom: 1.25rem; padding: 12px; background: #f4f6f3; border-radius: 4px; border: 1px dashed #ccd3c7;">
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Foto Latar Belakang Hero Utama</label>
+                <p style="margin: 0 0 8px 0; font-size: 12px; color: #666;">Rekomendasi ukuran: <strong>1920 x 1080 px (Landscape)</strong>, format WebP atau JPG, maksimal 500 KB.</p>
+                <?php
+                $current_hero_img = ! empty( $fields['gv_home_hero_img'] )
+                    ? $fields['gv_home_hero_img']
+                    : ( get_theme_mod( 'gv_hero_image', '' ) ?: gv_asset_img( 'Hero Image.png' ) );
+                ?>
+                <div class="gv-media-field" style="display: flex; gap: 14px; align-items: center;">
+                    <div style="width: 140px; height: 85px; border-radius: 4px; overflow: hidden; background: #e0e0dc; border: 1px solid #ccc; flex-shrink: 0;">
+                        <img src="<?php echo esc_url( $current_hero_img ); ?>" class="gv-preview-img" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <input type="hidden" name="gv_home_hero_img" value="<?php echo esc_attr( $fields['gv_home_hero_img'] ); ?>" class="gv-img-input" data-default="<?php echo esc_attr( gv_asset_img( 'Hero Image.png' ) ); ?>">
+                        <button type="button" class="button button-secondary gv-upload-btn" style="margin-right: 6px;">Pilih / Ganti Foto</button>
+                        <button type="button" class="button gv-reset-btn" style="color: #666;">Gunakan Foto Default</button>
+                    </div>
+                </div>
+            </div>
+
             <div style="display: grid; grid-template-columns: 140px 1fr; gap: 1rem;">
                 <div>
                     <label style="font-weight: 600; display: block; margin-bottom: 4px;">Angka Statistik</label>
@@ -1398,6 +1870,27 @@ function grand_vanilla_frontpage_meta_callback( $post ) {
         <!-- Section 2: About Us Preview -->
         <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
             <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">2. About Us Preview Section (Homepage)</h3>
+            
+            <div style="margin-bottom: 1.25rem; padding: 12px; background: #f4f6f3; border-radius: 4px; border: 1px dashed #ccd3c7;">
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Foto Biji Vanili (Sebelah Kiri)</label>
+                <p style="margin: 0 0 8px 0; font-size: 12px; color: #666;">Rekomendasi ukuran: <strong>800 x 900 px (Portrait / Menegak)</strong>, format WebP atau JPG, maksimal 400 KB.</p>
+                <?php
+                $current_about_img = ! empty( $fields['gv_home_about_img'] )
+                    ? $fields['gv_home_about_img']
+                    : ( get_theme_mod( 'gv_about_image', '' ) ?: gv_asset_img( 'About Us Image.png' ) );
+                ?>
+                <div class="gv-media-field" style="display: flex; gap: 14px; align-items: center;">
+                    <div style="width: 100px; height: 110px; border-radius: 4px; overflow: hidden; background: #e0e0dc; border: 1px solid #ccc; flex-shrink: 0;">
+                        <img src="<?php echo esc_url( $current_about_img ); ?>" class="gv-preview-img" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <input type="hidden" name="gv_home_about_img" value="<?php echo esc_attr( $fields['gv_home_about_img'] ); ?>" class="gv-img-input" data-default="<?php echo esc_attr( gv_asset_img( 'About Us Image.png' ) ); ?>">
+                        <button type="button" class="button button-secondary gv-upload-btn" style="margin-right: 6px;">Pilih / Ganti Foto</button>
+                        <button type="button" class="button gv-reset-btn" style="color: #666;">Gunakan Foto Default</button>
+                    </div>
+                </div>
+            </div>
+
             <div style="margin-bottom: 1rem;">
                 <label style="font-weight: 600; display: block; margin-bottom: 4px;">Heading</label>
                 <input type="text" name="gv_home_about_heading" value="<?php echo esc_attr( $fields['gv_home_about_heading'] ); ?>" style="width: 100%;">
@@ -1461,6 +1954,27 @@ function grand_vanilla_frontpage_meta_callback( $post ) {
         <!-- Section 4: Flexible Supply & OEM -->
         <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
             <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">4. Flexible Vanilla Supply & Special OEM</h3>
+            
+            <div style="margin-bottom: 1.25rem; padding: 12px; background: #f4f6f3; border-radius: 4px; border: 1px dashed #ccd3c7;">
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Foto Suplai & Kemasan Bulk OEM</label>
+                <p style="margin: 0 0 8px 0; font-size: 12px; color: #666;">Rekomendasi ukuran: <strong>800 x 600 px (Landscape)</strong>, format WebP atau JPG, maksimal 400 KB.</p>
+                <?php
+                $current_oem_img = ! empty( $fields['gv_home_oem_img'] )
+                    ? $fields['gv_home_oem_img']
+                    : ( get_theme_mod( 'gv_oem_image', '' ) ?: gv_asset_img( 'Bulk  Wholesale Vanilla 1.png' ) );
+                ?>
+                <div class="gv-media-field" style="display: flex; gap: 14px; align-items: center;">
+                    <div style="width: 130px; height: 85px; border-radius: 4px; overflow: hidden; background: #e0e0dc; border: 1px solid #ccc; flex-shrink: 0;">
+                        <img src="<?php echo esc_url( $current_oem_img ); ?>" class="gv-preview-img" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <input type="hidden" name="gv_home_oem_img" value="<?php echo esc_attr( $fields['gv_home_oem_img'] ); ?>" class="gv-img-input" data-default="<?php echo esc_attr( gv_asset_img( 'Bulk  Wholesale Vanilla 1.png' ) ); ?>">
+                        <button type="button" class="button button-secondary gv-upload-btn" style="margin-right: 6px;">Pilih / Ganti Foto</button>
+                        <button type="button" class="button gv-reset-btn" style="color: #666;">Gunakan Foto Default</button>
+                    </div>
+                </div>
+            </div>
+
             <div style="margin-bottom: 1rem;">
                 <label style="font-weight: 600; display: block; margin-bottom: 4px;">Subtitle Bagian Kanan</label>
                 <textarea name="gv_home_oem_subtitle" rows="2" style="width: 100%;"><?php echo esc_textarea( $fields['gv_home_oem_subtitle'] ); ?></textarea>
@@ -1499,7 +2013,7 @@ function grand_vanilla_frontpage_meta_callback( $post ) {
         </div>
 
         <!-- Section 5: Who We Serve (6 B2B Targets) -->
-        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; border-radius: 4px;">
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; margin-bottom: 1.5rem; border-radius: 4px;">
             <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">5. Who We Serve In Global B2B Markets (6 Cards)</h3>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;">
                 <input type="text" name="gv_home_serve_1" value="<?php echo esc_attr( $fields['gv_home_serve_1'] ); ?>" placeholder="Target 1">
@@ -1508,6 +2022,30 @@ function grand_vanilla_frontpage_meta_callback( $post ) {
                 <input type="text" name="gv_home_serve_4" value="<?php echo esc_attr( $fields['gv_home_serve_4'] ); ?>" placeholder="Target 4">
                 <input type="text" name="gv_home_serve_5" value="<?php echo esc_attr( $fields['gv_home_serve_5'] ); ?>" placeholder="Target 5">
                 <input type="text" name="gv_home_serve_6" value="<?php echo esc_attr( $fields['gv_home_serve_6'] ); ?>" placeholder="Target 6">
+            </div>
+        </div>
+
+        <!-- Section 6: Worldwide Export Map Graphic -->
+        <div style="background: #fdfdfd; border: 1px solid #ddd; border-left: 4px solid #363E19; padding: 1.25rem; border-radius: 4px;">
+            <h3 style="margin: 0 0 1rem 0; font-size: 15px; color: #363E19;">6. Grafik Peta Ekspor Dunia (Connecting Indonesia To The World)</h3>
+            <div style="padding: 12px; background: #f4f6f3; border-radius: 4px; border: 1px dashed #ccd3c7;">
+                <label style="font-weight: 600; display: block; margin-bottom: 4px;">Grafik Peta Distribusi Dunia</label>
+                <p style="margin: 0 0 8px 0; font-size: 12px; color: #666;">Rekomendasi ukuran: <strong>1200 x 600 px (Landscape)</strong>, format PNG transparan atau WebP, maksimal 300 KB.</p>
+                <?php
+                $current_map_img = ! empty( $fields['gv_home_map_img'] )
+                    ? $fields['gv_home_map_img']
+                    : ( get_theme_mod( 'gv_maps_image', '' ) ?: gv_asset_img( 'Worldwide maps.png' ) );
+                ?>
+                <div class="gv-media-field" style="display: flex; gap: 14px; align-items: center;">
+                    <div style="width: 150px; height: 75px; border-radius: 4px; overflow: hidden; background: #363E19; border: 1px solid #262C12; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 4px; box-sizing: border-box;">
+                        <img src="<?php echo esc_url( $current_map_img ); ?>" class="gv-preview-img" style="width: 100%; height: auto; max-height: 100%; object-fit: contain;">
+                    </div>
+                    <div>
+                        <input type="hidden" name="gv_home_map_img" value="<?php echo esc_attr( $fields['gv_home_map_img'] ); ?>" class="gv-img-input" data-default="<?php echo esc_attr( gv_asset_img( 'Worldwide maps.png' ) ); ?>">
+                        <button type="button" class="button button-secondary gv-upload-btn" style="margin-right: 6px;">Pilih / Ganti Foto</button>
+                        <button type="button" class="button gv-reset-btn" style="color: #666;">Gunakan Foto Default</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1521,6 +2059,10 @@ function grand_vanilla_aboutpage_meta_callback( $post ) {
     wp_nonce_field( 'grand_vanilla_save_aboutpage_meta', 'grand_vanilla_aboutpage_nonce' );
 
     $fields = array(
+        'gv_about_banner_img'      => get_post_meta( $post->ID, '_gv_about_banner_img', true ) ?: '',
+        'gv_about_hero_img'        => get_post_meta( $post->ID, '_gv_about_hero_img', true ) ?: '',
+        'gv_about_story_img'       => get_post_meta( $post->ID, '_gv_about_story_img', true ) ?: '',
+        'gv_about_sourcing_img'    => get_post_meta( $post->ID, '_gv_about_sourcing_img', true ) ?: '',
         'gv_about_hero_subtag'     => get_post_meta( $post->ID, '_gv_about_hero_subtag', true ) ?: 'Connecting Indonesian vanilla with global markets.',
         'gv_about_overview_heading'=> get_post_meta( $post->ID, '_gv_about_overview_heading', true ) ?: 'Grand Vanilla Indonesia',
         'gv_about_overview_p1'     => get_post_meta( $post->ID, '_gv_about_overview_p1', true ) ?: "Grand Vanilla Indonesia is an Indonesian vanilla supplier and exporter providing high-quality vanilla products for international buyers. We connect buyers with trusted sources of Indonesian vanilla, with a strong focus on product quality, consistent supply, and reliable service for wholesale and export needs.",
@@ -1623,6 +2165,25 @@ function grand_vanilla_aboutpage_meta_callback( $post ) {
                 <label style="font-weight: 600; display: block; margin-bottom: 4px;">Teks Cerita "Our Story" (Di atas foto fasilitas)</label>
                 <textarea name="gv_about_story_text" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_story_text'] ); ?></textarea>
             </div>
+            <div style="margin-bottom: 1rem; padding: 12px; background: #f4f6f3; border-radius: 4px; border: 1px dashed #ccd3c7;">
+                <label style="font-weight: 600; display: block; margin-bottom: 6px;">Foto Fasilitas (Our Story)</label>
+                <?php
+                $current_story_img = ! empty( $fields['gv_about_story_img'] ) 
+                    ? $fields['gv_about_story_img'] 
+                    : ( get_theme_mod( 'gv_story_image', '' ) ?: gv_asset_img( 'Our Story.png' ) );
+                ?>
+                <div class="gv-media-field" style="display: flex; gap: 14px; align-items: center;">
+                    <div style="width: 140px; height: 85px; border-radius: 4px; overflow: hidden; background: #e0e0dc; border: 1px solid #ccc; flex-shrink: 0;">
+                        <img src="<?php echo esc_url( $current_story_img ); ?>" class="gv-preview-img" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <input type="hidden" name="gv_about_story_img" value="<?php echo esc_attr( $fields['gv_about_story_img'] ); ?>" class="gv-img-input" data-default="<?php echo esc_attr( gv_asset_img( 'Our Story.png' ) ); ?>">
+                        <button type="button" class="button button-secondary gv-upload-btn" style="margin-right: 6px;">Pilih / Ganti Foto</button>
+                        <button type="button" class="button gv-reset-btn" style="color: #666;">Gunakan Foto Default</button>
+                        <p style="margin: 4px 0 0 0; font-size: 11px; color: #666;">Jika dikosongkan, halaman akan otomatis menggunakan foto fasilitas dari menu Grand Vanilla Settings atau aset bawaan.</p>
+                    </div>
+                </div>
+            </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div>
                     <label style="font-weight: 600; display: block; margin-bottom: 4px;">Teks "Our Vision"</label>
@@ -1680,6 +2241,25 @@ function grand_vanilla_aboutpage_meta_callback( $post ) {
                     <label style="font-weight: 600; display: block; margin-bottom: 4px;">Step 3</label>
                     <input type="text" name="gv_about_src3_title" value="<?php echo esc_attr( $fields['gv_about_src3_title'] ); ?>" style="width: 100%; margin-bottom: 4px;">
                     <textarea name="gv_about_src3_desc" rows="3" style="width: 100%;"><?php echo esc_textarea( $fields['gv_about_src3_desc'] ); ?></textarea>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; padding: 12px; background: #f4f6f3; border-radius: 4px; border: 1px dashed #ccd3c7;">
+                <label style="font-weight: 600; display: block; margin-bottom: 6px;">Foto Perkebunan Petani (Sourcing)</label>
+                <?php
+                $current_sourcing_img = ! empty( $fields['gv_about_sourcing_img'] ) 
+                    ? $fields['gv_about_sourcing_img'] 
+                    : ( get_theme_mod( 'gv_sourcing_image', '' ) ?: gv_asset_img( 'Sourcing.png' ) );
+                ?>
+                <div class="gv-media-field" style="display: flex; gap: 14px; align-items: center;">
+                    <div style="width: 140px; height: 85px; border-radius: 4px; overflow: hidden; background: #e0e0dc; border: 1px solid #ccc; flex-shrink: 0;">
+                        <img src="<?php echo esc_url( $current_sourcing_img ); ?>" class="gv-preview-img" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <input type="hidden" name="gv_about_sourcing_img" value="<?php echo esc_attr( $fields['gv_about_sourcing_img'] ); ?>" class="gv-img-input" data-default="<?php echo esc_attr( gv_asset_img( 'Sourcing.png' ) ); ?>">
+                        <button type="button" class="button button-secondary gv-upload-btn" style="margin-right: 6px;">Pilih / Ganti Foto</button>
+                        <button type="button" class="button gv-reset-btn" style="color: #666;">Gunakan Foto Default</button>
+                        <p style="margin: 4px 0 0 0; font-size: 11px; color: #666;">Jika dikosongkan, halaman akan otomatis menggunakan foto perkebunan dari menu Grand Vanilla Settings atau aset bawaan.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1776,6 +2356,13 @@ function grand_vanilla_save_page_meta( $post_id ) {
                 update_post_meta( $post_id, '_' . $f, $val );
             }
         }
+
+        $front_img_fields = array( 'gv_home_hero_img', 'gv_home_about_img', 'gv_home_oem_img', 'gv_home_map_img' );
+        foreach ( $front_img_fields as $fif ) {
+            if ( isset( $_POST[ $fif ] ) ) {
+                update_post_meta( $post_id, '_' . $fif, esc_url_raw( trim( $_POST[ $fif ] ) ) );
+            }
+        }
     }
 
     // Save About Us Meta
@@ -1807,6 +2394,13 @@ function grand_vanilla_save_page_meta( $post_id ) {
                     ? sanitize_textarea_field( $_POST[ $f ] ) 
                     : sanitize_text_field( $_POST[ $f ] );
                 update_post_meta( $post_id, '_' . $f, $val );
+            }
+        }
+
+        $image_post_fields = array( 'gv_about_banner_img', 'gv_about_hero_img', 'gv_about_story_img', 'gv_about_sourcing_img' );
+        foreach ( $image_post_fields as $ipf ) {
+            if ( isset( $_POST[ $ipf ] ) ) {
+                update_post_meta( $post_id, '_' . $ipf, esc_url_raw( trim( $_POST[ $ipf ] ) ) );
             }
         }
     }
@@ -2505,4 +3099,64 @@ function gv_asset_img( $filename ) {
         return $img_dir . $webp_filename;
     }
     return $img_dir . $filename;
+}
+
+/**
+ * 12. Client Welcome Dashboard Widget (Panduan Cepat Admin)
+ */
+function grand_vanilla_register_dashboard_widget() {
+    wp_add_dashboard_widget(
+        'grand_vanilla_dashboard_widget',
+        __( 'Panduan Cepat Admin Grand Vanilla', 'grand-vanilla' ),
+        'grand_vanilla_render_dashboard_widget'
+    );
+}
+add_action( 'wp_dashboard_setup', 'grand_vanilla_register_dashboard_widget' );
+
+function grand_vanilla_render_dashboard_widget() {
+    $front_id   = (int) get_option( 'page_on_front' );
+    $about_page = get_page_by_path( 'about' );
+    $about_id   = $about_page ? (int) $about_page->ID : 0;
+    ?>
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 4px 0;">
+        <p style="font-size: 13.5px; color: #333; margin: 0 0 14px 0; line-height: 1.55;">
+            Selamat datang di panel admin <strong>Grand Vanilla Indonesia</strong>. Anda dapat mengelola seluruh halaman, produk, foto, dan informasi kontak melalui pintasan cepat di bawah ini:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 16px;">
+            <?php if ( $front_id ) : ?>
+            <a href="<?php echo esc_url( admin_url( 'post.php?post=' . $front_id . '&action=edit' ) ); ?>" class="button button-primary" style="background: #363E19; border-color: #262C12; color: #FFFFFF; font-weight: 600; padding: 6px 12px; text-align: center; height: auto;">
+                Edit Halaman Beranda
+            </a>
+            <?php endif; ?>
+
+            <?php if ( $about_id ) : ?>
+            <a href="<?php echo esc_url( admin_url( 'post.php?post=' . $about_id . '&action=edit' ) ); ?>" class="button button-secondary" style="font-weight: 500; padding: 6px 12px; text-align: center; height: auto;">
+                Edit Halaman Tentang Kami
+            </a>
+            <?php endif; ?>
+
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=vanilla_product' ) ); ?>" class="button button-secondary" style="font-weight: 500; padding: 6px 12px; text-align: center; height: auto;">
+                Kelola Produk Vanili
+            </a>
+
+            <a href="<?php echo esc_url( admin_url( 'admin.php?page=grand-vanilla-settings&tab=contact' ) ); ?>" class="button button-secondary" style="font-weight: 500; padding: 6px 12px; text-align: center; height: auto;">
+                Ganti WhatsApp & Kontak
+            </a>
+
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=vanilla_gallery' ) ); ?>" class="button button-secondary" style="font-weight: 500; padding: 6px 12px; text-align: center; height: auto;">
+                Kelola Galeri Dokumentasi
+            </a>
+
+            <a href="<?php echo esc_url( admin_url( 'admin.php?page=grand-vanilla-settings&tab=media' ) ); ?>" class="button button-secondary" style="font-weight: 500; padding: 6px 12px; text-align: center; height: auto;">
+                Pusat Pengaturan Media
+            </a>
+        </div>
+
+        <div style="background: #FAF8F5; border-left: 4px solid #363E19; padding: 12px 14px; border-radius: 4px; font-size: 12.5px; color: #4A5239; line-height: 1.55;">
+            <strong>Tips Pengunggahan Foto:</strong><br>
+            Untuk menjaga kecepatan website tetap optimal bagi pembeli luar negeri, disarankan menggunakan gambar berformat <strong>WebP atau JPG</strong> dengan ukuran file di bawah <strong>500 KB</strong>. Setiap halaman sudah dilengkapi rekomendasi dimensi gambar yang sesuai.
+        </div>
+    </div>
+    <?php
 }

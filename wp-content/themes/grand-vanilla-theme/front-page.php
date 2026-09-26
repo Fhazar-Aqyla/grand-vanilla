@@ -59,7 +59,7 @@ $serve_6 = get_post_meta( $post_id, '_gv_home_serve_6', true ) ?: 'CONFECTIONERY
 ?>
 
 <?php
-$custom_hero_img = get_theme_mod( 'gv_hero_image', '' );
+$custom_hero_img = get_post_meta( $post_id, '_gv_home_hero_img', true ) ?: get_theme_mod( 'gv_hero_image', '' );
 $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : gv_asset_img( 'Hero Image.png' );
 ?>
 <!-- 1. Hero Section (Exact Match to Figma Reference) -->
@@ -163,7 +163,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : gv_asset_img
             <!-- Left Column: High-Res Rustic Photo -->
             <div style="display: flex;">
                 <?php
-                $custom_about_img = get_theme_mod( 'gv_about_image', '' );
+                $custom_about_img = get_post_meta( $post_id, '_gv_home_about_img', true ) ?: get_theme_mod( 'gv_about_image', '' );
                 $about_img_src    = ! empty( $custom_about_img ) ? $custom_about_img : gv_asset_img( 'About Us Image.png' );
                 ?>
                 <img src="<?php echo esc_url( $about_img_src ); ?>"
@@ -481,7 +481,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : gv_asset_img
                     Flexible Vanilla Supply<br>For Your Business
                 </h2>
                 <?php
-                $custom_oem_img = get_theme_mod( 'gv_oem_image', '' );
+                $custom_oem_img = get_post_meta( $post_id, '_gv_home_oem_img', true ) ?: get_theme_mod( 'gv_oem_image', '' );
                 $oem_img_url    = ! empty( $custom_oem_img ) ? $custom_oem_img : gv_asset_img( 'Bulk  Wholesale Vanilla 1.png' );
                 ?>
                 <img src="<?php echo esc_url( $oem_img_url ); ?>"
@@ -572,7 +572,7 @@ $hero_bg_url     = ! empty( $custom_hero_img ) ? $custom_hero_img : gv_asset_img
 
             <div style="max-width: 980px; margin: 0 auto;">
                 <?php
-                $custom_maps_img = get_theme_mod( 'gv_maps_image', '' );
+                $custom_maps_img = get_post_meta( $post_id, '_gv_home_map_img', true ) ?: get_theme_mod( 'gv_maps_image', '' );
                 $maps_img_url    = ! empty( $custom_maps_img ) ? $custom_maps_img : gv_asset_img( 'Worldwide maps.png' );
                 ?>
                 <img src="<?php echo esc_url( $maps_img_url ); ?>"

@@ -71,8 +71,11 @@ $fac2_desc  = get_post_meta($post_id, '_gv_about_fac2_desc', true) ?: 'Sorting, 
 
 <!-- 1. Hero Section -->
 <?php
-$custom_about_hero = get_theme_mod( 'gv_hero_about', '' );
-$about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : gv_asset_img( 'About Us Hero Section.png' );
+$custom_about_hero = get_post_meta( $post_id, '_gv_about_banner_img', true );
+if ( empty( $custom_about_hero ) ) {
+    $custom_about_hero = get_theme_mod( 'gv_hero_about', '' );
+}
+$about_hero_bg = ! empty( $custom_about_hero ) ? $custom_about_hero : gv_asset_img( 'About Us Hero Section.png' );
 ?>
 <section class="gv-hero-page" style="background-image: url('<?php echo esc_url( $about_hero_bg ); ?>');">
     <div class="gv-container">
@@ -89,8 +92,11 @@ $about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : gv_ass
             <!-- Left Column: Rustic Vanilla Beans Photo -->
             <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex;">
                 <?php
-                $custom_about_img = get_theme_mod( 'gv_about_image', '' );
-                $about_img_src    = ! empty( $custom_about_img ) ? $custom_about_img : gv_asset_img( 'About Us Image.png' );
+                $custom_about_img = get_post_meta( $post_id, '_gv_about_hero_img', true );
+                if ( empty( $custom_about_img ) ) {
+                    $custom_about_img = get_theme_mod( 'gv_about_image', '' );
+                }
+                $about_img_src = ! empty( $custom_about_img ) ? $custom_about_img : gv_asset_img( 'About Us Image.png' );
                 ?>
                 <img src="<?php echo esc_url( $about_img_src ); ?>"
                     alt="Grand Vanilla Indonesia Premium Curing"
@@ -186,8 +192,11 @@ $about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : gv_ass
             <!-- Left: Facility Photo with Overlay Box at Bottom -->
             <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); min-height: 460px; display: flex; flex-direction: column; justify-content: flex-end;">
                 <?php
-                $custom_story_img = get_theme_mod( 'gv_story_image', '' );
-                $story_img_src    = ! empty( $custom_story_img ) ? $custom_story_img : gv_asset_img( 'Our Story.png' );
+                $custom_story_img = get_post_meta( $post_id, '_gv_about_story_img', true );
+                if ( empty( $custom_story_img ) ) {
+                    $custom_story_img = get_theme_mod( 'gv_story_image', '' );
+                }
+                $story_img_src = ! empty( $custom_story_img ) ? $custom_story_img : gv_asset_img( 'Our Story.png' );
                 ?>
                 <img src="<?php echo esc_url( $story_img_src ); ?>"
                     alt="Our Story Jember Facility"
@@ -402,8 +411,11 @@ $about_hero_bg     = ! empty( $custom_about_hero ) ? $custom_about_hero : gv_ass
                 <!-- Farm Photo: Sourcing.png -->
                 <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); aspect-ratio: 16 / 9; width: 100%;">
                     <?php
-                    $custom_sourcing_img = get_theme_mod( 'gv_sourcing_image', '' );
-                    $sourcing_img_src    = ! empty( $custom_sourcing_img ) ? $custom_sourcing_img : gv_asset_img( 'Sourcing.png' );
+                    $custom_sourcing_img = get_post_meta( $post_id, '_gv_about_sourcing_img', true );
+                    if ( empty( $custom_sourcing_img ) ) {
+                        $custom_sourcing_img = get_theme_mod( 'gv_sourcing_image', '' );
+                    }
+                    $sourcing_img_src = ! empty( $custom_sourcing_img ) ? $custom_sourcing_img : gv_asset_img( 'Sourcing.png' );
                     ?>
                     <img src="<?php echo esc_url( $sourcing_img_src ); ?>"
                         alt="Indonesian Local Vanilla Sourcing Plantation"
